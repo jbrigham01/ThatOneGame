@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="18">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="3726" name="grassstage4" tilewidth="32" tileheight="32" tilecount="600" columns="30">
+  <image source="grassstage4.png" width="960" height="640"/>
+ </tileset>
+ <layer id="5" name="Tile Layer 1" width="35" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0M0RwVAYheHbQbIQUoeQehB1SKIORB3+6kBSR4JV3m/sNHAw98w8+3eOc35+/7NZ8DbHAhmWgabFGlbIUaDEWtRiDRtssUOFvajFGg444oQzLqIWa7jihjtqNKIWa2jR4YEnXqIWaxiEzkUYYoQ41LRYwxgJJpgiFbV8Nqg+sX3LJ35+v7IeiRcfnw==
+  </data>
+ </layer>
+ <layer id="6" name="Tile Layer 2" width="35" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAPwaCvAAAQ==
+  </data>
+ </layer>
+ <layer id="7" name="Tile Layer 3" width="35" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0jtPFFEYxvHjyimgYQovGK0paBbxFlo/gdpYyk1K9ROorGIjF+1FqMEPwLLABv0SoliiCztRKxUTE/8n+57smeE9u0tiY0Lxy0zOOzvPM292sNeYwWPH/kMjGMUYxjGBkqJoeB4XMSSK5vB5URHOW3V5iEd4jCksRWyeNOYunhaMmcYzuZbwpJA9n4qch7T5K3IW8BqLPldDjyp2Cu196uCZUDfv7cEaORWsY0NydxS+S3cHejp8Lv+b9+Rs4wM+Su5vhe+yhbd4h9sndM97m/fXFW6unf/g/Cd+4UBy+5LD6mSn+Ipv+O6+x+pcVmzWan6KnNM4g7OSaxS+S7iXf91Fy23Vpd1ehiVr2MbF5p126esy5hzO40JX9v8R9piUrEkbF5truUPK2QH5Jdvwh/tLXC/jCq7imryvIlkbXDexijLWZObnNdvwGV/k/kaSdRO3cMdm9dtmlwGMYBRjGMcEqsJlxXrUZL6qzO8lWffxADM2azro4u5nMYd5vMBL6ZFKVtU28/LcfFfpMpNkzWIuaczWbXPX1aCL+7Y97KMu70uVvexG+L3kdxbmh/y8HPBdyjm+U3qEveTP3HuWyV3BmxyfUwv4LpVAfnd1yUrb7CV/5vr8BcpbNQ8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="3" x="1088" y="344" width="32" height="40">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="4" x="352" y="280" width="64" height="224">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="5" name="level Info" x="400" y="192" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The place with the tree."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="7" x="1088" y="160" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="8" x="1120" y="296" width="8" height="120">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="10" x="1120" y="128" width="8" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="11" name="character" type="cloakedcreator" x="416" y="352" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="image" value="awakenedcreator.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="13" x="576" y="352" width="32" height="64">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="distance" value="5"/>
+    <property name="walkinfo" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="576" y="288" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="distance" value="16"/>
+    <property name="walkinfo" value=""/>
+   </properties>
+  </object>
+  <object id="17" x="512" y="384" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="14">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="3726" name="grassstage4" tilewidth="32" tileheight="32" tilecount="700" columns="35">
+  <image source="grassstage4.png" width="1120" height="640"/>
+ </tileset>
+ <tileset firstgid="4426" source="grassstage4redux.tsx"/>
+ <tileset firstgid="5126" name="grassstage3a" tilewidth="32" tileheight="32" tilecount="600" columns="30">
+  <image source="grassstage3a.png" width="960" height="640"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 2" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwN02ODEAYAANBbLbvuLtu2bdv2sm1u2bZtu2XXsrds27X34f2EFzowICAMYQlHeCIQkUhEJgpRiUZ0YhBIEMHEJBaxiUNc4hGfBCQkEYlJQlKSkZwUpCQVqUlDWtKRngxkJBOZyUJWspGdHOQkF7nJQ17ykZ8CFKQQhSlCUYpRnBKUpBSlKUNZylGeClSkEpWpQlWqUZ0a1KQWtalDXepRnwY0pBGNaUJTmtGcP2hBS1rRmja0pR3t6UBHOtGZLnSlG93pQU960Zs+9KUf/RnAQAYxmCEM5U/+YhjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmznMZR7zWcBCFrGYJSxlGctZwUpWsZo1rGUd69nARjaxmS1sZRvb2cFOdrGbPezlb/axnwMc5BCHOcJRjnGcE5zkFKc5wz+c5RznucBFLnGZK1zlGte5wU3+5T9ucZs73OUe93nAQx7xmCc85RnPecFLXvGaN7zlHe/5wEc+8ZkvfOUb3/nBT34REBQQ8BshCMnvhCI0YQhLOMITgYhEIjJRiEo0ohODQIIIJiaxiE0c4hKP+CQgIYlITBKSkozkpCAlqUhNGtKSjvRkICOZyEwWspKN7OQgJ7nITR7yko/8FKAghShMEYpSjOKUoCSlKE0ZylKO8lSgIpWoTBWqUo3q1KAmtahNHepSj/o0oCGNaEwTmtKM5vxBC1rSita0oS3taE8HOtKJznShK93oTg960ove9KEv/ejPAAYyiMEMYSh/8hfDGM4IRjKK0YxhLOMYzwQmMonJTGEq05jODGYyi9nMYS7zmM8CFrKIxSxhKctYzgpWsorVrGEt61jPBjayic1sYSvb2M4OdrKL3exhL3+zj/0c4CCHOMwRjnKM45zgJKc4zRn+4SznOM8FLnKJy1zhKte4zg1u8i//cYvb3OEu97jPAx7yiMc84SnPeM4LXvKK17zhLe94zwc+8onPfOEr3/jOD37yi4Bg/wlBSH4nFKEJQ1jCEZ4IRCQSkYlCVKIRnRgEEkQwMYlFbOIQl3jEJwEJSURikpCUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAUpRGGKUJRiFKcEJSlFacpQlnKUpwIVqURlqlCValSnBjWpRW3qUJd61Od/DQpAsA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="3" x="896" y="352" width="32" height="40">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="4" x="224" y="544" width="64" height="24">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="5" name="level Info" x="240" y="192" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The first grassy road"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="7" x="-64" y="256" width="64" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage2a.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="8" x="32" y="352" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="9" x="0" y="416" width="960" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="10" x="0" y="256" width="960" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="11" x="960" y="256" width="64" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grasstown.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="12" name="sign" x="608" y="192" width="160" height="96">
+   <properties>
+    <property name="description" value="The sign for the town.\There's some carvings on the back\from bored children."/>
+   </properties>
+  </object>
+  <object id="13" x="480" y="352" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

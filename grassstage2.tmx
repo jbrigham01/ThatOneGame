@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="21">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassdungeon5.tsx"/>
+ <tileset firstgid="7927" source="grassstage2sp.tsx"/>
+ <layer id="1" name="Tile Layer 2" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztz8kJgEAQRNGBTtwlHkfjccnFvg+CNxl8D/69qhQAAAAA4G+GaBuzKZvj63XvLdFWszXbOvqxR9uRndnV0Q+AJzdCtRCT
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 1" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1T1KBDEUwPHZJKuIhVqJ9WBjq4iFttY24gHEyr2CoIsHECs9wDaCK9Yi3mG7EfEA4gFsZN0wCT4fb18Ssl/CG/iRqTLvP0VS6qIohRBCCCGEEOKfeW1Mf4YYXw3avBpuWU1/btywrmhbjL0ZarENlarhhgro6VrHrU+qNomWb8WDDSF9Xeu41XfAljlgCcjt2AjA/zzUUZjfDvuOWzaBXSC35SggtiGm41D/dQDkttinu1IUl5o2qY7clseAdkJLqOPC7eedA7kt7wEPCS1+9h7RYRu6bj/vHshtWTS8N/fNlI4+6vANFSO3ZcfwFkBLm2DnP9PDxTSMouXE8LZRC+WOEduQ23JteMeohZIyZ2pL7P3yYnhXqIUy6g7fAs/k00FHi2n5NLxn1EIZR0eV2LHW5H2gFsosdOw3eauohTKOhhJ13AwabpmOHwM/EjA=
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="1" x="1600" y="672" width="56" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage2a.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="3" x="-32" y="704" width="33" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage2b.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="5" x="32" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="6" name="Genmu" type="character" x="992" y="704" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Where do ya think you're going?"/>
+    <property name="eventrequirement" value="mettheswordsman"/>
+    <property name="image" value="sprites/genmu.gif"/>
+    <property name="name" value="Genmu"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="184" y="568" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The place with the sword guy"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="8" x="608" y="640" width="32" height="272">
+   <properties>
+    <property name="event" value=""/>
+    <property name="eventrequirement" value="mettheswordsman"/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="10" x="1536" y="768" width="32" height="32">
+   <properties>
+    <property name="image" value="graycloak"/>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="11" x="0" y="672" width="608" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="0" y="832" width="608" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="13" x="640" y="608" width="448" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="14" x="640" y="896" width="416" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="15" x="1120" y="672" width="480" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="1120" y="832" width="480" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="17" x="256" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="18" x="832" y="640" width="96" height="32">
+   <properties>
+    <property name="description" value="There's usually a fisherman here."/>
+   </properties>
+  </object>
+  <object id="19" x="576" y="624" width="576" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="20" x="576" y="894" width="576" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

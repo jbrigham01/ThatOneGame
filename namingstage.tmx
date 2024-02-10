@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="35">
+ <tileset firstgid="1" name="place_of_decisions" tilewidth="32" tileheight="32" tilecount="1848" columns="21">
+  <image source="place_of_decisions.png" width="672" height="2816"/>
+ </tileset>
+ <tileset firstgid="1849" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="bettertiles.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="1858" name="firstplace" tilewidth="32" tileheight="32" tilecount="3250" columns="130">
+  <image source="firstplace.png" width="4160" height="800"/>
+ </tileset>
+ <tileset firstgid="5108" name="place_of_judgement" tilewidth="32" tileheight="32" tilecount="1200" columns="60">
+  <image source="place_of_judgement.png" width="1920" height="640"/>
+  <tile id="54">
+   <properties>
+    <property name="" value=""/>
+   </properties>
+  </tile>
+  <tile id="114">
+   <properties>
+    <property name="cover" value=""/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="429">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="529">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="534">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="535">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="536">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="537">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="538">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="588">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="589">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="590">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="591">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="592">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="593">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="594">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="595">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="596">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="597">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="598">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="648">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="649">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="650">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="651">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="652">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="653">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="654">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="655">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="656">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="657">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="658">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="708">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="709">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="710">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="711">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="712">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="713">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="714">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="715">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="716">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="717">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="718">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="773">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="774">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="775">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="776">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="777">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="778">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6308" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6309" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value="exactly what it says on the name area."/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6310" name="firstplace" tilewidth="32" tileheight="32" tilecount="3250" columns="130">
+  <image source="firstplace.png" width="4160" height="800"/>
+  <tile id="1535">
+   <properties>
+    <property name="image" value="ghostface2.png"/>
+    <property name="orient" value="left"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="9" name="Player Start" type="trigger" x="288" y="408" width="32" height="8">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value="3"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="23" name="level Info" type="info" x="56" y="112" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Where it starts..."/>
+    <property name="levelinfo" value="1"/>
+    <property name="spinfo">Organization 13
+Their cloaks were an inspiration for gray/white/black cloak.
+
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJw7zs7AcHwUj+JRPODYEojVRRkYNIDYCsjWBdLWBPRs42Bg2A7EO4B4JxTD5GyAOBloRgoQzwfiTCC2I2DeVg5UDDMfZt4CMQaGhUC8CIg9xRHm7eTAjs05ERjZXJAeeyC+AzTnLhDfA+JWoHmOONwBcwsASZjmGA==
+  </data>
+ </layer>
+</map>

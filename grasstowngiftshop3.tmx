@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="60">
+ <tileset firstgid="1" name="grasstowngiftshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstowngiftshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="301" name="grasstowngiftshop2" tilewidth="32" tileheight="32" tilecount="465" columns="31">
+  <image source="grasstowngiftshop2.png" width="992" height="480"/>
+ </tileset>
+ <tileset firstgid="766" name="grasstowngiftshop3" tilewidth="32" tileheight="32" tilecount="465" columns="31">
+  <image source="grasstowngiftshop3.png" width="992" height="480"/>
+ </tileset>
+ <layer id="32" name="Tile Layer 2" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0AusxYLX0cnug1jwITrZfRULvkYnu19iwa/oZPcoGP4AADyTEw0=
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGATkAAAdEAAE=
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyN1OWWFVQYBuBDiyIoegtKScygXgDSPagXoMR0EAK2EtNBCIig5HRQAiY5HYSCTc0AEwwN0uhzfntc8ONZa+/1vfvb39o/9sAOgcAgBjOEMMIZysu8wqt07xQIPMlT9OBpetKLZ3iW3jzHMPnXGM4IRjKK0YxhLOMYzwQmMonJRDCF13mDN+mrZz/6M4CXGMggBjOEMMJ5S/5tpjKN6cwgkiiiiSGWOOJJIJEkZjKL2cwJzq3naMYwlnGMZwITmcRkIvhE/lMWsJBFLCaZFFJJI50MMskimxyWsJRlLA/OrWckUUQTQyxxxJNAIkmsk1/PBjayic3kkkc+BRRSRDEllFLGFrayje3BufVMJoVU0kgng0yyyCaHPfJ72cd+DnCQciqopIpqaqiljnoaOMRhjnA0OLeeueSRTwGFFFFMCaWUcUL+JKc4zRkaaWKn+i7OWzfTQitt3KGdi1ziMleCc8uXU0ElVVRTQy111NPAffkHPOQfAh0DgQ505Jj6cbpYd6UbT9Cd+P/RKN/EWc4F56aZFlpp4wLtnf57NoFEkriufoObvGD/In3oS+YjZJH9GLlQZ3Lo3dkfwPMMtx/BSEZR/AgllD5GLtSZMsLcGc5QptpPYzoziCSKaGKIJS7E281kFrOZwzvMZR7zeZf3eJ8P+JCP+JgI905hgfVCFrGYZFJIJY10MkK83RKWsozlfMYKVrKKz1nNF6xhLV/yFetYzwY2sonN5JJHPgUUUhTi7bawlW1sZwdfs5Nd7OYbvuU7vucHfmQPe9nHfg5wkHIqqKSKamqopY56GjjEYY5wlJ/4mWMc5xd+5Td+5w/+5C9OcJJTnOYMjTRxlnOcp5kWWmnjAu1c5BKXucJVrnGdG9zkb25xmzvc5R73ecC/iB8PKw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="19" x="96" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="32" y="224" width="32" height="96">
+   <properties>
+    <property name="NewArea" value="grasstowngiftshop.tmx"/>
+    <property name="area" value="grasstowngiftshop2.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="22" name="level Info" x="768" y="32" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The First Door"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="51" name="Shopkeep" type="character" x="288" y="224" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="This door is freaking annoying, man. It doesn't even open. It came with the bulding, and the original owners don't even\know what it does."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="52" x="96" y="160" width="800" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="53" x="384" y="96" width="224" height="160">
+   <properties>
+    <property name="description" value="You're not me!"/>
+    <property name="door" value=""/>
+    <property name="nodesc" value=""/>
+   </properties>
+  </object>
+  <object id="54" x="480" y="256" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="55" x="32" y="428" width="928" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="58" name="Gray" type="character" x="608" y="-96" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="bro please square up bro, im not gonna mess around bro"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="None"/>
+    <property name="orient" value="down"/>
+    <property name="sprite1" value=""/>
+    <property name="talk" value="There was someone like you... He told me something interesting."/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

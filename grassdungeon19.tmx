@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="509">
+ <tileset firstgid="1" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="grassdungeon1" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon1.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="1702" name="foresttreesolo" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="foresttreesolo.png" width="250" height="300"/>
+ </tileset>
+ <tileset firstgid="1765" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="3465" name="grassdungeon5" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon5.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="5165" source="grassdungeon5snow.tsx"/>
+ <layer id="6" name="Tile Layer 2" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1UdOAlEAh/EnAyoiYtc76MaC2Hs9hG5cqBR79yRWUMDuUbCB2PUo+s3CxJDZGIcMeXn/5LdhwbwvAzNCqKnJs0ObEEeIIoY4jnFis/pk2VmSrhQekMYjnvAsaa9DEyIfBSiEE0VwaVafLDvz0dWKNrSjA53okrR3hi4/AggihFnMSdq7S9ce9nGAMCI4lLQ3Qdc1bnCLO9wjKWnvl95lFyIPNmiww2G3+mTZWQNdjWhCM7xogU/S3km90UUjfGhFG9rRgU6XuderqxWivtbc7/zrpmiaxgz8CCCIEGZN7h2ndcLi3m2adrCLPezjAGFETOrNhfv6M6NntGby/zcX7qs+o1adV9LnlVFvQjP+XIb9dCV++dKM38syLLNRp7+Tjd7LMiyz0arOYq7jRgk8KEUZylGBSlShGjX/OFOu3MturtmDXvShHwMYxBCGMYJRjEnwW5unYQGLWMIyVrCKNaxjA5vYkqD3iIYoYojjGCc4xRnOcYFLXEnQm6LhAWk84gnPeMEr3vCOD3xK0JvvEKIAhXCiCC4Uw40SeFCKMofVp1VTU1NTU1P7y74BruNrDg==
+  </data>
+ </layer>
+ <layer id="7" name="Tile Layer 1" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6Dbv7Qt7twgAQkAAAAAAC1zHQAA4K0FKiwAAg==
+  </data>
+ </layer>
+ <layer id="8" name="Tile Layer 3" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzV11l0E1Ucx/FRqaSZlCyFGAFfcCVpwRXZWnApboBvojYtLZsLaykt7uibPJSWtrTgjgqI+/rgi21x33fF3aIo4ItsCtTtOyeZ09uZO8lMZjgnPnzOJJN7/3N/+d9Mp71BRek12AG1QFECKMKQAvP7Gp+i1GKOz/38Q8MU5TCOoA9rmN+MFrwSyq4L3ehgfGcwVS8e7a9XGu3ndq1HI28383uwDb+HMpPl1bJqStIZE8Jrt1nbURwaaGgoNbYcUzAVZYb3rcxrS8/X8/Z51N+4IaNXedslvc2n/ZyImrO7Waexr2776/V+FnPqv2Mv71O51hGzHo39LN633Oxlr/orrk3jRX+NvdXz5rpGr3o7F/MwHwvQFPS+v+J+tupRrpx+b+vQgU6sR1fQfX83+eQ93sz5ilB+2ct692E/DmBU2EzMqNsn5N0TkefdTt6Vof8fq/08vFhRRmBksTyvv1BRtobM6sIpy1GPFWgIW5/PVCMR45qxzDWcXlfbx3pd7fXedH+nk3MGZlrkXVXoLFed4TPjUTa2ijVVS/KKc7XPRjMmHrN33VFCXe31yTglnD2vxk79eskajZ/ZqaH3xFhDm1PJ+WTM3nU3DJLT97P4fGX8G2xcq51MVnOy1dB7kqmGneta5dX7K3u+0vPK+iJeV7ZnjWt1W8PpnGz9tZtX9h3b2btuazidE/Eryjj/wGO2/valn1mtrmt372bKm8v+tzOn3C8n9lf2v5FVXtnetOpto43vw869zcmcCrJN85uPxvuzrMey9TcK+0l2nzWuyW0Np3MayLbFbz7u4rlqd8T8/6WYWXu2ld0r7OxjfY07Q/1yqeF0jp37lZhRfD+Y78OHQvihIhAxn7cat9HvvobTOXEkUIJSjMHYyMD9rP8NNmafwLiJmITJKEN5xHzeapxsrNMaTuckUYVqzEYNavGy9pmaInvm0Pb2QsYswmIswVIsi5jPW40bH3Bfw+mcNWhGC9aiFW3aebWf1f2qmfW2YC1a0YZ2rEMHOrEeG3AP7sV9uB8P4EE8hI14GI/gUWzCZmzBY9iKx/EEnsRTeBrP4FlcFU2ZlfZSIPVdynSTp0eVH7tV672cT/0V866OuuuvnlWWOR/7u9plf8XnDePvOB/768Xvt8rwG9aP+dLfu6MpWm9fDLjrr6ZZlT9X5kve5/A8Xgh4k7dHOCfm7WH+NryK1/A63sCbeAtv4x28i/fwPj7Ah/gIH+MTfIrP8Dm+wJfYjq/wNb7Bt/gO3+MH/Ihe7MBP+Bk78Qt+xS7sxh78hko1JZner7JjUnivnxPz7qfOARzEH/gTh3AYR9CHv/A3/sG/UIoU5Rgci+MwCAU4HoPhQyH8UBFAEYYgiBDCiKAYQzEMUZyAGE7EcIzASJyEJjWl0oVTqXMaTscZGI04EihBKcZgLM7EWTgb5+BcnIdxOB/jMQETMQmTUYZyTMFUXIALcREuRgWm4RJcistwOa7AdMzATFyJLjWlyYVZ1Lka1+BaVCKJKlRjNmpQizmYi3mYjwW4DtfjBtyIhViExViCpViGOixHPVagAY1YiZtwM27BrbgNt+MOrMKduAsH1YG6cvAfWdEIYw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="7" name="level Info" x="992" y="128" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Mainpath puzzle 2"/>
+    <property name="filter" value="dim"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="12" x="32" y="-128" width="1504" height="320">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="32" y="768" width="1536" height="256">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="24" type="spobject" x="32" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="262" x="1472" y="0" width="576" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowplace.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="263" type="spobject" x="96" y="0" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="475" x="32" y="512" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value="0"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="479" name="Grassy Spirit" type="character" x="1344" y="864" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Want a sword?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="480" type="spobject" x="224" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="481" type="spobject" x="416" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="482" type="spobject" x="608" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="483" type="spobject" x="928" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="484" type="spobject" x="1152" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="485" type="spobject" x="1376" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="486" type="spobject" x="288" y="0" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="487" type="spobject" x="480" y="0" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="488" type="spobject" x="672" y="0" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="489" type="spobject" x="864" y="0" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="490" type="spobject" x="1056" y="0" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="493" type="spobject" x="1664" y="384" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="494" type="spobject" x="1568" y="608" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="495" type="spobject" x="1760" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="496" type="spobject" x="1664" y="384" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="497" type="spobject" x="1664" y="96" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="498" name="cutgrass" type="item" x="384" y="480" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrass.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="499" x="-64" y="320" width="32" height="384">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon18.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="500" x="1536" y="256" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value="1"/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="501" x="1312" y="160" width="576" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon20.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="503" name="Save Guy" type="character" x="1376" y="416" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="SaveGuy.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="left"/>
+    <property name="save" value=""/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="506" name="Nyu" type="character" x="672" y="416" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="You should come on an \ adventure with us sometime!"/>
+    <property name="image" value="sprites/nyu.gif"/>
+    <property name="name" value="Nyu"/>
+    <property name="orient" value="left"/>
+   </properties>
+  </object>
+  <object id="507" name="MagiNyu" type="character" x="608" y="352" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Turn on your location"/>
+    <property name="image" value="sprites/maginyu.gif"/>
+    <property name="name" value="Nyu"/>
+    <property name="orient" value="left"/>
+   </properties>
+  </object>
+  <object id="508" name="SwordNyu" type="character" x="736" y="480" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Yes swords YES!"/>
+    <property name="image" value="sprites/swordnyu.gif"/>
+    <property name="name" value="Nyu"/>
+    <property name="orient" value="left"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

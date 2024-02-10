@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="51">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grasstownweaponshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownweaponshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="7227" name="grasstownhotel" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="grasstownhotel.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="7677" name="peteza" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="peteza.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="8127" name="player" tilewidth="32" tileheight="32" tilecount="96" columns="8">
+  <image source="sprites/player.png" width="280" height="400"/>
+ </tileset>
+ <layer id="32" name="Tile Layer 2" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyN1FdwFWUYgOGDcKs0lSIHwVtEehGpKkqHAApKFYWEEsAuAWzUECz0qqAhoSlVigWQhKqUEEhQASEBglKkRnp5GDgz5yIncPHMfjP7zbz7787sM2UCgbrUoz4NaEgjnuU5nqcxL/AiTWhKM5rTgpa0ojVtiKJthPu3vcKrdKIzXehKN7rzGj14nTfoSS+iiaE3fehLP2Lpz4AIzdi73ucDBhHHYIYwlA/5iI/5hE8ZxnBGMJJRjCaeMSQwNp9zJtw1iclMYSrTmM4MZvIVXzOL2XzDtyQyhySSmcs85rMgj25a6Tvd0LMt5wdWsJJVrOZHfuJnfmENa1nHr6wnhVQ2sJFNbGZLPucNvZddpLObPWSQyV7+4E/+Yh/7OcDfHOQQWWRzmCMcJSefbuibnOYMZznHeS6Qy/9c5BKXucJVrnGdG9wkEAwECvAABSkUvHf3QTsPUZgiFKUYxXmYR3iUEpSkFKV5jDIEKcvjlKM8T+TTDb3nCnaepCJPUYnKVKEq1ahODWpSi9o8TR3WlvXNqWeuTwMa3ke3qZ1mt/doQUta0Zo2RNGWdrTnJV6mAx3Zr3mATubOdKFrhG5sWDfaTgy96UNf+hFLfwYwkDd5i7d5h3d5L6w7yBzHYIZE6CaEdUfYGckoRhPPGBIYy2d8zhd8yTjGM4GJYd0p5qlMY3ow7/9YeDfRzhySSGYu85jPAhbyHd+ziMUsYSnLwrorzCtZxepg3v+x8O56OymksoGNbGIzW9jKb/zONrazg52ksYt0drOHDDLZG6Eduh50/xBZZHOYIxwlh2P8w78c5wQnOcV/nOYMZznHeS6Qe4/uLd6LGmw=
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAf3GRiYLjEDMFLofRuJgi2BWIBIFZmhmBqApC9/5kheCmUhtmLbDcbE23sZWBB2Atio9ttPAD2hjJD8EixtxEo1kRDey9hsRdk5zogXk9De/+j2Quz8yYUUxPUMmPH6HZS295VzNgxup3UthfdbHx41N6RZS8AWr10FA==
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx100WUFQQAheFHt4B0zDw6pTuH7u7uFOnumKG7u7u7S1FaCUUFLBqDTgUBv3Pc6WHxbe7mX903IYHAW94RCA0EIhGZKEQlGtGJQUxiEZs4xCUeHxCfBCTkQxKRmCQkJRnJSUFKUpGaEEIJkoa0pCM9GchIJjKThaxkIzsfkYOc5CI3echLPvJTgIIUojBFKEoxilOCkoRRitKUoSzlKE8FKlKJylShKtWoTg1qUova1KEu9ahPAxrSiMY0oSnNaE4LWtKK1rShLe1oTwc60onOfEwXPqEr3ehOD3rSi970oS/96M8ABjKIwQxhKMMYzghGMopwIhjNGMYyjvFMYCKTmMwUpjKN6cxgJrOYzRzmMo/5LGAhi1jMEpayjOWsYCWrWM0a1rKO9WxgI5vYzBa2so3t7GAnu9jNHvayj/0c4CCHOMwRjvIpn3GMz/mC45zgJKc4zRnO8iVfcY7zXOAiX/MNl/iW7/iey1zhKj/wIz/xM79wjevc4Ca3uM0d7vIrv/E7f3CP+zzgIY94zBOe8oznvOAlf/IXr3jN37zhLe8IBP2fyEQhKtGITgxiEovYxCEu8YL/Nv/bTWRPTBKSkozkpCAlqUhNCKEESUNa0pGeDGQkE5nJQlaykf093Tz2vOQjPwUoSCEKU4SiFKM4JShJGKUoTRnKUo7yVKAilaj8nm5Ney1qU4e61KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSKfg/7tdbd3oTg960ove9KEv/ejPAAYyiMEMYSjDGM4IRjKKcCIYzRjGMo7xTGAik5jMFKYyjenMYCazmM0c5jKP+SxgIYtYzBKWsozlrGAlq1jNGtayjvVsYCOb2MwWtrKN7exgJ7vYzR72so/9HOAghzjMEf4BCiQMbw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="40" name="level Info" x="736" y="64" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Overpriced pizza place"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="41" x="384" y="416" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="42" x="352" y="512" width="224" height="64">
+   <properties>
+    <property name="NewArea" value="grasstown.tmx"/>
+    <property name="area" value="grasstown.tmx"/>
+    <property name="returnarea" value="5"/>
+   </properties>
+  </object>
+  <object id="43" name="Arctender" type="character" x="202" y="192" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="44" name="Percy" type="character" x="960" y="416" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="friend" value=""/>
+    <property name="image" value="sprites/notpercy.png"/>
+    <property name="name" value="Percy"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="45" name="Gray Mask" type="character" x="256" y="320" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="46" x="32" y="160" width="64" height="128">
+   <properties>
+    <property name="description" value="A sharp looking sword.\Dust is beginning to settle on it."/>
+   </properties>
+  </object>
+  <object id="47" x="224" y="0" width="70" height="128">
+   <properties>
+    <property name="description" value="The portal to flavortown..."/>
+   </properties>
+  </object>
+  <object id="48" x="98" y="104" width="800" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="50" name="Gray Mask" type="character" x="448" y="192" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="Sometimes, one of the heroes...\He'll stop by for a certain kind of pizza."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

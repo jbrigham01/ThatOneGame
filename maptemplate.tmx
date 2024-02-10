@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="90" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="26" nextobjectid="69">
+ <tileset firstgid="1" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="bettertiles.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="10" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="11" name="dungeonentrance" tilewidth="32" tileheight="32" tilecount="3750" columns="50">
+  <image source="dungeonentrance.png" width="1600" height="2400"/>
+ </tileset>
+ <tileset firstgid="3761" name="1stkalpabattle" tilewidth="32" tileheight="32" tilecount="4500" columns="90">
+  <image source="1stkalpabattle.png" width="2880" height="1600"/>
+ </tileset>
+ <tileset firstgid="8261" source="grassdungeon21.tsx"/>
+ <layer id="23" name="Tile Layer 1" width="90" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1EVyVkEAhdF/BCE48eDOenAnjsdxZwSsBXfieBx3FsNZQCZAFUmR+1WdyRt136rXhcKft7GkUNjEZrawlW1sZwc72cVu9rCXfdRQSx31NNBIU8lfHOY/7rpdbnCTW9zmDne5x30e8JBHPOYJXXTTQy999DOQnSdsRmmhMJMiZlHMbOYwl3nMZwELWUQJpZRRTgWVVFFdOtk3mprV2KWWOuppoJEm9nOAgxziMEc4SjMttNJGOx10ZucJ67JLNz300kc/AzzlGc95wUte8ZpBhhhmhFHGGM/OE1Za5v+nnAoqqaKaxSxhKctYzgpWsorVrGEt61jPhrLJvtHUrNkuLbTSRjsddHKM45zgJKc4zRnOco7zXOAil7icnSds0C5DDDPCKGOM84a3vOM9H/jIJz7zha984zs/+Jmd0xTuSlGhcJVrRZN9kv+7Lvt205OdU0oppZTSNKj4N7+nlKZneRNSSimllFJKKaWUUkoppZRSSimllFJKKaX0r/oF+glfaA==
+  </data>
+ </layer>
+ <layer id="24" name="Tile Layer 2" width="90" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAA8GRlAAAQ==
+  </data>
+ </layer>
+ <layer id="25" name="Tile Layer 3" width="90" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="45" name="Player Start" x="768" y="960" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value="0"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="47" name="Entry Object" x="608" y="928" width="32" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="1stkalpa.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="51" name="Area Info" x="896" y="864" width="32" height="32">
+   <properties>
+    <property name="areaname" value="First Kalpa"/>
+    <property name="levelinfo" value=""/>
+   </properties>
+  </object>
+  <object id="59" x="640" y="320" width="320" height="32">
+   <properties>
+    <property name="event" value=""/>
+   </properties>
+  </object>
+  <object id="61" name="Gray Cloak" type="character" x="672" y="832" width="32" height="61">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Really? THIS is what you think about?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Gray"/>
+    <property name="orient" value="down"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

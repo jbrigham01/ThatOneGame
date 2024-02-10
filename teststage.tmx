@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="75" height="75" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="103">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2040" name="poisontile" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="poisontile.png" width="100" height="100"/>
+ </tileset>
+ <tileset firstgid="2049" source="grassstage4redux.tsx"/>
+ <layer id="15" name="Tile Layer 1" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAACAxwBX5AAB
+  </data>
+ </layer>
+ <layer id="16" name="Tile Layer 2" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAACAxwBX5AAB
+  </data>
+ </layer>
+ <layer id="17" name="Tile Layer 3" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJzt2mdwVFUYxvHN7sYPAhZAJcReSQ82ktAxTaXYSAWkJaFDGt1GerAC9kKRqn6wd0liLxSp6gcBeyGJvVAE/3eyd/bO5exynWH2HPA8w2/YfWeXe+ewb/KEweXS0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dFRMcuxAiuxCquxRuodqZtN2Iwt2Ipt2C71jtTNARw0HoTxC254wiTflKKJ4VxiEYd4JCBRn5Uwqz1t1uAJPImnfHT8Mc5om892fIJP8ZmPPjN/jDNye9t44EU4jvMxz0zHf07BzsvwXxPldrmi0THc5eqEzojneQIS0R0X4xJcistwOXogCclIQU/0Qm/0QV/0Q38MMN7ndXatI3E/ovMR3U8qv6chHTfyfCRGYTTGYCDzQRiMIchCNnKQizzkYxiGY4Tx52AkRmE0xmAsClCIIozDeEzAREzCZEzBVExzeK1Q3k8xSlCKMpRjOmZgJmZhNuZgLipQiSpUowa1qEM95uN23IE7cRfuxj1YgIVYhHtxH+7HA3gQD+FhPIJHHV4rlPfzGBZjCZZiGR7HcqzASqzC9d42T/P4GTyL5/A8XsCLeAkv4xW8itfwOt7AWjSgEU14E2/hbbyDd/Ee3scH+NDt7FqhvJ+PsA7rsQEb8TE2YTO2YKvlrD7n8Q7sxC58gS/xFb7GN/gW3+F7/IAfsRvNaEErfsLP+AW/4jf8jj/wJ/5yO7tWKO/nb+zBXuzDfvyDAzgIF98rwzz+szqex+3QHh1wAk7ESTgZHdEJnXEKTsVp6IIIdEUkTscZOBNn4Wycg3NxHs73OLtWKO/nAlyIi9ANUYhGDGIRh3jLWfXgcRKSkYKe6IXe6IO+6If+GIArkIo0pCMDmbgSV+FqDMQgDMYQXINrPc6uFcr7uc44B9yAochCNnKQizzkW85qLI8LUIgijMN4TMBETMJkTMFUTEMxSlCKMpRjOmZgJmZhNuZgLm7CzR5n1wrl/dyCW3Eb5qEClahCNWpQizrUG38XXvHPTf/HmWi+AzuxC2vRgEY0efw/N4l+ljrWZ6J5Oz5L7dEBu3nejBa0evw9V9R9j/WZaJ6EZKSgCyLQFZFeNXZBpVkBZ1KIIqR5275mZSDTq8YuqDRbwJksxCKUoBRlKFdkF1SaNaARTViMJViKZXoHD5k1cyYtaMU6rMcGbNQ7eMgsIpyv5YjEHs5nL/ZhvyKfe1Vm1m5lxt6xZH/uVZlZu5UZe8eS/blXZWbtVmbsHUu1XZA1s3YrM/aOpdouyJpZu5UZe8dSbRdkzazdyoy9Y6m2C7Jm1m5lxt6xVNsFWTNrtzJj71iq7YKMmahbBepYKu2CjJmoWwXqWCrtgoyZqFsF6liq7IKsmahbBepYquyCrJmoWwXqWKrsgqyZqFsF6liq7IKsmahbBepYquyCrJmoW1k7lr03qLALMmbWbiU6K1FvUGEXZMyCdatAvUGFXZAxC9atzNh7g+xdkDUL1q3M2HuD7F2QNQvWrczYe4PsXZA1C9atzNh7g+xdkDUL1q3M2P9tRvYuyJoF61b2dOM1UYhGjI/1eSzijP93jgQkovtR8JrDvScVaUhHBjIdnNVQXpOFbOT4WJ/nIg/5GIbhGHEUvOZw7ylGCUpRhnIHZyVKBe+rRBWqUYNa1KEe88PVf42T9+gcmfwLk9lOdA==
+  </data>
+ </layer>
+ <objectgroup id="18" name="Object Layer 1">
+  <object id="21" x="480" y="160" width="32" height="32">
+   <properties>
+    <property name="description" value="A surprisingly deep pond. \The water is rather warm ."/>
+   </properties>
+  </object>
+  <object id="29" x="416" y="288" width="32" height="32">
+   <properties>
+    <property name="description" value="Seems like a good place to \watch the sun set..."/>
+   </properties>
+  </object>
+  <object id="53" x="1528" y="736" width="32" height="64">
+   <properties>
+    <property name="NewArea" value="grassstage2.tmx"/>
+    <property name="area" value="grassstage2.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="54" x="0" y="1216" width="8" height="32">
+   <properties>
+    <property name="NewArea" value="grassstage2.tmx"/>
+    <property name="area" value="grassstage4.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="56" x="624" y="296" width="32" height="26">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="63" type="info" x="608" y="288" width="64" height="64">
+   <properties>
+    <property name="description" value="If you can read this, you aren't blind. \Good job! \(Something is just ahead.)"/>
+   </properties>
+  </object>
+  <object id="65" x="96" y="608" width="1184" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="67" x="516" y="688" width="94" height="80">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="69" x="32" y="736" width="480" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="70" x="1344" y="736" width="208" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="72" x="1272" y="616" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="74" x="1344" y="616" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="76" x="769" y="960" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="78" name="level Info" x="168" y="208" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Picnic Area?"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="80" x="88" y="320" width="8" height="288">
+   <properties>
+    <property name="NewArea" value="grassstage4.tmx"/>
+    <property name="area" value="grassstage4.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="81" x="64" y="1216" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="83" x="128" y="576" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="84" x="1472" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="3"/>
+   </properties>
+  </object>
+  <object id="86" name="Save Guy" type="character" x="288" y="384" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="SaveGuy.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="right"/>
+    <property name="save" value=""/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="87" type="spobject" x="1056" y="320" width="64" height="64">
+   <properties>
+    <property name="image" value="sptester.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="90" x="832" y="416" width="92" height="19">
+   <text wrap="1" color="#ffffff">Despacito</text>
+  </object>
+  <object id="93" x="1760" y="448" width="215" height="38">
+   <text wrap="1" color="#ffffff">I swear on Lorei's breasts
+ I am not a furry...</text>
+  </object>
+  <object id="96" x="608" y="736" width="665" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="97" name="Alexander Hamilton" type="character" x="1344" y="320" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="sprites/player.png"/>
+    <property name="name" value="Copy"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+    <property name="test" value=""/>
+   </properties>
+  </object>
+  <object id="98" x="832" y="1024" width="64" height="32">
+   <properties>
+    <property name="description" value="A lone flower.\The only survivor..."/>
+   </properties>
+  </object>
+  <object id="99" x="96" y="288" width="512" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="100" x="832" y="288" width="704" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="101" x="1344" y="608" width="208" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="102" x="1744" y="779" width="32" height="32">
+   <properties>
+    <property name="description" value="Residential Area\Hopefully you already knew because you live here.\Otherwise..."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="19" name="Tile Layer 4" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAACAxwBX5AAB
+  </data>
+ </layer>
+</map>

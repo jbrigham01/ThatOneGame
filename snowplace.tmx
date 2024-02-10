@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="36" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="79">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2040" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4540" name="snowplace" tilewidth="32" tileheight="32" tilecount="1440" columns="36">
+  <image source="snowplace.png" width="1152" height="1280"/>
+ </tileset>
+ <tileset firstgid="5980" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="7680" source="grassdungeon21.tsx"/>
+ <tileset firstgid="8904" source="snowplacev2.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="36" height="40" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztkEsOQDAURc3MLYOuha4Fa2eqwksaffWJXhHuSc6kk3v6sowQQsjMkC9qlEVo5TQFtmPbI9u1Iqppr0e2W8X5vXFawI22XYJsd85+vYXov6M7/B7ZtJ5G8Sn8pl5ps6Ce2I2O2qQP0XKmKdaH4GoPuoE9IXd7xsR/+Np9UsOefd7QQAghhJB/MAGkxjqJ
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 2" width="36" height="40" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAOBvFoAAAQ==
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="36" height="40">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="29" x="320" y="-32" width="32" height="32"/>
+  <object id="64" x="559" y="1120" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="65" x="448" y="1216" width="256" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon22.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="66" name="level Info" x="352" y="-32" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Snow place"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="67" name="Gray" type="character" x="544" y="544" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="That sheep girl..."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="68" x="256" y="224" width="64" height="64">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowplacecoffeeshop.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="69" x="288" y="384" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="70" x="448" y="-64" width="256" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowplace2.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="71" x="544" y="32" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="72" name="internet duder" type="character" x="576" y="960" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="YES MORE TOURISTS YES"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Tourismerist"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="73" name="room designer" type="character" x="768" y="512" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="I am the one who designs rooms.\For some reason, it reflects their personalities???"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="74" name="goat lover" type="character" x="416" y="512" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="Is that a goat???\You made a goat friend!?"/>
+    <property name="graygoatexplain" value=""/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="75" name="goat lover???" type="character" x="352" y="512" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="A goat girl friend? IS that like, a furry thing???"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="76" x="64" y="448" width="32" height="96"/>
+  <object id="77" x="966" y="294" width="64" height="64">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowplacetouristcenter.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="78" x="992" y="416" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="3"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

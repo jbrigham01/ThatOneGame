@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="36" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="81">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2040" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4540" name="snowplace" tilewidth="32" tileheight="32" tilecount="1440" columns="36">
+  <image source="snowplace.png" width="1152" height="1280"/>
+ </tileset>
+ <tileset firstgid="5980" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="7680" source="grassdungeon21.tsx"/>
+ <tileset firstgid="8904" source="snowplacev2.tsx"/>
+ <tileset firstgid="10344" source="snowmountain1.tsx"/>
+ <tileset firstgid="11064" source="snowmountain2.tsx"/>
+ <tileset firstgid="12216" source="snowmountain3.tsx"/>
+ <layer id="8" name="Tile Layer 1" width="36" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztyzENAAAIA7AJwr8ZEIMGTpL2bwIAAADAB13J1P0tgNACEA==
+  </data>
+ </layer>
+ <layer id="9" name="Tile Layer 2" width="36" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAzwYSAAAB
+  </data>
+ </layer>
+ <layer id="10" name="Tile Layer 3" width="36" height="32">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="67" name="Gray" type="character" x="384" y="608" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="That sheep girl..."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="68" x="448" y="1024" width="256" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountain2.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="69" x="544" y="672" width="32" height="32">
+   <properties>
+    <property name="orient" value=""/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="71" x="576" y="928" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="77" name="level Info" x="864" y="576" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Mountain 1"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="79" x="768" y="544" width="32" height="32">
+   <properties>
+    <property name="orient" value=""/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="80" x="608" y="352" width="256" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountain4.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="162">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grassstage2a" tilewidth="32" tileheight="32" tilecount="2000" columns="50">
+  <image source="grassstage2a.png" width="1600" height="1280"/>
+ </tileset>
+ <tileset firstgid="8927" name="grassdungeon1" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon1.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="10627" name="foresttreesolo" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="foresttreesolo.png" width="250" height="300"/>
+ </tileset>
+ <tileset firstgid="10690" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="12390" name="grassdungeon5" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon5.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="14090" source="1stkalpaforest1.tsx"/>
+ <tileset firstgid="15790" source="grassdungeon21.tsx"/>
+ <layer id="1" name="Tile Layer 2" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1bVOBFEAheFJtscrXIeeJwAWd4cKfwjcvcIfYnHXCn8GWNzdteKn2ITAkLAJydxL5iRfPefMzM1VFCNG/j65IYqSh3wUoBBFKA7Ru5l9aadvBzrRhW70oFeyHQv0XcQSlrGCVaxJtuOBvo94wjNe8Io3yXZEqYoSjRjEIg7xSFD1bmZfSuhbijKUowKVqJJsh4W+fejHAAYxhGHJdljpu4ktbGMHu9iTbIdDsKI4wgnOcIEr3IL1bmZfQukbhnCYEYFIREm2wxatcyJbtDb8lx07ku346Vu4SHY+tHZYVPnOi62v5ROrqn2viJyv3T983Cla94rI+dpdr/6ndDjDOS5wiStc4wa3uMM9HjT+DVHevQfP9IQXvOEDX/jBHwEIRBBUgf+NRLolIRkpSEUa0pGBTGQhGzkC76imWw1qUYd6NKARTWhGC1rRJvCOEbqNYgzjmMAkpjCNGcxiDvMC79in2wEOcYRjnOAUZzjHBS5xJfAOWwZM3w1iCMMmvdv9Puum7zZgxaZEO4wYMSJ+Qt1/FoZwmBHh/rfPfQc3K6fE
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 1" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1T1KBDEUwPHZJKuIhVqJ9WBjq4iFttY24gHEyr2CoIsHECs9wDaCK9Yi3mG7EfEA4gFsZN0wCT4fb18Ssl/CG/iRqTLvP0VS6qIohRBCCCGEEOKfeW1Mf4YYXw3avBpuWU1/btywrmhbjL0ZarENlarhhgro6VrHrU+qNomWb8WDDSF9Xeu41XfAljlgCcjt2AjA/zzUUZjfDvuOWzaBXSC35SggtiGm41D/dQDkttinu1IUl5o2qY7clseAdkJLqOPC7eedA7kt7wEPCS1+9h7RYRu6bj/vHshtWTS8N/fNlI4+6vANFSO3ZcfwFkBLm2DnP9PDxTSMouXE8LZRC+WOEduQ23JteMeohZIyZ2pL7P3yYnhXqIUy6g7fAs/k00FHi2n5NLxn1EIZR0eV2LHW5H2gFsosdOw3eauohTKOhhJ13AwabpmOHwM/EjA=
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="5" x="0" y="576" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="672" y="864" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Deeper into the forest..."/>
+    <property name="filter" value="dim"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="17" x="-64" y="448" width="32" height="256">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="1stkalpa.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="18" x="1632" y="416" width="32" height="352">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="1stkalpaforest2.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="21" x="1568" y="544" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="25" type="spobject" x="416" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="26" type="spobject" x="608" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="28" type="spobject" x="224" y="128" width="196" height="298">
+   <properties>
+    <property name="image" value="1stkalpaforesttree.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="29" type="spobject" x="416" y="96" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="30" type="spobject" x="608" y="96" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="32" type="spobject" x="800" y="96" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="33" type="spobject" x="992" y="116" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="34" type="spobject" x="1184" y="154" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="35" type="spobject" x="1376" y="155" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="36" type="spobject" x="800" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="37" type="spobject" x="992" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="38" type="spobject" x="1184" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="39" type="spobject" x="1376" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="40" name="Player Start" type="trigger" x="128" y="544" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="53" name="cutgrass" type="item" x="672" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrass.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value="don't do it."/>
+   </properties>
+  </object>
+  <object id="65" name="WarriorNyu" type="character" x="864" y="1024" width="32" height="64">
+   <properties>
+    <property name="desc" value="I looooooove swords."/>
+    <property name="image" value="sprites/maginyu.gif"/>
+    <property name="name" value="WarriorNyu"/>
+    <property name="orient" value="left"/>
+   </properties>
+  </object>
+  <object id="66" name="Nyu" type="character" x="288" y="992" width="32" height="64">
+   <properties>
+    <property name="desc" value="I just wanna talk..."/>
+    <property name="image" value="sprites/nyu.gif"/>
+    <property name="name" value="Nyu"/>
+    <property name="orient" value="left"/>
+   </properties>
+  </object>
+  <object id="131" x="416" y="672" width="640" height="64">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="132" x="416" y="358" width="640" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="134" name="flyer" type="item" x="224" y="544" width="60" height="35">
+   <properties>
+    <property name="description" value="            "/>
+    <property name="event1" value=""/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+   </properties>
+  </object>
+  <object id="135" x="320" y="416" width="64" height="32">
+   <properties>
+    <property name="description" value="Don't cut the bush!\It's not hiding anything."/>
+   </properties>
+  </object>
+  <object id="146" x="0" y="429" width="384" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="147" x="1088" y="428" width="384" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="148" x="384" y="352" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="149" x="1056" y="352" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="150" x="0" y="640" width="384" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="151" x="1088" y="640" width="512" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="152" x="1056" y="685" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="156" type="spobject" x="32" y="160" width="196" height="298">
+   <properties>
+    <property name="image" value="1stkalpaforesttree.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="157" type="spobject" x="0" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="1stkalpaforesttree.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="158" type="spobject" x="224" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="1stkalpaforesttree.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="160" name="Genmu" type="character1" x="960" y="512" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="I need a job. For to buy swords."/>
+    <property name="eventrequirement" value="mettheswordsman"/>
+    <property name="image" value="sprites/genmu.gif"/>
+    <property name="name" value="Genmu"/>
+    <property name="orient" value="left"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+  <object id="161" name="Original Fredrick???" type="character" x="864" y="512" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag3" value=""/>
+    <property name="image" value="sprites/fredrickdesirous.png"/>
+    <property name="orient" value="right"/>
+    <property name="percival" value=""/>
+    <property name="speak" value="Grr- grah. GAAAAH!!! Rrrrrrrrrr...."/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="134" height="25" tilewidth="32" tileheight="32" nextobjectid="29">
+ <tileset firstgid="1" name="blocktile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="../Downloads/Downloads/thatonegame/blocktile.png" trans="ff00ff" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="dreamtiles" tilewidth="32" tileheight="32" tilecount="9">
+  <image source="../Downloads/Downloads/thatonegame/dreamtiles.png" width="96" height="96"/>
+  <tile id="2">
+   <properties>
+    <property name="description" value="['A list', 'Is like', 'a list']"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="description" value="I like to create \n poetry"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="description" value="&quot;He didn't make it. He obtained knowledge better left unknown.'"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="description" value="'A hero had to appear. So, from his designs, I created you.'"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="description" value="'A better, more caring, and trustworthy version of him.'"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="11" name="playerstart" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="../Downloads/Downloads/thatonegame/playerstart.png" trans="ff00ff" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="12" name="dreampathway" tilewidth="32" tileheight="32" tilecount="180">
+  <image source="../Downloads/Downloads/thatonegame/dreampathway.png" width="648" height="300"/>
+  <tile id="2">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+  <tile id="46">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="192" name="tile" tilewidth="32" tileheight="32" tilecount="9">
+  <image source="../Downloads/Downloads/thatonegame/tile.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="201" name="firstplace" tilewidth="32" tileheight="32" tilecount="3250">
+  <image source="firstplace.png" width="4160" height="800"/>
+ </tileset>
+ <tileset firstgid="3451" name="desctile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="tiles/desctile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="event" value=""/>
+    <property name="onetime" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3452" name="texttiles" tilewidth="32" tileheight="32" tilecount="16">
+  <image source="texttiles.png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="image" value="'cloakedcreator.png'"/>
+    <property name="sprite" value="sprite"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="description" value="'There was a Fredrick before you.     He... became undeserving of the title of Hero.'"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="description" value="'One day, he stumbled upon knowledge. Knowledge better left unknown...'"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="description" value="'He became irregular. A Maverick, if  you will. He had to be stopped,      before he did something drastic.'"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="description" value="'So, I removed him. He was taken and placed somewhere where he could do no harm.'"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="description" value="'However, he escaped. It cost him his identity, however, as you are        Fredrick, now. Not him.'"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="description" value="'He has chosen you as the scapegoat for his failures, and is determined to destroy you, and the world along with it. In one big, suicidal cosmic temper tantrum.'"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="description" value="'So now, you have a choice. Do you want to sit around, enjoy your last few peaceful days here, or begin a journey to stop the original Fredrick?'"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="description" value="&quot;You don't really have a choice, as this would be a disappointing and somewhat depressing video game should you choose to do nothing.'"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3468" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9">
+  <image source="bettertiles.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="3477" name="desctile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="tiles/desctile.png" width="32" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="134" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztltEOwyAIRe3z/v9/97TMGkGhCGjvSZpsnaNXuFJKAQAAAAC4cw0u8D5mav8Wb4zOh/W1OyfsIRsneGN3/bN4n/fZOFk9lEXTKh3avEv+o33PXE0MzbM1ZJovpOfU8j2v9YX3DFLrpXLS+9yLwcUbabDsYV51tsh/Znp+bu9x9aZiZIHS+ePjKwcIWeWnNm423wIeT19I33fcfep71v65Gyvmi17cCF88mS8i5h5qTth5Jhv5onR+W6Gj1UNpkcYYrdHkt+dnbo2WSF/UGjgt9ZpS4nSsypHkvLfruX3sjtYXmXuhFot6Z9iHBTP78PJFdE7hiz9SX2if0cbY0ReUzkx7sGQmH29A0hNO9UJNht4enduT67szkXWBJ3KzeqaN7onAB66mqPedL33mAiM=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="134" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztzqENADAIADAMchfzPAdgl4BoL2gEANyV2wEAAAAA+KDe9gAAAAAAAACmBlPcAI4=
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="134" height="25">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" x="1280" y="160" width="32" height="32">
+   <properties>
+    <property name="description" value="&quot;You aren't the first Fredrick, as youknow.'"/>
+   </properties>
+  </object>
+  <object id="2" x="960" y="224" width="32" height="32">
+   <properties>
+    <property name="description" value="'There was a Fredrick before you.     He... went astray..'"/>
+   </properties>
+  </object>
+  <object id="3" x="1152" y="256" width="32" height="32">
+   <properties>
+    <property name="description" value="'He became irregular. A Maverick, if  you will. He had to be stopped,      before he did something drastic.'"/>
+   </properties>
+  </object>
+  <object id="4" x="1216" y="256" width="32" height="32">
+   <properties>
+    <property name="description" value=""/>
+   </properties>
+  </object>
+  <object id="5" x="1344" y="288" width="32" height="32">
+   <properties>
+    <property name="description" value=""/>
+   </properties>
+  </object>
+  <object id="6" x="1408" y="288" width="32" height="32">
+   <properties>
+    <property name="description" value="'So now, you have a choice. Do you want to sit around, enjoy your last few peaceful days here, or begin a journey to stop the original Fredrick?'"/>
+   </properties>
+  </object>
+  <object id="7" x="1056" y="160" width="32" height="32">
+   <properties>
+    <property name="description" value="'One day, he stumbled upon knowledge. Knowledge better left unknown...'"/>
+   </properties>
+  </object>
+  <object id="8" x="1280" y="256" width="32" height="32">
+   <properties>
+    <property name="description" value="'However, he escaped. It cost him his identity, however, as you are        Fredrick, now. Not him.'"/>
+   </properties>
+  </object>
+  <object id="9" x="1472" y="288" width="32" height="32">
+   <properties>
+    <property name="description" value=""/>
+   </properties>
+  </object>
+  <object id="10" name="character" type="cloakedcreator" x="3936" y="192" width="32" height="64">
+   <properties>
+    <property name="conversation" value="True"/>
+    <property name="description" value="So, now you know how to survive.\ Are you ready to begin your journey?"/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="hasaquestion" value="True"/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value="sprite"/>
+   </properties>
+  </object>
+  <object id="11" name="character" type="cloakedcreator" x="1568" y="352" width="32" height="64">
+   <properties>
+    <property name="description" value="At times, you must know yourself. \Imagine a thing called an enter \button, and press it."/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="left"/>
+    <property name="specialtalk" value="2"/>
+    <property name="sprite" value="sprite"/>
+    <property name="temporary" value="True"/>
+   </properties>
+  </object>
+  <object id="12" name="character" type="cloakedcreator" x="1056" y="352" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="left"/>
+    <property name="specialtalk" value="1"/>
+    <property name="sprite" value="sprite"/>
+    <property name="temporary" value="True"/>
+   </properties>
+  </object>
+  <object id="13" name="character" type="cloakedcreator" x="2880" y="288" width="32" height="64">
+   <properties>
+    <property name="description" value="You will notice 4 choices.\The first choice allows you to select\and use items."/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="left"/>
+    <property name="specialtalk" value="3"/>
+    <property name="sprite" value="sprite"/>
+    <property name="temporary" value="True"/>
+   </properties>
+  </object>
+  <object id="14" name="character" type="cloakedcreator" x="3520" y="352" width="32" height="64">
+   <properties>
+    <property name="description" value="The second choice allows you to change\ whatever equipment you have."/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="left"/>
+    <property name="specialtalk" value="4"/>
+    <property name="sprite" value="sprite"/>
+    <property name="temporary" value="True"/>
+   </properties>
+  </object>
+  <object id="17" x="3904" y="96" width="32" height="32">
+   <properties>
+    <property name="description" value="A mysterious sigil carved on a slab \of rock hangs here. \Suspended by four chains, it waits patiently."/>
+    <property name="question" value="question"/>
+   </properties>
+  </object>
+  <object id="21" x="576" y="320" width="32" height="160">
+   <properties>
+    <property name="description" value="The tile is just out of reach... \What a shame."/>
+   </properties>
+  </object>
+  <object id="22" name="character" type="cloakedcreator" x="128" y="352" width="32" height="64">
+   <properties>
+    <property name="debug" value="1"/>
+    <property name="description" value="Welcome to the demo!"/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="right"/>
+    <property name="special3" value=""/>
+    <property name="sprite" value="sprite"/>
+   </properties>
+  </object>
+  <object id="27" x="896" y="384" width="32" height="32">
+   <properties>
+    <property name="event" value=""/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

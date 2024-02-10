@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="57">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grasstownweaponshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownweaponshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="7227" name="grasstownhotel" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="grasstownhotel.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="7677" name="grasstownhotelhallway" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="grasstownhotelhallway.png" width="960" height="480"/>
+ </tileset>
+ <layer id="32" name="Tile Layer 2" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxtxzMCHAAAALCr7S617S61bdu2bdu2bdu2bds28oAbMiRX/EAgN3nISz7yU4CCFKIwRShKMYpTgpKUojRlKEs5ylOBilSiMlWoSjWqU4Oa1KI2dahLPerTgIY0ojFNaEozmtOClrSiNW1oSzva04GOdKIzXehKN7rTg570ojd96Es/+jOAgQxiMEMYyjCGM4KRjGI0YxjLOMYzgYlMYjJTmMo0pjODmcxiNnOYyzzms4CFLGIxS1jKMpazgpWsYjVrWMs61rOBjWxiM1vYyja2s4Od7GI3e9jLPvZzgIMc4jBHOMoxjnOCk5ziNGc4yznOc4GLXOIyV7jKNa5zg5vc4jZ3uMs97vOAhzziMU94yjOe84KXvOI1b3jLO97zgY98CvLPfOErv/jNH/7yj0CCQCAEIQlFaMIQlnCEJwIRiURkohCVaEQnRpDHJBaxiUNc4hGfBCQkEYlJQlKSkZwUpCQVqUlDWtKRngxkJFOQZyYLWclGdnKQk1zkJg95yUd+ClCQQhSmCEUpRnFKUJJSlKZMkJelHOWpQlWqUZ0a1KQWtalDXepRnwY0pBGNaUJTmtGcFrSkVZC3pg1t6URnutCVbnSnBz3pRW/60Jd+9GcAAxnEYIYwlGEMZ0SQj2QUo5nARCYxmSlMZRrTmcFMZjGbOcxlHvNZwEIWsZglLGVZkC9nBStZx3o2sJFNbGYLW9nGdnawk13sZg972cd+DnCQQxzmSJAf5RjHOcNZznGeC1zkEpe5wlWucZ0b3OQWt7nDXe5xnwc85BGPecJTnvGcF7zkFa95w1ve8Z4PfOQTn/nCV77xnR/85Be/+Q+f5Ca8
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAf3GRiYLjEDMFLofRuJgi2BWIBIFZmhmBqApC9/5kheCmUhtmLbDcbE23sZWBB2Atio9ttPAD2hjJD8EixtxEo1kRDey9hsRdk5zogXk9De/+j2Quz8yYUUxPUMmPH6HZS295VzNgxup3UthfdbHx41N6RZS8AWr10FA==
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwN0+NiHgYAAMCvto0ktW2ntm3btm3btm0PxVC7W82h3Orej3uE+xIUCHzlG4HgQCAMYQlHeCIQkUhEJgpRiUZ0YhCTWMQmDnGJR3wSkJBEJCYJSUlGcoIIJoQUpCQVqUlDWtKRngxkJBOZyUJWspGdHOQkF7nJQ17ykZ8CFKQQhSlCUYoRSnFKUJJSlKYMZSlHeSpQkUpUpgpVqUZ1alCTWtSmDnWpR30a0JBGNKYJTWlGc1rQkla0pg1taUd7OtCRTnSmC13pRnd60JNe9KYPfelHfwYwkEEMZghDGcZwRjCSUYxmDGMZx3gmMJFJTGYKU5nGdGYwk1nMZg5zmcd8FrCQRSxmCUtZxnJWsJJVrGYNa1nHejawkU1sZgtb2cZ2drCTXexmD3vZx34OcJBDHOYIRznGcU5wklOc5gd+5Cd+5gxnOcd5fuFXfuN3LnCRS1zmCle5xnVucJNb3OYOd/mDP7nHfR7wkEc85glPecZzXvCSv/ibf/iXV7zmDW95x3v+438+8JFPfOYLX/lGIMR/whKO8EQgIpGITBSiEo3oxCAmsYhNHOISj/gkICGJSEwSkpKM5AQRTAgpSEkqUpOGtKQjPRnISCYyk4WsZCM7OchJLnKTh7zkIz8FKEghClOEohQjlOKUoCSlKE0ZylKO8lSgIpWoTBWqUo3q1KAmtahNHepSj/o0oCGNaEwTmtKM5rSgJa1oTRva0o72dKAjnehMF7rSje70oCe96E0f+tKP/gxgIIMYzBCGMozhjGAkoxjNGMYyjvFMYCKTmMwUpjKN6cxgJrOYzRzmMo/5LGAhi1jMEpayjOWsYCWrWM0a1rKO9WxgI5vYzBa2so3t7GAnu9jNHvayj/0c4CCHOMwRjvIdyN/+1A==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="40" name="level Info" x="736" y="64" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Hotel Hallway"/>
+    <property name="levelinfo" value="1"/>
+    <property name="music" value="dabbad.mp3"/>
+   </properties>
+  </object>
+  <object id="41" x="270" y="192" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="42" x="256" y="32" width="64" height="84">
+   <properties>
+    <property name="NewArea" value="grasstownhotel.tmx"/>
+    <property name="area" value="grasstownhotel.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="48" x="0" y="416" width="960" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="49" x="0" y="224" width="160" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="50" x="416" y="224" width="96" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="51" x="576" y="224" width="160" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="52" x="800" y="224" width="160" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="53" name="door" x="512" y="224" width="64" height="64">
+   <properties>
+    <property name="description" value="Get a roomkey you Frick"/>
+   </properties>
+  </object>
+  <object id="54" x="512" y="320" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="55" x="416" y="288" width="32" height="128">
+   <properties>
+    <property name="event" value="genmuhotel"/>
+   </properties>
+  </object>
+  <object id="56" name="Genmurei" type="character1" x="672" y="288" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="Adventure! I dont care about ur lore."/>
+    <property name="image" value="sprites/genmu.gif"/>
+    <property name="name" value="Genmu"/>
+    <property name="orient" value="left"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

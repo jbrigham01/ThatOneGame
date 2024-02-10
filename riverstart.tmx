@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="blocktile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2027" name="playerstart" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2028" name="riverstart" tilewidth="32" tileheight="32" margin="27" tilecount="81">
+  <image source="riverstart.png" width="320" height="320"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALqg9fsA+2CoQ9esVMXUxsAAMjTE8c=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApIBwAGQAAB
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyd0GdKxEAYxvHJWjK6FrCDHexgB/sN7OUIcb9bFuzlCNEbCPZyBy9k+2IH/wEHhpiZED/8YHmfmSfvrCeEWEYG3u9vT5sl5YX6Aj6OcPwPep8fsaPq179h2t+P6DPNVJd+37afp3WF+0xvjzqn/2d+qDPw4ArxiCc8u+Zzqk/P1R767JWON7zjwzWfU/P7GEIK4SCFHBl//sWxK6CjEGkUYY3ZOrIx98Lv+sQXvl17Fsz0nhWsOn/flYs85Et7lgrtrPrC7ypGCUqlPUsb+sqYl6MClahCNWqkPQvuRvXVktWhHg1oRBOapT0z9bWQtaIN7ehAJ7qkPTP1dZP1oBd96McABqU907tUX2CIbBgjGMUYxjEh7VlW6zrBZEqIKUxjBrOYwzwWsIilBDawiS1sYwe72MM+DnCYwCnOcI4LXOIK17jBLe4S+AG6UrSu
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1"/>
+</map>

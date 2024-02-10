@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="49">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grasstownweaponshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownweaponshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="7227" name="grasstownhotel" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="grasstownhotel.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="7677" name="snowplacecoffeeshop" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="snowplacecoffeeshop.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="8127" source="grassdungeon21.tsx"/>
+ <tileset firstgid="9351" source="grassdungeon5snow.tsx"/>
+ <layer id="32" name="Tile Layer 2" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxt1FV0FgQYx+FPQBRQQrlRSpFGBb0RpZtRAgoMGL3RoTBGw0bDJt01upXu0YNh0DCa0Q2jQcF4PIfL7+I57/nd/a/ekjkDgVKUpgxlKUd5KlCRSlSmClWpRgjVqUFNalGbb6lDXerxHd9TnwY0JJRGNKYJYTSlGc1pQUta0ZpwImhDW9rRng50pBOd6UJXfuBHutGdSHoQRU960Zs+9KUf/RnAQKKJYRCDGcJQhjGcEYxkFLHE8ROjGcNYxjGeCUxkEpOZwlSmMZ0ZzGQWs4lnDnOZx3wWsJBFLGYJS1nGclbwM7+wklWsZg1rWcd6NrCRTWxmC1tJYBvb2cFOdrGbPSSyl30ksZ9f+Y3f+YMDHOQQhznCUY5xnBMkc5JTnOYMZznHeS6QwkUucZkrXOUa17nBTW5xmzvc5R73SeUBD3nE4yD9hKc84yWv+Jt/+JdArkDgDdKQlnS8SXre4m0ykJFMvMO7ZCYLWckWpN/jfbLzAR+Sg5zkIjd5+IiPycsn5CM/BShIIQpThKJ8ymd8TrEgXZwv+JKvKMHXfENJSlGaMpSlHOWpQEUqUZkqVKUaIVSnBjWpFaRrMz2vf+DWpwENCaURjWlCGE1pRnNa0JJWtCacCNrQlna0pwMdg3QnOtOF7kTSgyh60uv1rj5uX/rRnwEMJJoYBjGYIQxlGMMZwcggPYpY4hjHeCYwkUlMZgpTmfb/BmYwk1nMJp45zGUe81nAQhaxOEgvYSnLWMkqVrOGtaxjPRvYyCY2s4WtJLCN7exgJ7vYzR4S2Ruk95HEfg5wkEMc5ghHOcZxTpDMSU5xmjOc5RznuUAKF7nEZa5wlWtc5wY3ucVt7nCXe9wnlQc85BGPecJTnvGcF/zJX7zkFf8BwsknMg==
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAf3GRiYLjEDMFLofRuJgi2BWIBIFZmhmBqApC9/5kheCmUhtmLbDcbE23sZWBB2Atio9ttPAD2hjJD8EixtxEo1kRDey9hsRdk5zogXk9De/+j2Quz8yYUUxPUMmPH6HZS295VzNgxup3UthfdbHx41N6RZS8AWr10FA==
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyF00OMHkAUAOC/ts2t261tbW3btu0tt7Zt27bNW3uufeuh+DbpJu3mb3r4MpO8lzdv3mS+ZwkEfvCTQNZAIAYxiUVs4hCXeMQnAQlJRGKSkJRkJCcFKUlFatKQlnSkJwMZyURmspCVELKRnRzkJBe5yUNe8hFKfgpQkEIUpghFKUZxSlCSUpSmDGUpR3kqUJFKVKYKVQmjGtWpQU1qUZs61KUe9WlAQxrRmCY0pRnNaUFLWtGaNrSlHe3pQEc60ZkudKUb3elBT3rRmz70pR/9GcBABjGYIQxlGMMZwUhGMZoxjGUc45nARCYRzmSmMJVpTGcGEcxkFrOZw1zmMZ8FLGQRi1nCUpaxnBWsZBWrWcNa1rGeDWxkE5vZwla2sZ0d7GQXu9nDXvaxnwMc5BCHOcJRjnGcE5zkFKc5w1nOcZ4LXOQSl7nCVa5xnRvc5Ba3ucNd7nGfBzzkEY95wlOeRb5ViLdiQMjf++diL37H/yUq96W8V7zmDW95x3s+8JFPfOYLX4PUjar17Y+e/oxFXyNzYxOHuMQjPglISCISk4SkJCM5KaLViJIuJPgsgvWYP9T/t+YiN3nISz5CI+MUoCCFKEyR/8wxek/BcqoSRjWqU4Oa1KI2dahLPerTgIY0ojFNaBrkblHntqEt7WhPBzrSic50oSvd6E4PetKL3vShb7SaAxnE4H/MciSjGM0YxjKO8UxgIpMIZzJTmMo0pjODCGYyi9nMYS7zmM8CFrKIxSxhKctYzgpWsorVrGEt61jPBjayic1sYSvb2M4OdrKL3exhL/vYzwEOcojDHOEoxzjOCU5yitOc4SznOM8FfgGgefuT
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="40" name="level Info" x="736" y="64" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Fcuk yuo"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="41" x="450" y="369" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="42" x="404" y="416" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="snowplace.tmx"/>
+    <property name="area" value="snowplace2.tmx"/>
+    <property name="returnarea" value="3"/>
+   </properties>
+  </object>
+  <object id="44" name="Fortune Teller" type="character" x="256" y="288" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="Kill ALL gamers. Every one."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value=""/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="48" name="Maybe a girl?" type="character" x="640" y="288" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="Me? A gamer girl? NOPE."/>
+    <property name="image" value="sprites/lucy.gif"/>
+    <property name="name" value=""/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset version="1.2" tiledversion="1.2.1" name="snowmountain8 - Copy" tilewidth="32" tileheight="32" tilecount="1008" columns="42">
+ <image source="snowmountain8 - Copy.png" width="1368" height="768"/>
+</tileset>

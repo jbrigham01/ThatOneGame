@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="17">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <layer id="1" name="Tile Layer 2" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztz0dOQlEYhuETDvYNwAKsqOvAruuwAboAy1zsxl7m9gYE7O7AgpTYyzJ85zcGByY3v/nf5Jl/nzGapv335n3GLGARS1jGClaxhnVs+NxeWbgkG1M4wSnOcI4LXOIK1wJ+PLLxCc94wSve8I4PfOJLwA+P3xgLL4pQjBKUogzlqPC7vbJwlWysQjVqUIs6BFCPBjQK+BFkYxOa0YJWtKEdHehEl4Af3WzsQS/60I8QwohgAIMCfoyxMYpxTGASU5jGDGYxJ+DHLhv3sI8DHOIIx4ghjoSAHzdsvMUd7pHGAzLIIoe8gB+apmmapml/3ZB1GsYIRq3b637fpnXawjZ2BP3IWKcscsgL+qFpmvZT36e6T0U=
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 1" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1T1KBDEUwPHZJKuIhVqJ9WBjq4iFttY24gHEyr2CoIsHECs9wDaCK9Yi3mG7EfEA4gFsZN0wCT4fb18Ssl/CG/iRqTLvP0VS6qIohRBCCCGEEOKfeW1Mf4YYXw3avBpuWU1/btywrmhbjL0ZarENlarhhgro6VrHrU+qNomWb8WDDSF9Xeu41XfAljlgCcjt2AjA/zzUUZjfDvuOWzaBXSC35SggtiGm41D/dQDkttinu1IUl5o2qY7clseAdkJLqOPC7eedA7kt7wEPCS1+9h7RYRu6bj/vHshtWTS8N/fNlI4+6vANFSO3ZcfwFkBLm2DnP9PDxTSMouXE8LZRC+WOEduQ23JteMeohZIyZ2pL7P3yYnhXqIUy6g7fAs/k00FHi2n5NLxn1EIZR0eV2LHW5H2gFsosdOw3eauohTKOhhJ13AwabpmOHwM/EjA=
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJy113eUVOUZB+CV5u4iCxF2l0EpFrqgptKMiQXpS1GqRtNE0jssVYpSVBCwQbpZqtKboDSBFPUfEyF22u5CpNgommiSZ87OnHOZM3e4Q8gfz/nmfvPdd37vnPeeOXPkwpycoxzjOO/yHu/zAR9ygpOc4jQf8TH/5F98wqf8m/+Qk5uTcwHVqE4NalKLC8klj3xqcxF1KKAu9fgMF1OfBhRSRDENidGISxIa04SmNOMyLucKrqQ5LWhJK1rThrZcRTvaczXXcC3zGubkzOeX/Ipf8xt+y+/4PU/Sxdnr+DLX8xW+yg3cyE3cTFduoRvd6UFPetE7oYS+9KM/A7iV2xjIIAYzhKEM43buyJD3OTazha1sYzvPN4ze48/V/wUjGUUpoxnDWMYxngkJE5nEZKZwH/czlWlMZwYP8CAPMZNZueF597KP/RzgIOVUUMkhDqfpcQc72cUi9RezhKU8xdMsYzkrWMmqhDWsZR3r2cAzbGQTz8bzspktbGUb23Oj560V81yQG4t+z2vqv84bvMlbvB3/TPaxnwMcTKigkkMc5h+8wxGOcozjITNUTa7q1KBm7My8eeRTm9a0oW0s+j3pZq1enuefi6lPAwoTimlIjEZcwqU0pglNaZaXfoaa+7wWtKRVSt6raEd7etGbPrHo96SbtRvkuJGbuJmudMip0t3rHvSkF73pQwl96Uf/vOjzkMxbQl/68UN+xI/pRnd60DPQY9T6ydxJpXlVxjCWcYxnAvcykUlMZkpe9HlI5v0JP+VnzGEuj/Bdvsf3+UGgx6j1U/tIWibjclawklWsZg1rWcf6vOjzkMz7KI/xOOtYzwZmMouHmR3oMWr9sD72yriP/RzgIOVUUMkhDueFz0PqDCXzPsNGNvEqr/E6q1jNGtYGeoxa/4QsJznFaT7i4/jzn+/5pz4NKKSIYhoSo1F++DykzlAy7xu8yUAGM4Shievd7OHvgR6j1m8hS0ta0Zo2tI2v1ap8iQ50pBOdU4TNQ+oMpWYeFGGvcaPo9cNyBvsIE78vbB6CM5Tuu4/Sx7AM85Y6o+m+47ge9KQXvelDCX3pR38G8ErIPJxthqL2EaX+W7HwfCMZRSmjGcNYxjGeCdzLRCYxmSncx/1MZVq16JnD+oibrs6MRI4wYfnKWMBCFrGYJSzlKZ5mGctZwcr4jLGaNaxlXRZ9DMuwv16dDYkcYcLynY8+ys5zH+VUJNbywHVlyl5wvyyDTP0F3/9/9VFZ7ew9JV/fXZi94YH1noBRlDKaroXZ99HNPQ0Kw7OmXgdfP1GYvXmBdX5Apmc4tY+ws8k+0gn2k+qFwuy9GFhfChgYiy5dD9POIUvSJ+fg0+Aaq5JND5mcS564Bhec3Yi6mZ2vXvbUjZYnWyMi1D1fvUws8l+j3rlnbVwzXBOa0izkOrn3pAx/oIwFLKSdTO25mmu4ls/yOT7PF/giq5x9u4bfIuvaosx5MumRQU960TvkOrn3is/fzZ5Epletd8p4V72q629Yv8m3+HZib3hiPehsORUsrZ45TyYjGUUpoxnD2DRGZlCr2H9Qcskjn9lyzmEuj/Aoj/E4TzCP+RQ6W0QxtQuq3FbHrDGIwQxhKMO4nTv4GndyF1+nTI4FLGQRi1mSRlkGHWToSCc604UdMu5kF3/kT/yZv/ACL/IStzjbje6BPqbKNY3pzOABHuQhZjKLh5nNHObyshx/5W/x+WA3e9J4+SySGbJVKv9oxgT62CjXJp7lOTazha1sYzvPs4Od7GJvzfNrH/s5EPJ+PGfYvRfVysl5R6YjHOUYx3mX93ifD/iQE5zkFKfrnFkj1f/Sw8GQmpl05FJ9NqYJTWnGZVzOFVxJc1rQkla0LjizRqpsc9ShgLrUC6mZyd30kamEvvSjPwO4Nf78M5BBDGYIQxlWcGaNVNnm6ERnunBdSM2zGc49jOA7WZz/L4CLfnw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="1" x="1600" y="672" width="56" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage3.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="3" x="-32" y="704" width="33" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage2"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="5" x="32" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="184" y="568" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The place with the sword guy"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="10" x="1536" y="768" width="32" height="32">
+   <properties>
+    <property name="image" value="graycloak"/>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="11" x="0" y="672" width="608" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="0" y="832" width="608" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="14" x="672" y="896" width="384" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="15" x="1120" y="672" width="480" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="1120" y="832" width="480" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

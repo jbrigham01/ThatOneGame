@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="90" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="26" nextobjectid="69">
+ <tileset firstgid="1" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="bettertiles.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="10" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="11" name="dungeonentrance" tilewidth="32" tileheight="32" tilecount="3750" columns="50">
+  <image source="dungeonentrance.png" width="1600" height="2400"/>
+ </tileset>
+ <tileset firstgid="3761" name="1stkalpabattle" tilewidth="32" tileheight="32" tilecount="4500" columns="90">
+  <image source="1stkalpabattle.png" width="2880" height="1600"/>
+ </tileset>
+ <tileset firstgid="8261" source="grassdungeon21.tsx"/>
+ <layer id="23" name="Tile Layer 1" width="90" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1EVyVkEAhdF/BCE48eDOenAnjsdxZwSsBXfieBx3FsNZQCZAFUmR+1WdyRt136rXhcKft7GkUNjEZrawlW1sZwc72cVu9rCXfdRQSx31NNBIU8lfHOY/7rpdbnCTW9zmDne5x30e8JBHPOYJXXTTQy999DOQnSdsRmmhMJMiZlHMbOYwl3nMZwELWUQJpZRRTgWVVFFdOtk3mprV2KWWOuppoJEm9nOAgxziMEc4SjMttNJGOx10ZucJ67JLNz300kc/AzzlGc95wUte8ZpBhhhmhFHGGM/OE1Za5v+nnAoqqaKaxSxhKctYzgpWsorVrGEt61jPhrLJvtHUrNkuLbTSRjsddHKM45zgJKc4zRnOco7zXOAil7icnSds0C5DDDPCKGOM84a3vOM9H/jIJz7zha984zs/+Jmd0xTuSlGhcJVrRZN9kv+7Lvt205OdU0oppZTSNKj4N7+nlKZneRNSSimllFJKKaWUUkoppZRSSimllFJKKaX0r/oF+glfaA==
+  </data>
+ </layer>
+ <layer id="24" name="Tile Layer 2" width="90" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAA8GRlAAAQ==
+  </data>
+ </layer>
+ <layer id="25" name="Tile Layer 3" width="90" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="45" x="768" y="960" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value="0"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="47" x="320" y="864" width="224" height="256">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="1stkalpa.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="51" x="1152" y="640" width="32" height="32">
+   <properties>
+    <property name="areaname" value="First Kalpa"/>
+    <property name="levelinfo" value=""/>
+   </properties>
+  </object>
+  <object id="59" x="640" y="320" width="320" height="32">
+   <properties>
+    <property name="event" value=""/>
+   </properties>
+  </object>
+  <object id="61" name="Gray Cloak" type="character" x="608" y="864" width="32" height="61">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Really? This is what you think about?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Gray"/>
+    <property name="orient" value="orient"/>
+   </properties>
+  </object>
+  <object id="62" name="Percy" type="character" x="896" y="896" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Oh, fredrick... I missed you..."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="63" name="Percy" type="character" x="672" y="896" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Fredrick! Let's hang out together! Please???"/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="64" name="Percy" type="character" x="640" y="992" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Dammit! Kiss me! DAMMIT!"/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="65" name="Percy" type="character" x="928" y="992" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="I am glad that I met you."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="66" name="Percy" type="character" x="832" y="992" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="I will beat you this time, Fredrick."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="67" name="Percy" type="character" x="704" y="992" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="No! You're MY human..."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="68" name="Percy" type="character" x="800" y="832" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Even though you're a humie, i still like you..."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

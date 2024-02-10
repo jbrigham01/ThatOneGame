@@ -1,0 +1,14 @@
+[0m2022.05.13 00:27:47 INFO  Started: Metals version 0.10.2 in workspace 'C:\Users\jerem\Documents\pylletTown-masterV2' for client vscode 1.67.1.[0m
+[0m2022.05.13 00:27:49 INFO  time: initialize in 1.91s[0m
+[0m2022.05.13 00:27:50 WARN  Build server is not auto-connectable.[0m
+[0m2022.05.13 00:27:50 WARN  no build tool detected in workspace 'C:\Users\jerem\Documents\pylletTown-masterV2'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2022.05.13 00:27:50 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\cs2\game\EnemySwarm.scala[0m
+[0m2022.05.13 00:27:50 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\cs2\adt\DEPQ.scala[0m
+[0m2022.05.13 00:27:56 INFO  no build target: using presentation compiler with only scala-library: 2.12.13[0m
+[0m2022.05.13 00:28:05 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\cs2\game\EnemySwarm.scala[0m
+[0m2022.05.13 00:28:05 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\cs2\adt\DEPQ.scala[0m
+[0m2022.05.13 00:28:12 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\test\scala\cs2\adt\DEPQTester.scala[0m
+[0m2022.05.13 00:28:17 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\cs2\game\Boss.scala[0m
+[0m2022.05.13 00:28:19 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\graphics\FirstWindow.scala[0m
+[0m2022.05.13 00:28:22 WARN  no build target for: C:\Users\jerem\CS2\cs2hw-s22-Jbrigham-Trinity\src\main\scala\cs2\adt\HeapPriorityQueue.scala[0m
+[0m2022.05.13 00:49:03 INFO  shutting down Metals[0m

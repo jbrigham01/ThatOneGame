@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="51">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grasstownweaponshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownweaponshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="7227" name="grasstownhotel" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="grasstownhotel.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="7677" name="snowplacecoffeeshop" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="snowplacecoffeeshop.png" width="960" height="480"/>
+ </tileset>
+ <tileset firstgid="8127" source="grassdungeon21.tsx"/>
+ <tileset firstgid="9351" source="grassdungeon5snow.tsx"/>
+ <tileset firstgid="11051" source="snowmountainresortentrance.tsx"/>
+ <layer id="32" name="Tile Layer 2" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxt1EWQ1wUYx+G/gbQCcpFQQhCVUIcZQWLpDkHp7loQXEq62QWU7m5YRbq7QaV36Vq6FpZGl3qY8fg7PPOdz+09vYUyhUKFKUJRwihGcUpQklKUpgxlKUd5KlCRSlSmClX5nmpU5wd+pAY1qUVt6lCXetSnAQ1pRGOa0JRmNKcFLWlFa9rQlnaE054O/ERHOvEzEXSmC13pRnd+oQc96UVv+tCXfvRnAAMZxGCGMJRIohjGcEbwK78xklGMZgxjGcd4JjCRSeTPGwpNsVOZxnRmMJNZzGYOc5nHfBawkEUsJprf+YMl/MlSlrGcFaxkFatZw1rWsZ4NbGQTm9nCVraxnR3sZBe72cNe9rGfv/ibfzjAQQ5xmCMc5RgxxHKcE5zkFKc5w1nOcZ4LXCSOS1zmCle5xnVucJNb3OYO8dzlHgnc5wEPA/oRj3lCIs95wUteEcocCr3F27zDuyThPZKSjOSkICWpSM37fEAa0gZ0Oj4kPR+RgYxkIjMf8wlZyEo2svMpOcjJZ+Tic77gS3KTh7zkC+iv+Jpv+JYCFOQ7ClGYIhQljGIUpwQlKUVpylCWcpSnAhWpROWArsKUbP6BrUFNalGbOtSlHvVpQEMa0ZgmNKUZzWlBS1rRmja0pV1Ah9OeDkTQmS50pRvd/7+rh+1JL3rTh770oz8DGMggBjOEoUQSFdDDGM4IRjOGsYxjPBOYyCQmv7mBqUxjOjOYySxmM4e5zGM+C1gY0ItYTDRLWcZyVrCSVaxmDWtZx3o2sJFNbGYLW9nGdnawk13sDug97GUfBzjIIQ5zhKMcI4ZYjnOCk5ziNGc4yznOc4GLxHGJy1zhKte4zg1ucovb3CGeu9wjgfs84CGPeMwTnvKMf/mPRJ7zGvTpJt8=
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAf3GRiYLjEDMFLofRuJgi2BWIBIFZmhmBqApC9/5kheCmUhtmLbDcbE23sZWBB2Atio9ttPAD2hjJD8EixtxEo1kRDey9hsRdk5zogXk9De/+j2Quz8yYUUxPUMmPH6HZS295VzNgxup3UthfdbHx41N6RZS8AWr10FA==
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyNz0OMHlAUgNG/tm3btm3b9tR2Z2rbtm3b7q5d1951UZxJ/kkmbdPp4uR7yXt5N/d7pkDgBz8JZA4EohGdGMQkFrGJQ1ziEZ8EJCQRiUlCUpKRnBSkJBWpSUNa0pGeDGQkE5nJQlaykZ0c5CQXuclDXvKRnwIUpBCFKUJRilGcEpSkFKUpQ1nKUZ4KVKQSlalCVapRnRrUpBa1qUNd6lGfBjSkEY1pQlOa0ZwWtKQVrWlDW9rRng50pBOd6UJXutGdHvSkF73pQ1/60Z8BDGQQIQxmCEMZxnBGMJJRjGYMYxnHeCYwkUlMZgpTmUYoYUxnBjOZxWzmMJd5zGcBC1nEYpawlGUsZwUrWcVq1rCWdaxnAxvZxGa2sJVtbGcHO9nFbvawl33s5wAHOcRhjnCUYxznBCc5z+lgw50L9gIXucRlrnCVa1znBje5xW3ucJd73OcBD3nEY57wlGd843mkRpzDvYh0/peXvOI1b3jLO97zgY984jNf+EqaLH+K/Off7iO/C29MYhGbOMQlHvFJQEISkZgkJP2POVHtGvEmh+YkF7nJQ17ykZ8CFKQQhSkSxT5R7V4l2GpUpwY1qUVt6lCXetSnAQ1pRGOa/GN+hLa0oz0d6EgnOtOFrnSjOz3oSS9604e+9KM/AxjIIEIYHGzIbzNHMorRjGEs4xjPBCYyiclMYSrTCCWM6cxgJrOYzRzmMo/5wYZbxGKWsJRlLGcFK1nFatawlnWsZwMb2cRmtrCVbWxnBzvZxW72sJd97OcABznEYY5wlGMc5wQnOcVpznCWc5znAr8AnHMBlw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="40" name="level Info" x="736" y="64" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Coffee Shop?"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="41" x="448" y="384" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="42" x="400" y="424" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="snowplace.tmx"/>
+    <property name="area" value="snowplace.tmx"/>
+    <property name="returnarea" value="3"/>
+   </properties>
+  </object>
+  <object id="48" name="Percy" type="character" x="448" y="224" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="hotel work is just..."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="49" x="352" y="320" width="224" height="32">
+   <properties>
+    <property name="event" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

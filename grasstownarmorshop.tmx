@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="43">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2027" name="grasstownarmorshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownarmorshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="2327" name="grasstownarmorshop - Copy" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownarmorshop - Copy.png" width="640" height="480"/>
+ </tileset>
+ <layer id="29" name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwNwwV0FQQAAMAvSIxORzesGd2xkQLSISEpICAdgnR3S0p3g6QiIUpJKEhLdylSKh13711wUCCQzvRmMKOZzGwWs5rN7OYwp7nMbR5DDDXMcCOMNMq8RpvP/BawoIUsbBGLWszilrCkpSxtGcsaY6zlLG8FK1rJyn5sFatazU+sbg1rWsva1rGu9axvAz+1oY1sbBM/s6nNbG4LW9rKz21tG9v6he1sbwe/tKOd7GwXu9rN7vawp738yt728Wv72s/+DnCggxzsEIc6zOGOcKSjHO0YxzrO8U5wopOc7BSn+o3TnO4MZzrL2X7rHOc6z/kucKGLXOwSl7rM5a5wpatc7RrXus71bvA7N7rJzW5xq9v83h/c7o/ucKe73O1P7vFnf3Gv+9zvAQ/6q4c87BGP+pu/e8zj/uEJT3rK057xrOf80/Ne8KKXvOwVr3rN697wpre87R3ves/7/uXfPvAfH/rIxz7xqf/6n//7zOe+8KWvfO0b3/rOQKJA4APjGNcPjWd8E5jQIBOZ2CQmNZnJTWFKU5naNKb1I4NNZ3ozmNFMZjaLWc1mdnOY01zmNo8hhhpmuBFGGmVeo81nfgtY0EIWtohFLWZxS1jSUpa2jGWNMdZyvgdvWpH2
+  </data>
+ </layer>
+ <layer id="30" name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAEN5kYGC4xQ/BSKL2bCYJtgVgAiJWZIZgYADLvPzMEL4XSMPOQzWRjIs08BhaEeSA2upnGVDQvlBmCB6t5jUCxJjLMu4TFPJBZ64B4PRnm/UczD2bWTSgmBtQyY8foZhFr3ipm7BjdLGLNQ9eDD4+aR13zAGm4dBQ=
+  </data>
+ </layer>
+ <layer id="31" name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwNwwV0FQQAAMAvSIxORzesGd2xkQLSISEpICAdgnR3S0p3g6QiIUpJKEhLdylSKh13711wUCCQzvRmMKOZzGwWs5rN7OYwp7nMbR5DDDXMcCOMNMq8RpvP/BawoIUsbBGLWszilrCkpSxtGcsaY6zlLG8FK1rJyn5sFatazU+sbg1rWsva1rGu9axvAz+1oY1sbBM/s6nNbG4LW9rKz21tG9v6he1sbwe/tKOd7GwXu9rN7vawp738yt728Wv72s/+DnCggxzsEIc6zOGOcKSjHO0YxzrO8U5wopOc7BSn+o3TnO4MZzrL2X7rHOc6z/kucKGLXOwSl7rM5a5wpatc7RrXus71bvA7N7rJzW5xq9v83h/c7o/ucKe73O1P7vFnf3Gv+9zvAQ/6q4c87BGP+pu/e8zj/uEJT3rK057xrOf80/Ne8KKXvOwVr3rN697wpre87R3ves/7/uXfPvAfH/rIxz7xqf/6n//7zOe+8KWvfO0b3/rOQKJA4APjGNcPjWd8E5jQIBOZ2CQmNZnJTWFKU5naNKb1I4NNZ3ozmNFMZjaLWc1mdnOY01zmNo8hhhpmuBFGGmVeo81nfgtY0EIWtohFLWZxS1jSUpa2jGWNMdZyvgdvWpH2
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="19" x="320" y="416" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="256" y="480" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="grasstown.tmx"/>
+    <property name="area" value="grasstown.tmx"/>
+    <property name="returnarea" value="3"/>
+   </properties>
+  </object>
+  <object id="22" name="level Info" x="160" y="96" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Everything else..."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="30" x="544" y="192" width="32" height="192">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="32" x="32" y="192" width="32" height="224">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="34" x="64" y="192" width="32" height="160">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="37" x="384" y="416" width="192" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="38" x="64" y="416" width="192" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="40" name="Shopkeep" type="character" x="160" y="192" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="41" name="Weird Customer" type="character" x="416" y="224" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Loiterer"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="42" x="512" y="256" width="32" height="128">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

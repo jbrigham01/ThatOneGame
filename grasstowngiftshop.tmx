@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="46">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2027" name="grasstownarmorshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownarmorshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="2327" name="grasstownarmorshop - Copy" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownarmorshop - Copy.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="2627" source="grassstage4redux.tsx"/>
+ <tileset firstgid="3327" name="grasstowngiftshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstowngiftshop.png" width="640" height="480"/>
+ </tileset>
+ <layer id="29" name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxtzDOgFQAAQNGX9bNt2+5n27Zt27Zt27VkY8m2beMMjQ1nucONGyEQiEd8EpCQRCQmCUlJRnJSkJJUpCYNaUlHejKQkUxkJgtZyUZ2cpCTXOQmD3nJR34KUJBCFKYIwRSlGMUpQUlKUZoylKUc5alARSpRmSpUpRrVqUFNalGbOtSlHvVpQEMa0ZgmNKUZzWlBS1rRmja0pR3t6UBHOtGZLnSlG93pQU960Zs+9KUf/RnAQAYxmCEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmznMZR7zWcBCFrGYJSxlGctZwUpWsZo1rGUd69nARjaxmS1sZRvb2cFOdrGbPexlH/sJCgoEIhPlnwPaQQ5xmCMc5RjHOcFJTnGaM5zlHOf/87ugXeQSl7nCVa5xnRvc5Ba3ucNd7nGfBzzkEY95wlOe8ZwXvOQVr3nDW97xng985BOf+cJXvvGdH/zkF7/5QyBiIBCCkIQiNGEISzjCE4GIRCKIyEQhKtGITgxiEovYxCEu8YhPAhKSiMQkISnJSE4KUpKK1KQhLelITwYykonMZCEr2chODnKSi9zkIS/5yE8BClKIwhQhmKIUozh/AWbljEQ=
+  </data>
+ </layer>
+ <layer id="30" name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAEN5kYGC4xQ/BSKL2bCYJtgVgAiJWZIZgYADLvPzMEL4XSMPOQzWRjIs08BhaEeSA2upnGVDQvlBmCB6t5jUCxJjLMu4TFPJBZ64B4PRnm/UczD2bWTSgmBtQyY8foZhFr3ipm7BjdLGLNQ9eDD4+aR13zAGm4dBQ=
+  </data>
+ </layer>
+ <layer id="31" name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwN0+ViFgQAAMAPGDHYRm2MHs02SjoV6W6kU5CS7hAB6Q6lG6WRVrpBAZVSQBqlUbpR4n7cI9y7kEAgEBoIxCEu8QgiPglISCKCSUwSQggljKQkIzkpSEk4EaQiktSkIS3pSE8GMhJFJjKThaxkIzs5yEk0McSSi9zkIS/5+ID8FKAghShMEYpSjOKUoCSl+JCPKM3HlKEs5ShPBSpSicpUoSrVqE4NalKL2tShLvWozyc0oCGNaEwTmtKM5rSgJa1ozae0oS2f0Y72dKAjnficznShK93oTg960ove9KEv/ejPAAYyiC8YzJcMYSjD+IrhjGAkoxjNGMYyjvFMYCKTmMwUpjKNr/mG6cxgJrOYzRzmMo/5LGAhi1jMEr7lO5ayjOWsYCWrWM0avmct61jPBjayic38wI9sYSvb2M4OdrKL3exhL/vYzwEOcoif+JnDHOEov/Arv3GM45zgJKf4nT84zRnO8ifnOM8FLnKJy1zhKn/xN9e4zg1ucovb3OEu//Av97jPAx7yiMc84SnPeM4LXvKK1/zH/7zhLe8IhPlPXOIRRHwSkJBEBJOYJIQQShhJSUZyUpCScCJIRSSpSUNa0pGeDGQkikxkJgtZyUZ2cpCTaGKI5T2yIZNt
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="19" x="320" y="416" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="256" y="480" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="grasstown.tmx"/>
+    <property name="area" value="grasstown.tmx"/>
+    <property name="returnarea" value="6"/>
+   </properties>
+  </object>
+  <object id="22" name="level Info" x="160" y="96" width="24" height="24">
+   <properties>
+    <property name="areaname" value="&quot;The heroes of yesterday...&quot;"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="37" x="384" y="416" width="224" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="38" x="32" y="416" width="224" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="40" name="Shopkeep" type="character" x="448" y="224" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="(Man, does this job suck...)\Hello... and welcome to our exhibit."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="42" x="128" y="224" width="160" height="128">
+   <properties>
+    <property name="description" value="Imitations of the garments worn\ by the legendary heroes.\One's awfully familiar..."/>
+   </properties>
+  </object>
+  <object id="44" x="568" y="257" width="32" height="64">
+   <properties>
+    <property name="NewArea" value="grasstowngiftshop2.tmx"/>
+    <property name="area" value="grasstowngiftshop2.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="45" x="512" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

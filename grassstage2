@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="70" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="50" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt2b9rFEEUwPG73b1dRVA7sdQj+KM9FUHtxMoiBDWtKFbaiI3CSXKHf4BYaRPSnHCSnFiLWCmK2KQJp+IfIJYagiDxhpshL29n3pvZuR8bnOLLXXXzPvsjN5urx5VKPRQKhUKhUCgUCoV2WV+q05/Bps2qviwydzCa/tzYMBPpO0V0oUQWYehHw7ChD1qLh3Xk6+to2CQsfyM6aODaiod15KtyQEsKOgDydZxkwsecc1SSbYd4jy0N0HmQr2WeydZg47ga72wW5Gt5xDQph6/lFVPbwcI5WvLzVIsgX8t3ppcOFjX7msYhDD35eapVkK9lX0L3Ta7p4thCDmXoE/laziZ0e4GlrUnM/zA2Z2MYheVWQncGWXS9ILI1+FqeJHQ3kUWXy5yuFtvvl7cJ3WNk0TVqh7LAv8m3B447hOVnQvcGWXSNw9F3dByu0f1AFl1lcFyq0R1CFl3jMNSR4+nA8Ixw3KvRXUQWXeM2iHt+3TC/arlGdxdZdPXB5x23zMWwauH4XKNbQhZdcG28FzSls1AGzvGnRvcJWXBqbfX9zj0HqLCFM3COYyndJrKoflXzBheHsqg5OAPnuJLSzSDLkjQcifIGV8c8mp8ycI5WSjeHLMpwWWMo4oAWysA5eindArBAg6gp83G0ZE3GwDm+pnQr0oIN4th1ZdDiaujJuoyBc+zJ6PoGgzh2c/JcQYurgZvd1nE6ozMZFtLt1onzoruHihg4x43M3EakN6ykO1PrCIvpWQtWxMA5Gom++4P5H2gMwiauNViRmableDd4/35QmuXbjY5Glq/Mjs5g5ufAofZD17N8ZXaIxL2wGOct3HonYn7fvj+anEOk/ndhaxGGazG/bz8XuVt8HC4WZRB7pQ9EHwtafB02FmgQ/Sba0JwX32wdlEXcR9AgOpqYqyf5a8w3F4fJgp8hZsFxN2X7/Mul9jquDmjR/X4Bz0edCM/T0mTraBZ0KIvp9wvb+xzO0jOE18GJ/VrXw6Fz4evK5j5vy1mKrpuOaH6TxeY+9zWMM3WN6a53WJkN0GK63lVlN4RCoVDo/+gf+ADlJg==
+  </data>
+ </layer>
+</map>

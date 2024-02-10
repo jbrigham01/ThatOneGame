@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="48">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grassstage2a" tilewidth="32" tileheight="32" tilecount="2000" columns="50">
+  <image source="grassstage2a.png" width="1600" height="1280"/>
+ </tileset>
+ <tileset firstgid="8927" name="grassdungeon1" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon1.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="10627" name="foresttreesolo" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="foresttreesolo.png" width="250" height="300"/>
+ </tileset>
+ <tileset firstgid="10690" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="12390" name="grassdungeon5" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon5.png" width="1600" height="1088"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 2" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1UduE2EABeCRvKcEp5le7OxyhgAhld5PAumdehRDEqdSTwIOhPROPQCfF5FQMkiJFMkzkp/0bWYz741m5g+CUko5+PSkg6CXPvoZYJChdLGb7S85fccYZ4JJppiO2Y45fedZYJElllmJ2Y5kJgjKqaCSKqpJZYrdbH9p0LeRJpppoZWrMdvRpm87HXTSRTc9MduR1fcVrxlmhFFyMduR13eGL3xllm/MxWzHoZogOMwRjlLGMZI1xW62v9QVutfqTpJyKqikiuraYjfce+p1vUIDjTTRTAutMdrxSNfHtNFOB5100R2jHWH/rNmYfedhGwrKYvadh+3IZsKvRznbfbP/yGfCz5UoZ2f3gsKZEnauRDk7uxer/6oOa6yzwSZbfOcHP/nFb/6EvBtRefbH3fMEJznFac5wlnOc5wJpMhF+N67pdp0b3OQWt7nDXe5xnwc8jPCOXt366GeAQYZ4wlOe8ZwXvIzwjjHdxplgkimmecNb3vGeD3yM8I553RZYZIllVlhljXU22GQrwju2M5zYbYRRcolit9t7PiV2+0yemRjtKKWUUqKfutT/XeQSl6lPHex9/wK7aqJc
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 1" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1T1KBDEUwPHZJKuIhVqJ9WBjq4iFttY24gHEyr2CoIsHECs9wDaCK9Yi3mG7EfEA4gFsZN0wCT4fb18Ssl/CG/iRqTLvP0VS6qIohRBCCCGEEOKfeW1Mf4YYXw3avBpuWU1/btywrmhbjL0ZarENlarhhgro6VrHrU+qNomWb8WDDSF9Xeu41XfAljlgCcjt2AjA/zzUUZjfDvuOWzaBXSC35SggtiGm41D/dQDkttinu1IUl5o2qY7clseAdkJLqOPC7eedA7kt7wEPCS1+9h7RYRu6bj/vHshtWTS8N/fNlI4+6vANFSO3ZcfwFkBLm2DnP9PDxTSMouXE8LZRC+WOEduQ23JteMeohZIyZ2pL7P3yYnhXqIUy6g7fAs/k00FHi2n5NLxn1EIZR0eV2LHW5H2gFsosdOw3eauohTKOhhJ13AwabpmOHwM/EjA=
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJy113eUVNUZAPCNNQWsVFFIYoCF3ZmFtSAovUonzUJbwJwUC6BGMdLR2HuSP5JYIilALFQNoLEgRcAOKWAFYomaRAWWTn7v7Oxx9jLvzZzN5o/fed/c785993tzZ+6dyvZFRbvYzR72so/9HOAgReVFRZUF9FvJKlazhudZyzrW8wIv5ukX5gods405tqWEUlKkKaMd7Skvr9kvrqZCas33TMJcoWMOZwQjGcVoKhjDWMZxUdAvrvbaPJOwX5grdMzbuJ07uJO7uJt7+Bk/5xdBv7jaa/NMwn5hrtAxn+JpnuFZVvAcK1nFatYE/eJqr80zCfuFuULH/IRP+Yzt7GAnlexiN3uCfnG11+aZhP3CXKFjJs09LhdXe22eSdgvzBU6Zkmx7w8p0hktS4qKWtGaYtrQlhJKSZGmjHa0p5zTOJ0zOJMOJbnH76y9C13pRnd60JNe9KYPfenHufRnAAMZxGCGMJRhOe5TUXxoW665ZIvLxfUf774TmMjlXMGVeZ7TZKYwlWlMZwYzmZWjjkLmVBFIx+QK6X9e6edKSmqKq2kBC1nEYpbEfO755rTC+0a6jmJ00C9fW9y4kZF55p+kJMe6SZrTdu/ZwU4q2cXuhDgplyuOahnFaCoYw1jG5RHW0C/te0V/mqRrvm7ps29Fa4ppQ9toPSTESbm4uCOdOJtz6FxaVV+2sNawjp+Y77VM5o9lNV9Ha/h8LuBChjMiukdCnJSLiy/mEi7lMsaXVq2BSKd0blNL87uBG7mJm7mFWzPXSI9U3brXmPdxPw8wJ2NuQjy/ANHYy1yX80TWvJ/MipvVcs7RGM1Sn4vaXtL2Mq/wKpsyNifEW2jovY1onKqKs183oWkdP+9ovicn5L/AYRzOEdTLqJ8Qh/MNVbc3p0Ud1zOkwH5dMromxOFnEVfXUIbVcR35fJ8fMCFjYkI8qQAzmMksrsu6z/UFzOXd//F34Jc8mDE7IZ5XgEUsZgmP8ThLWcby4L5Lg1yuOK4te5y1rGM9GzI2JsThnl29n2+R28q2VNW+Ee0l74nf5wM+5CM+zsSh7FwYx7VVx3vZx34OcDAVv29UizsnNZBrSCMaZ/b2ppxEM06hOS0ycSg7F8ZxbdVxinT60DNkacI+GNUR1tJbex/6BueSAQxkEIMz10h4Ti303BqXy9WeNM64HOfWq8zraiZxTbrmuWRKtP8zjemZayQ8++Q7C1Wf++JyudqTxpmdY13N0TaXedH5iod4mEd4lPksYGHmuiCrnro2KEG0Hl5jAxtz1LFJ22Ze5w3e5C3e5h22sJVtmevWrHrqWlKN0Xo40m/PURxddmgd9bTV5xiO5TiO5wROpAENaZS5RqrrqWtJNUbroYN7n0XHHHV00daVbnSnBz3pRW/60Jd+WXX8vyTVGK2HH+rzIy7mEi7lMsYzgYlczhVcyY+5iquZxDXR/xKuZTJTmMo0pjODmcziOq7np9zAjdzEzdzCrdzG7dzBndzF3XlqjNbDr/g193If9/MAv+FBZvNbfsfv+QNzmMu8sqo98SEe5hEeZT4LWMgiFrOEx3icP7GUZSznCZ7kzzzF0zzDs6zgOVayitWs4XnWso71vMCLvMTLvMKrvMYGNvIX/srf+Dub2MzrvMGbvMXbvMOWaB2wjX/wLu/xPh/wTz7kIz7mX/yb//AJn/IZ29nBTirZxW72sJd97OcABylq55zPYRzOERzJURzNF/kSX+Yr1KM+x3Asx3E8J3AiDWhIIxrThKacRDNO5hSa04Kv8jW+zql8g5a0ojXFtKEtJZSSIk0Z7WhPOadxOmdwJh04i4504mzOoTNd6Eo3utODnvSiN33oSz/OpT8DGMggBjOEoQzjm3yLb/Mdvst5nM8FXMhwRjCSUYymgjGMZRwX8T3+C2gKOjg=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="5" x="0" y="576" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="672" y="896" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Deeper into the forest..."/>
+    <property name="filter" value="dim"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="12" x="0" y="864" width="544" height="224">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="1120" y="832" width="480" height="256">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="17" x="-64" y="448" width="32" height="256">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon2.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="18" x="1632" y="416" width="32" height="352">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon4.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="21" x="1568" y="544" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="22" x="1088" y="352" width="32" height="480">
+   <properties>
+    <property name="event1" value=""/>
+   </properties>
+  </object>
+  <object id="24" type="spobject" x="32" y="608" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="25" type="spobject" x="608" y="736" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="26" type="spobject" x="224" y="608" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="27" type="spobject" x="416" y="672" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="28" type="spobject" x="800" y="736" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="29" type="spobject" x="992" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="30" type="spobject" x="1024" y="704" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="32" name="gsword" type="item" x="768" y="544" width="64" height="35">
+   <properties>
+    <property name="description" value="Is this Genmu's sword?\Man, he's weird..."/>
+    <property name="event1" value=""/>
+    <property name="image" value="genmusword.png"/>
+    <property name="item" value=""/>
+    <property name="itemid" value="genmusword"/>
+    <property name="requirement" value="firstgrassdungeon"/>
+   </properties>
+  </object>
+  <object id="33" type="spobject" x="32" y="160" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="34" type="spobject" x="224" y="160" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="35" type="spobject" x="416" y="128" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="36" type="spobject" x="608" y="96" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="37" type="spobject" x="800" y="128" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="38" name="Player Start" type="trigger" x="32" y="512" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="39" x="224" y="352" width="32" height="480">
+   <properties>
+    <property name="event" value=""/>
+    <property name="onetime" value=""/>
+    <property name="requirement" value="firstgrassdungeon"/>
+   </properties>
+  </object>
+  <object id="40" type="spobject" x="992" y="128" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="41" name="sword" type="item" x="288" y="64" width="60" height="35">
+   <properties>
+    <property name="description" value="A sword is lying there.\There are strange markings on the blade."/>
+    <property name="event1" value=""/>
+    <property name="image" value="firstsword.png"/>
+    <property name="item" value=""/>
+    <property name="itemid" value="firstsword"/>
+   </properties>
+  </object>
+  <object id="42" x="0" y="640" width="384" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="43" x="416" y="704" width="832" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="44" x="1280" y="640" width="320" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="45" type="spobject" x="1408" y="160" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="46" type="spobject" x="1216" y="128" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="47" name="Gray Cloak" type="character1" x="64" y="512" width="32" height="61">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="i hate having to do things"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="down"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
