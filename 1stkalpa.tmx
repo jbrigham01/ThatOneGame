@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="87" height="81" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="75">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="87" height="81" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="75">
  <tileset firstgid="1" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9" columns="3">
   <image source="bettertiles.png" width="96" height="96"/>
  </tileset>
@@ -114,7 +114,7 @@
     <property name="" value=""/>
     <property name="SPflag1" value=""/>
     <property name="descriptionold" value="bro please square up bro, im not gonna mess around bro"/>
-    <property name="image" value="graycloak.gif"/>
+    <property name="image" value="sprites/salesman.gif"/>
     <property name="name" value="None"/>
     <property name="orient" value="down"/>
     <property name="sprite" value=""/>
@@ -194,6 +194,7 @@
   <object id="70" name="Noone1" type="character" x="1792" y="1600" width="32" height="64">
    <properties>
     <property name="" value=""/>
+    <property name="SPflag4" value=""/>
     <property name="descriptionold" value="Does the swordsman wear on you?"/>
     <property name="genmuquestion" value=""/>
     <property name="image" value="graycloak.gif"/>

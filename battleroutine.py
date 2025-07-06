@@ -7,18 +7,20 @@ from playerconstants import *
 import BattleEnemyData
 import time
 
-#cursor = pygame.mixer.Sound('cursor.wav')
 fps = pygame.time.Clock()
 global what
 what = 0
+global battleFinished
+battleFinished = False
 global alertcounter
 alertcounter = 0
 global specialblits
 specialblits = []
+global damagenumbers
+damagenumbers = []
 global alltiles 
 alltiles = []
-#heal = spell('Heal', 25,None, 'Healing',10, None)
-heal = spell('Heal','Restores any small wounds','or injuries you may have sustained.','Manipulating life energy is draining...','', 25,'Healing',20,None,'creation')
+heal = spell('Heal','Restores any small wounds','or injuries you may have sustained.','Manipulating life energy is hard...','', 25,'Healing',20,None,'creation')
 print(heal.mpcost,'heal')
 display = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Battle System, GO!')
@@ -27,6 +29,9 @@ pygame.init()
 # However, Players and enemies can get up close and personal, or attack
 # from a distance, as the area is not divided.
 #we should make corners able to be stood on.
+
+'''GLOBAL DAMAGE TRIPLE FOR PLAYER IS ACTIVE! APPLIED IN DAMAGE() FUNCTION'''
+
 grassbg = pygame.image.load('battlesprites/grassstagebackground.png')
 grassbgrect = grassbg.get_rect()
 
@@ -44,10 +49,15 @@ class Game:
         gorgeous freemannnnnn
     '''
     def __init__(self,name):
+        #Generic multipurpose checks.
         self.check1 = False
         self.check2 = False
         self.check3 = False
         self.check4 = False
+        self.check5 = False
+        self.path1 = False
+        self.path2 = False
+        self.path3 = False
         self.debug = None
         self.SPcheck = False
         self.SPattacked = False
@@ -76,6 +86,7 @@ class Game:
         self.difficulty = 1
         #player is used to quickly refer to current player
         self.player = None
+        self.specialReady = None
         self.specialblits = specialblits
         self.specialintro = None
         self.moocounter = 0
@@ -408,6 +419,11 @@ def draw(moo, choice=False, choices=None, talk=None, speaker=None,talkmenu=None)
     display.blit(battlebox, battleboxrect)
     displayupdate(game.players,game.enemies, game.background, game.backcolor)
     
+
+def usualDraw(content: str):
+    #The usual way to draw the battle menu.
+    draw(content,1,['Check','Talk','Item'])
+
 #allows usage of draw in battleenemydata module easily    
 BattleEnemyData.draw = draw          
 class battletile:
@@ -515,6 +531,8 @@ class battletile:
             self.damageonframe = frame
             self.damageamount = amount
             self.damages = damages
+            if damages == 'player':
+                self.damageamount *= 2
             self.staggeronblock = None
             #duration defaults to 1 frame
             self.damageduration = 1
@@ -672,6 +690,7 @@ def updatebattlearea():
                                         print(x.damageamount,'attack damage')                                        
                                         damage = x.damageamount*(1-(0.05*x.occupant.defense))
                                         damage = int(damage)
+                                        x.occupant.showDamageNumber(damage)
                                         print(damage,'damage received',x.occupant.defense)
                                         x.occupant.Chealth -= damage   
                                         if x.hitstun:
@@ -695,8 +714,11 @@ def updatebattlearea():
                                     if x.occupant.stunsp:
                                         x.damageamount *= 1.5
                                         x.damageamount = int(x.damageamount)
-                                    if x.occupant.guard == False:
-                                        x.occupant.Chealth -= x.damageamount
+
+
+                                    x.occupant.Chealth -= x.damageamount
+                                    x.occupant.showDamageNumber(x.damageamount)
+
                                     if game.players[0].mode == 'Emotion':
                                         game.players[0].SPmeter += 10
                                     if x.hitstun:
@@ -755,35 +777,84 @@ def choice():
 ##        
 ##        display.blit(battlebox, battleboxrect)
 ##        pygame.display.update()
-        
+def resetBattleField():
+    #Resets all currently flying projectiles and player actions and such
+    #for cutscenes.
+    print("reset battle field called.")
+
+    global specialblits
+    specialblits.clear()
+    global damagenumbers
+    damagenumbers.clear()
+    game.player.hardImageReset()
+    for t in alltiles:
+        t.state = "normal"
+    #displayupdate()
+    #game.enemies[0].hardImageReset()
+
 def eventcheck():
+    global battleFinished
+
+    #Yes I have to put reset battle field every time.
+    #Is there a better way to do it?
     global game
     weirdrects = None
     if game.scene == 'First Battle':
         dnyu = game.enemies[0]
         fredrick = game.players[0]
-        if dnyu.Chealth >= 999 and game.check1 == False:
+        if dnyu.Chealth >= 250 and game.check1 == False:
+            resetBattleField()
+
             
             game.alertinfo = 'Attack using "Z".'
-            draw('My first enemy! Some human! I\'m excited!',1,['Check','Talk','Item'])
+            draw('The creature forces an interaction.',1,['Check','Talk','Item'])
             if chosenoption == 1:
-                draw('Dark Nyu? @@ Dark-Peace. Neutral oriented.')
-                #Peace Neutral Chaos 
-                #
+                draw('Nyu?@ A creature who\'s a little far from home.')                
             if chosenoption == 2:
                 talkmenu('What is that thing and why does it want to hurt me?',['You think you can beat me?', 'Why are you trying to fight me?'],fredrick)
                 if chosenoption == 1:
-                    speak('Hee hee hee!',dnyu)
-                    speak('I don\'t know!',dnyu)
-                    speak("But I want to find out!",dnyu)
-                if chosenoption == 2:
-                    speak('What?',dnyu)
-                    speak('I thought I was supposed to fight you?',dnyu)
-                    draw("The creature is reevaluating its priorities...")
+                    speak('Hmm...',dnyu)
+                    speak("You do have a weapon...", dnyu)
+                    #speak("I don\'t know...", dnyu)
+                    draw("The creature hesitates.")
                     draw("Its attack drops!")
+                    game.path1 = True
+                if chosenoption == 2:
+                    speak('It\'s fun!',dnyu)
+                    speak('Why else would people fight?',dnyu)
+                    speak("You\'re having fun, right?\\You wouldn\'t fight if you weren\'t!", dnyu)
                 game.check1 = True
-        if dnyu.Chealth < 500 and game.check2 == False:
-            game.alertinfo = 'The creature is reconsidering fighting random people.'
+        if dnyu.Chealth < 250 and game.check2 == False:
+            resetBattleField()
+            if game.path1:
+                text = "Get me out of here."
+                game.alertinfo = 'The creature is reconsidering fighting random people.'
+            else:
+                text = "Your arm hurts from all that slicing."
+                game.alertinfo = "The creature\'s eyes have been opened to battle."
+            usualDraw(text)
+            if chosenoption == 1:
+                draw("Nyu?@Ended up here looking for his favorite stick...")
+            if chosenoption == 2:
+                talkmenu("", ["Are you having fun?","Can you leave me alone?"], fredrick)
+                if chosenoption == 1:
+                    if game.path1:
+                        speak("Umm. Not really...", dnyu)
+                        speak("I think I\'m gonna leave now.", dnyu)
+                        battleFinished = True
+                        
+                    else:
+                        speak("Yes! I\'m gonna wack you in the face!", dnyu)
+                    
+                else:
+                    if game.path1:
+                        speak("Fine. You win...", dnyu)
+                        #speak("This wasn\'t a very fun game...", dnyu)
+                        battleFinished = True
+                    else:
+                        speak("Hee hee hee! Make me!", dnyu)
+                game.check2 = True
+
 
     if game.scene == 'First Battle (Starring Gray Cloak)':
         fredrick = game.players[0]
@@ -797,10 +868,9 @@ def eventcheck():
         i.talkmode = True
     if game.scene == 'First Battle (Starring Gray Cloak)':
         if game.TooClose and game.TooCloseCheck == False:
-            speak('Well punch my mother in the neck.',ghostface)
-            #speak('Nice try, buddy.', ghostface)
             game.TooCloseCheck = True
         if game.player.Chealth <= 50 and game.Ghealthcheck == False:
+            resetBattleField()
             speak('(He\'s gonna need some help.)',ghostface)
             speak('Here.',ghostface)
             game.player.cattack = heal
@@ -810,10 +880,11 @@ def eventcheck():
             speak('A "C"-cret.',ghostface)
             game.Ghealthcheck = True
         if game.player.HitsTaken == 1 and game.playerhitcheck == False:
+            resetBattleField()
             speak('OWWW!',fredrick)
             #if gamedata.playerpreference == 'logic':
             speak('What were you expecting?\\Some vague awareness that you are now hurt?', ghostface)                        
-##            speak('What was that?\\Are you trying to kill me?',fredrick)
+##            speak('What was that?\\Are you ',fredrick)
 ##            speak('Uh, yeah.',ghostface)
 ##            speak('I\'d guess your enemies will do the same.',ghostface)
 ##            speak('My recommendation is that \\you should probably get used to it.',ghostface)
@@ -828,7 +899,6 @@ def eventcheck():
             #speak('Wait for an opening before making an attack.',ghostface)
             #speak('"The second player to make a mistake wins."',ghostface)
             #speak('But I always want to be first.',fredrick)
-            #speak('First is the worst, man.',ghostface)
 ##            if game.debug:
 ##                return
 ##            speak('You\'re being too aggressive.',ghostface)
@@ -844,6 +914,7 @@ def eventcheck():
             game.aggressivecheck = True                    
             game.playerhitcheck = True
         if game.SPattacked and game.SPcheck == False:
+            resetBattleField()
             fredrick.emote('displeased')
             #speak('Are you serious?',fredrick)
             speak('Well I warned you, didn\'t I?',ghostface)
@@ -871,33 +942,28 @@ def eventcheck():
                 return
             game.moocounter += 1
             if game.moocounter == 15:
+                resetBattleField()
                 speak('Hey, that hurt, you know.',ghostface)
                 speak("Now then...",ghostface)
                 #speak('Now, let\'s get in to the good stuff.',ghostface)
-                game.specialintro = False            
+                game.specialintro = False     
+        '''       
         if ghostface.Chealth >= 1001 and game.check1 == False:            
             game.alertinfo = 'Show your skill (or lack thereof).'
             draw('This kid looks like he just woke up.',1,['Check','Talk','Item'])
             if chosenoption == 3:
                 game.debug = True
             if chosenoption == 1:
-                draw('The Man in the Gray Cloak@@\\Doesn\'t take things seriously.\\Battle style isn\'t known.') #A mysterious, amusingly irreverent individual.
+                draw('The Man in the Gray Cloak@@\\Doesn\'t take things seriously.') #A mysterious, amusingly irreverent individual.
                 time.sleep(1)
                 return
             if chosenoption == 2:                
-                findpreference()
-                speak('Yes, this is battle. Exciting, right?',ghostface)
-                speak('There was an important saying\\about battle that was\\passed down to me.',ghostface)
-                speak('I hope it\'ll help you out...',ghostface)               
-                findpreference()
-                speak('"Z,S,C, Arrow keys!"', ghostface)
                 #if game.gamedata.preference == 'will':
-                speak('(Arrow keys? Sounds moving...)',fredrick)
                 #if game.gamedata.preference == 'emotion':
                 #    speak('What?',fredrick)
                 #speak('Hopefully you understood it...',ghostface)                
                 speak('Anyway, for your first lesson...',ghostface)
-                speak('Just try to hit me a few times, okay?',ghostface)
+                speak('Hit me.',ghostface)
                 if game.gamedata.preference == 'emotion':
                     speak('But won\'t that hurt?', fredrick)
                     speak('I\'ve been through worse.',ghostface)
@@ -908,8 +974,7 @@ def eventcheck():
                 elif game.gamedata.preference == 'logic':
                     speak('Whatever you say...',fredrick)                                                             
             if chosenoption == 'Check':
-                print
-                ('You win')
+                print('You win')
             if chosenoption == 3:
                 chosenitem = itemmenu()
                 if chosenitem != None:
@@ -927,7 +992,9 @@ def eventcheck():
             if chosenoption == 'Pass':
                 pass
             game.check1 = True
-        elif ghostface.Chealth >= 501 and ghostface.Chealth <= 1000 and game.check2 == False:
+            '''
+        if ghostface.Chealth >= 501 and ghostface.Chealth <= 1000 and game.check2 == False:
+            resetBattleField()
             # if player is doing okay, took no damage, or took a lot, opponent reacts accordingly
             #if fredrick.Chealth >
             #Totally winged this part. Hope its accurate.
@@ -946,11 +1013,19 @@ def eventcheck():
             game.alertinfo = snark
             draw(thoughts, 1, ['Check','Talk',])
             if chosenoption == 1:
-                draw('He uses light and dark magic (the rarest types).\\Usually, he uses a sword...?')                
+                draw('He\'s missing his weapon.')                
             if chosenoption == 2:                
                 if game.difficulty == 2:
                     findpreference()
-                    speak('You aren\'t leaving me much to teach you.',ghostface)
+                    speak('Yes, this is battle. Exciting, right?',ghostface)
+                    speak('There was an important saying\\about battle that was\\passed down to me.',ghostface)
+                    speak('I hope it\'ll help you out...',ghostface)               
+                    findpreference()
+                    speak('"Z,S,C, Arrow keys!"', ghostface)
+                    speak('(Arrow keys? Sounds moving...)',fredrick)
+
+                    findpreference()
+                    #speak('You aren\'t leaving me much to teach you.',ghostface)
                     #speak('AHAHAHA! VIOLENCE!',fredrick)
                     #speak('Maybe you\'ll actually make it.',ghostface)
 ##                    if game.gamedata.preference == 'will':
@@ -966,7 +1041,7 @@ def eventcheck():
 ##                        speak('I have to be strong.',fredrick)
 ##                        speak('Uh, yeah...',ghostface)
                         #speak('Good mindset, but you sound cliché.',ghostface)
-                if game.difficulty == 1:
+                    """                if game.difficulty == 1:
                     speak('Well, you\'re doing as well as I thought you would.',ghostface)
                     speak('And that is?',fredrick)
                     speak('Well...',ghostface)
@@ -988,13 +1063,15 @@ def eventcheck():
                     #speak('(Ehh.....)',fredrick)
                     ghostface.imagereset()
                     speak('(Maybe I should go easier on him.)',ghostface)
+                """
+
                 #speak('Do you have any questions?',ghostface)
                 #triplequestion('Do you have emotions or no.','Who are you really?','Ow this hurts.')                
                 speak('So, what should you do if you can\'t avoid an attack?',ghostface)                
                 speak('Put my hands in front of my face.',fredrick)
                 speak('And what is that called..?',ghostface)
                 speak('Cowering.',fredrick)
-                speak('Is that based off of your prior experience?',ghostface)
+                #speak('Cer?',ghostface)
                     #speak('Your grasp of basic knowledge is truly without rival...',ghostface)
                 speak('Usually, if you can\'t avoid an attack, block it, using "s".',ghostface)
                 speak('Blocking certain attacks will stun your opponent.',ghostface)
@@ -1003,6 +1080,7 @@ def eventcheck():
 ##                speak('Truly the wisdom of a sage.',ghostface)
                 game.check2 = True
         elif ghostface.Chealth >= 101 and ghostface.Chealth <= 500 and game.check3 == False:
+            resetBattleField()
             ghostface.emote('smirk')
             snark = 'The man is suddenly becoming more interested.'
             if game.difficulty >= 2:
@@ -1023,18 +1101,19 @@ def eventcheck():
                 draw('He doesn\'t seem to be using his usual attacks...')
             if chosenoption == 2:
                 speak('Are we done yet?', fredrick)
-                speak("Hmph, you\'re telling me...",ghostface)
+                speak("Honestly, we probably could\'ve skipped this.",ghostface)
                 speak('You\'re almost finished.',ghostface)
                 speak('When your opponent is in a pinch,\\they may use an exceedingly powerful move.',ghostface)
                 speak('Usually, the attack\'s form is a\\reflection of its user\'s desires.',ghostface)
 
                 speak('More often than not,\\blocking won\'t protect you.',ghostface)
-                speak('However, this is usually your enemy\'s final attack.',ghostface)
+                speak('However, this is usually your enemy\'s last resort',ghostface)
                 speak('Why\'d you bring that up?',fredrick)
                 speak('Let\'s not spoil the surprise...',ghostface)
                  
                 game.check3 = True
         elif ghostface.Chealth <= 100:
+            resetBattleField()
             speak('Yeah, I\'m beat. That\'s enough.',ghostface)
             ghostface.Chealth = 0
         
@@ -1061,6 +1140,7 @@ def eventcheck():
             game.check0 = True
             
         if magicdog.Chealth == magicdog.Mhealth and game.check1 == False:
+            resetBattleField()
             game.alertinfo = "The dog could be persuaded not to fight."
             draw('What does this mutt want???',1,['Check','Talk','Item'])
             if chosenoption == 1:
@@ -1079,18 +1159,19 @@ def eventcheck():
                     #rightchoice()!
                     speak('What did I even do to you?', fredrick)
                     #speak('Bark! BARKBARKBARK!',magicdog)
-                    speak('Bark bark bark, bark... Bark?',magicdog)
-                    speak('The dog is questioning its actions.',magicdog)
-                    draw('The dog\'s will to fight wavers.')
+                    speak('Bark bark... Bark?',magicdog)
+                    draw("The dog is questioning its actions")
                     draw("His attack drops...")
                     game.Mdogcheck1 = True
                 game.check1 = True                               
         if game.SPcheck == True and game.SPattacked == False:
+            resetBattleField()
             speak('Why does it know magic???',fredrick)
             speak('bark bark bark\\BARK BARK BARK\\BARK baBARK!!!',magicdog)
             speak('...',fredrick)
             game.SPattacked = True
         if (magicdog.Chealth < (magicdog.Mhealth*0.66) and magicdog.Chealth >= (magicdog.Mhealth*0.66)) and game.check2 == False:
+            resetBattleField()
             draw('If the dog cannot talk, how can it learn magic???',1,['Check','Talk','Item'])
             if chosenoption == 1:
                 draw('It seems Charles is of a more timid temperament.')
@@ -1108,7 +1189,7 @@ def eventcheck():
                 draw('The dog is questioning its motives.')
                 draw('Yes, attacking random people is weird...')
 
-        if magicdog.SPevent :
+        if magicdog.SPevent:
             speak('Bark bark bark...', magicdog)
             #self.heal()
             magicdog.Chealth += 500
@@ -1118,6 +1199,7 @@ def eventcheck():
         maginyu = game.enemies[0]
         fredrick = game.players[0]
         if maginyu.Chealth == maginyu.Mhealth and not game.check1:
+            resetBattleField()
             game.alertinfo = 'I wonder who taught her magic...'
             draw('She doesn\'t seem very happy...',1,['Check','Talk','Item'])
             if chosenoption == 1:
@@ -1127,9 +1209,10 @@ def eventcheck():
                 speak('I\'ll show your jerk friend\\why magic rocks and swords... don\'t!',maginyu)
             game.check1 = True
         if maginyu.Chealth <= maginyu.Mhealth*0.75 and not game.check2:
+            resetBattleField()
     
             if game.usedmagic == False:
-                game.alertinfo = "She\'s angry. Good job!"
+                game.alertinfo = "She\'s angry. Well done...?"
                 draw('Maginyu seems flustered.',1,['Check','Talk','Item'])
                 if chosenoption == 1:
                     draw('Your opposition seems to have her disinterest in swords challenged.')
@@ -1158,15 +1241,17 @@ def eventcheck():
         swordnyu = game.enemies[0]
         fredrick = game.players[0]
         if swordnyu.Chealth == swordnyu.Mhealth and not game.check1:
+            resetBattleField()
             game.alertinfo = 'Using only magic will frustrate him...'
             draw('Grr. Grr! GRR!',1,['Check','Talk','Item'])
             if chosenoption == 1:
-                draw('A Nyu who dreams of heroism.\\And swords.//Sword oriented.')
+                draw('A Nyu who dreams of heroism.\\And swords.')
             if chosenoption == 2:
                 #speak('Yes! An opportunity for training!',swordnyu)
                 speak('Prepare to taste defeat!',swordnyu)
             game.check1 = True
         if swordnyu.Chealth <= swordnyu.Mhealth*0.5 and not game.check2:
+            resetBattleField()
             if game.usedsword == False:
                 game.alertinfo = "The thought of magic being useful scares him."
                 draw('Swordnyu seems confused.',1,['Check','Talk','Item'])
@@ -1189,58 +1274,114 @@ def eventcheck():
     if game.scene == 'Original Fredrick Encounter':
         ofredrick = game.enemies[0]
         fredrick = game.players[0]
+
         if ofredrick.Chealth == ofredrick.Mhealth and game.check1 == False:
-            game.alertinfo = 'Show the proof of your worth.'
-            draw('This guy really doesn\'t like you.',1,['Check','Talk','Item'])
+            resetBattleField()
+            game.alertinfo = 'He\'s not pleased.'
+            draw('...',1,['Check','Talk','Item'])
             if chosenoption == 1:
                 draw('???\\Radiates a familiar yet dangerous energy.')
             if chosenoption == 2:
-                speak('Do I look like I\'m here to chat?.',ofredrick)
-                draw("For some reason, the person's emotions\\ are resonating with Fredrick.")
-                draw("Fredrick\'s attack increases!")
+                speak('Shut up.',ofredrick)
+                draw("For some reason, the person's emotions\\ are influencing Fredrick.")
+                draw("Fredrick will deal more damage than usual.")
                 fredrick.Chealth *= 1.5
                 fredrick.Chealth = int(fredrick.Chealth)
+                fredrick.attack += 2
+                fredrick.magic += 2
                 game.check1 = True
-        if ofredrick.Chealth <= (ofredrick.Mhealth*0.5) and game.check2 == False:
-            draw('The man\'s glare becomes somehow more hostile...',1,['Check','Talk','Item'])
+        if ofredrick.Chealth <= (ofredrick.Mhealth*0.7) and game.check2 == False:
+            resetBattleField()
+
+            draw('Some frustration enters the person\'s glare...',1,['Check','Talk','Item'])
             if chosenoption == 1:
-                draw("Is he just a copy of you?")
+                draw("???\\A copy of you?")
             if chosenoption == 2:
                 #speak('I...!',ofredrick)
                 speak('Grr...',ofredrick)
                 #speak('You scumbag!',ofredrick)
                 speak('...',ofredrick)
-                speak('No surprise we\'re closely matched...',ofredrick)
+                speak("Am I really this weak?", ofredrick)
+                speak('This makes me sick...',ofredrick)
+                talkmenu("", ["Why are you trying to kill me?", "What is it that you want?"], fredrick)
+                if chosenoption == 1:
+                    speak("If you were in my position...", ofredrick)
+                    speak("You\'d do the exact same thing.", ofredrick)
+                    #draw("Hard to argue against...")
+                else:
+                    game.path1 = True
+                    speak("I...", ofredrick)
+                    draw("The person hesitates...")
+                    draw("His defense drops!")
+                    #actually we raise fredrick attack
+                    fredrick.attack += 1
+                    fredrick.magic += 1
                 game.check2 = True
-        if ofredrick.Chealth <= (ofredrick.Mhealth * 0) and game.check3 == False:
-            ofredrick.Chealth = 0
+        if ofredrick.Chealth <= (ofredrick.Mhealth*0.3) and game.check3 == False:
+            resetBattleField()
+            draw("The person clenches his fist painfully tight." if chosenoption != 2 else "The person is slightly hesitating.",1,['Check','Talk','Item'])
+            if chosenoption == 1:
+                draw("A copy of you?")
+            if chosenoption == 2:
+                if goodPath:
+                    talkmenu("", ["This isn\'t what he wanted for us.", "I know how you feel."], fredrick)
+                #speak('I...!',ofredrick)
+                    if chosenoption == 1:
+                        #speak("Grr!", ofredrick)
+                        #speak("How could you know about that?", ofredrick)
+                        speak("D-damn it! Damn you!", ofredrick)
+                        speak("I didn\'t want any of this.", ofredrick)
+                        speak("I didn\'t ask for any of this.", ofredrick)
+                        #speak("Why is it that you ")
+                        draw("Batle ends early...")
+
+                        #speak("I can\'t...", ofredrick)
+
+                    else:
+                        goodPath = False
+                        #you messed it up! Dweeb!
+                        draw("The person's expression darkens.")
+                        speak("You...", ofredrick)
+                        speak("You make me sick!", ofredrick)
+                        #speak(")
+                        #speak("You could")
+                else: 
+                    speak("...")
+                        
+                game.check3 = True
+        if ofredrick.Chealth <= (ofredrick.Mhealth * 0.05) and game.check4 == False:
+            ofredrick.Chealth = 1
+            resetBattleField()
             ofredrick.emote('turning')
             speak("U-uuugh...",ofredrick)
-            speak('Everything\'s turning red...!',ofredrick)
+            speak('AAAArgh--',ofredrick)
             #speak("Y-you\'re making me..!",ofredrick)
-            draw("The man is struggling to maintain control...")
+            draw("The man is struggling to maintain composure...")
             #speak('!',ofredrick)
             speak("NO! I... won\'t--",ofredrick)
-            speak('AAAAAAAAAGGGGHHHHH--',ofredrick)
+            speak('...',ofredrick)
             ofredrick.emote('desirous')
-            draw("The man falls silent.")
+            #draw("The man falls silent.")
             speak("...!",ofredrick)
             ofredrick.Chealth = 300
             ofredrick.image = pygame.image.load('battlesprites/dfredrickbattlesprite.png')
             ofredrick.imagedefault = ofredrick.image.copy()
-            game.check3 = True
-        if ofredrick.Chealth <= (ofredrick.Mhealth * 0.1) and game.check4 == False and game.check3 != False:
-            speak('Heh heh heh heh...',ofredrick)
-            speak('AAAHAHAHA!',ofredrick)
-            draw("The man readies something.")
+            game.check4 = True
+        if ofredrick.Chealth <= (ofredrick.Mhealth * 0.1) and game.check5 == False and game.check4:
+            resetBattleField()
+            speak('grrrAAAGGGGHHHH--',ofredrick)
+            #speak('AAAHAHAHA!',ofredrick)
+            draw("The man's lips pull back into a crazed smile.")
+            draw("He readies something.")
             #speak("K-KILL YOU...",ofredrick)
             #speak("FREEDOM...",ofredrick)
             #draw("For a split second, the man's expression lightens...")
-            game.check4 = True
+            game.check5 = True
     if game.scene == 'Black Cloak Battle':
         bc = game.enemies[0]
         fredrick = game.players[0]
         if bc.Mhealth == bc.Chealth and game.check1 == False:
+            resetBattleField()
             draw('He even holds his sword\\the way the other one did....',1,['Check','Talk','Item'])
             if chosenoption == 1:
                 draw('The Man in the Black Cloak\\The swordsman of the three heroes.')
@@ -1255,11 +1396,19 @@ def eventcheck():
         warrior = game.enemies[0]
         fredrick = game.players[0]
         if warrior.Chealth == warrior.Mhealth and game.check1 == False:
+            resetBattleField()
             draw('Fredrick feels concerned.',1,['Check','Talk','Item'])
             game.alertinfo = "This enemy is not persuadable."
             if chosenoption == 1:
-                draw('Fallen Warrior\\Jovial dead guy.\\Is seriously powerful.\\Obviously sword oriented.')
+                draw("Fallen Warrior?\\Legendary sword wielder, though forgetten to time.\\A powerful will emanates from him...")
             if chosenoption == 2:
+                speak("I KNOW WHAT YOU ARE...!", warrior)
+                #speak("IT IS WRONG THAT YOU ARE HERE.", warrior)
+                speak("YOUR CONTINUED EXISTENCE IS UNNATURAL.", warrior)
+                #speak("How dare you!")
+                speak("YOU WILL BE TESTED.",warrior)
+                #speak("")
+                """
                 speak('Where are my clothes???',warrior)
                 speak('This ALWAYS happens...',warrior)
                 speak('Anyway, I feel like I lost some weight.',warrior)
@@ -1281,37 +1430,53 @@ def eventcheck():
                 speak('Others may judge you in various ways,\\but not me.',warrior)
                 speak('Violence really lets a person open up to you.',warrior)
                 speak('Not that I\'m hiding anything.',warrior)
-                speak('After all, you can probably see right through me.',warrior)                            
+                speak('After all, you can probably see right through me.',warrior)     
+                """                       
                 game.check1 = True
             if chosenoption == 3:
                 pass
                 game.check1 = True
         if warrior.Chealth <= (warrior.Mhealth*0.66) and game.check2 == False:
-            draw('I can see through his ribcage.',1,['Talk','Item'])
-            if chosenoption == 1:
-                speak('Heh heh, you\'re still alive! Sweet!',warrior)
-                speak('You\'re doing better than the other guys...',warrior)#this line has no plot relevance
+                resetBattleField()
+            #draw('I can see through his ribcage.',1,['Talk','Item'])
+            #if chosenoption == 1:
+                speak("...", warrior)
+                draw('The warrior relents for a moment...')
+                talkmenu("This is bad. He\'s not stopping",[ "Why are you doing this?", "What can I do?"], fredrick)
+                if chosenoption == 1:
+                    speak("YOU MUST KNOW ALREADY.", warrior)
+                    speak("IT IS YOUR FAULT.", warrior)
+                else:
+                    draw("Fredrick called out for Genmu.")
+                    draw("No one heard him.")
+                    speak("WHAT IMPOTENCE.", warrior)
+                    #speak("YOU ARE ALL ALONE.")
+                    
+                '''
+                speak('Looks like you\'re not letting me\\ back into the human world that easily...',warrior)
+                #speak('You\'re doing better than the other guys...',warrior)#this line has no plot relevance
                 speak('At this point,\\I hope you have met one of the previous warriors.',warrior)
                 speak('They are three weirdos in pretty drab cloaks who,\\ for some reason, are super popular among the living...',warrior)
-                speak('That one in the gray cloak is usually on top of things,\\but those other two, in the black and the white...',warrior)
-                talkmenu('If that gray guy was "normal", then those two...',['Tell me about white cloak.','Who\'s black cloak?'],fredrick)
+                speak('That one in the gray cloak usually isn\'t too much trouble,\\but those other two, in the black and the white...',warrior)
+                talkmenu('There\'s more? And they\'re weirder than him?!',['Tell me about white cloak.','Who\'s black cloak?'],fredrick)
                 if chosenoption == 1:
                     speak('She was a very decisive fellow.\\The only thing sharper than her tongue was her skill with magic...',warrior)
-                    speak('She always wanted to do her own thing, too.',warrior)
+                    speak('She\'s not a good listener either... She wil keep you busy.',warrior)
                     speak('She is going to be a pain to track down;\\You won\'t find her unless she wants you to.',warrior)
                     
                 if chosenoption == 2:
-                    speak('Truly a legend with swords.. All swordsmen,\\from the amazing to the amazingly incompetent,\\hold him as the gold standard.',warrior)
+                    speak('Truly a master of the blade... All swordsmen,\\from the amazing to the amazingly incompetent,\\hold him as the gold standard.',warrior)
                     speak('He seems to have gone into hiding...?',warrior)
                     speak('I doubt he\'s retired;\\he lived for and loved battle.',warrior)
                     speak('He\'s probably just gone undercover\\so he can fight people, free from fame\'s burden...',warrior)
                 speak('...',warrior)
                 speak('Somehow those three got together and\\finished the same journey you are beginning.',warrior)
                 speak('They weren\'t able to end it permanently,\\but they were able to do it without the journey\'s downside.',warrior)
-                speak('Yes, they cheated death. All of them.',warrior)
+                #speak('Yes, they cheated death. All of them.',warrior)
                 speak('I\'d be jealous,\\but I\'m more busy being dead...',warrior)
                 speak('I can\'t return to my rest\\until I have taught you enough, so...',warrior)
                 speak('We should probably continue fighting.',warrior)
+                '''
 ##                speak('As I said before, I undertook the same journey you did.',warrior)
 ##                speak('Ultimately, I gave my life so that I could finish it.',warrior)
 ##                speak('Every chosen before and after me has struggled with the same problem:',warrior)
@@ -1331,44 +1496,62 @@ def eventcheck():
                 #who are you, why are you here?
                 #(whya re you here?) We have been brought back for your journey.
         if warrior.Chealth <= (warrior.Mhealth*0.33) and game.check3 == False:
-            draw('No bones about it, he is tough.',1,['Talk','Item'])
+            resetBattleField()
+            draw('He\'s weakened?',1,['Talk','Item'])
             if chosenoption == 1:
-                speak('We, as people, are nothing more than the bonds we hold.',warrior)
-                speak('The only way for us to truly exist\\is to be seen and heard by others.',warrior)
-                speak('Which reminds me...',warrior)
-                speak('That swordsman you put up with, Genmu...',warrior)
-                speak('He takes after me for some reason.',warrior)
-                speak('As a result,\\I can probably predict what problem he\'s dealing with...',warrior)
-                speak('He can\'t deal with it on his own,\\so you\'ve gotta help him..',warrior)
-                speak('Believe me, he will be eternally grateful to you for it.',warrior)
+                '''
+                speak('Most of the time, we are only as strong as those we know...',warrior)
+                #speak('The only way for us to truly exist\\is to be seen and heard by others.',warrior)
+                #speak('Which reminds me...',warrior)
+                speak('That swordsman you put up with, Genmu.',warrior)
+                speak('I\'m familiar with his type.',warrior)
+                speak('I think I know what his problems are...',warrior)
+                speak('You\'re gonna have to guide him through them.',warrior)
+                speak('If you do, he will be forever grateful...',warrior)
                 speak('Now, figuring out the specifics of\\solving people\'s problems is your deal, but...',warrior)
                 speak('I feel bad for that moron.',warrior)
                 speak('After we finish fighting,\\I\'ll give you something.',warrior)
                 speak('It will lead you to something\\Genmu desperately needs.',warrior)
-                speak('Find that sword-addled fool,\\give him the thing, and watch what happens.',warrior)
+                #speak('Find that sword-addled fool,\\give him the thing, and watch what happens.',warrior)
                 speak('It will be lifechanging for both of you.',warrior)
+                '''
+                speak("DISGUSTING.", warrior)
+                speak("YOU CANNOT STAND ON YOUR OWN!", warrior)
+                speak("YOU ARE TOO WEAK TO BE A HERO!", warrior)
+                #speak("YOU WILL SAVE NO ONE!", warrior)
+                draw("The fiend gathers its remaining strength.")
                 game.check3 = True
                 
                 
     elif game.scene == 'Light Battle':
         light = game.enemies[0]
         fredrick = game.enemies[0]
+        #Why do you seek to destroy me?
+        #I have done everything for your sake?
+        #I bring life and peace to your world...
+        #Where have I ever led you astray?
+
+        #! It is beyond your understanding.
+
+        #My understanding... That of a god?
         if game.check1 == False:
+            resetBattleField()
             draw('He feels warm...?',1,['Check','Talk','Item'])
             if chosenoption == 1:
-                draw('Too complex to describe. Strong against Dark.')
+                draw('Being of Light. Indescribable. Strong against Dark.')
             if chosenoption == 2:
                 speak('I would assume you have met\\that being in the dark cloak.',light)
                 speak('I am his counterpart.',light)
-                speak('Do not let that knowledge restrict your actions.',light)
+                #speak('Do not let that knowledge restrict your actions.',light)
                 speak('I would like to see what your journey has taught you...',light)
-                speak('People are such contradictory creatures.',light)
+                speak('People are so contradictory.',light)
                 speak('They all act so different,\\and hold such variation in the\\way they live their lives.',light)
-                speak('But they still have the\\same desires and values.',light)
+                speak('But they still have the\\same desires at their core.',light)
                 speak('I have seen your journey so far.',light)
                 speak('Have you understood what it is\\that makes a person unique?',light)
                 game.check1 = True
         if game.check2 == False:
+            resetBattleField()
             draw('His warmth hides a deep pain.',1,['Talk','Item'])
             game.check1 = True
             if chosenoption == 1:
@@ -1377,19 +1560,20 @@ def eventcheck():
                 speak('Yet, despite that knowledge,\\you utilize your remaining time to the fullest.',light)
                 speak('Your resolve is truly admirable.',light)                
                 speak('Though, it would not be unwise\\to assume your true goal.',light)
-                speak('Only by denying another\\a life can you regain yours.',light)
+                #speak('Only by denying another\\a life can you regain yours.',light)
                 speak('It must be done someway,\\but that does not lighten the choice.',light)
                 speak('How is it you feel about this\\decision you have been burdened with?',light)
                 talkmenu('...',['I\'ll choose what\'s best for all.','My fate is mine to decide.'],fredrick)
 
         if game.check3 == False:
+            resetBattleField()
             draw('The light is beginning to wear on you.',1,['Talk','Item'])
             game.check3 = True
             if chosenoption == 1:
                 speak('It had always nagged at me.',light)
-                speak('Despite you and him being the same in all ways,\\how could you have triumphed where he had failed?',light)
+                speak('Despite you and him being the same in all ways,\\how could you have triumphed where he could not?',light)
                 speak('I suppose like you two, I must accept my situation.',light)
-                speak('But still, I digress.',light)
+                speak('But still.',light)
                 speak('You have seen what makes\\people hurt and what makes them happy.',light)
                 speak('You have truly displayed your\\understanding of the human condition.',light)
                 speak('That, and your decisiveness have proven your worth.',light)
@@ -1400,13 +1584,14 @@ def eventcheck():
         dark = game.enemies[0]
         fredrick = game.players[0] 
         if game.check1 == False:
+            resetBattleField()
             draw('A strange discomfort pulls at Fredrick.',1,['Talk','Item'])
             game.check1 = True
             if chosenoption == 1:
                 speak('You, who has clung to light\\amidst the darkness.',dark)
                 speak('You have done well until now.',dark)
                 speak('Finding my true self was no small act, I must admit.',dark)
-                speak('With that made clear: What are your intentions?',dark)
+                speak('What are your intentions?',dark)
                 
 ##                speak('But, the question still remains.',dark)
 ##                
@@ -1423,16 +1608,21 @@ def eventcheck():
 
             game.check1 = True
         if game.check2 == False:
+            resetBattleField()
             draw('Fredrick is feeling steadfast in his resolve.',1,['Talk','Item'])
             game.check2 = True
             if chosenoption == 1:
+                #im thinking more megaman juno.
+                #indeed you have finally found me.
+                #Yet, your actions go against the natural order of things.
+                #It is my right to correct your behavior.
                 speak('Of us two gods who maintain your world...',dark)
                 speak('It is I who bears the brunt of the hatred.',dark)
                 speak('My task is not a blessing by any means.',dark)
                 speak('But beginnings are not valued without an ending.',dark)
                 speak('It is I who brings about desire, and advancement.',dark)
                 speak('And thus, I am also the god of such things.',dark)
-                speak('However, do not let my words communicate lull you into a false sense of secuity.',dark)
+                speak('However, do not let my words give you unearned relief.',dark)
                 speak('Do not consider me your friend. Neither me or my counterpart.',dark)
 ##                speak('The One who I speak for...',dark)
 ##                speak('He is a being well deserving of the tales of death they tell.',dark)
@@ -1447,6 +1637,7 @@ def eventcheck():
 ##                    speak('You may be free from the blind\\pride which doomed your predecessors...',dark)
                 game.check2 = True
         if game.check3 == False:
+            resetBattleField()
             draw('Fredrick is experiencing intense feelings...',1,['Talk','Item'])
             game.check3 = True
             if chosenoption == 1:
@@ -1454,18 +1645,25 @@ def eventcheck():
                 speak('You have an immense decision ahead of you.',dark)
                 speak('The matter of that other "you".',dark)
                 speak('What is it that you desire for your fates?',dark)
-                talkmenu('...',['I will survive.','I don\'t know.'],fredrick)
+                talkmenu('...',['I will survive.','I will do what is best.'],fredrick)
                 if chosenoption == 1:
                     speak('...',dark)
                     draw('A look of recognition spreads across his face.')
                     draw('The being seems pleased.')
                     #speak('HA HA HA!',dark)
-                    speak('This desire to survive you have shown...',dark)
-                    speak('The sanctity innate to it is what my existence was defined for.',dark)
+                    speak('This desire to survive, and thrive that you have shown...',dark)
+                    speak("That is my entire purpose...")
+                    #speak('The sanctity innate to it is what my existence was defined for.',dark)
                     speak('You have seen it: it IS you who would better use that life.',dark)
+                    speak("I will grant you my blessing.", dark)
                     speak('Do what must be done.',dark)
                     speak('Once you have done so...',dark)
                     speak('Then you will be able to enjoy tomorrow.',dark)
+                else:
+                    speak("...", dark)
+                    speak("So you are a true hero.", dark)
+                    speak("I admire your resolve.", dark)
+
                     
 ##                speak('We have dedicated our existences to maintaining yours.',dark)
 ##                speak('We keep your worlds in order, free from strife and chaos.',dark)
@@ -1484,21 +1682,21 @@ def eventcheck():
         # Oh, right.
         # Heh heh heh.                
         if oldcloak.Chealth == oldcloak.Mhealth and game.check1 == False:
+            resetBattleField()
             draw('Heh heh heh. Just like the old days...',1,['Check','Talk','Item'])
             if chosenoption == 1:
                 draw('Reminds me of the man in the gray cloak.\\Though, it seems he possesses more emotions\\than just sarcasm...')
             if chosenoption == 2:
                 speak('...',oldcloak)
-                
                 speak('Who\'dya think I am?',oldcloak)
                 if 'secondplaythrough' in game.gamedata.events:
                     speak('You are some guy wearing a weird cloak\\who knows too much.',fredrick)
-                    speak('Does that really narrow it down that much?',oldcloak) 
+                    speak('I\m sure I\'m not the only one of those.',oldcloak) 
                 else:
                     speak('I have no idea.',fredrick)
                     speak('I don\'t call anyone to your mind?',oldcloak)
                     speak('No.',fredrick)
-                    speak('Heh heh heh. Is that so...',oldcloak)
+                    speak('You\'re funny.',oldcloak)
                 speak('Awright, let\'s get right down to business.',oldcloak)
                 speak('When you build up enough flow during a battle,\\ a special move becomes available to you.',oldcloak)
                 speak('How one builds up flow varies from person to person.\\But for you...',oldcloak)
@@ -1601,7 +1799,7 @@ def eventcheck():
         There\'s no way!?!
         You summoned HIM???
         Yes, I did.
-        He and I go WAAAAAY back.
+        He and I go way back.
         He owes me a few favors.
         Wiping you out will be one of them
 
@@ -1762,6 +1960,14 @@ class battleplayer:
         self.image = self.imagedefault.copy()
         self.emoting = None
 ##        
+    def hardImageReset(self):
+        self.image = self.imagedefault.copy()
+        self.slicing = 0
+        self.slicing2 = 0
+        self.slicing3 = 0
+        self.quickslicing = 0
+        self.quickslicing2 = 0
+        self.emoting = None
     def rectreset(self):
         if self.rect.height != self.defaultheight:
              self.rect.height = copy.copy(self.defaultheight)
@@ -1845,6 +2051,7 @@ class battleplayer:
                 self.chargingattack = None
         if self.hitstun:
             #quick hacky fix 
+            self.hardImageReset()
             print(self.hitstun, 'player stun')
             self.hitstun -= 1
             self.playercontrol = False
@@ -1852,11 +2059,15 @@ class battleplayer:
                 self.hitstun = 0
                 self.playercontrol = True
         if self.staggercounter:
+            #if self.staggercounter == 1:
             self.staggercounter += 1
+            #need to change all attack variables here...
             self.playercontrol = False
             if self.staggercounter == 30:
                 self.staggercounter = False
                 self.playercontrol = True
+            return
+
         if self.spcharging:
             self.spgaining = True
             if self.SPmeter >= 120:
@@ -1890,6 +2101,11 @@ class battleplayer:
                         pygame.quit()
                         sys.exit()
                 if event.type == KEYUP:
+                    if event.key == K_f:
+                        if game.specialReady:
+                            #where to store the special actions?
+                            pass
+
                     if event.key == K_s:
                         #self.blocking = False
                         pass
@@ -1995,15 +2211,19 @@ class battleplayer:
                             self.zattack.use(self)
                             game.usedsword = True                            
                     if event.key == K_x:
+                        print("X attacking")
                         if self.SPmeter >= 100 and self.spattack != None:
                             self.spattack.use(self)
                         else:
-                            if self.xattack.ismagic:
+                            if self.xattack.ismagic and not (self.slicing or self.slicing2
+                                                             or self.slicing3 or self.quickslicing 
+                                                             or self.quickslicing2):
                                 self.magicattack(self.xattack)
                                 game.usedmagic = True
                             else:
-                                self.xattack.use(self)
-                                game.usedsword = True
+                                if not self.attacking and not self.xattack.ismagic:
+                                    self.xattack.use()
+                                    game.usedsword = True
                     if event.key == K_c:
                         if self.cattack.ismagic:
                                 self.magicattack(self.cattack)
@@ -2121,6 +2341,9 @@ class battleplayer:
                     #This makes sure that the playersprite doesn't shift down
                     self.moo = copy.copy(self.rect.bottomleft)
                 self.stuck = True
+                #there has to be a better way to do this
+
+                #TODO MAKE THE MAGIC NUMBERS SUCK LESS
                 self.rect.width = 74
                 self.rect.height = 94
                 self.rect.bottomleft = self.moo
@@ -2139,7 +2362,7 @@ class battleplayer:
                         self.quickslicing += 1
                     if self.quickslicing == 7:
                         
-                        damage = self.attack*5 + 30
+                        damage = self.attack*5 + 5
                         area = [(1,0),(2,0)]
                         targetarea = self.currentpos.copy()                    
                         for i in area:
@@ -2168,7 +2391,7 @@ class battleplayer:
                         self.image.scroll(74*(self.quickslicing2//2)*-1,-340)
                         self.quickslicing2 += 1
                     if self.quickslicing2 == 5:
-                        damage = self.attack*5 + 40
+                        damage = self.attack*5 + 10
                         targetarea = self.currentpos.copy()
                         area = [(1,0),(2,0)]                                        
                         for i in area:
@@ -2225,7 +2448,7 @@ class battleplayer:
                         self.image.scroll(74*(self.slicing//2)*-1,-340)
                         self.slicing += 1
                     if self.slicing == 7:
-                        damage = self.attack*5 + 25
+                        damage = self.attack*5 + 0
                         targetarea = self.currentpos.copy()
                         targetarea[0] += 1
                         for x in alltiles:
@@ -2261,7 +2484,7 @@ class battleplayer:
                         self.image.scroll(74*(self.slicing2//2)*-1,-340)
                         self.slicing2 += 1
                     if self.slicing2 == 5:
-                        damage = self.attack*5 + 30
+                        damage = self.attack*5 + 0
                         targetarea = self.currentpos.copy()
                         targetarea[0] += 1
                         for x in alltiles:
@@ -2290,7 +2513,7 @@ class battleplayer:
                         self.image.scroll(74*(self.slicing3//2)*-1,-340)
                         self.slicing3 += 1
                     if self.slicing3 == 10:
-                        damage = self.attack*5 + 50
+                        damage = self.attack*5 + 5
                         targetarea = self.currentpos.copy()
                         targetarea[0] += 1
 
@@ -2337,6 +2560,7 @@ class battleplayer:
                             x.damagealert()
                         if x.occupied == True and (x.coords == targetarea or x.coords == secondtarget) and x.occupant != self:
                             x.occupant.Chealth -= damage
+                            x.occupant.showDamageNumber()
                 
                 if self.meteorcount == 60:
                     ghostface.statuseffect = 'normal'
@@ -2653,11 +2877,22 @@ class battleplayer:
         else:
             pass
         
+
+    def showDamageNumber(self, amount):
+        font = pygame.font.SysFont(None, 30) 
+        #outLineFont = pygame.font.SysFont(None, 32)
+        num = font.render(str(amount), True, (200,100,100))  
+        self.rect.width
+        num.get_rect()
+        numRect = num.get_rect(center=((self.rect.center) ))
+        numRect.y += random.randint(-20,20)
+        damagenumbers.append({"frame": 30,"rect" : numRect, "image": num })
+        #display.blit(num, numRect)
     def stagger(self):
         print('staggered')
         if self.isplayer:
             self.currentpos[0] -= 1
-            self.staggercounter = True
+            self.staggercounter = 1
         if self.isenemy:
             self.currentpos[0] += 1
             #self.guard = True
@@ -2750,6 +2985,9 @@ class enemy:
         self.image = self.imagedefault.copy()
         self.emoting = None
 
+
+
+
     def emote(self,emotion):
         self.imagereset()
         
@@ -2758,6 +2996,14 @@ class enemy:
         
         self.emoting = emotion
         print(self.emoting)
+
+
+    def showDamageNumber(self, amount):
+        font = pygame.font.SysFont(None, 30) 
+        num = font.render(str(amount), True, (50,50,50))  
+        numRect = num.get_rect(center=((self.rect.center) ))
+        numRect.y += random.randint(-10,10)
+        damagenumbers.append({"frame": 30,"rect" : numRect, "image": num })
     def playerinfocheck(self, player):
         #print('check info')
         #Check horizontal position vs self
@@ -2855,10 +3101,11 @@ class enemy:
         #print(self.staggercounter,'staggering')
         if self.staggercounter:
             self.staggercounter += 1
-            self.invincible = 30
+            self.invincible = True
             if self.staggercounter >= 25:
                 self.staggercounter = 0
                 self.invincible = False
+            
         if self.hitstun:
             #self.staggercounter += 1
             self.playercontrol = False
@@ -3147,6 +3394,8 @@ def displayupdate(players, enemies,background, backcolor):
                             else:
                                 damage = int(i['damage'] *(1-(0.05*i['tile'].occupant.defense)))
                                 i['tile'].occupant.Chealth -= damage
+                                i['tile'].occupant.showDamageNumber(damage)
+
                                 if 'nostagger' not in i.keys():
                                     i['tile'].occupant.invincible = 30                            
                             if 'stagger' in i.keys():
@@ -3154,6 +3403,7 @@ def displayupdate(players, enemies,background, backcolor):
                     if i['damages'] == 'enemy':
                         if i['tile'].occupied == True and i['tile'].occupant.isenemy and not i['tile'].occupant.guard == True and not i['tile'].occupant.invincible:
                             i['tile'].occupant.Chealth -= i['damage']
+                            i['tile'].occupant.showDamageNumber(i['damage'])
                             i['tile'].occupant.hit = True
                             #i['tile'].occupant.invincible = 30
                             #print(i.keys())
@@ -3186,6 +3436,21 @@ def displayupdate(players, enemies,background, backcolor):
             displaystatusbox(i)
         for i in enemies:
             displayenemystatusbox(i)
+
+        for i in damagenumbers:
+            if i['frame'] > 27:
+                #maybe i should use a sine wave here
+                i['rect'].x += 20
+            else:
+                if i['frame'] % 3 == 0:
+                    i['rect'].x += 1
+            if i['frame'] <= 10:
+                damagenumbers.remove(i)
+            else:
+                display.blit(i["image"], i['rect'])
+                i['frame'] -= 1
+            #ugh.
+            
         #Makes characters 'in front' draw first.
         
 def chardraw(char):
@@ -3214,7 +3479,7 @@ def occupantcheck():
                     x.occupied = None
                     x.occupant = None
     
-def Battle(playerdata,players, enemies, place, music, background,presentableitems, scene=None,gamedata=None):
+def Battle(playerdata,players, enemies, place, music, background,presentableitems, scene=None,gamedata=None) -> int:
     ''' place is background, background is now backcolor'''
     #print(playerdata)
     ##print(playerdata)
@@ -3242,6 +3507,8 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
     game.enemy = game.enemies[0]
     game.allchars = game.players + game.enemies
     game.gamedata = gamedata
+    if scene == 'Original Fredrick Encounter':
+        game.enemy.Mhealth = game.enemy.Chealth = 10 * game.player.Mhealth
     game.presentableitems = presentableitems
     print(game.allchars)
     game.backcolor = background
@@ -3253,10 +3520,14 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
     introed = True
     game.player.statsimport(playerdata)
     #reset battlefield
+    global battleFinished
+    battleFinished = False
     game.specialblits.clear()    
     while True:
         #print(game.players[0].mode)
         #print(game.enemies[0].stunned)
+
+        
         healthcheck(players,enemies)
         if game.perfectblock:
             game.perfectblock -= 1
@@ -3284,13 +3555,13 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
                 difficultyresult = copy.copy(game.difficulty)
                 print(difficultyresult)
                 game.gamedata.GCSkill = difficultyresult
-            return
+            return 0
         #print(players[0].Chealth)
         if players[0].Chealth <= 0:
             if game.scene == 'First Battle (Starring Gray Cloak)':
                 result = 'ded'
                 game.gamedata.GCSkill = result
-            return        
+            return 0  
         occupantcheck()
         if enemies[0].currentpos[0] > 8:
             enemies[0].currentpos[0] = 8
@@ -3300,6 +3571,8 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
             enemies[0].currentpos[1] = 0
         if enemies[0].currentpos[1] > 4:
             enemies[0].currentpos[1] =4
+        if battleFinished:
+            return 1
         game.enemy.strategy()
         game.player.update()
         for i in game.enemies:
@@ -3311,6 +3584,7 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
         eventcheck()
         pygame.display.update()
         fps.tick(30)
+
         
 def findpreference():
     print(game.player.color, 'current fredrick color')
@@ -3358,19 +3632,26 @@ if __name__ == '__main__':
     x = dummygameinfo()  
     global gamedata
     gamedata = x
+    #the actual battle player is Fredrick
+    # and neds to be assigned to
+    Fredrick.xattack  = laser
+    Fredrick.cattack  = heal
+    
     #Battle(Fredrick,[fredrick],[blackcloak],'grass stage',None, (0,0,0),['Stick','First Aid Kit'], 'Black Cloak Battle',x)
     #Battle(Fredrick,[fredrick],[darknyu],'gray area',None,(0,0,0),None,'First Battle',x)
     #Battle(Fredrick,[fredrick],[wizdog],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'WizDog Encounter',x)
     #Battle(Fredrick,[fredrick],[magicdog],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'Magic Dog Encounter',x)
-    Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Original Fredrick Encounter')
     #replicate brawl 1v1s?
     #Battle(Fredrick,[fredrick],[genmu],'grass stage',None, (100,100,200), 'First Genmu Encounter')
     #Battle(Fredrick,[fredrick],[ghostface],'grass stage',None, (129,129,254),['Stick','First Aid Kit'], 'GrassStage Gestalt',x)
-    Battle(Fredrick,[fredrick],[ghostface],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'First Battle (Starring Gray Cloak)',x)
+    #Battle(Fredrick,[fredrick],[ghostface],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'First Battle (Starring Gray Cloak)',x)
    
     #Battle(Fredrick,[fredrick],[maginyu],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'MagiNyu Battle',x)
-    Battle(Fredrick,[fredrick],[swordnyu],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'SwordNyu Battle',x)
+    #Battle(Fredrick,[fredrick],[swordnyu],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'SwordNyu Battle',x)
+    #Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Original Fredrick Encounter')
+
     Battle(Fredrick,[fredrick],[fallenwarrior],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'FallenWarrior Battle',x)
+
     Battle(Fredrick,[fredrick],[dark],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'Dark Battle',x)
     Battle(Fredrick,[fredrick],[light],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'Light Battle',x)
 

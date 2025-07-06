@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="48">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="48">
  <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
   <image source="grassstage.png" width="1440" height="1440"/>
  </tileset>
@@ -144,7 +144,7 @@
     <property name="startarea" value="0"/>
    </properties>
   </object>
-  <object id="37" name="chest" type="item" x="256" y="224" width="64" height="64">
+  <object id="37" name="chest" type="item" x="256" y="223" width="64" height="64">
    <properties>
     <property name="chestid" value="2"/>
     <property name="description" value=""/>

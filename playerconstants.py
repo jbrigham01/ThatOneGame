@@ -17,9 +17,8 @@ class bond:
         self.desc = description
         self.image  = image
     
-        #Why? Why did you come back?
-        #Don\'t you get that us talking like this...
-        #It\'s only gonna make things hurt even more in the end.
+        # You and I are basically mortal enemies...
+        # And yet you still want to pal around and talk.
         # ...
         # I\'ve been stuck for a while.
     def call(self):
@@ -28,20 +27,20 @@ class bond:
         #printdummy('Design this already u frick',0,0,0,1)
         if self.name == 'Genmu':
             #printdummy('')
-            printdummy('It seems Genmu does not think phones\\are more important than swords.')
+            printdummy('Having spent all his money on swords,\\ Genmu doesn\'t own a phone.')
         if self.name == 'Gray':
             printdummy('Your phone begins to ring.')
             printdummy('Suddenly, it turns off!')
             printdummy('A voice speaks into your head.')
             printdummy('Don\'t even think about it.')
         if self.name == 'OFredrick':
-            printdummy('Your phone shows an error...',0,0,0,1)
+            printdummy('Your head hurts just thinking about it...',0,0,0,1)
         if self.name == 'Percy':
             printdummy('The phone starts to ring.')
             printdummy('...')
             printdummy('H-hello?')
-            printdummy('Oh, Fredrick? I\'m happy you called me...')
-            printdummy('ignore what I just said I wasn\'t feeling well.')
+            printdummy('Oh, Fredrick? It\'s good to hear from you...')
+            printdummy('Ignore what I just said I was in a bad head space.')
         if self.name == 'Lucy':
             #when I talk about you with my brother...
             #He actually smiles for once.
@@ -66,8 +65,10 @@ class bond:
         if self.name == 'Gray':
             if self.level == 1:
                 printdummy('He lazily started you off on your journey.',0,0,0,1)
-                printdummy('Although he is probably more invested\\ in your success than he says.',0,0,0,1)
+                printdummy('It seems he is much more invested\\ in your success than he says.',0,0,0,1)
         if self.name == 'OFredrick':
+            if self.level == 0:
+                printdummy("Who is he?",0,0,0,1)
             if self.level == 1:
                 #printdummy('He really hates you.',0,0,0,1)
                 printdummy("What is it that is linking you to him?",0,0,0,1)
@@ -121,11 +122,11 @@ class item:
         
 
         #looking back, i exerted way more effort defending this code than
-        #I did writing it.
+        #was necessary
         exec(self.effect)
         
    
-Beta_Tester = title('Generic Hero', 'He has quite the blank ', 'look on his face...', '',  None)
+Beta_Tester = title('Dude', 'Who is he? ', '', '',  None)
 Genmu_Default = title('Wandering Swordsman','He is at least a little interested in swords.','Sword attacks are stronger with him present.','',None)
 Percy_Default = title('Sarcastic Mage','He seems to have a lot of ambitions to fulfill.','He somehow enhances your magic?','',None)
 Gface_Default = title('Imitation Original','Do not forget your old friends.','','',None)
@@ -194,6 +195,9 @@ class Player:
         else:
             self.SPmeter = None
     def imagereset(self):
+        #ugh i just realized why python can be problematic...
+        #imagereset makes the image no longer a pygame surface
+        #but rather a string...
         if self.originalstatusboximage != 'None':
             self.statusboximage = copy.copy(self.originalstatusboximage)
         self.battlesprite = copy.copy(self.originalbattlesprite)
@@ -354,7 +358,7 @@ SP_aura = spmove('Aura','auraburst','Your attack increases relative','to SP mete
 SP_trueaura = spmove('Emanation','auraburst','Your attack and speed increases relative','to SP meter fullness.','Damage still reduces your meter, however.','You can use full meter for an attack, too.',0)
 Salvation = spmove('Salvation','salvation','Doubles all stats and','revives user one time on death.',
                     'Ultimate Healing Move.','Switches to backup spmove after one use.',100)
-Nova = spmove("Nova",'nova', 'Attacks once...','','','',1000,"Holy") #create?
+Nova = spmove("Purify",'Purify', 'Attacks once...','','','',1000,"Holy") #create?
 Rage = spmove("Rage",'rage','Attacks 13 times...','','','',77,'Curse') #destroy
 Fredrick = Player('Fredrick', 1, 'battlesprites/Fredricktruebattle.png','Fstatusboxsprite.png',
                   100, 35,1,1,1,1,1,1, [], (0,113,113))
@@ -368,22 +372,47 @@ Fredrick.spattack = Salvation
 Fredrick.mode = 'sword'
 #atk def mag mdef spd lck
 GrayCloak = Player('Gray Cloak', 1, 'battlesprites/HimBattleSprite.gif','None',1500,100,3,3,3,3,3,3,None,(127,127,127))
-DarkNyu = Player('Dark Nyu',1,'battlesprites/dnyubattlesprite.gif','None',1000,25,2,2,2,2,2,2,None,(100,100,100))
+DarkNyu = Player('Dark Nyu',1,'battlesprites/dnyubattlesprite.gif','None',500,25,2,2,2,2,2,2,None,(100,100,100))
 BlackCloak = Player('Black Cloak',1,'battlesprites/BlackCloakBattleSprite.gif','None',2500,50,4,4,1,1,3,3,None,(50,50,50))
 Dark = Player('Dark', 1, 'battlesprites/DarkBattleSprite.gif','None',1500,100,5,5,0,0,5,0,None,(0,0,0))
 Light = Player('Light', 1, 'LightBattleSprite.gif','None',1500,100,0,0,5,5,5,0,None,(127,127,127))
 Genmu = Player('Genmu',1,'GenmuBattleSprite.png','genmustatusboxsprite.png',4000,10,8,8,2,2,5,10,None,(100,100,100))
+#he talks both kinda informally and then sometimes kinda dignified...
+#A little cocky, but well meaning.
+#How dare you dishonor this legendary hero?!
+#AH, he's right. Maybe I'll get it next time...
+# You think you'll be talkin' like that after facin' me?
+#"I want it! Gimme that sword!"
 Genmu.get_title(Genmu_Default)
 Percy = Player('Percy',1,'GenmuBattleSprite.png','genmustatusboxsprite.png',3000,200,4,4,7,7,2,7,None,(200,200,200))
-#he wants to be special???
+#He talks kinda sarcastic and kinda intelligent. But also a bit dorky.
+#He's trying kinda hard. He wants to be special??? He just wants people to like him
+#Oh I see. You\'re trying to tick me off. Very funny.
+#Wait, but... I got this cool magic... I want to show it to you.
 Percy.get_title(Percy_Default)
-MagicDog = Player('MagicDog',1,'magicdog.png','genmustatusboxsprite.png',2000,500,1,1,2,2,3,2,None,(100,100,100))
-WizDog = Player('WizDog',1,'magicdog.png','genmustatusboxsprite.png',2500,500,2,2,3,3,4,3,None,(125,125,125))
+'''Lucy = Player("Lucy", )'''
+#Percy's sister.
+#What is her personality?
+#A sweetiepie, but also a little snide.
+# a little cooler than percy, but a little more discerning.
+
+'''Salesman's Daughter'''
+#Very polite and sweet, but actually cutthroat.
+#Knows how to play the game.
+
+'''The last guy'''
+#Very charismatic, cares for the player.
+#But, of course, no one is truly perfect. He is hiding a very dark secret.
+
+''''''
+MagicDog = Player('MagicDog',1,'magicdog.png','genmustatusboxsprite.png',1000,500,1,1,2,2,3,2,None,(100,100,100))
+WizDog = Player('WizDog',1,'magicdog.png','genmustatusboxsprite.png',1500,500,2,2,3,3,4,3,None,(125,125,125))
 MagiNyu = Player('MagiNyu',1,'MagiNyubattlesprite.gif','genmustatusboxsprite.png',1250,250,1,1,2,2,3,5,None,(70,70,70))
 SwordNyu = Player('SwordNyu',1,'SwordNyubattlesprite.gif','genmustatusboxsprite.png',1500,15,2,2,1,1,3,5,None,(100,100,100))
-FallenWarrior = Player('FallenWarrior',1,'FallenWarriorbattlesprite.gif','genmustatusboxsprite.png',2000,100,2,2,2,2,2,2,None,(150,150,150))
+FallenWarrior = Player('FallenWarrior',1,'FallenWarriorbattlesprite.gif','genmustatusboxsprite.png',5000,100,2,2,2,2,2,2,None,(150,150,150))
 GenmuBond = bond('Genmu',['Idiot Swordsman','You have become closer ultimately due to swords.'],'genmustatusboxsprite.png')
-OfredrickBond = bond('OFredrick',['Indignant Being','What is going on with him?'],'Gstatusboxsprite.png')
+OfredrickBond = bond('OFredrick',['Other','What does he want?'],'Gstatusboxsprite.png')
+OfredrickBond.level = 0
 GrayCloakBond = bond('Gray',['Sarcastic Ex-hero','You understand his motivations.'],'graystatusboxsprite.png')
 #(self,name,description,image,character)
 #NyuBond = bond

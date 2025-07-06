@@ -18,6 +18,8 @@ def basicmovement(self,game,speed=10):
     if self.movecounter >= speed or (self.movecounter >= (speed//2) and self.fast):
         if self.moveneeded:
             h = self.moveneeded
+            #its a matrix.
+            #coordinates are y x
             if h == 'left':
                 self.currentpos[0] -= 1
                 if self.currentpos[0] <= 0:
@@ -143,7 +145,7 @@ def OFredrickStrategy(self,target,game,alltiles):
                     self.moo += 1
                     if self.Chealth >= (self.Mhealth*0.5):
                         self.moo += 1
-                    damage = 4
+                    damage = 7
                     #cant stagger
                     targetarea = copy.copy(self.currentpos)
                     targetarea[0] -= 1
@@ -164,6 +166,7 @@ def OFredrickStrategy(self,target,game,alltiles):
                 x.damagealert()
                 x.damage(50,30,'player',['stagger','player'])
             self.strat = 'beam'
+        
         if self.strat == 'slice':            
             if game.distancefromplayer > 2:
                 self.moveneeded = 'left'
@@ -174,12 +177,23 @@ def OFredrickStrategy(self,target,game,alltiles):
                     if (x.coords == targetarea) or (x.coords == [targetarea[0] + 1,targetarea[1]]):
                         x.damagealert()
                         x.damage(20,15,'player',['staggeronblock',self], ['stagger','player'])
+                if self.Chealth <= 300:
+                    self.strat = "slice2"
                 self.strat = 'beam'
                 if self.Chealth >= 150:
                     self.cooldown = 50
                 else:
                     self.strat = 'burst'
-                    self.cooldown = 30                                    
+                    self.cooldown = 30    
+        if self.strat == "slice2":
+            targetarea = [self.currentpos, self.currentpos]
+            targetarea[0][0] -= 2
+            targetarea[1][0] -= 1
+            for x in alltiles:          
+                    if (x.coords == targetarea) or (x.coords == [targetarea[0] + 1,targetarea[1]]):
+                        x.damagealert()
+                        x.damage(20,15,'player',['staggeronblock',self], ['stagger','player'])
+            self.strat = "beam"
         print(self.moveneeded)    
 
 def DarkStrategy(self,target,game,alltiles):
@@ -1567,6 +1581,9 @@ def DarkNyuStrategy(self,target,game,alltiles):
 ##                        
 ##                    #hit the rock back at the enemy?
 def FallenWarriorStrategy(self,target,game,alltiles):
+    print(self.strat)
+    if self.strat == 'intro':
+        self.strat = None
     
     if self.moveneeded:
         if self.movecounter >= 10 or (self.movecounter >= 5 and self.fast):
@@ -1586,14 +1603,9 @@ def FallenWarriorStrategy(self,target,game,alltiles):
             self.moveneeded = None
         self.movecounter += 1
     if self.cooldown:
-        
         self.guard = False
         self.cooldown -= 1
-
     else:
-                   
-            
-        
         if self.strat == None:
             self.strat = 'attack'
         if self.Chealth >= (self.Mhealth*0.75):
