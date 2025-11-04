@@ -683,8 +683,9 @@ class SpriteLayer(pygame.sprite.AbstractGroup):
 ##                                        if i.rect.bottomy == x:
 ##                                                n
                                                 
-                
-                for sprite in self.sprites():            
+                for sprite in sorted(self.sprites(), key=lambda x: x.rect.bottomleft[1] ): 
+                        #key sort means sprites draw from furthest to bottom, 
+                        # to allow proper stacking of objects in view           
                         sx, sy = sprite.rect.topleft
                         # Only the sprite's defined width and height will be drawn
                         area = pygame.Rect((0, 0),

@@ -1076,9 +1076,9 @@ def GrayCloakStrategy(self, target, game, alltiles):
                             if x.coords[0] == player.currentpos[0]:
                                 #make warning longer
                                 if self.Chealth >= 1001:
-                                    x.damage(25,10,'player',['stagger','player'])
+                                    x.damage(10,10,'player',['stagger','player'])
                                 else:
-                                    x.damage(25,10,'player',['stagger','player'],['staggeronblock',self])
+                                    x.damage(10,10,'player',['stagger','player'],['staggeronblock',self])
                                 #make laser that travels down row
                                 #moo = {'type':'animation','width':60,'frames':19,'elapsedframes':0,'image':'creatorattack.png','location':copy.copy(x.rect.midbottom),'damageframe':7,'tile':x,'damage':10,'damages':'player'}
                                 #game.specialblits.append(moo)
@@ -1092,7 +1092,7 @@ def GrayCloakStrategy(self, target, game, alltiles):
                             if x.coords[1] == player.currentpos[1]:
                                  
                                  x.damagealert()
-                                 x.damage(30,15,'player',['staggeronblock',self], ['stagger','player'])
+                                 x.damage(15,15,'player',['staggeronblock',self], ['stagger','player'])
                         self.attackready = False
                         
                                                   
@@ -1475,99 +1475,203 @@ def MagiNyuStrategy(self,target,game,alltiles):
 ##                    #hit the rock back at the enemy?
 
 def DarkNyuStrategy(self,target,game,alltiles):
-        player = target
-        self.movecounter += 1
-        self.moo2 += 1
-        self.guard = False
-        print(self.strat)
-        if self.movecounter >= 40 or (self.movecounter >= 20 and self.fast):
-            #if self.moveneeded:
-            #    h = self.moveneeded
-            #what i wouldn't do for a switch function
-            if self.currentpos == [5,4]:
-                self.currentpos[0] += 1
-                self.currentpos[1] -= 3#4
-                
-            elif self.currentpos == [7,3]:
-                self.currentpos[0] -= 2
-                self.currentpos[1] += 1#3
-            elif self.currentpos == [6,1]:
-                self.currentpos[1] += 1
-            
-            elif self.currentpos == [5,1]:
-                self.currentpos[0] += 2
-                self.currentpos[1] += 2#2
-            elif self.currentpos == [6,2]:
+    player = target
+    self.movecounter += 1
+    self.guard = False
+    if self.strat == 'intro': self.strat = 'circlecut'
+    print(self.strat)
+    if self.movecounter >= 10 or (self.movecounter >= 5 and self.fast):
+        if self.moveneeded:
+            h = self.moveneeded
+            if h == 'left':
                 self.currentpos[0] -= 1
-                self.currentpos[1] -= 1#1
+            if h == 'right':
+                self.currentpos[0] += 1
+                if self.currentpos[0] >= 9:
+                    self.currentpos[0] = 8
+            if h == 'down':
+                self.currentpos[1] -= 1
+            if h == 'up':
+                self.currentpos[1] += 1
+        self.movecounter = 0
+        self.moveneeded = None
+    self.battlecounter += 1
+    if self.cooldown:
+        self.guard = False
+        self.cooldown -= 1
+        return
+    
+    if self.Chealth >= (0.50*self.Mhealth):
+        if self.strat == 'reset' or self.strat == 'attack':
+            self.strat = 'dash'
+##        if self.strat == 'dash':
+##            self.guard = False
+##            if game.distancefromplayer >= 2:
+##                self.fast = True
+##                if game.playerinfront:
+##                    self.moveneeded = 'left'
+##                if game.playerisabove:
+##                    self.moveneeded = 'up'
+##                if game.playerisbelow:
+##                    self.moveneeded = 'down'
+##                if game.playerbehind:
+##                    self.moveneeded = 'right'
+##            
+##            else:
+        if self.strat == 'circlecut':
+            if game.distancefromplayer >= 1:
+                if game.playerinfront:
+                    self.moveneeded = 'left'
+                if game.playerbehind:
+                    self.moveneeded = 'right'
+            if game.playerinfront and game.distancefromplayer == 1:
+                self.moveneeded = None
+                self.moo += 1
+                #circlecut after hitting
+                if self.moo == 25:
+                    area = [(1,1),(1,0),(1,-1),(-1,1),(-1,0),(-1,-1),(0,1),(0,-1)]                                                
+                    targetarea = self.currentpos.copy()                    
+                    for i in area:
+                        targetarea[0] -= i[0]
+                        targetarea[1] += i[1]
+                        for x in alltiles:
+                            if x.coords == targetarea:
+                                x.damage(5,10,'player', ['stagger','player'])
+                                targetarea = self.currentpos.copy()
+                    self.cooldown = 10
+                    #cooldown so if player blocks can hit
+                    self.strat = 'retreat'
+                    self.moo = 0
+        if self.strat == 'dash':
+            if game.distancefromplayer >= 1:
+                if game.playerinfront:
+                    self.moveneeded = 'left'
+                if game.playerbehind:
+                    self.moveneeded = 'right'
+            if game.playerinfront and game.distancefromplayer == 1:
+                #if strat == 'closecut'
+                #if strat == 'combocut'
+                self.moveneeded = None
+                self.moo2 += 1
+                if self.moo2 >= 7:
+                    self.moo2 = 0
+                    target = copy.copy(self.currentpos)
+                    target[0] -= 1
+                    for i in alltiles:
+                        if i.coords == target:
+                            i.damage(5,10,'player',['stagger','player'],['staggeronblock',self])
+                    #stagger on block? damage if player blocks attack.
+                    self.moo += 1            
+                    self.cooldown = 60                                
+                    self.strat = 'retreat'                    
+        if game.playerbehind:
+            self.moveneeded = 'right'
+        if self.strat == 'retreat':
+            if self.currentpos[0] <= 7:
+                self.moveneeded = 'right'
             else:
-                moo = random.randint(0,2)
-                areas = [[6,1],[5,4],[7,3]]
-                self.currentpos = copy.copy(areas[moo])
+                self.moveneeded = None
+                x = random.randint(0,1)
+                if x == 1:
+                    self.cooldown = 10
+                    self.strat = 'circlecut'                   
+                    self.moo = 0
+                else:
+                    self.strat = 'dash'
+                    self.moo = 0
+#         player = target
+#         self.movecounter += 1
+#         self.moo2 += 1
+#         self.guard = False
+#         print(self.strat)
+#         if self.movecounter >= 40 or (self.movecounter >= 20 and self.fast):
+#             #if self.moveneeded:
+#             #    h = self.moveneeded
+#             #what i wouldn't do for a switch function
+#             if self.currentpos == [5,4]:
+#                 self.currentpos[0] += 1
+#                 self.currentpos[1] -= 3#4
+                
+#             elif self.currentpos == [7,3]:
+#                 self.currentpos[0] -= 2
+#                 self.currentpos[1] += 1#3
+#             elif self.currentpos == [6,1]:
+#                 self.currentpos[1] += 1
+            
+#             elif self.currentpos == [5,1]:
+#                 self.currentpos[0] += 2
+#                 self.currentpos[1] += 2#2
+#             elif self.currentpos == [6,2]:
+#                 self.currentpos[0] -= 1
+#                 self.currentpos[1] -= 1#1
+#             else:
+#                 moo = random.randint(0,2)
+#                 areas = [[6,1],[5,4],[7,3]]
+#                 self.currentpos = copy.copy(areas[moo])
                 
                 
                 
                 
                    
-##                if h == 'down':
-##                    self.currentpos[1] += 1
-##                if h == 'up':
-##                    self.currentpos[1] -= 1
-            self.movecounter = 0
-            self.moveneeded = None
-        self.battlecounter += 1
-        if self.cooldown:
-            self.guard = False
-            self.cooldown -= 1
-            return
+# ##                if h == 'down':
+# ##                    self.currentpos[1] += 1
+# ##                if h == 'up':
+# ##                    self.currentpos[1] -= 1
+#             self.movecounter = 0
+#             self.moveneeded = None
+#         self.battlecounter += 1
+#         if self.cooldown:
+#             self.guard = False
+#             self.cooldown -= 1
+#             return
         
-        #if self.Chealth >= (0.50*self.Mhealth):
-        if self.moo2 == 200:
-                self.strat = 'snipe'
-                self.moo2 = 0
-        if self.battlecounter >= 50 and self.battlecounter <= 53:
-            self.strat = 'firestorm'
+#         #if self.Chealth >= (0.50*self.Mhealth):
+#         if self.moo2 == 200:
+#                 self.strat = 'snipe'
+#                 self.moo2 = 0
+#         if self.battlecounter >= 50 and self.battlecounter <= 53:
+#             self.strat = 'firestorm'
         
         
         
-            #if self.battlecounter >= 53:
-            #    self.battlecounter = 0
-            #    i = random.randint(1,3)
-            #    if i == 2:
-            #        self.strat = 'snipe'
+#             #if self.battlecounter >= 53:
+#             #    self.battlecounter = 0
+#             #    i = random.randint(1,3)
+#             #    if i == 2:
+#             #        self.strat = 'snipe'
        
-            if self.strat == 'firestorm':
-                order = [4,3,2,1]
-                random.shuffle(order)
+#             if self.strat == 'firestorm':
+#                 order = [4,3,2,1]
+#                 random.shuffle(order)
                 
-                targetarea = [8,order[self.moo]]
+#                 targetarea = [8,order[self.moo]]
                 
-                for i in alltiles:
+#                 for i in alltiles:
                     
-                    if i.coords == targetarea:
-                        moo = {'type':'animation','width':60,'frames':4,'elapsedframes':0,
-                       'image':'blizzard.png','location':copy.copy(i.rect.midbottom),'coords':i.coords,
-                       'damageframe':'all','tile':i,'damage':10,'damages':'player','direction':'left','projectile':8,'onehit':1}
-                        game.specialblits.append(moo)
-                self.moo += 1
-                if self.moo >= 4:
-                    self.moo = 0
-                if self.battlecounter >= 53:
-                    self.battlecounter = 0
+#                     if i.coords == targetarea:
+#                         moo = {'type':'animation','width':60,'frames':4,'elapsedframes':0,
+#                        'image':'blizzard.png','location':copy.copy(i.rect.midbottom),'coords':i.coords,
+#                        'damageframe':'all','tile':i,'damage':10,'damages':'player','direction':'left','projectile':8,'onehit':1}
+#                         game.specialblits.append(moo)
+#                 self.moo += 1
+#                 if self.moo >= 4:
+#                     self.moo = 0
+#                 if self.battlecounter >= 53:
+#                     self.battlecounter = 0
             
 
             
                    
-            #for i in alltiles:
-            #    pass
-        if self.strat == 'snipe':
-            self.currentpos[1] = copy.copy(player.currentpos[1])
-            if self.currentpos[1] == player.currentpos[1]:
-                for i in alltiles:
-                    if i.coords[1] == self.currentpos[1] and i.coords[0] < self.currentpos[0]:
-                        i.damage(5,20,'player',['staggeronblock',self], ['stagger','player'])
-                self.cooldown = 40
-                self.strat = 'firestorm'
+#             #for i in alltiles:
+#             #    pass
+#         if self.strat == 'snipe':
+#             self.currentpos[1] = copy.copy(player.currentpos[1])
+#             if self.currentpos[1] == player.currentpos[1]:
+#                 for i in alltiles:
+#                     if i.coords[1] == self.currentpos[1] and i.coords[0] < self.currentpos[0]:
+#                         i.damage(5,20,'player',['staggeronblock',self], ['stagger','player'])
+#                 self.cooldown = 40
+#                 self.strat = 'firestorm'
                             
 ##                    targetarea = copy.copy(self.currentpos)
 ##                    targetarea[0] -= 1
@@ -1580,6 +1684,7 @@ def DarkNyuStrategy(self,target,game,alltiles):
 ##                            
 ##                        
 ##                    #hit the rock back at the enemy?
+
 def FallenWarriorStrategy(self,target,game,alltiles):
     print(self.strat)
     if self.strat == 'intro':

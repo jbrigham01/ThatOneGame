@@ -296,13 +296,13 @@ class equipment(item):
         
 ##shield = equipment('Shield','items/sacredstick.png','Blocking becomes more effective','Fredric')
 
-destroyer = equipment("Destroyer", 'items/hpbooster.png',"destroyer", "Fredrick feels indignant","Destroyer", "Opponents will not resurrect when equipped.", "Stay down!")
+destroyer = equipment("Destroyer", 'items/hpbooster.png',"destroyer", "You feel indignant","Destroyer", "Opponents will not resurrect when equipped.", "Stay down!")
 blade = equipment('Blade','items/sacredstick.png','Attack increases by 2 levels.','Equipping the blade is almost like habit for Fredrick.',
 [['attack',2]],'A traditional blade.','Not stolen or wooden, so an improvement.')
 ring = equipment('Ring', 'items/sacredstick.png','Boosts magic recharge rate by 50%', 
 'Fredrick is feeling sharper.', 'Boosts magic recharge ability.','Made of gold. No magic engravings, though.')
 stick = equipment('Stick','items/stickimage.png','increases attack by one half of a level.\\That\'s all...?',
-'Fredrick feels like a kid again.',[['attack',0.5],['luck',4]],'Neither heavy enough to crush things','or sharp enough to slice things.',None,[['luck','+5']])
+'You feel like a kid again.',[['attack',0.5],['luck',4]],'Neither heavy enough to crush things','or sharp enough to slice things.',None,[['luck','+5']])
 firstsword = equipment('Lost Sword','items/sacredstick.png','Increases attack by one level.',
 'Let\'s see how good\\floor weapons REALLY are.',[['attack',1]],'Pretty good for a sword','you randomly found on the ground.')
 sharpfirstsword = equipment('Sharp Lost Sword','items/sacredstick.png',
@@ -773,7 +773,7 @@ class menu:
         while not done:
             self.update()
             for event in pygame.event.get():
-                if event.type == pygame.KEYUP and event.key == pygame.K_RETURN:
+                if event.type == pygame.KEYUP and (event.key == pygame.K_RETURN or event.key == pygame.K_x):
                     done = True
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
@@ -1172,7 +1172,7 @@ class menu:
                 game.screen.blit(title,titlerect)
             for event in pygame.event.get():
                 #print('mid loop')
-                if event.type == pygame.KEYUP and event.key == pygame.K_RETURN:
+                if event.type == pygame.KEYUP and (event.key == pygame.K_RETURN or event.key == pygame.K_x):
                     finished = True
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
@@ -1464,25 +1464,25 @@ class menu:
       #  print(self.icon1image == self.icon1default)        
         if self.current_cursor == 1 and self.icon1image == self.icon1default:
              alertimage = copy.copy(self.icon1image).convert_alpha()
-             alertimage.fill((255,255,0,200), special_flags=pygame.BLEND_RGBA_MULT)
+             alertimage.fill((255,255,0,255), special_flags=pygame.BLEND_RGBA_MULT)
              self.icon1image = alertimage    
         elif self.current_cursor != 1:
              self.icon1image = self.icon1default
         if self.current_cursor == 2 and self.icon2image == self.icon2default :
              alertimage = copy.copy(self.icon2image).convert_alpha()
-             alertimage.fill((255,255,0,200), special_flags=pygame.BLEND_RGBA_MULT)
+             alertimage.fill((255,255,0,255), special_flags=pygame.BLEND_RGBA_MULT)
              self.icon2image = alertimage
         elif self.current_cursor != 2:
              self.icon2image = self.icon2default
         if self.current_cursor == 3 and self.icon3image == self.icon3default:
              alertimage = copy.copy(self.icon3image).convert_alpha()
-             alertimage.fill((255,255,0,200), special_flags=pygame.BLEND_RGBA_MULT)
+             alertimage.fill((255,255,0,255), special_flags=pygame.BLEND_RGBA_MULT)
              self.icon3image = alertimage
         elif self.current_cursor != 3:
              self.icon3image = self.icon3default
         if self.current_cursor == 4 and self.icon4image == self.icon4default:
              alertimage = copy.copy(self.icon4image).convert_alpha()
-             alertimage.fill((255,255,0,200), special_flags=pygame.BLEND_RGBA_MULT)
+             alertimage.fill((255,255,0,255), special_flags=pygame.BLEND_RGBA_MULT)
              self.icon4image = alertimage
         elif self.current_cursor != 4:
              self.icon4image = self.icon4default
@@ -1675,9 +1675,9 @@ def printstuff(moo, wait=0, creatormode=False, creatortalking=False,inmenu = Fal
     fast = None
     for y in range(0,maxlist):
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_x:
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_x or event.key == pygame.K_c):
                     fast = True
-                elif event.type == pygame.KEYUP and event.key == pygame.K_x:
+                elif event.type == pygame.KEYUP and (event.key == pygame.K_x or event.key == pygame.K_c):
                     fast = False
             #print('Fast?', fast)
             z = moo[y]
@@ -1698,7 +1698,8 @@ def printstuff(moo, wait=0, creatormode=False, creatortalking=False,inmenu = Fal
             # So...
             if moo[y-1] == moo[k]  or moo[y-1] == '\\' or needindent:
                 #print('yes')
-                tro.center = (text.rect.topleft[0] + ((y- dist_from_end)*12), text.rect.topleft[1] + (20*newline) + 15)               
+                #tro.
+                tro.midleft = (text.rect.topleft[0] + ((y- dist_from_end)*12), text.rect.topleft[1] + (20*newline) + 15)               
                 if not creatormode:
                     tro.left = 60
                 #print(moo[y], tro.x)
@@ -1749,10 +1750,13 @@ def printstuff(moo, wait=0, creatormode=False, creatortalking=False,inmenu = Fal
     revengeoftobias = False
     if fast:
         revengeoftobias = True
+    if pygame.key.get_pressed()[pygame.K_c]:
+        revengeoftobias = True
     while not revengeoftobias:
+
         #any([*map(lambda x: x.type == pygame.KEYUP and x.key == pygame.K_z)])
         for event in pygame.event.get():
-            if event.type == pygame.KEYUP and event.key == pygame.K_z:
+            if (event.type == pygame.KEYUP and(event.key == pygame.K_x or event.key == pygame.K_z)) or (event.type == pygame.KEYDOWN and (event.key == pygame.K_c)):
                 revengeoftobias = True
     if not inmenu:
         screenupdate()
@@ -2156,7 +2160,7 @@ class Player(pygame.sprite.Sprite):
         self.color = player.color
         self.image = pygame.image.load('sprites/player.png')
         self.imageDefault = self.image.copy()# Actual size is 28x56 #not anymore
-        self.rect = pygame.Rect(0,0,40,80)# 32 60
+        self.rect = pygame.Rect(0,0,40,80)# 32 60 #base if 40 80, could we get away wiith 60 120?
         originalrect = pygame.Rect(cell.left,cell.top,32,32) #rect is always 32 by 32
         self.rect.midbottom = originalrect.midbottom
         #Collisionrect is the rect used to make collision detection seem more 
@@ -2229,12 +2233,16 @@ class Player(pygame.sprite.Sprite):
         words = list(words)
         words.append('\n')
         fast = None
+        soFast = None
         letters = []
         for y in range(0,maxlist):
+                if pygame.key.get_pressed()[pygame.K_c]:
+                    soFast = True
+            
                 for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN and event.key == pygame.K_x:
+                    if event.type == pygame.KEYDOWN and (event.key == pygame.K_x or event.key == pygame.K_c):
                         fast = True
-                    elif event.type == pygame.KEYUP and event.key == pygame.K_x:
+                    elif event.type == pygame.KEYUP and (event.key == pygame.K_x or event.key == pygame.K_c):
                         fast = False
                 z = words[y]
                 #print('current',z)
@@ -2287,12 +2295,14 @@ class Player(pygame.sprite.Sprite):
                 if z == ')':
                     thinking = 0
                 if (z == '.' or z == '?' or z == '!') and thinking != 1:
-                    if fast:
+                    if soFast: time.sleep(0.1)
+                    elif fast:
                         time.sleep(0.25)
                     else:
                         time.sleep(0.5)
                 if z == ',':
-                    if fast:
+                    if soFast: time.sleep(0.1)
+                    elif fast:
                         time.sleep(0.25)
                     else:
                         time.sleep(0.125)
@@ -2303,9 +2313,13 @@ class Player(pygame.sprite.Sprite):
         done = False
         #time.sleep(wait)       
         revengeoftobias = False
+        #whos tobias
+        if pygame.key.get_pressed()[pygame.K_c]:
+                revengeoftobias = True
         while not revengeoftobias:
+            
             for event in pygame.event.get():
-                if event.type == pygame.KEYUP and event.key == pygame.K_z:
+                if (event.type == pygame.KEYUP and event.key == pygame.K_z):
                     revengeoftobias = True
         screenupdate()
         cleareventqueue()        
@@ -2396,6 +2410,8 @@ Fredrick: Alright, fine.
         #            i.rect = copy.copy(x.rect)
         ##print(cutscene,'Cutscene?')
         # This lets you interact with and inspect things.
+
+
         if self.orient == 'left':
             targetarea = copy.copy(self.coords)
             targetarea = list(targetarea)
@@ -2432,15 +2448,22 @@ Fredrick: Alright, fine.
         #as if it wasn't clear enough already, this is a hack.
         if self.orient == 'left':
             Sprite_Area[0] += 32
+        characterfound: character = None
         for i in characters:
             print('character =',i.coords,'self =', self.coords)
-            print("Location being checked for sprite:",Sprite_Area,"Actual sprite location",[i.coords[0]*32,i.coords[1]*32],'checking for character')            
-            if Sprite_Area == [i.coords[0]*32,i.coords[1]*32]:
+            print("Location being checked for sprite:",Sprite_Area,"Actual sprite location",[i.coords[0]*32,i.coords[1]*32],'checking for character')  
+            print(Sprite_Area, [i.rect.x, i.rect.y])     
+            #need to make this better! fix collisions???
+            if i.rect.collidepoint(Sprite_Area):#[i.coords[0]*32,i.coords[1]*32]:
+                #this is fix for bug that was reading character spawn tile only
+                #instead of actual character location.
+            
                 print(i.name,'found')
                 Not_A_Tile = True
                 moo = i.cell
                 mooid = id(i.cell)
-                characterfound = True
+                characterfound = i
+                break
                 ##print('Character found.')
             else:
                 characterfound = False
@@ -2468,6 +2491,8 @@ Fredrick: Alright, fine.
                 else:
                     itemdetected = False
         ryan = game.tilemap.layers['Object Layer 1']
+
+
         if not cutscene and not itemdetected:
             Sprite_Area = pygame.rect.Rect(Sprite_Area[0],Sprite_Area[1], 64,64)
             for i in game.tilemap.layers['Object Layer 1'].find('description'):
@@ -2497,7 +2522,8 @@ Fredrick: Alright, fine.
             moo = None
 
         print('Moo,Not a tile',moo,Not_A_Tile)      
-        if moo != None and Not_A_Tile != True:
+        if moo != None and Not_A_Tile == False:
+            #this is for non-character interactions.
             try:
                 ##print(3)
                 if 'prohibitor' in moo.properties:
@@ -2513,8 +2539,8 @@ Fredrick: Alright, fine.
                         gmode = False
                 if game.currentplace == 'snowmountain7.tmx':
                     if 'report' in moo.properties:
-                        printstuff('The piece of paper seems almost ethereal...')
-                        printstuff("Fredrick reads it anyway.")
+                        printstuff('The piece of paper has a strange glow....')
+                        printstuff("You read it anyway.")
                         printstuff("There are two beings who watch over your world.")
                         printstuff("I am one who is intimately linked to them.")
                         printstuff("Remember this:")
@@ -2549,13 +2575,9 @@ Fredrick: Alright, fine.
                         else:
                             printstuff('This door is connected to Percy.')
                             printstuff("It seems he does not appreciate you enough yet.")
-##                    if 'doorready' not in game.gamedata.events:
-##                        printstuff('The door is firmly shut.')
-##                        printstuff('Still, Fredrick feels drawn to it...')
-##                        
-##                    else:
+
                     elif game.currentplace == 'grasstowngiftshop3.tmx':
-                        if 'genmuready' in game.gamedata.events:
+                        if 'genmuReady' in game.gamedata.events:
                             spdooropen.play()
                             game.killtime(1.5)
                             #printstuff('The door has unlocked...')
@@ -2612,7 +2634,7 @@ Fredrick: Alright, fine.
                             char.rect.x += 2000
                             game.gamedata.events['firstdoorready'] = True
                         else:
-                            printstuff('Genmu doesn\'t find you heroic yet.\\Neither goes the door.')
+                            printstuff('Genmu doesn\'t find you heroic yet.\\Neither does the door.')
                             #printstuff('You\'ll know when you can enter it.')                                                  
                 if 'gelevator' in moo.properties:
                     if 'hasroom' in game.gamedata.events:
@@ -2672,21 +2694,21 @@ Fredrick: Alright, fine.
                                 #alt response?                                
                                 #Party.player2.talk('Uh.')
                                 if game.genmuaffection >= 1:
-                                    Party.player2.talk('Thanks a lot for helping me out.')
+                                    Party.player2.talk('Your loyalty to me will not go unrewarded...')
                                     Party.player2.talk("As a reward...")
                                     Party.player2.talk("I will pass on to you one of\\my amazing sword techniques.")
                                     printstuff("Time passes...")
                                     game.BlackOut()
-                                    printstuff("Fredrick has learned how to handle a blade more efficiently!")
+                                    printstuff("You have learned how to handle a blade more efficiently!")
                                     printstuff("This is surprising given\\ Genmu\'s general lack of focus.")
-                                    printstuff("Fredrick\'s strength has increased by half a level!")
+                                    printstuff("Your strength has increased by half a level!")
                                     Party.player1.attack += 0.5
-                                    Party.player2.talk("Good stuff, right???")
+                                    Party.player2.talk("My skills with the sword are hopefully unrivaled.")
                                     Party.player2.talk("Until we meet again, Fredrick.")
                                 else:
                                     Party.player2.talk("Well, my faithful companion.")
                                     Party.player2.talk('For now, our journey draws to a close.')
-                                    Party.player2.talk("Until tomorrow,\\when we seize victory\\from the jaws of that cursed forest!")
+                                    Party.player2.talk("Until tomorrow,\\when we claim ")
                                     #Party.player2.talk("Don\'t miss me TOO much until then.")
                                 
                                 #Party.player2.walkto()
@@ -2708,7 +2730,7 @@ Fredrick: Alright, fine.
                             if 'hasroom':
                                 chosenoption = doublequestion('Go to sleep?','I\'m so TIRED.','No! No.')
                                 if chosenoption == 1:
-                                    printstuff('Fredrick has had enough of today.')
+                                    printstuff('You have had enough of today.')
                                     game.BlackOut()
                                     game.initArea('floatingisland.tmx')
                                     for _ in game.actors:
@@ -2723,7 +2745,8 @@ Fredrick: Alright, fine.
                                     #simultaneous walking?
                                     #game.initArea('grasstownhotelhallway.tmx')
                                     for _ in ('percypizza','percytalk'):
-                                        del game.gamedata.events[_]
+                                        if _ in game.gamedata.events:
+                                            del game.gamedata.events[_]
                                     game.gamedata.events['after1stdream'] = True                                    
                                     #game.initArea('percydream.tmx')
                             else:
@@ -2776,11 +2799,13 @@ Fredrick: Alright, fine.
                         printstuff('Should he bring his newer toy,\\or the original he held so dear?')
                         printstuff('The boy pondered this for a while.')
                         printstuff('Eventually, he decided to pick--')
-                        printstuff('The rest of the story is missing...')
+                        #printstuff('The rest of the story is missing...')
                         printstuff("Suddenly, the story disappears!")
                         if Party.player2.name == "Genmu":
-                            printstuff('Huh? Where\'d it go?')
-                            game.player.talk
+                            Party.player2.talk('Was it about swords?')
+                            Party.player2.talk("No?")
+                            Party.player2.talk("Then...")
+                           
                             
                     else:
                         printstuff('Reading is just so boring...')
@@ -2798,7 +2823,7 @@ Fredrick: Alright, fine.
                             printstuff('Make sure you choose what you really want.')
                             #printstuff('Making insincere choices may stop you\\from taking the path you would like the most.')
                     if game.currentplace == 'grassdungeon4a.tmx' and 'annoying' in moo.properties:
-                        Party.player2.talk('Those are the words of my soul.')
+                        Party.player2.talk('Those words speak to my soul.')
                     if game.currentplace == 'grassdungeon13.tmx':
                         Party.player2.talk('Ugh!')
                         Party.player2.talk('What did I do to deserve all this grass?')
@@ -2808,7 +2833,8 @@ Fredrick: Alright, fine.
                             Party.player2.talk('It\'s the grass of my doom!')
                         if chosenoption == 2:
                             Party.player2.talk('My blades are for my enemies only!')
-                            self.talk('Is the grass not your enemy?')
+                            printstuff("You suggest that the grass is also his enemy")
+                            #self.talk('Is the grass not your enemy?')
                             Party.player2.talk("...")
                             Party.player2.talk("Genmu is narrowly avoiding a mental breakdown.")
                         if chosenoption == 3:
@@ -2824,7 +2850,7 @@ Fredrick: Alright, fine.
                         chosenoption = doublequestion('','Our freedom is so close...','OH NO MORE GRASS!!!')
                         if chosenoption == 1:
                             player.talk('Watch this.')
-                            printstuff("Fredrick cuts all the grass.")
+                            printstuff("Fredrick cut all the grass.")
                             screenupdate()
                             Party.player2.talk('Fredrick...')
                             printstuff('Genmu\s mind has been blown.')
@@ -2844,9 +2870,10 @@ Fredrick: Alright, fine.
                         if 'allcut4' in game.gamedata.events:
                             printstuff('Woah. You cut all the grass...')
                         elif game.cutgrassnum == 0:
-                            printstuff('You have a limited number\\of cuts you can make.')
-                            printstuff("Your remaining cuts are located at the top of the screen.")  
-                            printstuff('This page will let you restore grass,\\should you make a mistake.')
+                            printstuff('You must cut a path.\\You can undo your mistakes with this page.')
+                            #printstuff("Your remaining cuts are located at the top of the screen.")  
+                            
+                            game.grassdisplay = True
                         else:
                             chosenoption = doublequestion('Do you wish to reset the grass?','Please...','I can live with my mistakes.')
                             if chosenoption == 1:
@@ -2858,7 +2885,7 @@ Fredrick: Alright, fine.
                                             i.tangible = True
                                             game.cutgrassnum = 0
                                             pygame.display.set_caption('Cuts left: 9')
-                                Party.player2.talk("WHY WOULD YOU MAKE IT GROW BACK!?!")
+                                Party.player2.talk("WHY WOULD YOU DO THAT!?!")
                 if moo.name == 'cutgrass':
                     if 'cut' not in moocell.specialproperties:
                         print('cut')
@@ -2868,7 +2895,7 @@ Fredrick: Alright, fine.
                                 printstuff('You didn\'t listen...')
                                 if 'maginyudone' in game.gamedata.events and 'genmugrassanger' not in game.gamedata.events:
                                     Party.player2.talk('No!')
-                                    Party.player2.talk('DON\'t TOUCH ME!','bigtext')
+                                    Party.player2.talk('DON\'T TOUCH ME!','bigtext')
                                     Party.player2.talk('GAAAAH!','bigtext')
                                    #bugged
                                     for i in allitems:
@@ -2888,6 +2915,7 @@ Fredrick: Alright, fine.
                                 printstuff('Or what?')
                                 Party.player2.talk('I\'ll do something DANGEROUS!')
                                 printstuff('Ooh, what are you going to do? Cut all the grass?')
+                                printstuff("Genmu unsheathes his sword.")
                                 Party.player2.talk('Yes.')
                                 for i in allitems:
                                         i.tangible = False
@@ -3012,9 +3040,9 @@ Fredrick: Alright, fine.
                                 del moocell.specialproperties['cut']                                                
                         if game.currentplace == 'grassdungeon2.tmx':                        
                             if 'genmucut' in moo.properties and 'genmugrasstalk' not in game.gamedata.events:                                
-                                printstuff("Genmu's expression becomes slowly more pained...")
-                                #Party.player2.talk('Oh, I HATE IT!')
-                                #Party.player2.talk("I hate it I hate it I HATE IT!")
+                                #printstuff("Oh ...")
+                                Party.player2.talk('Oh, I HATE IT!')
+                                Party.player2.talk("I hate it I hate it I HATE IT!")
                                 game.gamedata.events['genmugrasstalk'] = True                                                        
                             if 'dog' in moo.properties and 'metdog' not in game.gamedata.events and 'grassdungeonround1done' not in game.gamedata.events :
                                 game.initextras()
@@ -3036,12 +3064,14 @@ Fredrick: Alright, fine.
                                 #Party.player2.talk('I\'ve seen better hiding spots than that.')
                                 char.talk('BARK bark bark...')                                
                                 Party.player2.talk('With a baseball cap.')
-                                printstuff('The dog hands Fredrick a note.')                                                                
+                                Party.player2.talk('... A magic dog!?')
+
+                                printstuff('The dog hands you a note.')                                                                
                                 char.talk('"Hello. My name is Charles.\\I can understand human speech."')
-                                Party.player2.talk('OH, CHARLES.\\That idiot saleman\'s mutt?')
+                                Party.player2.talk('OH, CHARLES.\\That stupid saleman\'s mutt?')
                                 char.talk('BARK BARK BARK BARK!?!?')
                                 char.talk('"The man travelling with you\\has stolen my master\'s sword,\\and he wants it returned.')
-                                Party.player2.talk('He should be proud\\I\'m putting his sword to such use!')
+                                Party.player2.talk('He should be proud\\I\'m putting his sword to such good use!')
                                 Party.player2.talk("I\'ll give it back. Probably. Maybe.")
                                 char.talk('Bark bark...')
                                 char.talk('"You\'re already a thief. Don\'t be a liar."')
@@ -3077,10 +3107,6 @@ Fredrick: Alright, fine.
                         if moo.name == 'cutgrass6':
                            pass 
 
-                                #battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)                                                                                                    
-##                if moo.name == 'cutgrass2':
-                        
-##                    moo.item.image = pygame.image.load('grasscut.png')
                     
                 if moo.name == 'chest':                   
                     x = 'chest'
@@ -3105,7 +3131,7 @@ Fredrick: Alright, fine.
                         printstuff('An item is held within.')
                         moo.item.image = pygame.image.load('chestopen.png')
                         if game.currentplace == 'grassstage.tmx':
-                            printstuff("Inside, there was a strange tablet\\ with mystic writings engraved on it.")
+                            printstuff("Inside was a strange tablet\\ with mystic writings engraved on it.")
                             printstuff("As Fredrick\'s eyes look over the tablet, suddenly...!")
                             choicebooster()
                             printstuff("The tablet disintegrates...")
@@ -3116,7 +3142,7 @@ Fredrick: Alright, fine.
                             #Party.player2.talk("Hm, more free stuff...")
                             Party.player2.talk("Who keeps putting those here?")
                             Party.player2.talk("I\'m glad we found it before someone else did.")
-                            printstuff("Fredrick feels obligated to open the chest.")
+                            printstuff("You feel obligated to open the chest.")
                             printstuff("A ring was waiting inside.")
                             printstuff("Ring was added to your equipment.")
                         if game.currentplace == 'grassdungeon21.tmx':
@@ -3127,15 +3153,11 @@ Fredrick: Alright, fine.
                             Party.player2.talk('Ugh, a book. What a waste of time...')
                             Party.player2.talk('BUT WAIT!','bigtext')
                             Party.player2.talk('Is it about SWORDS???','bigtext')
-                            self.talk('Uh, yeah...')
-                            self.talk('But i\'m reading it first.')
-                            self.talk('...')
-                            self.talk('...')
-                            self.talk('...')
+                            printstuff("You start reading the book.")
                             Party.player2.talk('Are you done yet???')
-                            self.talk('...')
-                            self.talk('...')
-                            self.talk('...')
+                            printstuff("...")
+
+                          
                             Party.player2.talk('COME ONNNNNNNNN--')
                             
                             printstuff('A new, nimbler slicing method\\was made clearer to Fredrick...')
@@ -3187,7 +3209,7 @@ Fredrick: Alright, fine.
                             printstuff('It is an incantation to remove all nearby grass.')
                             Party.player2.talk('Lemme see it.')
                             Party.player2.talk('Hmm.')
-                            Party.player2.talk('Genmu mispronounces some mystic words...')
+                            printstuff('Genmu mispronounces some mystic words...')
                             printstuff('All the grass vanishes.')
                             allcut = True
                             game.gamedata.events['allcut4'] = True
@@ -3205,7 +3227,8 @@ Fredrick: Alright, fine.
                 if game.currentplace == 'place_of_judgement.tmx':
                     if moo.name == 'sword':
                         if 'denial' in moo.item.specialproperties:
-                            self.talk('Nope, not interested.')
+                            #self.talk('Nope, not interested.')
+                            printstuff("You\'re not interested.")
                             return
                         if moo.item.specialproperties['rejection']:
                              #printstuff('Are you going to take the sword, or not?')
@@ -3228,10 +3251,10 @@ Fredrick: Alright, fine.
                         printstuff(moo.properties['description'])
                         printstuff("Will you take it?")
                         game.gamedata.events['lookedatsword'] = True
-                        chosenoption = triplequestion('Finders keepers.','Who just leaves a sword lying around?','No thanks.')                       
+                        chosenoption = triplequestion('Finders keepers.','Nah, it probably belongs to someone.','No thanks.')                       
                         if chosenoption == 1:
-                            self.talk('(Wonder who left a sword just lying around...?)')                            
-                            printstuff('Fredrick awkwardly grabs the sword...')
+                            #self.talk('(Wonder who left a sword just lying around...?)')                            
+                            printstuff('You awkwardly grab the sword...')
                             gamedata.logicpoints += 1
                             Party.equipment.append(eval(moo.properties['itemid']))                                                       
                             for i in game.items:
@@ -3243,8 +3266,10 @@ Fredrick: Alright, fine.
                             #moo.kill()
                             #del moo                            
                         elif chosenoption == 2:
-                            self.talk('(Seems kinda weird... It could be cursed.)')
+                            #self.talk('(Seems kinda weird... It could be cursed.)')
+                            
                             #self.talk('(I don\'t need to risk angering\\one of this place\'s residents, as well.')
+                            
                             printstuff('The sword feels rejected...')
                             printstuff('Did it just get a little sharper?')
                             moo.item.specialproperties['rejection'] = True
@@ -3255,26 +3280,14 @@ Fredrick: Alright, fine.
                             gamedata.willpoints += 1
                             self.talk("...")
                             game.gamedata.events['swordleaver'] = True
-##                            gamedata.choices.append('swordreturner')
-##                            self.talk('Weird. Who dropped this?')
-##                            self.talk('Well, someone should get\\some use out of it.')
-##                            printstuff('Fredrick just kinda grabs the sword.')
-##                            Party.equipment.append(eval(moo.properties['itemid']))
-##                            for i in game.items:
-##                                if i.name == moo.name:
-##                                    i.kill()
-##                                    del i
-##                            del moo
-##                            return
-                #if game.currentplace == 'grassstage.tmx':
-                #    if moo.name == 'chest' and m
                 if game.currentplace == 'grassstage2a.tmx':
                     if moo.name == 'flyer':
                         #printstuff(moo.properties['description'])
                         if 'grassstageflyer' not in game.gamedata.events:
                             printstuff("                        Fate's Salesman\\Selling you what you need\\ before you know you need it.")
                             #Party.player2.talk('UGH! Sounds like a dork!')
-                            Party.player2.talk('Is it that guy over there?')
+                            Party.player2.talk('But I already know I need my swords?!')
+                            #Party.player2.talk("W")
                             #self.talk('Maybe..?')
                             game.gamedata.events['grassstageflyer'] = True
                             #printstuff('Fredrick grabs the flyer off the ground.')
@@ -3282,32 +3295,48 @@ Fredrick: Alright, fine.
                             Party.player2.talk('I don\'t want to read it again.')                                                                                                    
                 if game.currentplace == 'grassdungeon2.tmx' and 'nodesc' not in moo.properties:
                     findpreference()
-##                    printstuff(moo.properties['description'])
-##                    if game.gamedata.preference == 'will':
-##                        self.talk('I don\'t think Genmu should know about this...')
-##                    if game.gamedata.preference == 'logic':
-##                        self.talk('Who is this guy?')
-##                    if game.gamedata.preference == 'emotion':
-##                        self.talk('Genmu, you should look at this...')
-##                if game.currentplace == 'grassdungeon3.tmx':
-##                    Party.player2.talk('*GASP*!!!')
-##                    Party.player2.talk('My sword!!!')
-##                    Party.player2.talk('REUNITED AT LAST!!!!!')
-                    
-                    
-                    
-                            
-##                            self.talk('HEY! WHO LEFT A SWORD HERE?')
-##                            self.talk('HELLOOOOOOOOOOOOOO!!!')
-##                            printstuff('I did. Can you just take the sword already?',1,0,1)
-##                            self.talk('Fine...')
+                ##                    printstuff(moo.properties['description'])
+                ##                    if game.gamedata.preference == 'will':
+                ##                        self.talk('I don\'t think Genmu should know about this...')
+                ##                    if game.gamedata.preference == 'logic':
+                ##                        self.talk('Who is this guy?')
+                ##                    if game.gamedata.preference == 'emotion':
+                ##                        self.talk('Genmu, you should look at this...')
+                ##                if game.currentplace == 'grassdungeon3.tmx':
+                ##                    Party.player2.talk('*GASP*!!!')
+                ##                    Party.player2.talk('My sword!!!')
+                ##                    Party.player2.talk('REUNITED AT LAST!!!!!')
+                                    
+                                    
+                                    
+                                            
+                ##                            self.talk('HEY! WHO LEFT A SWORD HERE?')
+                ##                            self.talk('HELLOOOOOOOOOOOOOO!!!')
+                ##                            printstuff('I did. Can you just take the sword already?',1,0,1)
+                ##                            self.talk('Fine...')
                         
             for character in characters:
+                #this goes through every character on screen... is that fine?
+                #ALSo why are we matching character init tile with character...!
+
+                #TODO getinfo from characters isn't getting the character object...
+                #its getting the actual character spawner tile!
+                #How to fix?!
+
+                #bug fix... interacting with character spawner tile is trigger interactions which is wrong..!
+                if moo.type == "character" and characterfound == False:
+                    #sloppy fix to prevent interacting with spawner tile
+                    continue
+                    #continue
+                print(dir(moo))
+
                 print('checking characters')
-                ##print(character.name,'Checking for')
-                #if character.name == moo.name:
+                
                 print(mooid , id(character.cell))
-                if id(character.cell) == mooid:
+                #if id(character.cell) == mooid:
+                if character == characterfound:
+
+                    moo = characterfound.cell
                     ##print('character found')
                     if 'debug' in moo.properties:
                         for event in pygame.event.get():
@@ -3343,8 +3372,8 @@ Fredrick: Alright, fine.
                             if Party.player2 != None:
                                 if Party.player2.name == 'Genmu':
                                     character.talk('It seems that someone has made a friend...')
-                                    Party.player2.talk('Heh, well...')
-                                    Party.player2.talk('Yes, my legendary status is FINALLY being recognized...')
+                                    #Party.player2.talk('Heh, well...')
+                                    Party.player2.talk('Yes, I could grow used to having fans...')
                                     chosenoption = character.askandquestion('Do you wish for me to save for you?','Yea.','Please help me.')
                                     if chosenoption == 1:
                                         character.talk('Very well.')
@@ -3368,13 +3397,13 @@ Fredrick: Alright, fine.
                                         if chosenoption == 1:
                                             if game.gamedata.preference == 'will':
                                                 character.talk('If you didn\'t, why would you talk to me?')
-                                                self.talk('Good point.')
+                                                #self.talk('Good point.')
                                                 character.talk('I have my moments.')
                                                 savegame()
                                             if game.gamedata.preference == 'emotion':
                                                 character.talk('If you didn\'t, why would you talk to me?')
-                                                character.talk('Because you seem interesting.')
-                                                self.talk('I am flattered, but basic conversation\\is not what I am here to do.')
+                                                #character.talk('Because you seem interesting.')
+                                                #self.talk('I am flattered, but basic conversation\\is not what I am here to do.')
                                                 savegame()
                                             
                                         if chosenoption == 2:
@@ -3384,17 +3413,17 @@ Fredrick: Alright, fine.
                                 if not character.talkedbefore:        
 
                                     if game.gamedata.preference == 'will' or 'emotion':
-                                        self.talk('Hello.')
+                                        #self.talk('Hello.')
                                         character.nameless = True
-                                        character.talk('Uh, hi.')
+                                        #character.talk('Uh, hi.')
                                         character.talk("What do you want?")
                                         character.talk('I am admiring the scenery...')
-                                        character.talk("Also I have no idea who you are.")
+                                        #character.talk("Also I have no idea who you are.")
                                         character.talk('...')
-                                        character.talk('(He\'s just standing there, staring at me.)')
+                                        #character.talk('(He\'s just standing there, staring at me.)')
                                         character.talk('(Wait, maybe he\'s the person\\I was told about...)')
                                         character.talk('So, ya gonna let me do my thing, or...?')
-                                        chosenoption = triplequestion('Nah...','Go for it.','Wait what?')
+                                        chosenoption = triplequestion('Nah...','Go for it.','What?')
                                         character.talkedbefore = True
                                         if chosenoption == 1:
                                             #character.talk('Well, you might need to eventually.')
@@ -3404,20 +3433,20 @@ Fredrick: Alright, fine.
                                             character.talk('If you say so...')
                                             savegame()
                                             printstuff('Your adventure to this point has,\\ for lack of a better term, been saved.')
-                                            self.talk('See you around, random save guy.')
+                                           #self.talk('See you around, random save guy.')
                                             character.name = 'Random Save Guy'
                                             character.nameless = False
                                             character.talk('Until we meet again.')
                                             game.gamedata.events['saveguytrust'] = 1
                                         if chosenoption == 3:
-                                            character.talk("So now you know how I feel.")
-                                            character.talk('Well, I\'m a person who\\ keeps track of people\'s journeys.')
+                                            #character.talk("So now you know how I feel.")
+                                            character.talk('I\'m a person who\\ keeps track of people\'s journeys.')
                                             character.talk('I have been told to keep\\track of your adventure.')
-                                            self.talk('Okay.')
-                                            character.talk('So, we are going to save now.')
-                                            self.talk('What exactly are we going to save?')
+                                            #self.talk('Okay.')
+                                            #character.talk('So, we are going to save now.')
+                                            #self.talk('What exactly are we going to save?')
                                             character.talk('Just tell me everything\\that has happened to you so far.')
-                                            self.talk('Everything?')
+                                            #self.talk('Everything?')
                                             character.talk('Well, all that\'s happened\\ in about the last 15 minutes...')
                                             #self.talk('Well, some guy in a cloak teleported me to some empty place..')
                                             game.BlackOut()
@@ -3438,14 +3467,14 @@ Fredrick: Alright, fine.
                                         character.talk('Why?')
                                         self.talk('Because I am supposed to keep track of your journey.')
                                         character.talkedbefore = True
-##                            if chosenoption == 1:
-##                                character.talk('ALrighty then.')
-##                                savegame()
-##                                character.talk('That\'s all.')
-##                                character.talk('Come back when ya need your actions saved.')
-##                            elif chosenoption == 2:
-##                                character.talk('Then why\'d ya talk to me?')                                                                                                                                                       
-                            #break
+                            ##                            if chosenoption == 1:
+                            ##                                character.talk('ALrighty then.')
+                            ##                                savegame()
+                            ##                                character.talk('That\'s all.')
+                            ##                                character.talk('Come back when ya need your actions saved.')
+                            ##                            elif chosenoption == 2:
+                            ##                                character.talk('Then why\'d ya talk to me?')                                                                                                                                                       
+                                                        #break
                         if game.currentplace == 'grassdungeon19.tmx':
                             if "save" in moo.properties:
                                 #character.talk('Ah, you\'re almost done with this place.')
@@ -3464,11 +3493,11 @@ Fredrick: Alright, fine.
                                     character.talk('Good, good.')
                                     printstuff("The man pulls something from somewhere...")
                                     character.talk("Drink this.")
-                                    Party.player2.talk('Ah, to quench my heroic thirst after these harrowing battles...')
+                                    Party.player2.talk('Ah, to quench my heroic thirst\\after cutting all that grass')
                                     printstuff("Genmu and Fredrick consume the drink.")
                                     game.player.player.Chealth = copy.copy(game.player.player.Mhealth)
                                     game.player.player.Cmp = copy.copy(game.player.player.Mmp)
-                                    printstuff('The drink tastes sweet, but only somewhat.')
+                                    printstuff('The drink tastes sweet, but only a little.')
                                     Party.player2.talk('What WAS that thing you gave us?')
                                     character.talk("Does it matter? You already drank it.")
                                     
@@ -3501,7 +3530,7 @@ Fredrick: Alright, fine.
                                 character.talk('Alright, it is done.')
                                 Party.player2.talk('WHO ARE YOU???')
                                 character.talk('I am a person who helps your friend save.')
-                                self.talk('He follows me everywhere.')
+                               #self.talk('He follows me everywhere.')
                                 Party.player2.talk('If I was him, I\'d follow me around everywhere instead.')
                                 #Party.player2.talk('How are you EVERYWHERE we go???')
                                 #character.talk('What? It\'s my job.')
@@ -3563,7 +3592,7 @@ Fredrick: Alright, fine.
                                 character.talk('Right. Now.')
                                 killtime(1)
                                 character.talk('Seriously?')
-        ##                        self.talk('Okay, I walked a few feet. I want answers.'
+                    ##                        self.talk('Okay, I walked a few feet. I want answers.'
                             elif moo.properties['specialtalk'] == 3:
                                 character.talk('So,you walked ALL the way over here \\and held up your end of the bargain.')
                                 character.talk('Now it\'s time for me to hold up mine.')
@@ -3582,8 +3611,10 @@ Fredrick: Alright, fine.
                             #character.talk("Huh? What do you want?")
                             #character.talk('Oh! I get it!')
                             character.talk("Hee hee hee.")
-                            character.talk('Oh look!')
+                            character.talk("My adventure\'s just starting!")
+                            #character.talk('Oh look!')
                             character.talk("You must be an enemy!")
+                            character.talk("My very first enemy!")
                             #character.talk("This will be fun...")
                             res = battle.Battle(Party.player1,[battle.fredrick],[battle.darknyu],
                             'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle',gamedata)
@@ -3593,22 +3624,30 @@ Fredrick: Alright, fine.
                             else:
                                 character.talk("You meanie! I was supposed to win! Not you!")
                                 character.talk("The hero is always supposed to win!")
-                                printstuff("The creature has sworn a solemn oath against you.")
-                            character.rect.x += 9999                            
+                                printstuff("The creature has sworn an oath against you.")
+                            character.rect.x += 9999                          
                         if'SPflag1' in moo.properties:                                                       
                             #Why did you leave that sword?
                             #Do you know what i went through to get it?
                             #character.talk('Well, it\'s more like\\I summoned you here, but.')
+                            #self.walk('rigth')
+
+                            #Yes we are rewriting this again.
+
                             if "secondtime" in game.gamedata.events:
-                                printstuff("Gray smirks knowingly at Fredrick.")
+                                character.talk("Back again...?")
+                                character.talk("I didn\'t like how that went, either.")
+                                printstuff("Gray smirks knowingly at you.")
                                 #character.talk("Fredrick...")
                                 character.talk("It's rude to pretend you don't know me.")
                                 character.talk('...')
-                                character.talk("After going through all that, you\'re still acting the fool?")
+                                character.talk("After going through all that,\\you\'re still acting the fool?")
                                 character.talk("I thought you'd be more excited\\to get back to your ladyfriend...")
-                            character.talk('I hate to interrupt your VERY BUSY life.')
-                            character.talk("That consists solely of video games and\\ haunting the shopping plaza with your friends.")
-                            character.talk("But. ")
+                            character.talk("Well, well.")
+                            character.talk("Glad you could make it.")
+                            #character.talk('I hate to interrupt your VERY BUSY life.')
+                            #character.talk("That consists solely of video games and\\ haunting the shopping plaza with your friends.")
+                            #character.talk("But. ")
 
                             #character.talk('But don\'t worry; you\'ll get back to\\your dorky school friends soon enough.')                            
                             #self.talk('Wait!')
@@ -3617,7 +3656,8 @@ Fredrick: Alright, fine.
                             if chosenoption == 1:
                                 gamedata.logicpoints += 1
                                 character.talk('Who am I?')
-                                character.talk('Of course, the one person\\I cannot tell that to asks me that.')
+                                character.talk('Someday, if things either go really really right\\or really really wrong, you\'ll ' \
+                                'find out.')
                                 character.talk('...')
                                 character.talk('They usually call me "Gray".')
                                 character.nameless = False
@@ -3625,7 +3665,7 @@ Fredrick: Alright, fine.
                                 character.talk('I am "in charge" of your world.')
                                 character.talk('You are about to begin a journey;\\My job is to make sure you finish it.\\Because you might not.')
                                 character.talk('So, now we begin.')
-                                self.talk('Wait, I don\'t even know what\'s going on--')
+                                #self.talk('Wait, I don\'t even know what\'s going on--')
                                 #character.talk('You will after this.')
                                 #self.talk('I\'m as ready as I\'ll ever be.')
                                 #character.talk('That\'s not true.\\You\'ll be more ready after this.')
@@ -3638,8 +3678,8 @@ Fredrick: Alright, fine.
                                 character.talk('It is a place hidden within your world.')
                                 character.talk('People like me keep your world going from here.')                               
                                 #character.talk('It is functionally the heart of your world.')                                
-                                self.talk('Cool.')
-                                character.talk("Yeah, you could say that, I guess.")
+                                #self.talk('Cool.')
+                                #character.talk("Yeah, you could say that, I guess.")
                                 #character.talk('That is one way to look at it...')
                                 #character.talk('I am one of a select few\\who have control over this place.')
                                 character.talk('Thus, I have called you here to \\start you off on your journey.')                                                                
@@ -3649,62 +3689,65 @@ Fredrick: Alright, fine.
                                 gamedata.willpoints += 1
                                 character.talk('A being which I have\\defeated before has returned.')
                                 character.talk('Of course, \\you are the one who must defeat him.')
-                                self.talk('Why me?')
+                                #self.talk('Why me?')
+
                                 character.talk('Unfortunately, you\'re "special".')
                                 character.talk('Hopefully.')
+                                
                                 #character.talk('You really think I\'d just\\grab some random kid off the street for this?')
-                                character.talk('I mean,\\we will find out if you aren\'t very quickly.')                                        
-                                character.talk('Look, we don\'t have all day. Let\'s begin.')                                
+                                #character.talk('I mean,\\we will find out if you aren\'t very quickly.')                                        
+                                #character.talk('Look, we don\'t have all day. Let\'s begin.')                                
                                 game.SPFade(game.dt)
                                 battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
                             
                             #Rewrite for difficulty from here for cockiness?
                             
-##                            for i in gamedata.data:
-##                                if 'GCSkill' in i.keys():
-##                                    x = i['GCSkill']
-##                            assert x != None
-##                            ##print(x,'Difficulty result')
+                            ##                            for i in gamedata.data:
+                            ##                                if 'GCSkill' in i.keys():
+                            ##                                    x = i['GCSkill']
+                            ##                            assert x != None
+                            ##                            ##print(x,'Difficulty result')
                             x = 1
                             #TODO why is this crashing.
-                            x = gamedata.GCSkill
+                            x = gamedata.GCSkill            
                             findpreference()
                             ##print(x,'battle difficulty result')
                             preference = gamedata.preference
                             #bro i'm not writing everything 9 times.
                             if  x == 2:
                                 if preference == 'logic':
-                                    self.talk('Was that supposed to be a challenge?')
-                                    character.talk('Ah, a very humble hero indeed.')
+                                    pass
+                                    #self.talk('Was that supposed to be a challenge?')
+                                    #character.talk('Ah, a very humble hero indeed.')
                                 elif preference == 'emotion':
                                     character.talk('Very adequate.')
                                 elif preference == 'will':
-                                    self.talk('I think I\'m ready.')
-                                    character.talk('Yes, I think so, too.')
+                                    #self.talk('I think I\'m ready.')
+                                    #character.talk('Yes, I think so, too.')
                                     character.talk('Have you done this before?')
                                 
 
                                 
                             elif x == 1:
                                 if game.gamedata.preference == 'logic':
-                                    self.talk('Guess I did alright.')
-                                    character.talk('Yes, "alright" is how I would describe it.')
+                                    #self.talk('Guess I did alright.')
+                                    character.talk('Just "alright" is how I would describe that.')
                                 if game.gamedata.preference == 'emotion':
                                     character.talk('Well, I guess that\'s good enough for now.')
-                                    self.talk('So, does that mean I did well, or...?')
-                                    character.talk('You did as well as I thought you would do.')
-                                    self.talk('Which is?')
-                                    character.talk('Eh, whatever.')
+                                    #self.talk('So, does that mean I did well, or...?')
+                                    #character.talk('You did as well as I thought you would do.')
+                                    #self.talk('Which is?')
+                                    #character.talk('Eh, whatever.')
                                     
                                 if game.gamedata.preference == 'will':
                                     print('whatever')
                             elif x == 0:
                                 character.talk('Heh. Uh...')
                                 character.talk('You\'ll get better eventually.')
-                                self.talk('(Yikes.)')
+                                #self.talk('(Yikes.)')
                                 character.talk('Maybe...')
-                                self.talk('(Was I really THAT bad?')
-                                character.talk("(Man, he was really bad.)")
+                                #self.talk('(Was I really THAT bad?')
+                                #character.talk("(Man, he was really bad.)")
                             elif x == 'ded':
                                 character.talk('Please tell me you did that poorly on purpose.')
                             character.talk('Anyway, that\'s it.')
@@ -3714,61 +3757,40 @@ Fredrick: Alright, fine.
                                 self.talk('(Certainly took long enough...)')
                             
                                 
-                            #character.talk('Your chances of survival have hopefully increased.')
-##                            character.talk('So, what are your thoughts on sheep?')
-##                            if game.gamedata.preference == 'logic':
-##                                #speak('Do you like sheep?',ghostface)
-##                                self.talk('They\'re okay, I guess...')
-##                                character.talk('Perhaps your opinion will change...')
-##                                
-##                                #character.talk('(Admittedly, not a sheep in the\\ traditional sense, but...)')
-##                            if game.gamedata.preference == 'emotion':
-##                                self.talk('I like them...')
-##                                # so, i made a mistake where fredrick says the next line
-##                                # instead of gray cloak
-##                                # It gives it an entirely different meaning.
-##                                character.talk('(If only he knew...)')
-                                   #lol dummied out tho
-##                            if game.gamedata.preference == 'will':
-##                                self.talk('What kind of sheep?')
-##                                character.talk('Heh heh heh. You will see.')
-##                            character.talk('As I said earlier, You\'ve got a journey to go on.')
-##                            character.talk('So, this is where you get off.')
-##                            self.talk('How am I supposed to explain where I was to my friends?')
-##                            character.talk('Don\'t worry about it. I\'ll take care of it.')
-##                            #self.talk('So, how am I supposed to get home from...\\ whereever I am?')
+
                             
-#                            character.talk('Like this.')
+                        #                            character.talk('Like this.')
                             character.talk('One last thing, though...')
-                            character.talk('In order for you to\\defeat that old acquaintance of mine,\\you must become stronger.')
-                            character.talk('To gain that strength, you must master\\one of the scariest things people can offer:\\Relationships.')
+                            character.talk('In order for you to\\defeat that old enemy of mine,\\you must become stronger.')
+                            character.talk('To help gain that strength, you must master\\one of the scariest things people can offer...')
+                            character.talk('Relationships.')
                             #self.talk('Friendship? How does that help me kill things?')
                             #character.talk('Ugh, just listen...')
-                            character.talk('I must unfortunately offer you an example.')
-                            printstuff('You have established a bond\\with the Man in the Gray Cloak.')
+                            #character.talk('I must unfortunately offer you an example.')
+                            #printstuff('You have established a bond\\with the Man in the Gray Cloak.')
                             Party.bonds.append(pc.GrayCloakBond)
                             for i in Party.bonds:
                                 if i.name == 'Gray' and i.level == 1:
                                     #i.level += 1
                                     printstuff('A voice begins speaking into Fredrick\'s mind.')
                                     printstuff('You, the one whose path leads to the end...',0,1,1)
-                                    printstuff('Let other\'s paths guide you to your own.',0,1,1)
+                                    #printstuff('Let other\'s paths guide you to your own.',0,1,1)
                                     break
                                     
                             printstuff('Gray has shared some of his power with Fredrick.')
-                            printstuff('Fredrick learned the magic spell, Beam.\\Beam has been added to your Xmoves.')
-                            printstuff('Your current Xmove has also become beam.')
+                            printstuff('Fredrick learned the magic spell, Beam.\\Beam was equipped and added to your Xmoves.')
+                            #printstuff('Your current Xmove has also become beam.')
                             Party.xmoves.append(pc.laser)
                             game.player.xmove = pc.laser
-                            party.player1.xattack = pc.laser
+                            Party.player1.xattack = pc.laser
                             printstuff('Your relationship with a person\\is shown through a bond,\\viewable in the world menu.')
                             
                             character.talk('For better or for worse,\\ you and I are now connected.')
                             character.talk('...')
                             self.talk('...')
                             character.talk('Once you make a bond, you can strengthen it.')
-                            character.talk('This happens when that person trusts you more.')
-                            character.talk('Strengthening bonds can give you unrivaled benefits.')
+                            character.talk('This happens when that person trusts you.')
+                            character.talk('Strengthening bonds\\can give you unrivaled benefits.')
                             character.talk('Try to make as many friends as you can.')
                             #character.talk('Well, actually, you should make the\\maximum number of friends possible.')
                             character.talk('Now, back to the task at hand...')
@@ -3778,19 +3800,19 @@ Fredrick: Alright, fine.
                             #character.talk('It also seems that they have become\\something of a legend in your world.')
                             #character.talk('Their locations are unfortunately\\unknown to me-- finding them falls on you.')
                             character.talk('When you return to your world,\\you will meet a swordsman.')
-                            character.talk('Not only is he more powerful\\than his airheaded personality will imply, but...')
+                            character.talk('Not only is he more powerful\\than his personality will imply, but...')
                             character.talk('He seems to have some awareness\\of one of my friend\'s location.')
                             character.talk('It is important that you get to know him.')
                             character.talk('Normally, I\'d let you ask questions,\\but, you know...')# our precious time is dwindling.')
                             #questions here on second playthrough?
-##                            if game.gamedata.preference == 'emotion':
-##                                self.talk('No, not really...')
-##                                character.talk('Are you sure about that?')
-##                            if game.gamedata.preference == 'logic':
-##                                self.talk('Seems like it.')
-##                            if game.gamedata.preference == 'will':
-##                                self.talk('That\'s what you\'ve been telling\\me the whole time.')
-##                                character.talk('Touche.')
+                ##                            if game.gamedata.preference == 'emotion':
+                ##                                self.talk('No, not really...')
+                ##                                character.talk('Are you sure about that?')
+                ##                            if game.gamedata.preference == 'logic':
+                ##                                self.talk('Seems like it.')
+                ##                            if game.gamedata.preference == 'will':
+                ##                                self.talk('That\'s what you\'ve been telling\\me the whole time.')
+                ##                                character.talk('Touche.')
                             
                             character.animation('armraise.png',35,5,500,dt)
                             game.fadeOut()
@@ -3815,10 +3837,10 @@ Fredrick: Alright, fine.
                                 clock.tick(30)
                                 if theleaderofthebunch == 30: #DK
                                     done = True
-                            character.talk("It\'s really all beginning again.")
+                            #character.talk("It\'s really all beginning again.")
                             #character.talk('Hard to believe its finally here.')
                             #character.talk('It really is beginning again.')
-                            #character.talk('I hope he\'s strong enough.')
+                            character.talk('I hope he\'s strong enough.')
                             #character.talk('He wasn\'t before, but...')
                             #character.talk('No, I shouldn\'t talk like that.')
 
@@ -3827,6 +3849,8 @@ Fredrick: Alright, fine.
                             game.currentfocus = "player"
                             game.killtime(1)
                             self.rect.y += 10000 
+
+                            screenupdate()
 
                             printstuff("Pressing A will sometimes yield\\ valuable information.")
                             #why does screen glitch out if this next killtime is not active?
@@ -3876,41 +3900,44 @@ Fredrick: Alright, fine.
                             if character.talkedbefore:
                                 if game.preference == 'will':
                                     character.talk('Are you enjoying your... thing?')
-                                    self.talk('I probably would if I knew what it was...')
+                                    #self.talk('I probably would if I knew what it was...')
                                     character.talk('It\'s a mystical item said to contain\\ the essence of a\\ legendary hero.')
-                                    self.talk('Wow.\\How do I use it?')
-                                    character.talk('Ah, it\'s simple, really.')
+                                    #self.talk('Wow.\\How do I use it?')
+                                    character.talk('The way you use it is simple, really.')
                                     character.talk('Or, at least that\'s what the guy who gave it to me said.')
                                     character.talk('It\'s a shame I don\'t remember what he said.')
                                     
                                 if game.preference == 'emotion':
-                                    self.talk('Well, thank you for... whatever this is.')
+                                    #self.talk('Well, thank you for... whatever this is.')
                                     character.talk('Of course.')
                                     character.talk('If you ever need weird garbage,\\you know who to talk to.')
                                 if game.preference == 'logic':
-                                    self.talk('Thanks for the orb.')
+                                    #self.talk('Thanks for the orb.')
                                     character.talk('That\'s what I do.\\But only for people named "Fredrick".')
                                     character.talk('Aren\'t you lucky that\'s your name?')
                                     character.talk('Imagine someone gave you a far\\worse name that wasn\'t "Fredrick".')
                                     character.talk("That\'d really suck.")
                             if not character.talkedbefore:
                                 Party.player2.talk("Did you write this?!")
-                                Party.player2.talk("I need my sword NOW you scoundrel!")
+                                #Party.player2.talk("If so!")
+                                Party.player2.talk("Where are MY BABIES???")
                                 #self.talk('Hey, is this you?')
                                 printstuff('Fredrick shows the salesman the flyer.')
                                 character.talk('Hey, woah woah WOAH! That\'s not me.')
+                                character.talk("And what are you talking about???")
                                 character.talk('"Fate\'s salesman?" Ugh...')
                                 #character.talk('You\'re kidding, right?\\I have enough self respect to\\not call myself that.')
                                 character.talk('I saw some weird traveling merchant though.\\Had a lot of swords.')
-                                character.talk('Yeah, he looked like the sort who would call himself that...')
+                                character.talk('Yeah, he looked like the sort\\who would call himself that...')
                                 Party.player2.talk("Where\'d he go?")
                                 character.talk('He went up into that forest over there...')
                                
-                                self.talk('Anyway, can I buy something?')
+                                Party.player2.talk('So what do you sell?')
                                 character.talk('Who said I was selling anything?')
                                 findpreference()
                                 if 'secondtime' in game.gamedata.events:
-                                    self.talk('Uh, maybe the sign that says "Stuff" on it.')
+                                    #self.talk('Uh, maybe the sign that says "Stuff" on it.')
+                                    Party.player2.talk("Hah! That sign does!")
                                     character.talk('Who put that there?')
                                     character.talk('(Darn it...)')
                                     character.talk('All right, I suppose that means\\ I have to sell you something.')
@@ -3935,10 +3962,9 @@ Fredrick: Alright, fine.
                                         character.talk('$5? Well, I\'ll take it.')
                                         printstuff('He hands you $5 and an orb.')
                                         character.talk('Ah, I\m finally free of that annoying thing.')
-                                        self.talk('(This is a good result.)')
+                                        #self.talk('(This is a good result.)')
                                         character.talk('A pleasure doing business with you.')
-                                        
-                                        
+                                    
                                 else:
 ##                                    self.talk('Then what ARE you doing out here?')
 ##                                    character.talk('I am waiting for someone to show up.\\I am supposed to give them something.')
@@ -3950,10 +3976,10 @@ Fredrick: Alright, fine.
 ##                                    printstuff('It was added to your Keyitems.')
 ##                                    Party.keyitems.append(firstorb)
 ##                                if game.gamedata.preference == 'emotion':
-                                    self.talk('Is your store open?')
+                                    Party.player2.talk('Is your store open?')
                                     character.talk('What store? I like to stand here\\ and get people\'s hopes up all day.')
-                                    self.talk('Are you serious?')
-                                    character.talk('Do I look serious?\\ I should, because I am.')
+                                    #.talk('Are you serious?')
+                                    #character.talk('Do I look serious?\\ I should, because I am.')
                                     character.talk('Well, here\'s something to cheer you up, anyway.')
                                     printstuff('The man shoves a strange orb at you.')
                                     Party.keyitems.append(firstorb)
@@ -3972,13 +3998,29 @@ Fredrick: Alright, fine.
                         if 'SPflag1' in moo.properties:
                             
                             #character.talk('You have not brought the sigil.')
+                            #character.talk("What brings you over here?")
+                            #character.talk("To speak with me?")
+                            #character.talk("It has been a long time\\since someone has spoken with me.")
+                            #character.talk("Hello.")
+                            character.talk("I once was a powerful hero.")
+                            character.talk("But now, I am no longer someone special.")
+                            #character.talk("I am no longer strong.")
+                            #character.talk("My name is no longer\\whispered through the land...")
+                            character.talk("There is little I can offer you...")
+                            #character.talk("There isn\'t much I could give you.")
+                            character.talk("But.")
+                            character.talk("I could teach you how to be a warrior.")
+                            #character.talk("That knowledge is something\\I could never lose.")
+
                             
-                            character.talk('Hello. Any chance you have an orb?')
+                            #character.talk('Hello. Any chance you have an orb?')
                             #self.talk('Well, i--')
                             hasorb = False
-                            for i in Party.keyitems:
-                                if i.name == 'Orb?':
-                                    hasorb = True
+                            if any(i.name == "Orb?" for x in Party.keyitems) :
+                                hasorb = True
+                            #for i in Party.keyitems:
+                            #    if i.name == 'Orb?':
+                            #        hasorb = True
                             if character.talkedbefore == True:
                                 pass
 
@@ -4004,9 +4046,9 @@ Fredrick: Alright, fine.
                                         #fredrick is more aware as the true end is reached
                                         character.talk('If you let me borrow your friend for a little,\\I will give you a sword.')
                                         Party.player2.talk('Deal.','bigtext')
-                                        self.talk('He gave me up for a sword THAT easily?')
+                                        #self.talk('He gave me up for a sword THAT easily?')
                                         character.talk('Don\'t be shocked if he does that again in the future.')
-                                        self.talk('So what do you want?')
+                                        #self.talk('So what do you want?')
                                         character.talk('To teach you a lesson you won\'t forget.')
                                         
                                         game.SPFade(dt)
@@ -4020,10 +4062,10 @@ Fredrick: Alright, fine.
                                         character.talk('Look, those orbs...')
                                         character.talk('They contain the battle\\ability of a legendary hero.')
                                         character.talk('I used to use these with my apprentice.')
-                                        character.talk('Put simply, these things are amazing.')
+                                        #character.talk('Put simply, these things are amazing.')
                                         character.talk('Problem is, you have to find these weird doors\\ before you can use them.')
                                         character.talk('The first one is in your town somewhere.')
-                                        character.talk('It should be pretty obvious, actually...')
+                                        #character.talk('It should be pretty obvious, actually...')
                                         character.talk('I\'d crack it open for you,\\but I\'m too old for it.')
                                 else:
                                     character.talk("I used to be quite the warrior in my day.")
@@ -4064,6 +4106,7 @@ Fredrick: Alright, fine.
                             character.talk('Powerful warrior always cut grass!\\Always!!!')
                             character.talk('It\'s their duty!')
                             if 'maginyudone' in game.gamedata.events:
+                                #man i dont want even more pathing.
                                 character.talk('And you like magic?')
                                 character.talk('Why?')
                                 character.talk("Attacking people from far away is so... weird!")
@@ -4142,10 +4185,10 @@ Fredrick: Alright, fine.
                                     character.talk('Read a book!')
                                     self.talk('ow...')
                                     printstuff('The book is titled "Fire flingin\' for freakin\' fricks".')
-                                    printstuff('Fredrick is offended, yet intrigued.')
-                                    printstuff('Fredrick starts reading the book.')
+                                    printstuff('You are offended, yet intrigued.')
+                                    printstuff('You start reading the book.')
                                     self.talk('It\'s pretty complex...')
-                                    printstuff('Fredrick only partially understands the book.')                                   
+                                    printstuff('You only partially understands the book.')                                   
                                     character.talk('There! I found that cool book, but I couldn\'t figure it out.')
                                     character.talk('It\'s soooooo boring.')
                                     character.talk('I hope you like it.')
@@ -4182,11 +4225,12 @@ Fredrick: Alright, fine.
                                     character.talk('You\'re a meanie!')
                                     Party.player2.talk('Nuh uh!')
                                     character.talk('Yeah huh! Swords are for stupidheads.')
-                                    Party.player2.talk('No they\'re not.\\They\'re for super cool warriors.')
+                                    Party.player2.talk('Nuh uh! Swords are for Powerful Warriors.')
                                     character.talk('No. They\'re not.')
                                     Party.player2.talk('Yes they are.')
                                     character.talk('NO. They\'re NOT.')
-                                    Party.player2.talk('Okay, you\'re right. Magic is cool.\\ \\Ha! I lied! Magic sucks!')
+                                    Party.player2.talk('Hmm. Maybe you may have a point...')
+                                    Party.player2.talk('\\Ha! I lied! Like a rug!Magic is stupid!')
                                     
                                     character.talk('...')
                                     character.talk('RRRRRAAAAWWWWWRRRRRRR!!!')
@@ -4197,7 +4241,15 @@ Fredrick: Alright, fine.
                                     character.talk('I hate you so much!')
                                     character.talk('HATE hate hate hate HATE!')
                                     character.talk('URRRRRRRRAAAAH!')
-                                    character.walk('right',20)                                                                                                        
+                                    character.walk('right',20)        
+                                    Party.player2.talk("Well.")
+                                    #Party.player2.talk("If only she had the right opinion about swords...")
+                                    Party.player2.talk("Gaze upon the pathetic state of the sword denier.")
+                                    Party.player2.talk("What tragedy...!")
+                                    Party.player2.talk("My heart would weep for her.")
+                                    Party.player2.talk("If only she had the right opinion!")
+                                    #Party.player2.talk("She might\'ve won.")
+                                    #Party.player2.talk("If only she knew of \\the glory of swordsmanship.")                                                                                                
                             
                             #begin casting
 ##                            character.orient = 'left'
@@ -4247,7 +4299,11 @@ Fredrick: Alright, fine.
                                     game.gamedata.events['metnyu'] = True
                                     character.talk('Excuse me, Mister?')
                                     character.talk('Can you and your boyfriend help me?')
-                                    Party.player2.talk('Boyfriend?! My only love is for swords.')
+                                    Party.player2.talk('Boyfriend?!')
+                                    Party.player2.talk("This person is my sidekick!")
+                                    Party.player2.talk("There are no romantic feelings involved whatsoever!")
+                                    Party.player2.talk("It would tarnish our team's dynamics!")
+                                    #)
                                     #character.talk('Hee hee, you\'re funny!')
                                     character.talk('Can you help me find my friends?')
                                     character.talk('I\'m not special like they are,\\so they left me all alone.')
@@ -4266,7 +4322,7 @@ Fredrick: Alright, fine.
                                         character.talk('MMM!')
                                         character.talk('MMM MMM MMM!')
                                         character.talk('Steak is so good!')
-                                        Party.player2.talk('Yeah, well, can you\\fight people with steak???')
+                                        Party.player2.talk('Maybe... But I like chicken more myself.')
                                     elif 'metnyu' in game.gamedata.events:
                                         character.talk('I like steak so much!')
                                         character.talk('I think I love steak!')
@@ -4338,12 +4394,12 @@ Fredrick: Alright, fine.
                         if 'SPflag1' in moo.properties:
                             character.talk('What? You guys again?')
                             character.talk('Are you two stalking me?')
-                            chosenoption = doublequestion('','Giiiive me your items...','What? No. No we\'re not.')
+                            chosenoption = doublequestion('','Give me your items...','What? No. No we\'re not.')
                             if chosenoption == 1:
                                 character.talk('Woah, okay buddy.')
                                 character.talk('That\'s kinda weird...')
-                                self.talk('I neeeeeed them.')
-                                Party.player2.talk('Giiiiiiive them to us.')
+                                #self.talk('I neeeeeed them.')
+                                #Party.player2.talk('Giiiiiiive them to us.')
                                 character.talk('Ugh, what\'s going on?\\Is that cloak wearing jerk\\screwing with me again?')
                                 character.talk('Who thought it was a good idea to\\give him those powers?')
                                 character.talk('If you can hear me, this isn\'t funny!')
@@ -4447,15 +4503,17 @@ Fredrick: Alright, fine.
                         if 'SPflag1' in moo.properties:
 
                             #Make the salesman more charming.
-                            character.talk('Ohh, a customer?')
-                            character.talk('Well, how do you do! Nice to meet you.')
+                            character.talk('Huh, a customer?')
+                            character.talk('Well, well.')
+                            character.talk("You must really want to buy something\\if you tracked me down in here...")
+                            #character.talk("I\'ll cut you a special deal!")
                             
                             character.talk('Hey, wait a minute...')
                             #genmu fails at hiding
                             character.talk('You aren\'t slick, swordsman. I can see you.')
                             Party.player2.talk('No you can\'t!\\I\'m GREAT at hiding.')
                             character.talk('I guess it was just the wind, then...')
-                            character.talk('Well. There\'s always time for a deal!')
+                            character.talk('Well. Back to business.')
                             character.talk("You\'re a young man... Swords are probably up your alley.")
                             character.talk('I\'d sell you something,\\but my dogs are in charge of sales.')
                             character.talk('They went off to take care of some errands.')
@@ -4491,9 +4549,9 @@ Fredrick: Alright, fine.
                                 Party.player2.talk('WHAT!?!','bigtext')
                                 Party.player2.rect.center = (448,864)
                                 Party.player2.walk('right',6)
-                                Party.player2.talk('How did you manage to reproduce?')
+                                Party.player2.talk('How did you manage to have kids!?')
                                 Party.player2.talk("And with THAT hair, no less!")
-                                character.talk('At least people know what mine looks like...')
+                                #character.talk('At least people know what mine looks like...')
                                 character.talk('Yes, I have a daughter.\\She is also an excellent businesswoman.')
                                 Party.player2.talk('NO! You can\'t let her sell those!')
                                 Party.player2.talk("All she\'ll do is rip off some moron who'll\\just have them sit in a case for the rest of time.")
@@ -4514,6 +4572,7 @@ Fredrick: Alright, fine.
                                 Party.player2.talk('HEY!','bigtext')
                                 Party.player2.rect.center = (448,864)
                                 Party.player2.walk('right',6)
+                                #TODO make this suck less
                                 Party.player2.talk('With how cheap you were selling them,\\you might as well have just given them away...')
                                 Party.player2.talk('Was it my fault your greedy daughter\\suddenly demanded more money???')
                                 Party.player2.talk('What did she even need all that money for???')
@@ -4527,7 +4586,7 @@ Fredrick: Alright, fine.
                             battle.Battle(Party.player1,[battle.fredrick],[battle.blackcloak],'grass stage',None, (0,0,0),['Stick','First Aid Kit'], 'WizDog Encounter',gamedata)
                             Party.player2.talk('HA! Your dog sucks!')
                             ###
-                            character.talk('Enough from the peanut gallery!')
+                            character.talk('Cripes, you\'re annoying...')
                             dog.rect.x += 9090909
                             character.rect.x += 199199199
                             game.gamedata.events['foughtthesalesman'] = True
@@ -4542,12 +4601,12 @@ Fredrick: Alright, fine.
                             for i in Party.bonds:
                                 if i.name == 'Genmu':
                                     #i.level += 1
-                                    printstuff('A voice begins speaking into Fredrick\'s mind.')
+                                    printstuff('A voice begins speaking into your mind.')
                                     printstuff('You, the one whose path leads to the end...',0,1,1)
                                     printstuff('You tread the path of the warrior further still.',0,1,1)
                                     i.level += 1
-                                    printstuff("Fredrick's bond with Genmu has strengthened!")
-                                    printstuff("Fredrick can now slice one extra time when using sword attacks.")
+                                    printstuff("Your bond with Genmu has strengthened!")
+                                    printstuff("You can now slice one extra time when using sword attacks.")
                             
                             Party.player2.talk('That cowardly coward ran away like a coward again.')
                             Party.player2.talk('What cowardice!')
@@ -4577,7 +4636,7 @@ Fredrick: Alright, fine.
                                 character.talk('...')
                                 character.talk('Or maybe I do.')
                                 character.talk('Hee hee hee.')
-                                character.talk('That guy gave me so much strength...')
+                                character.talk('That person gave me so much power...')
                                 character.talk('When I show his friends how amazing I am...')
                                 #character.talk('And then they\'ll ALL finally love me.')
                                 #character.talk('Finally! They will love me again!')
@@ -4605,7 +4664,7 @@ Fredrick: Alright, fine.
                                     #character.talk('Maybe we can practice together?')
                                 character.talkedbefore = True
                             else:
-                                printstuff("The nyu is conniving contentedlyx.")
+                                printstuff("The nyu is conniving contentedly.")
                                 printstuff("Are you going to fight him?")
                             
                         if 'SPflag2' in moo.properties:
@@ -4660,12 +4719,12 @@ Fredrick: Alright, fine.
                                     #character.talk('You\'re starting to irritate me.')
                                     character.talk('What could you possibly want from me?')
                                     character.talk('Actually, don\'t answer that...')
-                                    chosenoption = doublequestion('Well?','Do you like magic?','Is your job that hard?')
+                                    chosenoption = doublequestion('Well?','Do you like magic?','Do you not like your job?')
                                     if chosenoption == 1:
                                         printstuff("His eyes brighten.")
                                         character.talk("A little. Why do you ask?")
                                         character.talk("No, I\'m too tired to talk about that right now...")
-                                        printstuff("His gaze gets a little brigter...")
+                                        #printstuff("His gaze gets a little brigter...")
                       
                                     if chosenoption == 2:
                                         character.talk("Not really.")
@@ -4716,7 +4775,7 @@ Fredrick: Alright, fine.
                             #character.talk('It really felt like it opened doors for me.')
                             #character.talk('But I can\'t remember what it was...')
                             character.talk('...')
-                            character.talk("You know,\\ he probably couldn't have gotten too far from here..")
+                            character.talk("You know, he probably\\couldn't have gotten too far from here..")
                         if 'SPflag2' in moo.properties:
                             character.talk('Our world is ran by two powerful deities.')
                             character.talk('One is a being of creation, the other a being of destruction.')
@@ -4765,7 +4824,7 @@ Fredrick: Alright, fine.
                             character.talk('Man, I wonder if he\'ll come back again...')
                             #gray cloak eats at restaurants for fun
                             character.talk('Huh?\\I-it\'s you...')
-                            character.talk('Wait, no you\'re not.')
+                            character.talk('Wait, nevermind.')
                             character.talk('Anyway, where would you like to sit?')
                             chosenoption = doublequestion('','A table.','Uhh, the bar?')#,'The ground.')
                             if chosenoption == 1:
@@ -4793,14 +4852,14 @@ Fredrick: Alright, fine.
                                 
                             if chosenoption == 2:
                                 character.talk('How old are you?')
-                                character.talk('No, there\'s not a good answer from you...')
+                                character.talk('Actually,\\you aren\'t going to be able\\to give a good answer for that.')
                             #if chosenoption == 3:
                             #    character.talk('You don\'t need to come to\\ a restaurant to do that...')
                         if 'SPflag2' in moo.properties:
                             character.talk('Ah, that sword over there...')
                             character.talk('You know the old legend about\\the three heroes who saved the world?')
                             character.talk('It\'s said that that sword\\belonged to one of them.')
-                            Party.player2.talk("")
+                            Party.player2.talk("!!!")
                             #Party.player2.talk('AAA! AAAAaAaaAAAA!!!')
                             
                         
@@ -4847,17 +4906,17 @@ Fredrick: Alright, fine.
                                     character.talk('That\'ll be $10,000.')
                                     Party.player2.talk('Okay, okay...')
                                     Party.player2.talk('psst, Fredrick...')
-                                    self.talk('I\'m not giving you ten grand.')
+                                    #self.talk('I\'m not giving you ten grand.')
                                     Party.player2.talk('WHAT? No.')
                                     Party.player2.talk('I don\'t need THAT much.')
                                     Party.player2.talk('Just a little over $9,000...')
-                                    self.talk('I don\'t have $9000 for you.')
+                                    #self.talk('I don\'t have $9000 for you.')
                                     Party.player2.talk('Curses. Foiled again.')
                                     Party.player2.talk('I won\'t be making a purchase today, it seems.')
                                     character.talk('Bummer, dude.')
-                                    self.talk('Uh, we were looking for a sword.')
-                                    self.talk('Specifically, some weird salesman\\had the sword we were looking for.')
-                                    self.talk('Do you know the location of either of those?')
+                                    #self.talk('Uh, we were looking for a sword.')
+                                    #self.talk('Specifically, some weird salesman\\had the sword we were looking for.')
+                                    #self.talk('Do you know the location of either of those?')
                                     character.talk('Duuuude.\\That salesbrah is a real pain\\in my behind, man.')
                                     character.talk('He sells all this weird stuff, and it\'s hurting demand for my swords.')
                                     character.talk('I think he\'s heading up to the north now.')
@@ -4931,23 +4990,24 @@ Fredrick: Alright, fine.
                             character.talk('HEY!')
                             character.talk('You look like a human who eats and drinks.')
                             character.talk('Are you a human who eats and drinks?')
-                            
-                            character.talk('If you are,\\then buy my food and drinks!')
+                            character.talk('If you are,\\then buy my food and beverages!')
                             character.talk('It\'s like they were made for you!')
-                            character.talk('Please buy something.')
+                            character.talk('Please.')
                             character.talk('I\'d have more stuff usually.')
                             character.talk('But my supplier raised prices!')
                             character.talk('She did it for NO reason at all!')
-                            character.talk('She literally woke up one day and decided "i want more money"...')
+                            character.talk('She just woke up one day and\\said "I feel like raising prices!"')
+                            #character.talk("Then, she did!")
                             character.talk('What a jerk!')
                             character.talk('Wanting more money is MY thing!')
                             shopmenu(grasstownweaponshop)
                             #if true:
-                            character.talk('Ugh, my supplier...')
-                            character.talk('He put his greedy daughter as head of marketing!')
-                            character.talk('She\'s just another one of those\\ big city businesswomen.')
-                            character.talk('I mean, Easton is the only city nearby,\\so I should say "Easton businesswomen"...')
-                            character.talk('But a price-gouger by any other\\name is still just as annoying.')
+                            character.talk("I really hope you bought something!")
+                            #character.talk('Ugh, my supplier...')
+                            #character.talk('He put his greedy daughter as head of marketing!')
+                            #character.talk('She\'s just another one of those\\ big city businesswomen.')
+                            #character.talk('I mean, Easton is the only city nearby,\\so I should say "Easton businesswomen"...')
+                            #character.talk('But a price-gouger by any other\\name is still just as annoying.')
                             #Northton
                             #Easton
                             #Westley
@@ -4968,7 +5028,7 @@ Fredrick: Alright, fine.
                     if game.currentplace == 'grasstownsmithing.tmx':
                         if 'SPflag1' in moo.properties:
                             character.talk("Incredible...")
-                            character.talk("This is the metal necessary\\ for making impulse weaponry...") #desire?
+                            character.talk("This is the metal necessary\\for desire weaponry...") #desire?
                             character.talk("Don\'t mess this up...")
                                     
                     if game.currentplace == 'grasstownhotel.tmx':
@@ -4979,11 +5039,14 @@ Fredrick: Alright, fine.
                                 character.talk('What?')
                                 character.talk('Are you gonna stay another night?')
                                 character.talk('They don\'t even put a mint on your pillow here, though')
-                                chosenoption = doublequestion('','Why are you a goat?','Wow this place sucks.')
+                                chosenoption = doublequestion('','You\'re such a perfect goat PLEASE smooch me','Wow this place sucks.')
                                 if chosenoption == 1:
                                     #character.talk('Baaa. Baaa.')
                                     character.talk('A goat? What\'s a goat?')
                                     character.talk('I have no idea what you\'re talking about.')
+                                    character.talk("Smooch you...?")
+                                    character.talk("Maybe if you asked me really nicely...")
+                                    character.talk("And i was the correct character.")
                                     #character.talk('But there\'s no one I like around here.')
                                     #character.talk('There was some in my village, which is not far from here...')
                                     character.talk("Anyway, looks like break time just started...")
@@ -5070,7 +5133,7 @@ Fredrick: Alright, fine.
                                 printstuff('Grey gets back in the elevator and leaves.')
                                 char.walk('up',10)
                                 
-                                printstuff("You can either return to your \\hotel room and sleep until tomorrow's \\journey, or go mess around.")
+                                #printstuff("You can either return to your \\hotel room and sleep until tomorrow's \\journey, or go mess around.")
 ##                                    character.walkmode = True
 ##                                    character.followmode = True
 ##                                    character.name = 'Percy'
@@ -5102,6 +5165,8 @@ Fredrick: Alright, fine.
                                     character.talkedbefore = True
                                 elif 'grasstownhotel' in game.gamedata.events:
                                     if not character.talkedbefore:
+                                        printstuff("Should be Lucy here!")
+                                        character.talk("Oh, hello...!")
                                         character.talk("(Ugh, another customer...)")
                                         self.talk('Can I get two rooms, please?')
     ##                                    chosenoption = triplequestion('Don\'t know. That mask of yours didn\'t help.','Why work here if you hate it so much?','Can I *please* get a room?')
@@ -5111,13 +5176,14 @@ Fredrick: Alright, fine.
     ##                                        character.talk('Money.')
     ##                                        character.talk('It\'s the only reason.')
     ##                                    if chosenoption == 3:
-                                        character.talk('Yeah, sure...')
-                                        character.talk('That\'ll be $150...')
-                                        printstuff("Fredrick shows the man his card.")
+                                        character.talk('O-of course!')
+                                        character.talk('That\'ll be $150!')
+                                        printstuff("Fredrick shows the woman his card.")
                                         #self.talk('I have a card.')
                                         character.talk('Well, not anymore..')
-                                        self.talk('But wait...')
-                                        character.talk('Please don\'t do this to me.')
+                                        #self.talk('But wait...')
+                                        #character.talk('Please don\'t do this to me.')
+                                        '''
                                         Party.player2.talk("OOH, what\'s the thing???")
                                         chosenoption = doublequestion('There\'s a speech he has to say...','"It\'s really cool..."','He\'s been through enough.')
                                         if chosenoption == 1:
@@ -5143,14 +5209,17 @@ Fredrick: Alright, fine.
                                             #character.talk("Booo!")
                                             #Party.player2.talk("Now I'm REALLY curious!")
                                             character.talk('Here\'s your key.')
+                                        '''
                                         game.gamedata.events['hasroom'] = True
                                         character.talkedbefore = True
                                         printstuff("Fredrick receives a room key.")
                                         character.talk("Take the elevator to get to your room.")
                                     else:
-                                        if game.gamedata.events["percyHotelMad"]:
+                                        if 'percyHotelMad' in game.gamedata.events:
                                             printstuff("With a certain tiredness in his voice, he says:")
                                         character.talk("The elevator is directly to your right.")
+                                        character.talk("It\'s right there...")
+                                        character.talk("Hee hee hee.")
 
                                 else:
                                     character.talk('(I wish I had enough money to quit.)')
@@ -5324,11 +5393,11 @@ Fredrick: Alright, fine.
                             character.talk('Finally.')
                             character.talk('You have seen the world for how it is.')
                             character.talk("You have seen how people hurt.")
-                            character.talk("You have seen how people rejoice.")
+                            character.talk("You have seen how people love.")
                             character.talk('You have seen the weaknesses people have.')
                             character.talk("You have seen the strengths people have.")
                             character.talk("You saw what it is to be human, and then...")
-                            character.talk('You saw why those two deities were no longer necessary.')
+                            character.talk('You saw why those two deities\\ were no longer necessary.')
                             character.talk('Your path has led you to me.')
                             character.talk('I am the original deity.')
                             printstuff('The being glances towards Gray.')
@@ -5358,9 +5427,11 @@ Fredrick: Alright, fine.
                             character.talk("People may only wish for what is easily achievable, not what may be truly beneficial to their goals.")
                             character.talk("Would Genmu have ever discovered\\that no sword would ever give him the strength \\he wanted had you not shown him otherwise?")
                             character.talk("Would Percy have ever chosen to seek his true calling if you had not guided him?")
+                            character.talk("Would Lucy have ever learned her true desires without your guidance?")
                             character.talk("Would Lucille have ever learned how her actions affect others without your insight?")
+                            character.talk("Would Ram have accepted himself if you didn\'t accept him first?")
                             character.talk('People need someone who will guide them.')
-                            character.talk('Someday, one who is strong would\\ slay those false arbiters of stability.')
+                            character.talk('Someday, one who is strong would\\ rise against those arbiters')
                             character.talk("He would prove that he has exceeded their abilities.")
                             character.talk("That person would show that blindly following one path may not lead to happiness.")
                             character.talk("That knowledge and desire to achieve imbued\\ in that person would make him a hero unlike any other.")
@@ -5609,6 +5680,9 @@ Fredrick: Alright, fine.
             elif key[pygame.K_e]:
                 pass
             elif key[pygame.K_a]:
+
+                global chosenoption
+                #global variable to hold result of options.
                 if Party.player2 != None:
                     z = Party.player2
                     if  z.rect.x <= self.rect.x: #and z.rect.y <= self.rect.y:
@@ -5621,7 +5695,6 @@ Fredrick: Alright, fine.
                         self.orient = 'down'
                 if game.chatready == True:
                     game.chatready = False
-                
                     game.chatholder.chatready = False
                     game.chatholder = None
                 if game.currentplace == 'percydream.tmx':
@@ -5629,7 +5702,7 @@ Fredrick: Alright, fine.
                 if game.currentplace == 'place_of_judgement.tmx':
                     game.GAtalkcounter += 1
                     if game.GAtalkcounter == 1:
-                        printstuff('You have no one to talk to.\\Sad!')
+                        printstuff('You have no one to talk to.')
                     if game.GAtalkcounter == 2:
                         printstuff('Seriously, there is no one to talk to.\\ \\Maybe you should work on that?')
                     if game.GAtalkcounter == 3:
@@ -5646,7 +5719,7 @@ Fredrick: Alright, fine.
                     #    printstuff('Despacito')
                 if game.currentplace == 'grassstage.tmx':
                     if Party.player2 == None:
-                        printstuff('Fredrick has a slight headache.')
+                        printstuff('You have a slight headache.')
                         #printstuff("Fredrick begins to hear a voice.")
                         #printstuff('I shall guide you on your journey.')
                         #printstuff('No matter what you may believe, or choose...')
@@ -5681,12 +5754,12 @@ Fredrick: Alright, fine.
                             Party.player2.talk('I wish I had more arms\\so I could use all of my\\swords at the same time.')
                             #Party.player2.talk('It would .')
                             
-                            self.talk('(Who is this guy???)')
+                            #self.talk('(Who is this guy???)')
                         if chosenoption == 2:
                             Party.player2.talk('Hm?')
                             Party.player2.talk('Then why carry that blade around?')
-                            Party.player2.talk('You could ALWAYS just give it to me...')
-                            Party.player2.talk('I promise it\'ll be in good hands.')
+                            Party.player2.talk('You could just let me hold on to it...')
+                            #Party.player2.talk('I promise it\'ll be in good hands.')
                         Party.player2.talkedbefore = True
                 if game.currentplace == 'grassstage2a.tmx':
                     if Party.player2 == None:
@@ -5710,15 +5783,15 @@ Fredrick: Alright, fine.
                         self.talk('(Maybe I should get to know this guy\\ a little bit better.)')
                         character = Party.player2
                         if game.gamedata.preference == 'logic':
-                            self.talk('Hey, Genmu.')
+                            #self.talk('Hey, Genmu.')
                             Party.player2.talk('What do you want?')
                         if game.gamedata.preference == 'will':
                             self.talk('Hey, Genmu.')
                             Party.player2.talk('What? This better be about swords...')
                             
                         if game.gamedata.preference == 'emotion':
-                            self.talk('Can I ask you something, Genmu?')
-                            Party.player2.talk('Only if it\'s interesting.')
+                            #self.talk('Can I ask you something, Genmu?')
+                            Party.player2.talk('This better be interesting.')
                         chosenoption = triplequestion('What are your hobbies?','What is your deal with swords?','What do you want in a woman?')
                         if chosenoption == 2:
                             game.gamedata.willpoints += 1
@@ -5766,9 +5839,11 @@ Fredrick: Alright, fine.
 ##                                self.talk('Ok..')
 ##                                self.talk('(Easy come, easy go???)')
                         if chosenoption == 1:
-                            character.talk('Swords are a gift from the heavens!\\Also, I am unable to focus\\on anything else!')
+                            character.talk('Swords are a gift from the heavens!')
+                            character.talk("They give me divine strength to defeat my foes!")
+                            character.talk('Also, I am unable to focus\\on anything else!')
                             #character.talk('I am unable to focus on anything else!')
-                            character.talk('I love swords! They\'re neat, and easy to use!')
+                            #character.talk('I love swords! They\'re neat, and easy to use!')
                             
 ##                            character.talk('Hmph.')
 ##                            character.talk('If I am to become the strongest swordsman,\\I will need the strongest sword.')
@@ -5829,6 +5904,7 @@ Fredrick: Alright, fine.
                     elif 'metdog' in game.gamedata.events:
                         Party.player2.talk('Ugh, that salesman! What a pain!')
                         Party.player2.talk("To have to run into him here of all places...")
+                        #Party.player2.talk("Who wo")
                         #Party.player2.talk('I almost hate him as much as I love swords!')
                         #Party.player2.talk('It\'s really close. Unbelievably close.')
                 if game.currentplace == 'grassdungeon4.tmx':
@@ -5845,7 +5921,17 @@ Fredrick: Alright, fine.
                     #Party.player2.talk('He didn\'t give me a sword.')
                 if game.currentplace == 'grassdungeon4a.tmx':
                     Party.player2.talk('Oh, about my backstory...')
-                    doublequestion("", "Who are you, Genmu?", "Where are you from?")
+                    chosenoption =  doublequestion("", "Who are you, Genmu?", "Where are you from?")
+                    g = Party.player2
+                    if chosenoption == 1:
+                        g.talk("I am a swordsman.")
+                        g.talk("Well, actually...")
+                        g.talk("I am THE swordsman.")
+                        #doublequestion("Yes", "I think s")
+                    else:
+                        g.talk("Wherever swords are found.")
+                        g.talk("That is where I can be found.")
+
                     #TODO fill this out.
                 if game.currentplace == 'grassdungeon5.tmx':
                     if game.atalkedbefore == False:
@@ -5855,10 +5941,9 @@ Fredrick: Alright, fine.
                             Party.player2.talk("No other food is acceptable.")
                         else:
                             Party.player2.talk('Sword.')
-                                       
-                        Party.player2.talk('Ah, swords.')
-                        Party.player2.talk('...')
-                        Party.player2.talk('Heh heh. Hahahahaha!')
+                            Party.player2.talk('Ah, swords.')
+                            Party.player2.talk('...')
+                            Party.player2.talk('Heh heh. Hahahahaha!')
                     else:
                         Party.player2.talk('Why are you looking at me like that?')
                 if game.currentplace == 'grassdungeon6.tmx':
@@ -5880,6 +5965,7 @@ Fredrick: Alright, fine.
                         Party.player2.talk('I hate it here.')
                     else:
                         Party.player2.talk('Hate hate hate hate hate hate...')
+
                 if game.currentplace == 'grassdungeon9.tmx':
                     Party.player2.talk('More grass!?!')
                     Party.player2.talk('EAaaaaghhhhh!!!!')
@@ -5888,7 +5974,8 @@ Fredrick: Alright, fine.
                 if game.currentplace == 'grassdungeon10.tmx':
                     Party.player2.talk('Someday, i want to defeat the man in the black cloak.')
                 if game.currentplace == 'grassdungeon11.tmx':
-                    Party.player2.talk('Yes, I am currently a sword collector.')
+                    Party.player2.talk("FUn you bitch.")
+                    #Party.player2.talk('Yes, I am currently a sword collector.')
                 if game.currentplace == 'grassdungeon12.tmx':
                     Party.player2.talk('Ask me a question, Fredrick.')
                 if game.currentplace == 'grassdungeon13.tmx':
@@ -6100,26 +6187,42 @@ Fredrick: Alright, fine.
                     if game.currentplace == 'grassstage4.tmx':
                         game.fadeOut()
                         game.initextras()
+
+                    if game.currentplace == 'grassstage2a.tmx':
+                        Party.player2.talk("SWORD!")
+                        #Party.player2.talk("LOO")
+                        Party.player2.talk("OH MY GOD!")
+                        Party.player2.talk("LOOK! OVER THERE!")
+                        #)
+                        Party.player2.talk("Curses! It was only a reflection.")
+                                           
                     if game.currentplace == 'grassdungeon1.tmx':
-                        Party.player2.talk('UGH!')
+                        Party.player2.talk('GAAH!')
                         Party.player2.talk('I HATE this place!')
+                        Party.player2.talk("Something bad always happens here!")
                         Party.player2.talk('This is where I first met that salesman...')
-                        Party.player2.talk('What a weirdo he was!')
-                        Party.player2.talk('The way he would get around money was horrifying.')
-                        Party.player2.talk('He would get this weird look on his face,\\and pinch the money really tight...')
-                        Party.player2.talk('Then, he would go "WEEEEEUEW!"\\Like a child riding a pig!')
-                        Party.player2.talk('How could someone be so obsessed\\with something that\'s not a sword?')
+                        #Party.player2.talk('What a weirdo he was!')
+                        Party.player2.talk('He acts so STRANGE with money!')
+                        Party.player2.talk('He\'d squeal so... strangely\\after getting paid!')
+                        #Party.player2.talk('Then, he would go "WEEEEEUEW!"\\Like a child riding a pig!')
+                        Party.player2.talk('How could someone debase themselves like that!?')
+                        Party.player2.talk("For something that wasn\'t even a sword...")
                         game.gamedata.events['genmugrassintro'] = True
                         
                     if game.currentplace == 'grassdungeon2.tmx':
                         if 'genmuSawGrass' not in game.gamedata.events:
                             Party.player2.talk("AAAGGH!")
-                            Party.player2.talk("No. No!")
+                            Party.player2.talk("No.")
+                            Party.player2.talk("No!","bigtext")
+                            Party.player2.talk("It\'s all coming back...!")
                             Party.player2.talk("I CAN\'T DO THIS.")
                             printstuff("Genmu starts sweating.")
                             Party.player2.talk("...")
-                            Party.player2.talk("I must... be strong.")
-                            printstuff("Genmu reaffirms himself.")
+                            Party.player2.talk("Hah, just kidding!.")
+                            Party.player2.talk("A legendary hero? Afraid of grass?")
+                            Party.player2.talk("Never!")
+                            #printstuff("Genmu reaffirms himself.")
+                            game.gamedata.events["genmuSawGrass"] = True
                     if game.currentplace == 'grassdungeon4a.tmx':
                         pass                        
 
@@ -6155,9 +6258,9 @@ Fredrick: Alright, fine.
                         if 'event2' in cell.properties and 'after1stdream' not in game.gamedata.events:                    
                             Party.player2.talk("Fredrick?")
                             Party.player2.talk("You don\'t look so good.")
-                            printstuff("Fredrick is still feeling off.")
+                            printstuff("You are still feeling off.")
                             Party.player2.talk("This adventure is starting to\\ weigh on this legendary swordsman.")
-                            Party.player2.talk("And you aren't going to make a very good\\partner like this...")
+                            Party.player2.talk("And a zombie is a very poor sidekick.")
                             Party.player2.talk("We should get back to your village.")
                             game.gamedata.events['grassdungeonround1done'] = True
                             game.gamedata.events['grasstownhotel'] = True                               
@@ -6167,10 +6270,14 @@ Fredrick: Alright, fine.
                                 
                         else:
                             if 'ofredrickencounter' not in game.gamedata.events:                            
-                                printstuff('...')
-                                printstuff('Fredrick is feeling strange.')
-                                game.player.talk("M-my heart...")
-                                Party.player2.talk('NO!\\I swear the grass has something to do with it!')
+                                #printstuff('...')
+                                Party.player2.talk("Ugh!")
+                                Party.player2.talk("What is this... vile feeling?")
+                                printstuff('You feel a strange emptiness wash over you.')
+                                #game.player.talk("M-my heart...")
+                                #printstuff("")
+                                Party.player2.talk('NO!\\I blame the grass!')
+                                Party.player2.talk("But there\'s no grass around here!?")
                                 #Party.player2.talk('AHHHHHHHHHHHH--')
                                 #Party.player2.rect.x -= 20000
                                 game.initextras()
@@ -6180,13 +6287,13 @@ Fredrick: Alright, fine.
                                     if i.name == '???':
                                         char = i                                
                                 char.talk('You...')
-                                printstuff('A familiar voice calls from somewhere.')
+                                printstuff('A familiar voice calls from just out of sight.')
                                 printstuff('You know what you\'re doing isn\'t right.')
-                                char.talk('You\'re one to talk.')
+                                char.talk('Shut up.')
                                 #char.talk('...')
-                                Party.player2.talk("Is someone there? I don't see anything...")
+                                Party.player2.talk("Is someone there? I can\'t see anyone.")
                                 Party.player2.talk('Is something happening, Fredrick???')
-                                printstuff("Fredrick feels nauseous.")
+                                printstuff("You feel off.")
                                 char.talk("Seeing you makes me sick...")
                                 char.talk('And your friend can\'t even see me?')
                                 char.talk('Tch...')
@@ -6214,32 +6321,54 @@ Fredrick: Alright, fine.
                                 #    char.talk('I\'m not wasting any more time.')
                                 #    char.talk('Show me why he picked you.')     
                                 #char.talk("I have to try to take SOMETHING back.")                                                                                           
-                                battle.Battle(Party.player1,[battle.fredrick],[battle.ofredrick],'grass stage',None, (100,100,200),[], 'Original Fredrick Encounter',gamedata)
+                                res = battle.Battle(Party.player1,[battle.fredrick],[battle.ofredrick],'grass stage',None, (100,100,200),[], 'Original Fredrick Encounter',gamedata)
                                 #                                                                  ,'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'FallenWarrior Battle',gamedata)
                                 #("The man pauses for a second, then suddently...")
                                 #char.talk("Urgh.")
-                                char.talk("D-damn it!")
-                                char.talk('W-what happened???')
-                                char.talk('No! Not again! Why?!')
-                                char.talk('...')
-                                char.talk("Damn it...")
+                                if res == 1:
+                                    char.talk("You...")
+                                    char.talk("I hate this!")
+                                    char.talk("I hate everything about this!")
+                                    #char.talk("And most of all?")
+                                    #char.talk("I hate YOU!")
+                                    printstuff("The man slices at Fredrick, and disappears")
+                                else:
+                                    char.talk("AGH!")
+                                    char.talk('W-what happened???')
+                                    char.talk('No! Not again! Why?!')
+                                    char.talk('...')
+                                    char.talk("Damn it...")
                                 #printstuff('The person\'s face suddenly becomes determined.')
                                 #char.talk('Next time...')                                
                                 #char.talk('I\'ll show you who\\I really am next time.')
                                 char.rect.x += 90000
                                 printstuff("As suddenly as he appeared, he vanishes.")
-                                printstuff('A strange emptiness washes over Fredrick...')
+                                #printstuff('A strange emptiness washes over Fredrick...')
                                 Party.bonds.append(pc.OfredrickBond)
-                                for i in Party.bonds:
-                                    if i.name == 'OFredrick' and i.level == 0:
-                                        #i.level += 1
-                                        printstuff('A voice begins speaking into Fredrick\'s mind.')
-                                        printstuff('You, the one whose path leads to the end...',0,1,1)
-                                        printstuff('Let an alternate path guide your through your own.',0,1,1)
                                 printstuff("Something has awakened inside Fredrick...")
+
+                                #Why did i check if the bonds in the bond list
+                                # if i added it one line ago
+
+                                if any(x.name == 'OFredrick' and x.level == 0 for x in Party.bonds):
+                                #for i in Party.bonds:
+                                    #if i.name == 'OFredrick' and i.level == 0:
+                                        #i.level += 1
+                                        #printstuff('A voice begins speaking into Fredrick\'s mind.')
+                                        printstuff('You, the one whose path leads to the end...',0,1,1)
+                                        #printstuff('Let an alternate path guide your through your own.',0,1,1)
                                 printstuff('Fredrick\'s SPmeter activates.')
-                                Party.player2.talk('Were you fighting an invisible person?')
-                                Party.player2.talk('So much for ME being the legendary swordsman here.')
+                                Party.player2.talk("Ugh...")
+                                Party.player2.talk("I couldn\'t breathe.")
+                                Party.player2.talk("It felt like my blood was freezing!")
+                                Party.player2.talk("...")
+                                Party.player2.talk("If a hero's blood COULD freeze...")
+                                #Party.player2.talk("")
+                                #Party.player2.talk("Fortunately, every true hero\'s blood runs cold already")
+                                
+
+                                #Party.player2.talk('Were you fighting an invisible person?')
+                                #Party.player2.talk('So much for ME being the legendary swordsman here.')
                                 game.gamedata.events['ofredrickencounter'] = True                                                                                                                            
                     if game.currentplace == 'grassdungeon20.tmx':
                         Party.player2.talk('Th-that\'s...')                        
@@ -6324,8 +6453,8 @@ Fredrick: Alright, fine.
                             if i.name == 'Warrior':
                                 character = i
 
-                        printstuff("The orb Fredrick has began to glow...")
-                        printstuff("Fredrick presented it to the being.")
+                        printstuff("The orb you have began to glow...")
+                        #printstuff("Fredrick presented it to the being.")
                         #character.talk('Huh. The warrior arrives.')
                         character.talk("rrrrrrRRRRRRRRRRRROOOOOOOOAAAA--")
                         character.talk("!")
@@ -6474,12 +6603,15 @@ Fredrick: Alright, fine.
 ##                        game.fadeOut()
 ##                        screenupdate()
 ##                        self.talk('How did you do that?')
+                        elif cell.properties['event'] == 0:
+                            printstuff("darknyu first encounter")
                         elif cell.properties['event'] == 1:
                             self.setSprite()
-                            screenupdate()                            
+                            screenupdate()        
+                            self.walk("right", 6)                    
                             #game.player.talk('???')
                             game.killtime(0.5)
-                            printstuff("Fredrick feels slightly disoriented.")
+                            printstuff("You feel slightly disoriented.")
                             game.killtime(0.5)
                             game.fadeOut()
                             print('Gray Cloak shows up?')
@@ -6528,7 +6660,7 @@ Fredrick: Alright, fine.
                         character.talk('BARK BARK!')
                         character.walk('right',30,1)
                         game.killtime(1)
-                        printstuff("Fredrick is wondering if\\this will affect him later.")
+                        printstuff("You wonder if\\this will affect you later.")
 ##                        pygame.display.update()
 ##                        for i in game.actors:
 ##                            if i.name == 'Dog':
@@ -6558,84 +6690,56 @@ Fredrick: Alright, fine.
                         character.talk('YOU.')
                         character.talk('You.')
                         character.walk('left',6)
-                        character.talk('Have you seen my swords?')
+                        character.talk('MY SWORDS!')
                         findpreference()
                         preference = gamedata.preference 
-                        printstuff("Fredrick wonders how this\\person will affect him right now.")
-                        character.talk('I was just passing through,\\and I didn\'t feel my swords in my\\sword pouch!')
-                        character.talk('I need those swords for\\my fated battle against\\the man in the black cloak!')    
-                        character.talk('Where could they have gone???')
-                        self.talk('What do they look like?')
-                        character.talk('Oh, my darling swords...')
-                        character.talk('The first one\'s a silver sword\\ with these weird blade markings.')
-                        character.talk('It\'s by far the strongest sword I have.')
-                        character.talk('I stole it from some guy.')
+                        #printstuff("You wonder how this will affect you\\ right now.")
+                        character.talk('They\'re GONE!\\VANISHED!')
+                        character.talk('I need those swords for\\my fated battle against\\the man in the black cloak!')   
+                        #character.talk("Is the UNIVERSE conspiring against me?") 
+                        character.talk("To lose my strongest weapons\\at the critical moment! What tragedy!")
+                        #character.talk("Losing his strongest weapons\\at the final moments! What tragedy!")
+                        #character.talk('Where could they have gone???')
+                        #self.talk('What do they look like?')
+                        character.talk("...")
+                        #character.talk("No, this is only the beginning\\of my hero\'s journey!")
+                        character.talk("But what is a hero\\if he cannot overcome a challenge!")
+                        character.talk("Yes...!")
+                        #character.talk('Oh, my darling swords...')
+                        #character.talk("My favorite one ")
+                        #character.talk('The first one\'s a silver sword\\ with these weird blade markings.')
+                        #character.talk('It\'s by far the strongest sword I have.')
+                        #character.talk('I stole it from some guy.')
                         #character.talk('')
                         hassword = False
                         #any([(i.name == 'Lost Sword' or i.name == 'Sharp Lost Sword')])
                         for i in Party.equipment:
                             if i.name == 'Lost Sword' or i.name == 'Sharp Lost Sword':
-                                hassword = True
-                        if not hassword:
-                                character.talk('And the other one\'s a long, slender, more eastern blade.')
-                                character.talk('Anyway, I put them down somewhere,\\and then they disappeared!')
-                                character.talk('That legendary hero\ \\won\'t even cast me a heroic glance\\ if I show up without a power weapon!')
-                                character.talk('You gotta help me find them!')                              
-                                self.talk('Well, what\'s in it for me if I do?')
-                                character.talk("You get to say you traveled with the hero\\who defeated the Man in the Black Cloak!")
-                                #character.talk('The glory of traveling\\with an ace swordsman...')
-                                self.talk('...')
-                                character.talk('Fate rarely offers deals like that!')                                   
-##                                if game.gamedata.preference == 'logic':
-##                                    self.talk('Maybe I will.')
-##                                    character.talk('Then, maybe I\'l let you keep one of my sword\\ after we\'re done...')
-##                                if game.gamedata.preference == 'emotion':
-##                                    self.talk('Hmm, I don\'t know...\\I barely even know you.')
-##                                    character.talk('Well, you\'re missing out.')
-##                                    character.talk('100% of people who have gotten to\\know me rate me very highly on the \\"amazing swordsman" scale.')
-##                                    character.talk('(100% of 0 is still 100%, right?\\I never was good with numbers...)')
-##                                    self.talk('Maybe I\'ll see what all\\ those people are on about...')
-##                                    character.talk('Maybe you will.')
-                                printstuff('The swordsman has decided to\\travel with you for now...')
-                                #printstuff('Your path has interwined with that of another.')
-                                printstuff('You have been forced into a new bond.')
-                                Party.bonds.append(pc.GenmuBond)
-                                character.walkmode = True
-                                character.followmode = True
-                                Party.player2 = character
-                                for i in Party.bonds:
-                                            if i.name == 'Genmu' and i.level == 1:
-                                            #i.level += 1
-                                                printstuff('A voice begins speaking into Fredrick\'s mind.')
-                                                printstuff('You, the one who carves his own path...',0,1,1)
-                                                printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)                                            
-                                            printstuff("Fredrick's strength increases by 1.")
-                                            Party.player1.attack += 1
-                                printstuff('"A" will let you talk to your friends.')
-                                Party.player2.chatready = True
-                                game.gamedata.events['mettheswordsman'] = True                            
+                                hassword = True                          
                         if hassword:
                             chosenoption = doublequestion('Does this guy need to know about your sword?','It belongs to him.','NoooooOOOOO???')
                             if chosenoption == 1:
                                 gamedata.choices.append('swordreturner')
-                                self.talk('You mean, like this sword?')
-                                printstuff('Fredrick displays his newly found sword\\ to the strange sword person.')
-                                character.talk('MY')
+                                #('You mean, like this sword?')
+                                printstuff('You displays your newly found sword\\ to the strange sword person.')
+                                #character.talk('MY')
                                 printstuff('Sword guy instinctively snatches it away.')
-                                character.talk('My marvelous monster masher...')
-                                character.talk('My supreme snake slicer...')
-                                character.talk('My super useful can opener...')
-                                character.talk('Oh, how I\'ve missed you.')
-                                printstuff('Genmu begins to cry.')                                
+                                character.talk('OH, my beauty!')
+                                character.talk("My darling!")
+                                character.talk('My greatest can opener...')
+                                printstuff('Genmu is getting misty-eyed.')   
+                                character.talk('How long the days without you have felt!')
+
+                             
                                 sharpsword = False
                                 for i in Party.equipment:
                                     # i don't think anyones gonna have more than one instance
                                     # of the sword.
                                     if i.name =='Sharp Lost Sword':
                                         sharpsword = True
-##                                            baa = i
+                                           #baa = i
                                         # i love goats
-##                                    if 'attack+25' in baa.specialproperties:
+                                      #if 'attack+25' in baa.specialproperties:
                                         character.talk('*sniff*, *sniff*')
                                         character.talk('...hey, it\'s sharper than I remember...')
                                         character.talk('Have you been treating her right?')
@@ -6665,7 +6769,7 @@ Fredrick: Alright, fine.
                                             #i.level += 1
                                                 printstuff('A voice begins speaking into Fredrick\'s mind.')
                                                 printstuff('You, the one who carves his own path...',0,1,1)
-                                                printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)                                            
+                                                #printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)                                            
                                             printstuff("Fredrick's strength increases by 1.")
                                             Party.player1.attack += 1
                                         printstuff('"A" will let you talk to your friends.')
@@ -6675,14 +6779,13 @@ Fredrick: Alright, fine.
                                #elif 'swordreturner' not in gamedata.choices and firstsword in Party.equipment:
                                 #    self.talk('deg')
                                 if sharpsword == False:
-                                    character.talk('Oh, how my heart has LONGED for this sword...')
-                                    character.talk('*sniff*,*sniff*')
+                                    character.talk('Oh, I will NEVER leave you again...')
                                     character.talk('...')
                                     self.talk('...')
                                     character.talk('You HAVE to help me find the other one.')
                                     #screw you 
-                                    self.talk('Uh, okay, I guess.')
-                                    character.talk('Great.')
+                                    #self.talk('Uh, okay, I guess.')
+                                    character.talk('Ha HA! Amazing!')
                                     character.talk('NOW! Our adventure BEGINS!')
                                     printstuff('The swordsman has decided \\to tag along with Fredrick\\ until his sword is found.')
                                     Party.player2 = character
@@ -6698,11 +6801,55 @@ Fredrick: Alright, fine.
                                             #i.level += 1
                                             printstuff('A voice begins speaking into Fredrick\'s mind.')
                                             printstuff('You, the one who carves his own path...',0,1,1)
-                                            printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)
+                                            #printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)
                             
                                     printstuff("Fredrick's strength increases by 1.")
                                     Party.player1.attack += 1
-                                    printstuff('"A" will let you talk to your friends.')                                
+                                    printstuff('"A" will let you talk to your friends.')    
+
+                        elif not hassword or chosenoption == 2:
+                            #character.talk('And the other one\'s\\a long, slender samurai sword.')
+                            #character.talk('Anyway, I put them down somewhere,\\and then they disappeared!')
+                            #character.talk('That legendary hero \\won\'t even cast me a heroic glance\\ if I show up without a powerful weapon!')
+                            character.talk("YOU!", "bigtext")
+                            character.talk('You gotta help me find them!')  
+                            character.talk("Please!") 
+                            character.talk("Besides!")                           
+                        # self.talk('Well, what\'s in it for me if I do?')
+                            character.talk("You get to say you traveled with the hero\\who defeated the Man in the Black Cloak!")
+                            #character.talk('The glory of traveling\\with an ace swordsman...')
+                            #self.talk('...')
+                            character.talk('How often do chances like that come along?')
+                            character.talk("Not often! Not often AT ALL!")                                   
+##                                if game.gamedata.preference == 'logic':
+##                                    self.talk('Maybe I will.')
+##                                    character.talk('Then, maybe I\'l let you keep one of my sword\\ after we\'re done...')
+##                                if game.gamedata.preference == 'emotion':
+##                                    self.talk('Hmm, I don\'t know...\\I barely even know you.')
+##                                    character.talk('Well, you\'re missing out.')
+##                                    character.talk('100% of people who have gotten to\\know me rate me very highly on the \\"amazing swordsman" scale.')
+##                                    character.talk('(100% of 0 is still 100%, right?\\I never was good with numbers...)')
+##                                    self.talk('Maybe I\'ll see what all\\ those people are on about...')
+##                                    character.talk('Maybe you will.')
+                            printstuff('The swordsman has decided to\\travel with you for now...')
+                            #printstuff('Your path has interwined with that of another.')
+                            printstuff('You have been forced into a new bond.')
+                            Party.bonds.append(pc.GenmuBond)
+                            character.walkmode = True
+                            character.followmode = True
+                            Party.player2 = character
+                            for i in Party.bonds:
+                                        if i.name == 'Genmu' and i.level == 1:
+                                        #i.level += 1
+                                            # printstuff('A voice begins speaking into Fredrick\'s mind.')
+                                            printstuff('You, the one who carves his own path...',0,1,1)
+                                            #fprintstuff('Let other\'s paths give you the strength to change yours.',0,1,1)                                            
+                                            printstuff("Fredrick's strength increases by 1.")
+                                            Party.player1.attack += 1
+                            printstuff('"A" will let you talk to your friends.')
+                            Party.player2.chatready = True
+                            game.gamedata.events['mettheswordsman'] = True         
+                            '''        
                             elif chosenoption == 2:
                                 self.talk('(He seems like he has plenty of swords...)')
                                 character.talk('And the other one\'s a long, slender blade.\\ It\'s got more of an eastern design to it.')
@@ -6749,6 +6896,7 @@ Fredrick: Alright, fine.
                             #Fredrick finds later.
                             #He really pours his heart out about these two stabby pieces of metal...
 ##                                battle.Battle([battle.fredrick],[battle.Genmu],'grass stage', None, (129,129,254))
+                    '''
                     if 'onetime' in cell.properties:
                         del cell.properties['event']
                     if game.currentplace == 'grasstown.tmx':
@@ -6855,7 +7003,7 @@ Fredrick: Alright, fine.
                             #gray.walk('right',7)                            
                             game.player.orient = 'left'
                             gray.talk('So you DID find him...')
-                            gray.talk('I was worried he might have made things a little difficult.')
+                            gray.talk('I was worried he might\\have made things a little difficult.')
                             gray.talk('Sometimes when a person is teleported,\\they become a little... disoriented.')
                             gray.talk('When I first saw you, you had a distant look\\in your eyes that reminded me of that, but...')
                             gray.talk('I guess that blank stare\\is just how your face looks.')
@@ -6870,9 +7018,26 @@ Fredrick: Alright, fine.
     ##                            gray.talk('I know. It\'s all he talks about...')
     ##                            gray.talk("Why is he so obsessed with them?")
                             gray.talk('During this little sword quest you\'re on...')
-                            gray.talk("If you want to get good with swords, make friends with him.")
-                            gray.talk("He knows a thing or two about swordsmanship.")
-                            gray.talk("If nothing else...")
+                            gray.talk("You could learn how to fight from him.")
+                            gray.talk("Every point he didn\'t put in social skills,\\he put in swords...")
+                            gray.talk("...")
+                            gray.talk("Hey, wait a minute.")
+                            gray.talk("I don\'t think you have any money?")
+                            gray.talk("All these salesmen walking around here...")
+                            gray.talk("Even if you didn\'t have a penny to your name,\\they\'d still find a way to get money from you.")
+                            gray.talk("Here.")
+
+                            printstuff("Gray gave you $20.")
+                            Party.money += 20
+                            gray.talk("Don\'t make it easy for the salesmen.")
+                            gray.talk("Make them put a little work in...")
+                            gray.talk("You\'ll get your money\'s worth that way.")
+
+                            gray.talk("Farewell!")
+                            #gray.talk("")
+
+                            #gray.talk("")
+                            
                             #gray.talk('You should try to figure him out.')
                             #gray.talk('Do you know what he wants?')
                             #gray.talk('I mean, what he wants is no secret\\to anyone within earshot of him, but...')
@@ -6884,14 +7049,18 @@ Fredrick: Alright, fine.
                             
                             #game.killtime(1)
                             game.fadeOut()
+                            gray.rect.x -= 10000        
+
                             game.killtime(1)
                             #animation about open door here?
-                            gray.rect.x -= 10000        
-                            printstuff('Fredrick wonders why the man keeps teleporting.')            
+                            #printstuff('You wonder why the man can\'t\\choose a less disorientating way to travel.')            
                             game.currentfocus = "Player"
                             game.player.walk('right',12)                            
                             Party.player2.talk('This is the one.')
-                            Party.player2.talk('I could cry! If legends did cry.')
+                            Party.player2.talk('I could cry!')
+                            Party.player2.talk('That is, if heroes could cry.')
+                            #Party.player2.talk("If one victory filled, golden tear slips out\\, there ")
+                            Party.player2.talk("Perhaps one golden,\\victory struck tear could slip free...")
                             Party.player2.orient = 'left'
                             Party.player2.talk('Yes, it...')
                             Party.player2.talk('No...')
@@ -6903,15 +7072,17 @@ Fredrick: Alright, fine.
                             Party.player2.talk('A SHAM!','bigtext')                            
                             Party.player2.talk('It\'s so unwieldy!')
                             Party.player2.talk('No wield AT ALL!')
+                            Party.player2.talk("Not even a little!")
                             printstuff('Genmu throws the sword away...')
-                            printstuff('Genmu proceeds to have a mental breakdown.')
+                            #printstuff('Genmu proceeds to have a mental breakdown.')
                             for i in allitems:
                                 if i.name == 'gsword':
                                     i.rect.center = copy.copy(Party.player2.rect.center)
                                     i.rect.centerx += 20000                            
                             Party.player2.talk('Ugh, all this grass, and then THIS!')
+                            Party.player2.talk("Why is our glorious journey\\ so... inglorious?!")
                             Party.player2.talk('It all reeks of that salesman\'s weird planning.')
-                            Party.player2.talk('All this because of a few swords...')
+                            #Party.player2.talk('All this because of a few swords...')
                             Party.player2.talk('I am sorry that I got you involved in this.')
                             chosenoption = doublequestion('','I\'d feel better if I had a sword...','I have nothing to do besides fight things.')
                             if chosenoption == 1:
@@ -6922,18 +7093,18 @@ Fredrick: Alright, fine.
                             #Party.player2.talk('So I can beat him up\\and get my swords!')
                             #Party.player2.talk('Real men solve their problems in person.')
                             #Party.player2.talk('Not by sending their magical\\dog lackeys to beat up my friends.')
-                            game.player.talk('So how are we going to find him?')
+                            #game.player.talk('So how are we going to find him?')
                             Party.player2.talk('Let\'s just wander around until he shows up.')
-                            game.player.talk('I don\'t think that\'s gonna work.')                            
+                            #game.player.talk('I don\'t think that\'s gonna work.')                            
                             Party.player2.talk('That is all I know how to do!')
                             Party.player2.talk('But...!')
-                            Party.player2.talk('If I check the sword...')
+                            Party.player2.talk('That sword...')
                             game.fadeOut()
                             screenupdate()
-                            Party.player2.talk('Some rust has built up on it,\\but not a noticable amount.')
+                            Party.player2.talk('Some rust was built up on it,\\but not a noticable amount.')
                             Party.player2.talk('Perhaps three days worth.')
                             Party.player2.talk('I believe he dropped it on his exit trip...')
-                            Party.player2.talk('He usually passes through the forest about twice per week.')
+                            Party.player2.talk('He usually passes through the\\forest about twice per week.')
                             Party.player2.talk('So, this should be his entry trip.')
                             Party.player2.talk('We should be able to catch him\\if we get through this forest.')
                             Party.player2.talk('...')
@@ -6989,20 +7160,25 @@ Fredrick: Alright, fine.
                         if game.currentplace == 'grassstage.tmx':
                             print('found tile')
                             for i in game.actors:
+                                #game.actors
                                 if i.name == 'Save Guy':
                                     if i.talkedbefore == None:
                                         i.talk('Really? You\'re just going to ignore me?')
                                         
                         if game.currentplace == 'grassstage2a.tmx':
                             if Party.player2:
-                                Party.player2.talk('HEY!\\That\'s not north!')
+                                Party.player2.talk('Hey!')
+                                Party.player2.talk("If you\'re gonna go that direction...")
+                                Party.player2.talk("You should turn left first.")
+                                Party.player2.talk("It will go much better for us!")
                             else:
                                 printstuff('How did you get here this early?')
                         if game.currentplace == 'grassdungeon4b.tmx':
                             if 'after1stdream' not in game.gamedata.events:
                                 if game.var == 1:
                                     Party.player2.talk("Ohh, I REALLY need to find some swords..")
-                                    Party.player2.talk("Fredrick! Stop tempting me!")
+                                    Party.player2.talk("Fredrick! Knock it off!")
+                                    Party.player2.talk("You might keel over if you keep going...")
                                 if game.var == 0:
                                     Party.player2.talk("No, you are NOT in adventuring condition.")
                                     Party.player2.talk("Heh, maybe tomorrow...")
@@ -7153,8 +7329,9 @@ Fredrick: Alright, fine.
             if self.name == 'Fredrick':
                 game.tilemap.set_focus(self.rect.x, self.rect.y)
             game.tilemap.draw(game.screen)
-            pygame.display.update()
             fps.tick(30)
+            pygame.display.update()
+
             #print(self.rect)
         else:
             if self.name != 'Fredrick':
@@ -7243,14 +7420,20 @@ class character(Player):
         dist_from_end = 0
         #print(words)
         fast = None
+        soFast = None
         letters = []
         for y in range(0,maxlist):
                 #for i in letters:
                 #    print(i)
+                if pygame.key.get_pressed()[pygame.K_c]:
+                    soFast = True
+                    fast = True
+                else:
+                    soFast = False
                 for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN and event.key == pygame.K_x:
+                    if event.type == pygame.KEYDOWN and (event.key == pygame.K_x or event.key == pygame.K_c):
                         fast = True
-                    elif event.type == pygame.KEYUP and event.key == pygame.K_x:
+                    elif event.type == pygame.KEYUP and (event.key == pygame.K_x or event.key == pygame.K_c):
                         fast = False
                 #print('Fast?', fast)
                 z = words[y]
@@ -7275,7 +7458,7 @@ class character(Player):
                         lastletter = copy.copy(tro)
                     else:
                         #Magic numbers: tro.x has plus 80 (30 for edges, 50 for speaker pic
-                        tro.center = (copy.copy(text.rect.topleft[0]) + ((y- dist_from_end)*12) + 80 , copy.copy(text.rect.topleft[1]) + (20*newline) + 15)
+                        tro.midleft = (copy.copy(text.rect.topleft[0]) + ((y- dist_from_end)*12) + 80 , copy.copy(text.rect.topleft[1]) + (20*newline) + 15)
                         lastletter = copy.copy(tro)
                 else:
                     tro.left = lastletter.right 
@@ -7336,23 +7519,25 @@ class character(Player):
                     time.sleep(0.5)
                     break
                 if z == '.' or z == '?' or z == '!':
-                    if fast:
+                    if soFast: pass #time.sleep(0.1)
+                    elif fast:
                         #time.sleep(0.25)
                         pass
                     else:
                         time.sleep(0.5)
                 if z == ',':
-                    if fast:
+                    if soFast: time.sleep(0.1)
+                    elif fast:
                         #time.sleep(0.125)
                         pass
                     else:
                         time.sleep(0.25)
                 else:
-                    if fast:
+                    if fast or soFast:
                         pass
                     else:
                         time.sleep(0.03)
-                if not fast:
+                if not fast and not soFast:
                     fps.tick(60)
                 else:
                     #Best kill is overkill
@@ -7362,9 +7547,15 @@ class character(Player):
         revengeoftobias = False
         if sentenceinterrupt:
             revengeoftobias = True
+        keys = pygame.key.get_pressed()
+        checking = pygame.K_c
+        if pygame.key.get_pressed()[pygame.K_c]:
+            revengeoftobias = True
         while not revengeoftobias:
+
+            #pygame.key.get_pressed
             for event in pygame.event.get():
-                if event.type == pygame.KEYUP and event.key == pygame.K_z:
+                if (event.type == pygame.KEYDOWN  and (event.key == pygame.K_c)) or event.type == pygame.KEYUP and event.key == pygame.K_z:
                     revengeoftobias = True                                    
         screenupdate()
 
@@ -7645,6 +7836,7 @@ class character(Player):
             self.image.scroll(0,0)
         if game.counter == 55:
             self.setSprite()
+        
         if game.player.rect.colliderect(self.rect):
             if game.player.rect.bottomleft[1] < self.rect.bottomleft[1]:
                 self.playerbehind = True
@@ -7659,6 +7851,7 @@ class character(Player):
             self.playerbehind = False
             if self in game.coverobjects:
                 game.coverobjects.remove(self)
+        
         if self.chatready:
             game.chatholder = self
             exclamation  = pygame.image.load('sprites/exclamation.png')
@@ -7793,9 +7986,9 @@ def choicebooster():
     if chosenoption == 1:
         game.player.player.Mhealth += 10
         if x == 0:
-            printstuff("Fredrick feels more calm.")
+            printstuff("You feel more calm.")
         if x == 1:
-            printstuff("Fredrick feels more determined.")
+            printstuff("You feel more determined.")
         if x == 2:
             printstuff("A wave of relaxation washes over Fredrick...")
         printstuff("His health increases by 10.")
@@ -7807,11 +8000,11 @@ def choicebooster():
     if chosenoption == 2:
         game.player.player.Mmp += 5
         if x == 0:
-            printstuff("Fredrick feels more focused.")
+            printstuff("You feel more focused.")
         if x == 1:
-            printstuff("Fredrick feels sharper.")
+            printstuff("You feel sharper.")
         if x == 2:
-            printstuff("Fredrick feels a desire to achieve.")
+            printstuff("You feel a desire to achieve.")
         x = random.randint(1,4)
         if x == 3:
             #printstuff('You hear a goat bleating faintly...')
@@ -7854,6 +8047,7 @@ class Game(object):
         self.debug = None
         self.chatholder = None
         self.nosave = False
+        self.actors: tmx.SpriteLayer = None
         
     def killtime(self,seconds):
 ##    '''
@@ -7975,6 +8169,8 @@ class Game(object):
         for i in ('snowplace.tmx','snowplace2.tmx'):
             if self.currentplace == i:
                 Menu.image = pygame.image.load('snowplacemenu.png')
+
+        #Its all spritelayers... every one.
         self.players = tmx.SpriteLayer()
         self.objects = tmx.SpriteLayer()
         self.actors = tmx.SpriteLayer()
@@ -8130,6 +8326,13 @@ class Game(object):
         #print(self.items.sprites(), 'items')
         self.tilemap.layers.append(self.players)
         self.tilemap.set_focus(self.player.rect.x, self.player.rect.y)
+
+
+        #loading here
+        screenupdate()
+        #to let things render
+        screen.fill((0,0,0))
+        time.sleep(0.1)
         
         if game.currentplace == 'grasstownweaponshop.tmx' and 'FirstHomeTownTrip' in game.gamedata.events:
             game.player.talk('So, here it is.')
@@ -8157,17 +8360,18 @@ class Game(object):
 
         if game.currentplace == 'grasstown.tmx':
             if 'genmuswordsearch' in game.gamedata.events:
-                game.player.talk('Don\'t you live somewhere?')
-                Party.player2.talk('Well, I DO have a sword den.')
-                Party.player2.talk('Its location is a secret to everyone.')
-                Party.player2.talk('Even myself...')
+                #game.player.talk('Don\'t you live somewhere?')
                 Party.player2.talk('Is there a hotel or something around here?')
+                Party.player2.talk("My sword den is too far away...")
+                
+                #Party.player2.talk('Perhaps we will stumble upon it another day.')
                 del game.gamedata.events['genmuswordsearch']
                 game.gamedata.events['grasstownhotel'] = True
                 game.gamedata.events['firstswordshop'] = True
                 return
             elif 'percypizza' in game.gamedata.events:
-                game.player.talk('(I\'m hungry...)')
+                #game.player.talk('(I\'m hungry...)')
+                pass
             elif 'tohotel' in game.gamedata.events:
                 Party.player2.talk('What do we do now?')
                 game.player.talk('Wait until tomorrow...')
@@ -8198,6 +8402,7 @@ class Game(object):
             #this aint working
             if 'maginyudone' in game.gamedata.events and 'swordnyudone' not in game.gamedata.events:
                 print('maginyu placed')
+                
                 for i in game.actors:
                     if i.name == 'MagiNyu':
                         i.rect.bottomleft = (736,640)
@@ -8238,7 +8443,6 @@ class Game(object):
             a = a.strip('.tmx')
             a = 'allcut' + a
             print(a,'a')
-            
             if a in game.gamedata.events:
                 for i in allitems:
                     if i.name == 'cutgrass':
@@ -8265,8 +8469,10 @@ class Game(object):
                 game.initextras()
         if game.currentplace == 'grasstownhotel.tmx':
             if 'percypizza' in game.gamedata.events:
-                printstuff("Fredrick is feeling hungry.")
-                printstuff("Fredrick remembers that the pizza place\\ nearby has good lunch specials...")
+                pass
+            #bro wtf is this shit
+                #printstuff("Fredrick is feeling hungry.")
+                #printstuff("Fredrick remembers that the pizza place\\ nearby has good lunch specials...")
                 #game.player.talk('You know, I\'m kinda hungry...')
                 #game.player.talk('Maybe I\'ll get pizza.')
         if game.currentplace == 'grasstownhotelhallway.tmx' and 'after1stdream' in game.gamedata.events:
@@ -8294,6 +8500,8 @@ class Game(object):
                 Party.player2.chatready = True
                 game.gamedata.events['talkedtopercy2'] = True
         for i in allitems:
+            #what does tis do???
+            
             if 'moneyid' in i.tile.properties:
                 x = 'money'
                 y = str(i.tile.properties['moneyid'])
@@ -8416,7 +8624,9 @@ class Game(object):
         printstuff(Name+"...", 1, 1,0,1)
         screen.fill((0,0,0))
         if Name.lower() == 'genmu':
-            printstuff('What are ya talking about?', 1, 1)
+            printstuff('What are ya talking about?', 0,0,1, 1)
+        if Name.lower() == "fredrick":
+            printstuff('Doubt it.',0,0,0,1)
        
         screen.fill((0,0,0))
 ##        for i in ('So, i'):
@@ -8489,23 +8699,26 @@ class Game(object):
         #printstuff((Name+'...'), 1, 1)
         screen.fill((0,0,0))
         screenupdate()
+        funnyGuy = False
         #I'm sure you all are familiar with these words already...
-        if Name.lower() in ['piss','shit','ass','dick','penis','fuck','asshole','bastard','tits','cunt','pussy','alexander hamilton' 
+        for _ in ['piss','shit','ass','dick','penis','fuck','asshole','bastard','tits','cunt','pussy','alexander hamilton' 
                             ,'damn','sans']:
-            printstuff(('You\'re kidding, right?'),1,1,0,1)
-            screen.fill((0,0,0))
-            screenupdate()
+            if _ in Name.lower():
+                funnyGuy = True
+        if funnyGuy:
+            #printstuff(('You\'re kidding, right?'),1,1,0,1)
+            #screen.fill((0,0,0))
+           # screenupdate()
             printstuff(('This will be a long journey\\for us, it seems...'),1,1,0,1)
             screen.fill((0,0,0))
             screenupdate()
         elif Name.lower() == playername:
-            printstuff('I do not think he would be happy with that.',1,1,0,1)
+            printstuff('I suppose that would be best.',1,1,0,1)
             screen.fill((0,0,0))
-
-            printstuff('He is not a representation of yourself.',1,1,0,1)
+            printstuff("However... he has already been given a name.",1,1,0,1)
+            #printstuff('He is not a representation of yourself.',1,1,0,1)
             screen.fill((0,0,0))
-
-            printstuff('It would be wise to remember that...',1,1,0,1)
+            #printstuff('It would be wise to remember that...',1,1,0,1)
             #printstuff('You and him are not the same.')
             #printstuff('He is a tool with which you impart your desires..')
             #printstuff('What he is not is a representation of yourself.')
@@ -8541,7 +8754,7 @@ class Game(object):
         printstuff(('Make sure your answers\\reflect that which you truly desire.'),1,1,0,1)
         screen.fill((0,0,0))
         #screenupdate()
-        printstuff(('It is the only way to achieve\\that which you want most...'),1,1,0,1)
+        #printstuff(('It is the only way to achieve\\that which you want most...'),1,1,0,1)
         self.fadeOut()
         #Where are the questions?
 ##        Name = 'Fredrick'
@@ -8701,8 +8914,8 @@ def mainmenuselect(self):
             Party.keyitems = copy.copy(game.gamedata.keyitems)
             Party.player1 = copy.copy(game.gamedata.player1)
             Party.bonds = copy.copy(game.gamedata.bonds)
-            if destroyer not in Party.items:
-                Party.items.append(destroyer)
+            #if destroyer not in Party.items:
+            #    Party.items.append(destroyer)
 
             #
 ##            game.gamedata.player1 = Party.player1 
@@ -8713,13 +8926,13 @@ def mainmenuselect(self):
             findpreference()
             print('Kewl, you loaded a file')
         intro = False
-        while 1:
+        while True:
+            '''Here is the actual main game loop'''
             dt = clock.tick(30)
             game.dt = dt
             self.counter += 1
             if self.counter >= 61:
                 self.counter = 0
-            #print(self.counter)
             for event in pygame.event.get():
                 print(event)
                 if event.type == pygame.QUIT:
@@ -8734,15 +8947,7 @@ def mainmenuselect(self):
                     self.main()
                 if event.type == pygame.KEYUP and event.key == pygame.K_a:
                     pass
-##                    if game.currentplace == 'grassstage.tmx':
-##                        
-##                        printstuff('You shouldn\'t be able to use that button yet.',0,0,1)
-##                        game.player.talk('Then how did I?')
-##                        printstuff('...',0,0,1)
-##                        printstuff('(He seems annoyed.)')
-####                    if game.place == 'grassstage.tmx':
-####                        printstuff(
-##                    #printstuff('Hint goes here. Maybe.')
+
                 if event.type == pygame.KEYUP and event.key == pygame.K_F1:
                     self.BlackOut()
                     self.initArea('grassstage.tmx')#self.initArea('firstplace.tmx')
@@ -8761,24 +8966,6 @@ def mainmenuselect(self):
                     battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
                     findpreference()
                     print(gamedata.preference)
-##                    print(self.player.player.preference)
-##                    self.player.player.stat_recalculate()
-##                    for i in range(0,20):
-##                        self.backgroundcolor = list(self.backgroundcolor)
-##                        self.backgroundcolor[0] -= i
-##                        if self.backgroundcolor[0] <= 0:
-##                            self.backgroundcolor[0] = 0
-##                        self.backgroundcolor[1] -= i
-##                        if self.backgroundcolor[1] <= 0:
-##                            self.backgroundcolor[1] = 0
-##                        self.backgroundcolor[2] -= i
-##                        if self.backgroundcolor[2] <= 0:
-##                            self.backgroundcolor[2] = 0
-##                        self.backgroundcolor = tuple(self.backgroundcolor)
-##                        print(self.backgroundcolor)
-##                        game.screen.fill(self.backgroundcolor)
-##                        screenupdate()
-##                        pygame.display.update()
                 if event.type == pygame.KEYUP and event.key == pygame.K_F6:
                     game.screenshift = not game.screenshift
                     game.noclip = not game.noclip
@@ -8896,7 +9083,6 @@ def mainmenuselect(self):
                     Party.bonds.append(pc.GrayCloakBond)
                 if event.type == pygame.KEYUP and event.key == pygame.K_e:
                     goat.play()
-
                 if event.type == pygame.KEYUP and event.key == pygame.K_f:
                     pygame.display.set_mode((640,480), pygame.FULLSCREEN)
                 if event.type == pygame.KEYUP and event.key == pygame.K_g:
@@ -8980,14 +9166,11 @@ def mainmenuselect(self):
             elif not game.displaytalking and not game.grassdisplay:
                 pygame.display.set_caption('ThatOneGame')
             for i in game.specialblits:
-                
-                
                 ox, oy = game.actors.position
                 sx, sy = i[1].topleft
                 area = pygame.Rect((0, 0),
                                                                (i[1].width,
                                                                     i[1].height))
-               
                 screen.blit(i[0], (sx-ox, sy-oy), area)
                 if len(i) >= 3:
                     if i[2] == 'onetime':

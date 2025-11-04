@@ -32,9 +32,9 @@ class bond:
             printdummy('Your phone begins to ring.')
             printdummy('Suddenly, it turns off!')
             printdummy('A voice speaks into your head.')
-            printdummy('Don\'t even think about it.')
+            printdummy('If it was important, I\'d know.')
         if self.name == 'OFredrick':
-            printdummy('Your head hurts just thinking about it...',0,0,0,1)
+            printdummy('You don\'t have his number.',0,0,0,1)
         if self.name == 'Percy':
             printdummy('The phone starts to ring.')
             printdummy('...')
@@ -64,8 +64,8 @@ class bond:
                 printdummy('Actually, you are probably exactly the person he needs...',0,0,0,1)
         if self.name == 'Gray':
             if self.level == 1:
-                printdummy('He lazily started you off on your journey.',0,0,0,1)
-                printdummy('It seems he is much more invested\\ in your success than he says.',0,0,0,1)
+                printdummy('He started you off on your journey.',0,0,0,1)
+                printdummy('Though he says otherwise,\\ he\'s usually watching over you.',0,0,0,1)
         if self.name == 'OFredrick':
             if self.level == 0:
                 printdummy("Who is he?",0,0,0,1)
@@ -126,14 +126,15 @@ class item:
         exec(self.effect)
         
    
-Beta_Tester = title('Dude', 'Who is he? ', '', '',  None)
+Beta_Tester = title('Person', 'Who is he? ', '', '',  None)
+Destroyer = title("Destroyer", "Fateful", " ", " ", None)
 Genmu_Default = title('Wandering Swordsman','He is at least a little interested in swords.','Sword attacks are stronger with him present.','',None)
 Percy_Default = title('Sarcastic Mage','He seems to have a lot of ambitions to fulfill.','He somehow enhances your magic?','',None)
 Gface_Default = title('Imitation Original','Do not forget your old friends.','','',None)
 Genmu_Archetype = title('The Innocent','One who pursues happiness above all else.','','',None)
 Percy_Archetype = title('The Explorer','One who journeys to realize','their deepest desires.','',None)
 Fredrick_Archetype = title('The Self','A blank slate.','','',None)
-Gface_Archetype = title('The Shadow','What you REALLY want...','','',None)
+Gface_Archetype = title('The Shadow','Your deepest desires...','','',None)
 
 
 class Player:
