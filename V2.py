@@ -33,6 +33,9 @@ del Genmu
 pygame.init()
 global AllSprites
 AllSprites  = []
+
+global characters
+
 global fps   
 fps = pygame.time.Clock()
 
@@ -43,6 +46,10 @@ footstep = pygame.mixer.Sound('footstep.wav')
 footstep.set_volume(0.5)
 goat = pygame.mixer.Sound('sounds/babygoat.mp3')
 spdooropen = pygame.mixer.Sound('sounds/spdooropen.mp3')
+exclamation  = pygame.image.load('sprites/exclamation.png')
+excrect = exclamation.get_rect()
+
+
 global characters
 characters = pygame.sprite.Group()
 global allitems
@@ -66,7 +73,831 @@ player = None
 class dummypartymember():
     def __init__(self,name):
         self.name = name
+        self.chatready = None
+        self.rect = pygame.rect.Rect(0,0,64,64)
+        self.rect.center = (0,0)
         
+
+class Game(object):
+    def __init__(self, screen):
+        self.screen = screen
+        self.currentplace = None
+        self.areaname = None
+        self.currentmus = None
+        self.backgroundcolor = (0,0,0)
+        self.screenshift = False
+        self.noclip = False
+        self.playercontrol = False
+        self.displaytalking = False
+        self.displaysentence = 'I\'ve got nothing to say to you.'
+        self.atalkedbefore = False
+        self.grassdisplay = False
+        self.currentsentence = ''
+        self.currentletter = 0
+        #lettercounter is 1 so that the title talks immediately.
+        self.lettercounter = 1
+        self.waitcounter = 0
+        self.nextsentence = []
+        self.GAtalkcounter = 0
+        self.counter = 0
+        self.currentfocus = 'Player'
+        self.data = []
+        self.gamedata = None
+        self.currentscene = None
+        self.chatready = None
+        self.specialblits = [] # list of graphics to blit each frame, each having a dependence on a character
+        self.screenblits = [] # list of graphics to blit each frame, independent of characters
+        self.obstacles = []
+        self.filter = None
+        self.var = 0
+        self.genmuaffection = 0
+        self.percyaffection = 0
+        self.debug = None
+        self.chatholder = None
+        self.nosave = False
+        self.actors: tmx.SpriteLayer = None
+        
+
+
+
+        
+    def killtime(self,seconds):
+##    '''
+##    Waste time without freezing everything, like
+##    time.wait()
+##    Updates and draws the game while waiting
+##    for a set amount of seconds
+##    '''
+        clock = pygame.time.Clock()
+        start = time.time()
+        endtime = start + seconds
+        done = False
+        while not done:
+            screenupdate()
+            #self.tilemap.draw(game.screen)
+            #pygame.display.update()
+            clock.tick(30)
+            if time.time() >= endtime:
+                done = True
+    def fadeOut(self):
+        #Animate the screen fading to white for entering a new area
+        # or just because.
+        clock = pygame.time.Clock()
+        whiteRect = pygame.Surface(self.screen.get_size())
+        whiteRect.set_alpha(100)
+        whiteRect.fill((255,255,255))
+        # Continuously draw a transparent white rectangle over the screen
+        # to create a fadeout effect
+        for i in range(0,7):
+            clock.tick(15)
+            self.screen.blit(whiteRect, (0,0))  
+            pygame.display.flip()
+        clock.tick(15)
+        screen.fill((255,255,255,50))
+        pygame.display.flip()
+        
+    def displaytalk(self,words):
+        if game.displaytalking == True:
+            print('added to queue')
+            #print(game.nextsentence,'before')
+            game.nextsentence += [words]
+            #print(game.nextsentence,'after')
+        else:
+            game.displaytalking = True
+            game.displaysentence = words
+    def displaytalkreset(self):
+        game.displaytalking = False
+        game.displaysentence = "I\'ve got nothing to say."
+        game.lettercounter = 1
+        game.currentsentence = ""
+        game.currentletter = 0
+        game.waitcounter = 0
+    def BlackOut(self):
+        #Animate the screen fading to black for entering a new area
+        clock = pygame.time.Clock()
+        blackRect = pygame.Surface(self.screen.get_size())
+        blackRect.set_alpha(100)
+        blackRect.fill((0,0,0))
+        # Continuously draw a transparent black rectangle over the screen
+        # to create a fadeout effect
+        for i in range(0,5):
+            clock.tick(15)
+            self.screen.blit(blackRect, (0,0))  
+            pygame.display.flip()
+        clock.tick(15)
+        screen.fill((0,0,0,50))
+        pygame.display.flip()
+    def SPFade(self,dt):
+        clock = pygame.time.Clock()
+        blackRect = pygame.Surface(self.screen.get_size())
+        blackRect.set_alpha(100)
+        blackRect.fill((0,0,0))
+        # Continuously draw a transparent black rectangle over the screen
+        # to create a fadeout effect
+        for i in range(0,5):
+            clock.tick(15)
+            self.screen.blit(blackRect, (0,0))
+            game.players.draw(game.screen)
+            #if len(game.partymembers.sprites()) >= 0:
+            #    game.partymembers.draw(game.screen)
+            game.actors.draw(game.screen)
+            pygame.display.flip()
+        clock.tick(15)
+        screen.fill((0,0,0,50))
+        pygame.display.flip()
+    def findfocus(self):
+        if game.currentfocus == 'Player':
+            game.tilemap.set_focus(game.player.rect.x,game.player.rect.y)
+        elif type(game.currentfocus) == type([]):
+            game.tilemap.set_focus(game.currentfocus[0],game.currentfocus[1])
+        else:
+            game.tilemap.set_focus(game.player.rect.x,game.player.rect.y)
+        
+    def initArea(self, mapFile, introsp=False, startarea=False):
+        """Load maps and initialize sprite layers for each new area"""
+        game.grassdisplay = False
+        game.atalkedbefore = False
+        game.filter = None
+        game.var = 0
+        global Party
+        global characters
+        global AllSprites
+        Allsprites = []
+        
+        for i in allitems:
+            i.kill()
+        for i in characters:
+            i.kill()
+        print('Characters : ',characters)
+        self.tilemap = tmx.load(mapFile, screen.get_size())
+        self.currentplace = str(mapFile)
+        print(self.currentplace)
+        Menu.image = pygame.image.load('menu.png')
+        for i in ('firstplace.tmx','place_of_decisions','place_of_judgement','itemplace.tmx'):
+            if self.currentplace == i:
+                Menu.image = pygame.image.load('menu.png')
+        for i in ('grassstage.tmx','grassstage2.tmx','riverstart.tmx'):
+            if self.currentplace == i:
+                Menu.image = pygame.image.load('grassstagemenu.png')
+        for i in ('snowplace.tmx','snowplace2.tmx'):
+            if self.currentplace == i:
+                Menu.image = pygame.image.load('snowplacemenu.png')
+
+        #Its all spritelayers... every one.
+        self.players = tmx.SpriteLayer()
+        self.objects = tmx.SpriteLayer()
+        self.actors = tmx.SpriteLayer()
+        self.items = tmx.SpriteLayer()
+        self.spobjects = tmx.SpriteLayer()
+        self.coverobjects = tmx.SpriteLayer()
+        self.partymembers = tmx.SpriteLayer()
+        game.tilemap.layers.append(self.coverobjects)
+        # Initializing other animated sprites
+        try:
+            for cell in self.tilemap.layers['Object Layer 1'].find('src'):
+                SpriteLoop((cell.px,cell.py), cell, self.objects)
+        # In case there is no sprite layer for the current map
+        except KeyError:
+            pass
+        else:
+            self.tilemap.layers.append(self.objects)
+        try:
+            #for cell1 in self.tilemap.layers['Object Layer 1'].find('sprite'):
+             #   
+             for cell1 in self.tilemap.layers['Object Layer 1'].objects:
+                 if cell1.type == 'character':
+                     if 'eventrequirement' in cell1.properties:
+                         if cell1.properties['eventrequirement'] not in gamedata.events:
+                             pass
+                         else:
+                             continue
+                     character((cell1.px, cell1.py), cell1,cell1.properties['orient'], self.actors)                                      
+        except KeyError:
+            print('No characters found.')
+            raise
+            #raise 
+            pass
+        try:
+            for cell2 in self.tilemap.layers['Object Layer 1'].objects:
+                if cell2.type == 'item':
+                    #print('item found')
+                    x = worlditem((cell2.px,cell2.py),cell2,self.items)
+                    if 'noitem' not in cell2.properties:
+                        x.item = eval(cell2.properties['itemid'])
+                    self.items.add(x)
+            self.tilemap.layers.append(self.items)
+        except KeyError:
+            print('No items?')            
+            pass
+        try:
+            for z in self.tilemap.layers['Object Layer 1'].objects:
+                #print(z.type)
+                if z.type == 'spobject':
+                    #print('special object found')
+                    x = spobject((z.px,z.py),z,self.spobjects)
+                    self.spobjects.add(x)
+            self.tilemap.layers.append(self.spobjects)
+        except KeyError:
+            print('No items?')
+            raise
+            pass
+        try:
+            #Levelinfo is an object in each map on object layer 1 that indicates (guess what) level info
+            
+            levelinfo = self.tilemap.layers['Object Layer 1'].find('levelinfo')[0]
+            print(levelinfo)
+            print(levelinfo.properties)
+            game.areaname = levelinfo.properties['areaname']                        
+            if 'music' in levelinfo.properties:
+                #if levelinfo.properties['music'] != game.currentmus:
+                pygame.mixer.music.load(levelinfo.properties['music'])
+                pygame.mixer.music.play()
+                #else:
+                #    pygame.mixer.music.stop()
+                #game.currentmus = levelinfo.properties['music']
+            else:
+                pygame.mixer.music.stop()
+            if 'filter' in levelinfo.properties:
+                game.filter = levelinfo.properties['filter']
+            
+        except:
+            print('No level info found!')
+            raise
+        else:
+            #global characters
+            global AllSprites
+            self.tilemap.layers.append(self.actors)
+            for characterz in self.actors:
+                characters.add(characterz)
+                AllSprites.append(characterz)            
+            for i in self.items:
+                #print(i)
+                allitems.add(i)                    
+        # Initializing player sprite
+        if (startarea or startarea == 0):            
+            #links together certain entry and exit points with this variable
+            #Or just makes special one time entry points
+            #print(self.tilemap.layers['Object Layer 1'].objects, 'objects')
+            for i in self.tilemap.layers['Object Layer 1'].objects:
+                #print('Property check',i.properties['startarea'])                
+                try:
+                    if 'startarea' in i.properties:
+                        print(startarea,'looking for')
+                        print(i.properties['startarea'], 'has')
+                        if i.properties['startarea'] == startarea:
+                            startCell = i
+                except KeyError:
+                    print('Keyerror for startarea linking')
+                    pass                        
+        try:   
+            assert startCell
+        except UnboundLocalError:
+            raise('Player needs a place to start! Don\'t you think that\'s kinda important?') from UnboundLocalError        
+            #startCell = self.tilemap.layers['Object Layer 1'].find('playerstart')[0]
+        #It is out of place, but whatever
+        if len(Party) == 1:
+            Party.player2 = Noone
+            Party.player3 = Noone
+        if len(Party) >= 2:
+            startCell.properties['image'] = 'graycloak.gif'
+            #try:
+##            if gamedata.player2:
+##                Party.player2 = gamedata.player2
+##                try:
+##                    assert Party.player2.name != None
+##                except:
+##                    Party.player2.name == 'Genmu'
+##            #except:
+            #    print('Gameinfo has no player 2, or another error occured.')
+            print(Party.player2.name, 'char name')            
+            if Party.player2.name == 'Genmu' or Party.player2.name == 'Alexander Hamilton':
+                startCell.properties['image'] = 'sprites/genmu.gif'#.image = pygame.image.load('sprites/genmu.gif')
+                startCell.name  = 'Genmu'
+                inheritchar = DefGenmu
+            if Party.player2.name == 'Percy':
+                startCell.properties['image'] = 'sprites/percy.gif'
+                startCell.name = 'Percy'
+                inheritchar = DefPercy
+            player2 = character((startCell.px, startCell.py), startCell,startCell.properties['orient'], self.partymembers)
+            player2.character = inheritchar
+            player2.followmode = True
+
+            Party.player2 = player2
+            self.tilemap.layers.append(self.partymembers)
+            
+        for i in game.tilemap.layers['Object Layer 1'].objects:
+            i.assignobject(game)
+        print(startCell.properties)
+        self.player = Player(Party.player1,(startCell.left, startCell.top),
+                             startCell.properties['orient'],startCell, self.players)
+        if introsp:
+            self.player.rect.center = (320,360) 
+        global player
+        print(player, 'Player?')
+        assert self.player != None
+        player = self.player
+        #print(self.items.sprites(), 'items')
+        self.tilemap.layers.append(self.players)
+        self.tilemap.set_focus(self.player.rect.x, self.player.rect.y)
+
+
+        for i in allitems:
+            #what does tis do???
+            if 'moneyid' in i.tile.properties:
+                x = 'money'
+                y = str(i.tile.properties['moneyid'])
+                x += y
+                if x in game.gamedata.events:
+                    i.tile.properties['opened'] = 1
+                    if i.tile.name == 'safe':
+                        i.image = pygame.image.load('moneychestopen.png')
+            if 'chestid' in i.tile.properties:
+                x = 'chest'
+                y = str(i.tile.properties['chestid'])
+                x += y
+                if x in game.gamedata.events:
+                    i.tile.properties['opened'] = 1
+                    if i.tile.name == 'chest':
+                        i.image = pygame.image.load('chestopen.png')
+
+        game.tilemap.draw(game.screen)
+   
+
+
+
+        '''make sure things that affect the world map are loaded before preload...!'''
+
+        
+        if game.currentplace == 'grasstownweaponshop.tmx' and 'FirstHomeTownTrip' in game.gamedata.events:
+            game.player.talk('So, here it is.')
+            del game.gamedata.events['FirstHomeTownTrip'] 
+            game.gamedata.events['AfterSwordShop'] = True
+        if game.currentplace == 'grasstownweaponshop.tmx' and 'genmubondready' in game.gamedata.events:
+            game.initextras()
+        if game.currentplace == 'grasstownhotelhallway.tmx' and 'after1stdream' in game.gamedata.events:
+            game.killtime(1)
+            printstuff('You are feeling a sense of deja vu.')
+            #back to the forest
+            del game.gamedata.events['hasroom']
+        
+
+        if game.currentplace == 'grassstage2a.tmx':
+            if 'metorbsalesman' in game.gamedata.events:
+                for i in game.spobjects:
+                    if i.name == 'desk':
+                        i.image = pygame.image.load('grassstageshopclosed.png')
+            #if 'grassstageflyer' in game.gamedata.events:
+            #    for i in game.gamedata.events:
+            #        if i.name == 'flyer':
+            #            i.rect.x += 8008132
+            
+
+        if game.currentplace == 'grasstown.tmx':
+            if 'genmuswordsearch' in game.gamedata.events:
+                #game.player.talk('Don\'t you live somewhere?')
+                Party.player2.talk('Is there a hotel or something around here?')
+                Party.player2.talk("My sword den is too far away...")
+                
+                #Party.player2.talk('Perhaps we will stumble upon it another day.')
+                del game.gamedata.events['genmuswordsearch']
+                game.gamedata.events['grasstownhotel'] = True
+                game.gamedata.events['firstswordshop'] = True
+                return
+            elif 'percypizza' in game.gamedata.events:
+                #game.player.talk('(I\'m hungry...)')
+                pass
+            elif 'tohotel' in game.gamedata.events:
+                Party.player2.talk('What do we do now?')
+                game.player.talk('Wait until tomorrow...')
+                Party.player2.talk('But that\'s so LONG!')
+                Party.player2.talk('How will I become a great swordsman\\if I sit around and do nothing?')
+                game.player.talk('You can stay at a hotel till then.')
+                del game.gamedata.events['tohotel']
+                game.gamedata.events['athotel'] = True
+                
+                pass
+        if game.currentplace == 'grassdungeon2.tmx':
+            if 'grassskit1' not in game.gamedata.events:
+                
+                Party.player2.chatready = True
+                game.chatready = True
+                game.gamedata.events['grassskit1'] = True
+        if game.currentplace == 'grassdungeon3.tmx':
+            if 'genmufoundsword' in game.gamedata.events:
+                for i in allitems:
+                    if i.name == 'gsword':
+                        moo = i
+                moo.rect.x += 9999
+            
+        if game.currentplace == 'grassdungeon4.tmx':
+            game.cutgrassnum = 0
+            
+        if game.currentplace == 'grassdungeon5.tmx':
+            #this aint working
+            if 'maginyudone' in game.gamedata.events and 'swordnyudone' not in game.gamedata.events:
+                print('maginyu placed')
+                
+                for i in game.actors:
+                    if i.name == 'MagiNyu':
+                        i.rect.bottomleft = (736,640)
+                    if i.name == 'Nyu':
+                        i.rect.bottomleft = (672,640)
+            elif 'swordnyudone' in game.gamedata.events and 'maginyudone' not in game.gamedata.events:
+                print('swordnyu placed')
+                for i in game.actors:
+                    if i.name == 'Nyu':
+                        i.rect.bottomleft = (736,640)
+                    if i.name == 'SwordNyu':
+                        i.rect.bottomleft = (672,640)
+            elif 'swordnyudone' in game.gamedata.events and 'maginyudone' in game.gamedata.events:
+                print('maginyu and swordnyu placed')
+                for i in game.actors:
+                    if i.name == 'Nyu':
+                        i.rect.bottomleft = (688,640)
+                    if i.name == 'SwordNyu':
+                        i.rect.bottomleft = (736,640)
+                    if i.name == 'MagiNyu':
+                        i.rect.bottomleft = (640,640)
+                    #should characters be responsive and turn to face player?
+        if game.currentplace == 'grassdungeon15.tmx':
+            for i in allitems:
+                if i.name == 'cutgrass':
+                    i.tangible = False
+                    i.specialproperties['cut'] = True
+                    i.image = pygame.image.load('grasscut.png')
+            game.gamedata.events['allcut15'] = True
+        if game.currentplace == 'grassdungeonsecret.tmx':
+            if 'blackcloakready' in game.gamedata.events: 
+                game.initseconds()
+            else:
+                game.initextras()
+        if 'grassdungeon' in game.currentplace:
+            a = copy.copy(game.currentplace)
+            a = a.strip('grassdungeon')
+            a = a.strip('.tmx')
+            a = 'allcut' + a
+            print(a,'a')
+            if a in game.gamedata.events:
+                for i in allitems:
+                    if i.name == 'cutgrass':
+                        i.tangible = False
+                        i.specialproperties['cut'] = True
+                        i.image = pygame.image.load('grasscut.png')
+        if game.currentplace == 'grassdungeon8.tmx':
+            if 'grassskit2' not in game.gamedata.events:
+                Party.player2.chatready = True
+                game.chatready = True
+                game.gamedata.events['grassskit2'] = True
+        if game.currentplace == 'grassdungeon18.tmx':
+            for i in allitems:
+                if i.tile.properties['image'] == 'cutgrasssmall.png':
+                    i.tangible = False
+            game.cutgrassnum = 0
+        if game.currentplace == 'grassdungeon19.tmx':
+            if 'originalencounter' not in game.gamedata.events:
+                Party.player2.chatready = True
+                game.chatready = True
+                game.gamedata.events['originalencounter'] = True
+        if game.currentplace == 'grasstown.tmx':
+            if 'percystart' in game.gamedata.events:
+                game.initextras()
+        if game.currentplace == 'grasstownhotel.tmx':
+            if 'percypizza' in game.gamedata.events:
+                pass
+            #bro wtf is this shit
+                #printstuff("Fredrick is feeling hungry.")
+                #printstuff("Fredrick remembers that the pizza place\\ nearby has good lunch specials...")
+                #game.player.talk('You know, I\'m kinda hungry...')
+                #game.player.talk('Maybe I\'ll get pizza.')
+        if game.currentplace == 'grasstownhotelhallway.tmx' and 'after1stdream' in game.gamedata.events:
+            game.initextras()
+            Party.player2 = DefGenmu
+            printstuff('Genmu has rejoined the party.')
+            printstuff('You and Genmu head back to the forest.')
+            game.initArea('grassdungeon4b.tmx')
+            del game.gamedata.events['after1stdream']
+        if game.currentplace == 'peteza.tmx':
+            if 'percypizza' in game.gamedata.events:
+                for i in game.actors:
+                    if i.name == 'Percy':
+                        char = i
+                char.talk('Hey, Fredrick!')
+                char.talk('I already ordered a pizza.')
+                #that genmu guy...
+                # we should all hang out together!
+                #go pick up some chicks maybe??? Huh???
+                #"He likes swords?", what?
+        if game.currentplace == 'snowplace.tmx':
+            if 'talkedtopercy' in game.gamedata.events and 'talkedtopercy2' not in game.gamedata.events:
+                Party.player2.talk("Just go up from here and then to the right.")
+                Party.player2.talk("That will take you to the foot of the mountain...")
+                Party.player2.chatready = True
+                game.gamedata.events['talkedtopercy2'] = True
+
+        game.tilemap.draw(game.screen)
+
+        
+        screenupdate()
+
+
+    def initcharacter(self, name: str):
+        """inits extra characters from provided name argument. 
+        also returns said character!
+        the function can support multiple characters being instantiated at same time...
+        but only if they have same tiled object name!
+        """
+        spawnCells: list[cell] = self.tilemap.layers['Object Layer 1'].find('sprite1')
+        print(spawnCells)
+        for cell in spawnCells:
+            print(dir(cell))
+            if cell.name.lower() == name.lower():
+                global specialchar
+                specialchar = character((cell.px, cell.py), cell,
+                cell['orient'], self.actors)
+                print(specialchar.name, specialchar)
+                characters.add(specialchar)
+                AllSprites.append(specialchar)
+                return specialchar
+        print("No character initalized in initcharacter function!")
+
+        
+
+
+
+    def initextras(self, everyone=None):
+        '''
+        Used to spawn characters at a certain time.
+        Characters made this way must:
+        1. must have type != character
+        2. have sprite1 in their cell's custom properties.
+
+        Also only works for one character at the time of writing.
+        '''
+        SpawnCell = self.tilemap.layers['Object Layer 1'].find('sprite1')[0]
+        print(SpawnCell)
+        global specialchar
+        specialchar = character((SpawnCell.px, SpawnCell.py), SpawnCell,
+            SpawnCell['orient'], self.actors)
+        print(specialchar.name, specialchar)
+        characters.add(specialchar)
+        AllSprites.append(specialchar)
+    def initseconds(self):
+        '''
+        Inits other special characters
+        (lol plural it only works on one...)
+        '''
+        SpawnCell = self.tilemap.layers['Object Layer 1'].find('sprite2')[0]
+        print(SpawnCell)
+        global specialchar
+        specialchar = character((SpawnCell.px, SpawnCell.py), SpawnCell,
+            SpawnCell['orient'], self.actors)
+        print(specialchar.name, specialchar)
+        characters.add(specialchar)
+        AllSprites.append(specialchar)
+
+    def intro(self):
+        Font = pygame.font.Font('FreeSans.ttf',25)
+        smallfont = pygame.font.Font('FreeSans.ttf',22)
+        self.BlackOut()
+        screen.fill((0,0,0))
+        time.sleep(2)
+        #printstuff('Hmm.', 1,1,0,1)
+        screen.fill((0,0,0))
+        #if game.notfirsttime:
+        #    printstuff('Were you unsatisfied with your outcome?\\It was the one most fitting for you.')
+        
+        #printstuff('It has been a while\\since someone like you has come here.',1,1)
+        screen.fill((0,0,0))
+        printstuff('Before we begin,\\I would like to know your name.',1,1,0,1)
+        name = []
+        done = False
+        shift = False
+        keyboard = smallfont.render('Use the keyboard!',True, (200,200,200),(0,0,0))
+        keyboardrect = keyboard.get_rect()
+        keyboardrect.center = (320,460)
+        while not done:
+            game.screen.blit(keyboard,keyboardrect)
+            print(name)
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT):
+                    shift = True
+                if event.type == pygame.KEYUP:
+                    print(event.key)
+                    if event.key == pygame.K_BACKSPACE:
+                            currentname.fill((0,0,0))
+                            game.screen.blit(currentname, namerect)
+                            if len(name) > 0:
+                                name.pop((len(name)-1))
+                            else:
+                                pass
+                    if event.key == pygame.K_RETURN:
+                        Name = ''
+                        for i in name:
+                            Name += i
+                        done = True
+                    if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
+                        shift = False
+                    for i in ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'):
+                        if len(name) <= 10:
+                            if event.key == ord(i) and shift == True:
+                                k = i.capitalize()
+                                name.append(k)
+                            elif event.key == ord(i) and shift == False:
+                                name.append(i)
+                        
+            moo = ''
+            for i in name:
+                moo += i           
+            currentname = Font.render(moo,True, (255,255,255),(0,0,0))
+            namerect = currentname.get_rect()
+            namerect.center = (320,370)
+            game.screen.blit(currentname,namerect)
+            pygame.display.update()
+            moo = ''
+        screen.fill((0,0,0))
+        Name = Name.lower()
+        playername  = copy.copy(Name)
+        Name = Name.capitalize()       
+        if Name.lower() == 'nothanks':
+            printstuff('Pfff, whatever.', 1, 1,0,1)
+            return
+        printstuff(Name+"...", 1, 1,0,1)
+        screen.fill((0,0,0))
+        if Name.lower() == 'genmu':
+            printstuff('What are ya talking about?', 0,0,1, 1)
+        if Name.lower() == "fredrick":
+            printstuff('Doubt it.',0,0,0,1)
+       
+        screen.fill((0,0,0))
+##        for i in ('So, i'):
+##            'This story is unlike most others.', 'Choices you make will directly affect the story,\in ways both expected and unexpected.',
+##                  'Also, as in real life, once a choice \\has been made, it cannot be undone.\\You can only move forward.',
+##                  'Be cautious, but also trust your heart.', 'That being said...'):
+##            printstuff(i,1,1)
+        screen.fill((0,0,0))
+        
+      
+        self.fadeOut()
+        self.initArea('namingstage.tmx', True)
+        screenupdate()
+        printstuff('See this boy?',1,1)
+        for i in (-160,-200,-160,0):
+            self.player.image.scroll(i,0)
+            self.player.setSprite()
+            time.sleep(0.1)
+            screenupdate()
+        #He blinks.
+        printstuff('Give him a name.',1,1)
+        self.player.emote('sprites/angryfredrick.png')
+        name = []
+        done = False
+        shift = False
+        keyboard = smallfont.render('Again, keyboard.',True, (200,200,200),(0,0,0))
+        keyboardrect = keyboard.get_rect()
+        keyboardrect.center = (120,400)
+        while not done:
+            game.screen.blit(keyboard,keyboardrect)
+            print(name)
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT):
+                    shift = True
+                if event.type == pygame.KEYUP:
+                    print(event.key)
+                    if event.key == pygame.K_BACKSPACE:
+                            currentname.fill((0,0,0))
+                            game.screen.blit(currentname, namerect)
+                            if len(name)  > 0:
+                                name.pop((len(name)-1))
+                            else:
+                                pass
+                    if event.key == pygame.K_RETURN:
+                        Name = ''
+                        for i in name:
+                            Name += i
+                        done = True
+                    if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
+                        shift = False
+                    for i in ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'):
+                        if len(name) <= 10:
+                            if event.key == ord(i) and shift == True:
+                                k = i.capitalize()
+                                name.append(k)
+                            elif event.key == ord(i) and shift == False:
+                                name.append(i)
+            moo = ''
+            for i in name:
+                moo += i           
+            currentname = Font.render(moo,True, (255,255,255),(0,0,0))
+            namerect = currentname.get_rect()
+            namerect.center = (315,300)
+            game.screen.blit(currentname,namerect)
+            pygame.display.update()
+            moo = ''
+        self.player.setSprite()
+        screen.fill((0,0,0))
+        screenupdate()
+        #printstuff((Name+'...'), 1, 1)
+        screen.fill((0,0,0))
+        screenupdate()
+        funnyGuy = False
+        #I'm sure you all are familiar with these words already...
+        for _ in ['piss','shit','ass','dick','penis','fuck','asshole','bastard','tits','cunt','pussy','alexander hamilton' 
+                            ,'damn','sans']:
+            if _ in Name.lower():
+                funnyGuy = True
+        if funnyGuy:
+            #printstuff(('You\'re kidding, right?'),1,1,0,1)
+            #screen.fill((0,0,0))
+           # screenupdate()
+            printstuff(('This will be a long journey\\for us, it seems...'),1,1,0,1)
+            screen.fill((0,0,0))
+            screenupdate()
+        elif Name.lower() == playername:
+            printstuff('I suppose that would be best.',1,1,0,1)
+            screen.fill((0,0,0))
+            printstuff("However... he has already been given a name.",1,1,0,1)
+            #printstuff('He is not a representation of yourself.',1,1,0,1)
+            screen.fill((0,0,0))
+            #printstuff('It would be wise to remember that...',1,1,0,1)
+            #printstuff('You and him are not the same.')
+            #printstuff('He is a tool with which you impart your desires..')
+            #printstuff('What he is not is a representation of yourself.')
+        elif Name.lower() == 'fredrick':
+            printstuff('...',1,1,0,1)
+            printstuff('So, you learned from your mistakes\\and made the right decision.',1,1,0,1)
+            #printstuff('Quite fitting.',1,1)
+            #first time
+            #Seriously? You already know whats going to happen?
+            #R=            
+        else:
+            printstuff((Name+'...'),1,1,0,1)
+            screen.fill((0,0,0))
+            screenupdate()
+            printstuff(('What kind of a name is that?'),1,1,0,1)
+            screen.fill((0,0,0))
+            screenupdate()
+            printstuff(('Unfortunately, his name is already Fredrick.'), 1,1,0,1)
+            screen.fill((0,0,0))
+            screenupdate()
+            self.BlackOut()
+            #printstuff(('Unfortunately, a name is not\\what you have control over...'),1,1)
+            #printstuff((''),1,1)
+            #screenupdate()
+        self.BlackOut()
+        printstuff(('Now, you will decide what kind\\of person the boy will become.'),1,1,0,1)
+        screen.fill((0,0,0))
+        pygame.display.update()
+       # screenupdate()
+        #self.fadeOut()
+        printstuff(('For this, there are some\\choices for you to make.'),1,1,0,1)
+        screen.fill((0,0,0))
+        printstuff(('Make sure your answers\\reflect that which you truly desire.'),1,1,0,1)
+        screen.fill((0,0,0))
+        #screenupdate()
+        #printstuff(('It is the only way to achieve\\that which you want most...'),1,1,0,1)
+        self.fadeOut()
+        #Where are the questions?
+##        Name = 'Fredrick'
+##        moo = ''
+##        for i in name:
+##            moo += i
+##       
+##        currentname = Font.render(moo,True, (255,255,255),(0,0,0))
+##        namerect = currentname.get_rect()
+##        namerect.center = (320,300)
+##        game.screen.blit(currentname,namerect)
+##        pygame.display.update()
+##        moo = ''
+        #time.sleep(1)
+        screen.fill((255,255,255))
+        
+    def main(self):
+        title = pygame.image.load('title.png')
+        titleimage = title.get_rect()
+        self.fadeOut()
+        BLACK = (0,0,0)
+        z = time.time()
+        for I in range(0,60):                                     #8.3 motherfuckers
+            pygame.draw.line(screen, BLACK, (197,479),(197,479 - (I*8.3)))
+            pygame.draw.line(screen, BLACK, (0,110),(0 + (I*11),110))
+            pygame.draw.line(screen, BLACK, (442,0),(442,0 + (I*8.3)))
+            pygame.draw.line(screen, BLACK, (639,190),(639 - (I*11), 190))
+            pygame.display.update()
+            fps.tick(30)
+        #print((time.time()-z), 'josh')
+        #You mean joj?
+        self.fadeOut()
+        screen.fill((255,255,255))
+        time.sleep(0.25)
+        done = False
+        Font = pygame.font.Font('FreeSans.ttf', 25)
+        smallfont = pygame.font.Font('FreeSans.ttf',22)
+        titlepointer = choicepointer((0,0,32,32),'titlepointer.png',0)
+        moo = 0
+        # check for save file before allowing loading.
+        #gamedata.loaddata()
+        mainmenuselect(self)
+
         
 class party:
     def __init__(self, money, items, player1,player2=None,player3=None,player4=None):
@@ -215,6 +1046,7 @@ class dummycharacter:
     '''
     def __init__(self):
         self.name = 'None'
+        self.rect = pygame.rect.Rect(0,0,32,32)
     def askandquestion(self,*args):
         pass
     def walk(self,*args):
@@ -297,10 +1129,10 @@ class equipment(item):
 ##shield = equipment('Shield','items/sacredstick.png','Blocking becomes more effective','Fredric')
 
 destroyer = equipment("Destroyer", 'items/hpbooster.png',"destroyer", "You feel indignant","Destroyer", "Opponents will not resurrect when equipped.", "Stay down!")
-blade = equipment('Blade','items/sacredstick.png','Attack increases by 2 levels.','Equipping the blade is almost like habit for Fredrick.',
+blade = equipment('Blade','items/sacredstick.png','Attack increases by 2 levels.','Equipping the blade is almost like habit for you.',
 [['attack',2]],'A traditional blade.','Not stolen or wooden, so an improvement.')
 ring = equipment('Ring', 'items/sacredstick.png','Boosts magic recharge rate by 50%', 
-'Fredrick is feeling sharper.', 'Boosts magic recharge ability.','Made of gold. No magic engravings, though.')
+'You are feeling sharper.', 'Boosts magic recharge ability.','Made of gold. No magic engravings, though.')
 stick = equipment('Stick','items/stickimage.png','increases attack by one half of a level.\\That\'s all...?',
 'You feel like a kid again.',[['attack',0.5],['luck',4]],'Neither heavy enough to crush things','or sharp enough to slice things.',None,[['luck','+5']])
 firstsword = equipment('Lost Sword','items/sacredstick.png','Increases attack by one level.',
@@ -308,19 +1140,19 @@ firstsword = equipment('Lost Sword','items/sacredstick.png','Increases attack by
 sharpfirstsword = equipment('Sharp Lost Sword','items/sacredstick.png',
 'Increases attack by one and a half levels.\\Swordlovers are fanatic about it.','The sword is looking forward to\\ serving its purpose.',[['attack',1.5]],'Sharpened through the pain of rejection.')
 genmusword = equipment('Genmu\'s Sword','items/genmusword.png','Increases attack by one level,\\and increases luck by two.','Anata no okasan doseiai-sai','Trades a social life for power.')
-sacredstick = equipment('Stick?','items/sacredstick.png','Trust me, it\'s powerful','It\'s shining! WITH POWER!',[['attack',3],['luck',5]],'Oh yes.','You\'re both weird AND lucky.','Excessively so on both ends.')
+sacredstick = equipment('Stick?','items/sacredstick.png','A powerful light envelops it.','You feel a little stronger.',[['attack',3],['luck',5]],'You\'re either lucky','or unemployed.','')
 angelfeather = item('Feather','items/angelfeather.png','consumable','Resurrect when hp = 0 one time.','Incredibly soft. Smells somewhat sweet.','Did it hurt when you fell from heaven?')
 #Items, not equipment, are defined here.
 firstaidkit = item('First Aid Kit', 'items/firstaidimage.png','consumable','Slightly numbs pain and increases wellbeing,\\restoring 50 hp.','target.Chealth += 50', 'Chicks dig scars.','Not that you\'ll have them if you use this.')
 #angelfeather = item('Feather','items/angelfeather.png','consumable','Resurrect when hp is 0 one time.','It\'s soft. Like REALLY soft.',' You could say divinely soft...')
-tonic = item('Tonic', 'items/tonicimage.png', 'consumable',"Refreshes and focuses Fredrick,\\restoring 25 mp.",'target.Cmp += 25', 'Bubbly, yet bland.','Somehow that\'s a mark of quality.')
+tonic = item('Tonic', 'items/tonicimage.png', 'consumable',"Refreshes and focuses you,\\restoring 25 mp.",'target.Cmp += 25', 'Bubbly, yet bland.','Somehow that\'s a mark of quality.')
 #stick = item('Stick', 'items/stickimage.png','equipment',"target.equippedweapon = self", 'Makes a good sword.','Actually, that depends on your definition of "good".','And sword.')
 Hamburger = item('Hamburger','items/hamburgerimage.png','consumable',"0",'What? A burger?')
 strengthbooster = item('StrengthPlus','items/strengthbooster.png','consumable','Raises attack stat by 1. Permanently.','target.attack += 1','It smells like victory.','And sweat.')
 magicbooster = item('MagicPlus','items/magicbooster.png','consumable','Raises magic stat by 1. Permanently.','target.magic += 1','Holding it makes you feel','like overthinking..')
-mpboost = item("MPBoost",'items/mpbooster.png','consumable','Raises Fredrick\'s desire, boosting MP by 5.','target.player.Mmp += 5','Emanates a destructive aura.','Holding it makes Fredrick feel decisive.')
-hpboost = item("HPBoost",'items/hpbooster.png','consumable','Raises Fredrick\'s will, boosting HP by 10.','target.player.Mhp += 5','Emanates an aura of creation.','Holding it makes Fredrick feel steadfast.')
-choiceboost = item("Choice Boost",'items/choicebooster.png','consumable','Allows Fredrick to pursue his preferred path,\\by increasing either his mp or his hp.','choicebooster()','Emanates a gray aura.','Holding it makes Fredrick feel confident in his abilties.')
+mpboost = item("MPBoost",'items/mpbooster.png','consumable','Raises your desire, boosting MP by 5.','target.player.Mmp += 5','Emanates a destructive aura.','Holding it makes you feel decisive.')
+hpboost = item("HPBoost",'items/hpbooster.png','consumable','Raises your will, boosting HP by 10.','target.player.Mhp += 5','Emanates an aura of creation.','Holding it makes you feel steadfast.')
+choiceboost = item("Choice Boost",'items/choicebooster.png','consumable','Allows you to pursue his preferred path,\\by increasing either his mp or his hp.','choicebooster()','Emanates a gray aura.','Holding it makes you feel confident in his abilties.')
 
 ############################
 
@@ -554,7 +1386,8 @@ class menu:
         for i in range(1,17):
                 #print(self.rect.bottomleft, 'V@')
                 self.rect.y = 0 -(i*12)
-                game.tilemap.draw(game.screen)
+                screenupdate()
+                #game.tilemap.draw(game.screen)
                 #print(i, self.rect.y)
                 game.screen.blit(self.image,self.rect)
                 pygame.display.update()
@@ -771,7 +1604,9 @@ class menu:
 
         print('okay')     
         while not done:
+            
             self.update()
+            
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP and (event.key == pygame.K_RETURN or event.key == pygame.K_x):
                     done = True
@@ -962,7 +1797,7 @@ class menu:
         itemset = None
         gesfont = pygame.font.Font('FreeSansBold.ttf',35)
         titlefont = pygame.font.Font('FreeSansBold.ttf', 20)        
-        descfont = pygame.font.Font('FreeSansBold.ttf', 12)
+        descfont = pygame.font.Font('FreeSansBold.ttf', 14)
         font = pygame.font.Font('FreeSans.ttf',15)
         moveselect = False
         while not finished:
@@ -1555,7 +2390,7 @@ class menu:
         # center of pt 2 is 270, 150
         #dont fcuk with the magic numbers for backcolor locations
         if Party.money == 0:
-            mon = "0 (Broke!)"
+            mon = "Broke!"
         else:
             mon = Party.money
         currentgold = goldfont.render(str(mon),True,(0,0,0),(self.image.get_at((175,145))))
@@ -1609,10 +2444,20 @@ def screenupdate():
     Brings the screen back to normal
     It's a lot easier to write a function like this,
     rather than typing game.tilemap.draw() every time.
+
+    unfortunately literally just  copying pasting the 
+    drawing screen part of main loop hrere
     '''
     global game
     game.findfocus()
     game.tilemap.draw(game.screen)
+    if len(game.coverobjects) > 0:
+            game.coverobjects.draw(game.screen)
+            for i in game.coverobjects:
+                if i.characterbehind == True and i.playerbehind == False:
+                    game.players.draw(game.screen)
+                
+            
     if game.filter:
                 if game.filter == 'dim':
                     blackRect = pygame.Surface(game.screen.get_size())
@@ -1620,6 +2465,7 @@ def screenupdate():
                     blackRect.fill((0,0,0))
                     game.screen.blit(blackRect, (0,0))  
                     pygame.display.flip()
+    
     pygame.display.update()
 
 def cleareventqueue():
@@ -1727,7 +2573,7 @@ def printstuff(moo, wait=0, creatormode=False, creatortalking=False,inmenu = Fal
                 cursor.play()
             pygame.display.update()
             currentlist += 1
-            if z == '.' or z == '?' or z == '!':
+            if (z == '.' and y + 1 < len(moo) and moo[y+1] != '.') or z == '?' or z == '!':
                 if fast:
                     time.sleep(0.1)
                 else:
@@ -1760,7 +2606,7 @@ def printstuff(moo, wait=0, creatormode=False, creatortalking=False,inmenu = Fal
                 revengeoftobias = True
     if not inmenu:
         screenupdate()
-    print('finished!')
+    print('finished!', "text was ", moo , ".")
 
 pc.printdummy = printstuff
 
@@ -2153,6 +2999,7 @@ def showtitlecard(titlecard):
     game.killtime(0.1)
 
     print('yes')
+    
 class Player(pygame.sprite.Sprite):
     def __init__(self,player,location, orientation, cell,*groups):
         super(Player, self).__init__(*groups)
@@ -2380,7 +3227,9 @@ Fredrick: Alright, fine.
         self.coords[0] += 1
         self.coords[1] += 2
         print(self.coords, 'coordinates')
-    def getinfo(self, game,dt, cutscene=False):
+    def getinfo(self, game: Game,dt, cutscene=False):
+        self.setSprite()
+        screenupdate
         '''
         Handles inspecting things and talking to people.
         Also start cutscenes and stuff,
@@ -2395,6 +3244,8 @@ Fredrick: Alright, fine.
         this function is bloated 
         also buggy
         we should break over ids for chcking similarities
+
+        man this is bad programming but i wrote it when i was 16
         '''
         d_check = 0
         Not_A_Tile = None
@@ -2424,7 +3275,7 @@ Fredrick: Alright, fine.
         elif self.orient == 'up':
             targetarea = copy.copy(self.coords)
             targetarea = list(targetarea)
-            targetarea[1] -= 2
+            targetarea[1] -= 2 #ye this is fix
             #fixes rounding errors?
             #targetarea[0] -= 1
         elif self.orient == 'down':
@@ -2474,13 +3325,8 @@ Fredrick: Alright, fine.
         #    Sprite_Area[0] -= 32
         for i in allitems:
             zx = copy.copy(Sprite_Area)
-            #print(zx,'zx')
-            Sprite_Area = pygame.rect.Rect(Sprite_Area[0],Sprite_Area[1], 1,1)
-            Sprite_Area.centerx = (zx[0])
-            Sprite_Area.centery = (zx[1])
-            
-            if i.rect.colliderect(Sprite_Area):
-                Not_A_Tile = True
+            if i.rect.collidepoint(Sprite_Area):
+                Not_A_Tile = True #bro this is the worse naming convention ever
                 moo = i.tile
                 moocell = i
                 itemdetected = True
@@ -2500,12 +3346,10 @@ Fredrick: Alright, fine.
                 #print(i.rect.colliderect(Sprite_Area),'Collide')
                 try:
                     if i.rect.colliderect(Sprite_Area):
-                        
                         print(i.rect, Sprite_Area,'Collide')
                         moo = i
                         print('moo',4)
                         if 'orient' not in moo.properties:#only characters have orient
-                            #this bug plagued me for longer than it shoudl have
                             Not_A_Tile = False
                         break
                 except TypeError:
@@ -2624,11 +3468,11 @@ Fredrick: Alright, fine.
                             char.talk('Sheesh, you threw off the\\momentum of my whole day.')
                             char.talk("Ugh, this is gonna ruin the mood,\\but you\'re not gonna be able to get in there yet.")
                             char.talk("It\'s between you and Genmu for some reason...")
-                            char.talk('See you around.')
+                            #char.talk('See you around.')
                             #char.talk('I am unfortunately guaranteed to do so,\\even against my will...')
-                            char.talk("Actually, wait a minute.")
-                            char.talk('I do detect something on you.')
-                            char.talk('You found one of those orbs, huh?')
+                            #char.talk("Actually, wait a minute.")
+                            #char.talk('I do detect something on you.')
+                            char.talk('But, you found one of those orbs, huh?')
                             char.talk('Hmmmmm.')
                             char.talk('These are the place to use those...')
                             char.rect.x += 2000
@@ -2690,7 +3534,7 @@ Fredrick: Alright, fine.
                             if 'hasroom' in game.gamedata.events:
                                 Party.player2.talk('Another eventful day of adventuring.')
                                 Party.player2.talk("Who was that guy you fought earlier?")
-                                printstuff("Fredrick is still wondering about that.")
+                                printstuff("You are still wondering about that.")
                                 #alt response?                                
                                 #Party.player2.talk('Uh.')
                                 if game.genmuaffection >= 1:
@@ -2708,7 +3552,7 @@ Fredrick: Alright, fine.
                                 else:
                                     Party.player2.talk("Well, my faithful companion.")
                                     Party.player2.talk('For now, our journey draws to a close.')
-                                    Party.player2.talk("Until tomorrow,\\when we claim ")
+                                    Party.player2.talk("Until tomorrow,\\when we claim our long-awaited victory!")
                                     #Party.player2.talk("Don\'t miss me TOO much until then.")
                                 
                                 #Party.player2.walkto()
@@ -2738,9 +3582,9 @@ Fredrick: Alright, fine.
                                             x = _
                                     x.talk("It\'s weird being this high up, huh?")
                                     self.talk("That\'s definitely not the weirdest part.")
-                                    x.talk("True.")
+                                    #.talk("True.")
                                     x.talk("To be fair, we left normal behind a long time ago.")
-                                    x.talk("Let\'s get going.")
+                                    #x.talk("Let\'s get going.")
                                     x.activewalk('up',20)                                    
                                     #simultaneous walking?
                                     #game.initArea('grasstownhotelhallway.tmx')
@@ -2808,12 +3652,12 @@ Fredrick: Alright, fine.
                            
                             
                     else:
-                        printstuff('Reading is just so boring...')
+                        printstuff('Imagine reading for fun...')
                     
                 if moo.name == 'flyer' or 'flyer' in moo.properties:
                     
-                        
-                    printstuff(moo.properties['description'])
+                    if 'nodesc' not in moo.properties:
+                        printstuff(moo.properties['description'])
                     if 'friendintro' in moo.properties:
                         if 'readthepaper' not in moo.properties:
                             #printstuff('People have different personalities,\\and thus, different desires.')
@@ -2850,7 +3694,7 @@ Fredrick: Alright, fine.
                         chosenoption = doublequestion('','Our freedom is so close...','OH NO MORE GRASS!!!')
                         if chosenoption == 1:
                             player.talk('Watch this.')
-                            printstuff("Fredrick cut all the grass.")
+                            printstuff("You cut all the grass.")
                             screenupdate()
                             Party.player2.talk('Fredrick...')
                             printstuff('Genmu\s mind has been blown.')
@@ -2872,7 +3716,6 @@ Fredrick: Alright, fine.
                         elif game.cutgrassnum == 0:
                             printstuff('You must cut a path.\\You can undo your mistakes with this page.')
                             #printstuff("Your remaining cuts are located at the top of the screen.")  
-                            
                             game.grassdisplay = True
                         else:
                             chosenoption = doublequestion('Do you wish to reset the grass?','Please...','I can live with my mistakes.')
@@ -2921,6 +3764,7 @@ Fredrick: Alright, fine.
                                         i.tangible = False
                                         i.specialproperties['cut'] = True
                                         i.image = pygame.image.load('grasscut.png')
+
                                 #second time?    
                         if game.currentplace == 'grassdungeon18.tmx':
                             if 'reqgrass' in moo.properties:
@@ -2984,7 +3828,7 @@ Fredrick: Alright, fine.
                                 game.gamedata.events['allcut11.tmx'] = True
                             if game.currentplace == 'grassdungeon12.tmx':
                                 printstuff('How will you do the next puzzle now?')
-                                printstuff('NICE GOING, STUPID.')
+                                #printstuff('NICE GOING, STUPID.')
                                 game.gamedata.events['allcut12'] = True
                             if game.currentplace == 'grassdungon13.tmx':
                                 printstuff('Uh, I guess this will do.')
@@ -3072,21 +3916,22 @@ Fredrick: Alright, fine.
                                 char.talk('BARK BARK BARK BARK!?!?')
                                 char.talk('"The man travelling with you\\has stolen my master\'s sword,\\and he wants it returned.')
                                 Party.player2.talk('He should be proud\\I\'m putting his sword to such good use!')
-                                Party.player2.talk("I\'ll give it back. Probably. Maybe.")
+                                Party.player2.talk("It\'s free advertising! Truly no downsides!")
+                               # Party.player2.talk("I\'ll give it back. Probably. Maybe.")
                                 char.talk('Bark bark...')
-                                char.talk('"You\'re already a thief. Don\'t be a liar."')
+                                #char.talk('"You\'re already a thief. Don\'t be a liar."')
                                 char.talk('"The swordsman is probably resisting,\\so I have been told to use force..."')
                                 
                                 battle.Battle(Party.player1,[battle.fredrick],[battle.magicdog],'grass stage',None,(129,129,254),['Stick','First Aid Kit'],'Magic Dog Encounter',gamedata)
                                 screenupdate()
                                 char.talk('Bark?!?')
-                                Party.player2.talk('Hey, mutt!\\Unless you want to deal with my\\friend again, tell me where your owner went.')
+                                Party.player2.talk('You mutt! Tell me where your owner is!')
                                 char.talk('BARK!?!?')
                                 char.walk('right',30,1)
                                 screenupdate()
                                 printstuff('The dog left a note...')
                                 char.talk('You brute!')
-                                self.talk('...')
+                                #self.talk('...')
                                 #Party.player2.talk(',\\ he would have known:')
                                 #Party.player2.talk("That sword is mine!")
                                 
@@ -3132,10 +3977,10 @@ Fredrick: Alright, fine.
                         moo.item.image = pygame.image.load('chestopen.png')
                         if game.currentplace == 'grassstage.tmx':
                             printstuff("Inside was a strange tablet\\ with mystic writings engraved on it.")
-                            printstuff("As Fredrick\'s eyes look over the tablet, suddenly...!")
+                            printstuff("As your eyes look over the tablet, suddenly...!")
                             choicebooster()
                             printstuff("The tablet disintegrates...")
-                            printstuff("Fredrick is wondering why everything is weird now.")
+                            printstuff("You wonder why everything is weird now.")
                             printstuff("It probably won\'t get normal any time soon...")
 
                         if game.currentplace == "snowmountain4.tmx":
@@ -3160,7 +4005,7 @@ Fredrick: Alright, fine.
                           
                             Party.player2.talk('COME ONNNNNNNNN--')
                             
-                            printstuff('A new, nimbler slicing method\\was made clearer to Fredrick...')
+                            printstuff('A new, nimbler slicing method\\was made clearer to you...')
                             printstuff('Quickslice was added to your zmoves.')
                             Party.zmoves.append(pc.quickslice)
                             
@@ -3211,6 +4056,12 @@ Fredrick: Alright, fine.
                             Party.player2.talk('Hmm.')
                             printstuff('Genmu mispronounces some mystic words...')
                             printstuff('All the grass vanishes.')
+                            #TODO cut all grass here
+                            for i in allitems:
+                                if i.name == 'cutgrass':
+                                    i.tangible = False
+                                    i.specialproperties['cut'] = True
+                                    i.image = pygame.image.load('grasscut.png')
                             allcut = True
                             game.gamedata.events['allcut4'] = True
                         else:
@@ -3234,7 +4085,7 @@ Fredrick: Alright, fine.
                              #printstuff('Are you going to take the sword, or not?')
                              chosenoption = doublequestion('Are you going to take the sword, or not?','Gimme that sword.','Nah...')
                              if chosenoption == 1:
-                                 printstuff('Fredrick finally takes the sword.')
+                                 printstuff('You finally takes the sword.')
                                  printstuff('The sword feels happy...')
                                  gamedata.choices.append('swordreturner')                                 
                                  Party.equipment.append(sharpfirstsword)
@@ -3245,7 +4096,7 @@ Fredrick: Alright, fine.
                                  del moo
                                  return                                 
                              if chosenoption == 2:
-                                 self.talk('Probably shouldn\'t touch it...')
+                                 #self.talk('Probably shouldn\'t touch it...')
                                  printstuff('The sword sinks into despair...')
                              return
                         printstuff(moo.properties['description'])
@@ -3292,7 +4143,7 @@ Fredrick: Alright, fine.
                             game.gamedata.events['grassstageflyer'] = True
                             #printstuff('Fredrick grabs the flyer off the ground.')
                         else:
-                            Party.player2.talk('I don\'t want to read it again.')                                                                                                    
+                            Party.player2.talk('That is so stupid!')                                                                                                    
                 if game.currentplace == 'grassdungeon2.tmx' and 'nodesc' not in moo.properties:
                     findpreference()
                 ##                    printstuff(moo.properties['description'])
@@ -3317,10 +4168,7 @@ Fredrick: Alright, fine.
                         
             for character in characters:
                 #this goes through every character on screen... is that fine?
-                #ALSo why are we matching character init tile with character...!
 
-                #TODO getinfo from characters isn't getting the character object...
-                #its getting the actual character spawner tile!
                 #How to fix?!
 
                 #bug fix... interacting with character spawner tile is trigger interactions which is wrong..!
@@ -3418,10 +4266,11 @@ Fredrick: Alright, fine.
                                         #character.talk('Uh, hi.')
                                         character.talk("What do you want?")
                                         character.talk('I am admiring the scenery...')
+                                        character.talk("The south sea looks so nice from here.")
                                         #character.talk("Also I have no idea who you are.")
                                         character.talk('...')
                                         #character.talk('(He\'s just standing there, staring at me.)')
-                                        character.talk('(Wait, maybe he\'s the person\\I was told about...)')
+                                        character.talk('(Wait, maybe he\'s the one...)')
                                         character.talk('So, ya gonna let me do my thing, or...?')
                                         chosenoption = triplequestion('Nah...','Go for it.','What?')
                                         character.talkedbefore = True
@@ -3494,7 +4343,7 @@ Fredrick: Alright, fine.
                                     printstuff("The man pulls something from somewhere...")
                                     character.talk("Drink this.")
                                     Party.player2.talk('Ah, to quench my heroic thirst\\after cutting all that grass')
-                                    printstuff("Genmu and Fredrick consume the drink.")
+                                    printstuff("You and Genmu consume the drink.")
                                     game.player.player.Chealth = copy.copy(game.player.player.Mhealth)
                                     game.player.player.Cmp = copy.copy(game.player.player.Mmp)
                                     printstuff('The drink tastes sweet, but only a little.')
@@ -3619,244 +4468,16 @@ Fredrick: Alright, fine.
                             res = battle.Battle(Party.player1,[battle.fredrick],[battle.darknyu],
                             'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle',gamedata)
                             if res == 1:
-                                character.talk('Boo! I\'m leaving.')
+                                #character.talk('Boo! I\'m leaving.')
                                 character.talk("I'm gonna find a sword and get you!")
                             else:
                                 character.talk("You meanie! I was supposed to win! Not you!")
                                 character.talk("The hero is always supposed to win!")
                                 printstuff("The creature has sworn an oath against you.")
                             character.rect.x += 9999                          
-                        if'SPflag1' in moo.properties:                                                       
-                            #Why did you leave that sword?
-                            #Do you know what i went through to get it?
-                            #character.talk('Well, it\'s more like\\I summoned you here, but.')
-                            #self.walk('rigth')
-
-                            #Yes we are rewriting this again.
-
-                            if "secondtime" in game.gamedata.events:
-                                character.talk("Back again...?")
-                                character.talk("I didn\'t like how that went, either.")
-                                printstuff("Gray smirks knowingly at you.")
-                                #character.talk("Fredrick...")
-                                character.talk("It's rude to pretend you don't know me.")
-                                character.talk('...')
-                                character.talk("After going through all that,\\you\'re still acting the fool?")
-                                character.talk("I thought you'd be more excited\\to get back to your ladyfriend...")
-                            character.talk("Well, well.")
-                            character.talk("Glad you could make it.")
-                            #character.talk('I hate to interrupt your VERY BUSY life.')
-                            #character.talk("That consists solely of video games and\\ haunting the shopping plaza with your friends.")
-                            #character.talk("But. ")
-
-                            #character.talk('But don\'t worry; you\'ll get back to\\your dorky school friends soon enough.')                            
-                            #self.talk('Wait!')
-                            #character.talk('What?')
-                            chosenoption = triplequestion('Who are you?','Where am I?','What\'s going on?')
-                            if chosenoption == 1:
-                                gamedata.logicpoints += 1
-                                character.talk('Who am I?')
-                                character.talk('Someday, if things either go really really right\\or really really wrong, you\'ll ' \
-                                'find out.')
-                                character.talk('...')
-                                character.talk('They usually call me "Gray".')
-                                character.nameless = False
-                                character.name = 'Gray'
-                                character.talk('I am "in charge" of your world.')
-                                character.talk('You are about to begin a journey;\\My job is to make sure you finish it.\\Because you might not.')
-                                character.talk('So, now we begin.')
-                                #self.talk('Wait, I don\'t even know what\'s going on--')
-                                #character.talk('You will after this.')
-                                #self.talk('I\'m as ready as I\'ll ever be.')
-                                #character.talk('That\'s not true.\\You\'ll be more ready after this.')
-                                game.SPFade(game.dt)
-                                battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)                                                                                                               
-                                    
-                            elif chosenoption == 2:
-                                gamedata.emotionpoints += 1
-                                character.talk('This place is known as the "Gray Area".')
-                                character.talk('It is a place hidden within your world.')
-                                character.talk('People like me keep your world going from here.')                               
-                                #character.talk('It is functionally the heart of your world.')                                
-                                #self.talk('Cool.')
-                                #character.talk("Yeah, you could say that, I guess.")
-                                #character.talk('That is one way to look at it...')
-                                #character.talk('I am one of a select few\\who have control over this place.')
-                                character.talk('Thus, I have called you here to \\start you off on your journey.')                                                                
-                                game.SPFade(game.dt)
-                                battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
-                            elif chosenoption == 3:
-                                gamedata.willpoints += 1
-                                character.talk('A being which I have\\defeated before has returned.')
-                                character.talk('Of course, \\you are the one who must defeat him.')
-                                #self.talk('Why me?')
-
-                                character.talk('Unfortunately, you\'re "special".')
-                                character.talk('Hopefully.')
-                                
-                                #character.talk('You really think I\'d just\\grab some random kid off the street for this?')
-                                #character.talk('I mean,\\we will find out if you aren\'t very quickly.')                                        
-                                #character.talk('Look, we don\'t have all day. Let\'s begin.')                                
-                                game.SPFade(game.dt)
-                                battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
-                            
-                            #Rewrite for difficulty from here for cockiness?
-                            
-                            ##                            for i in gamedata.data:
-                            ##                                if 'GCSkill' in i.keys():
-                            ##                                    x = i['GCSkill']
-                            ##                            assert x != None
-                            ##                            ##print(x,'Difficulty result')
-                            x = 1
-                            #TODO why is this crashing.
-                            x = gamedata.GCSkill            
-                            findpreference()
-                            ##print(x,'battle difficulty result')
-                            preference = gamedata.preference
-                            #bro i'm not writing everything 9 times.
-                            if  x == 2:
-                                if preference == 'logic':
-                                    pass
-                                    #self.talk('Was that supposed to be a challenge?')
-                                    #character.talk('Ah, a very humble hero indeed.')
-                                elif preference == 'emotion':
-                                    character.talk('Very adequate.')
-                                elif preference == 'will':
-                                    #self.talk('I think I\'m ready.')
-                                    #character.talk('Yes, I think so, too.')
-                                    character.talk('Have you done this before?')
-                                
-
-                                
-                            elif x == 1:
-                                if game.gamedata.preference == 'logic':
-                                    #self.talk('Guess I did alright.')
-                                    character.talk('Just "alright" is how I would describe that.')
-                                if game.gamedata.preference == 'emotion':
-                                    character.talk('Well, I guess that\'s good enough for now.')
-                                    #self.talk('So, does that mean I did well, or...?')
-                                    #character.talk('You did as well as I thought you would do.')
-                                    #self.talk('Which is?')
-                                    #character.talk('Eh, whatever.')
-                                    
-                                if game.gamedata.preference == 'will':
-                                    print('whatever')
-                            elif x == 0:
-                                character.talk('Heh. Uh...')
-                                character.talk('You\'ll get better eventually.')
-                                #self.talk('(Yikes.)')
-                                character.talk('Maybe...')
-                                #self.talk('(Was I really THAT bad?')
-                                #character.talk("(Man, he was really bad.)")
-                            elif x == 'ded':
-                                character.talk('Please tell me you did that poorly on purpose.')
-                            character.talk('Anyway, that\'s it.')
-                            character.talk('You are now hopefully passable at fighting.')
-                            
-                            if game.gamedata.preference == 'logic':
-                                self.talk('(Certainly took long enough...)')
-                            
-                                
-
-                            
-                        #                            character.talk('Like this.')
-                            character.talk('One last thing, though...')
-                            character.talk('In order for you to\\defeat that old enemy of mine,\\you must become stronger.')
-                            character.talk('To help gain that strength, you must master\\one of the scariest things people can offer...')
-                            character.talk('Relationships.')
-                            #self.talk('Friendship? How does that help me kill things?')
-                            #character.talk('Ugh, just listen...')
-                            #character.talk('I must unfortunately offer you an example.')
-                            #printstuff('You have established a bond\\with the Man in the Gray Cloak.')
-                            Party.bonds.append(pc.GrayCloakBond)
-                            for i in Party.bonds:
-                                if i.name == 'Gray' and i.level == 1:
-                                    #i.level += 1
-                                    printstuff('A voice begins speaking into Fredrick\'s mind.')
-                                    printstuff('You, the one whose path leads to the end...',0,1,1)
-                                    #printstuff('Let other\'s paths guide you to your own.',0,1,1)
-                                    break
-                                    
-                            printstuff('Gray has shared some of his power with Fredrick.')
-                            printstuff('Fredrick learned the magic spell, Beam.\\Beam was equipped and added to your Xmoves.')
-                            #printstuff('Your current Xmove has also become beam.')
-                            Party.xmoves.append(pc.laser)
-                            game.player.xmove = pc.laser
-                            Party.player1.xattack = pc.laser
-                            printstuff('Your relationship with a person\\is shown through a bond,\\viewable in the world menu.')
-                            
-                            character.talk('For better or for worse,\\ you and I are now connected.')
-                            character.talk('...')
-                            self.talk('...')
-                            character.talk('Once you make a bond, you can strengthen it.')
-                            character.talk('This happens when that person trusts you.')
-                            character.talk('Strengthening bonds\\can give you unrivaled benefits.')
-                            character.talk('Try to make as many friends as you can.')
-                            #character.talk('Well, actually, you should make the\\maximum number of friends possible.')
-                            character.talk('Now, back to the task at hand...')
-                            
-                            #character.talk('In order for you to reach that enemy of mine,\\you must find my two partners.')
-                            #character.talk('They wear cloaks similar to mine,\\and are as unusual as I am.')
-                            #character.talk('It also seems that they have become\\something of a legend in your world.')
-                            #character.talk('Their locations are unfortunately\\unknown to me-- finding them falls on you.')
-                            character.talk('When you return to your world,\\you will meet a swordsman.')
-                            character.talk('Not only is he more powerful\\than his personality will imply, but...')
-                            character.talk('He seems to have some awareness\\of one of my friend\'s location.')
-                            character.talk('It is important that you get to know him.')
-                            character.talk('Normally, I\'d let you ask questions,\\but, you know...')# our precious time is dwindling.')
-                            #questions here on second playthrough?
-                ##                            if game.gamedata.preference == 'emotion':
-                ##                                self.talk('No, not really...')
-                ##                                character.talk('Are you sure about that?')
-                ##                            if game.gamedata.preference == 'logic':
-                ##                                self.talk('Seems like it.')
-                ##                            if game.gamedata.preference == 'will':
-                ##                                self.talk('That\'s what you\'ve been telling\\me the whole time.')
-                ##                                character.talk('Touche.')
-                            
-                            character.animation('armraise.png',35,5,500,dt)
-                            game.fadeOut()
-                            
-                            character.setSprite()
-                            self.rect.y += 10000 #Yep
-
-                            game.killtime(2)
-                            
-                            lastspot = (player.rect.x,player.rect.y)#copy.copy(game.currentfocus)
-                            done = False
-                            theleaderofthebunch = 0
-                            clock = pygame.time.Clock()
-
-                            while not done:
-                                theleaderofthebunch += 1
-                                center = [character.rect.x,character.rect.y]#[(lastspot[0] + character.rect.x)/2,(lastspot[1] + character.rect.y)/2]
-                                centerdiff = [(center[0] - lastspot[0])/30,(center[1] - lastspot[1])/30]
-                                #why crash it helps
-                                game.currentfocus = [lastspot[0] + (centerdiff[0]*theleaderofthebunch),lastspot[1] + (centerdiff[1]*theleaderofthebunch)]
-                                screenupdate()
-                                clock.tick(30)
-                                if theleaderofthebunch == 30: #DK
-                                    done = True
-                            #character.talk("It\'s really all beginning again.")
-                            #character.talk('Hard to believe its finally here.')
-                            #character.talk('It really is beginning again.')
-                            character.talk('I hope he\'s strong enough.')
-                            #character.talk('He wasn\'t before, but...')
-                            #character.talk('No, I shouldn\'t talk like that.')
-
-                            game.BlackOut()
-                            game.initArea('grassstage.tmx')
-                            game.currentfocus = "player"
-                            game.killtime(1)
-                            self.rect.y += 10000 
-
-                            screenupdate()
-
-                            printstuff("Pressing A will sometimes yield\\ valuable information.")
-                            #why does screen glitch out if this next killtime is not active?
-                            printstuff("You must now press the A button.")
-                            
-                            return
+                        if'SPflag1' in moo.properties:   
+                            pass                                                    
+                        
                         
 
                             
@@ -3922,7 +4543,7 @@ Fredrick: Alright, fine.
                                 #Party.player2.talk("If so!")
                                 Party.player2.talk("Where are MY BABIES???")
                                 #self.talk('Hey, is this you?')
-                                printstuff('Fredrick shows the salesman the flyer.')
+                                printstuff('You show the salesman the flyer.')
                                 character.talk('Hey, woah woah WOAH! That\'s not me.')
                                 character.talk("And what are you talking about???")
                                 character.talk('"Fate\'s salesman?" Ugh...')
@@ -3980,7 +4601,7 @@ Fredrick: Alright, fine.
                                     character.talk('What store? I like to stand here\\ and get people\'s hopes up all day.')
                                     #.talk('Are you serious?')
                                     #character.talk('Do I look serious?\\ I should, because I am.')
-                                    character.talk('Well, here\'s something to cheer you up, anyway.')
+                                    character.talk('Well, here\'s something to cheer you up,\\anyway.')
                                     printstuff('The man shoves a strange orb at you.')
                                     Party.keyitems.append(firstorb)
                                 character.talkedbefore = True
@@ -4016,7 +4637,7 @@ Fredrick: Alright, fine.
                             #character.talk('Hello. Any chance you have an orb?')
                             #self.talk('Well, i--')
                             hasorb = False
-                            if any(i.name == "Orb?" for x in Party.keyitems) :
+                            if any(x.name == "Orb?" for x in Party.keyitems) :
                                 hasorb = True
                             #for i in Party.keyitems:
                             #    if i.name == 'Orb?':
@@ -4027,7 +4648,7 @@ Fredrick: Alright, fine.
 
                             elif hasorb:
                                 character.talk('Hold it...')
-                                character.talk('Ah ha. Looks like we\'ve got a winner.')
+                                character.talk('Ah ha. Looks like you\'ve got somethin\'.')
                                 chosenoption = doublequestion('','What is with the cloak?','Who are you?')
                                 if chosenoption == 1:
                                     character.talk("Oh, it\'s special. Magical, even.")
@@ -4072,7 +4693,7 @@ Fredrick: Alright, fine.
                                     character.talk("That orb you have contains certain powers that only I can handle.")
                                     character.talk('If you let me see it, I will crack it open for you.')
                                     character.talk("I\'d ask you if you\'d agree, but you actually have no reason to say no.")
-                                printstuff('Fredrick learned an SPmove.')
+                                printstuff('You learned an SPmove.')
                                 
                                         
 ##                                        character.talk('They will let you enter places\\where you can fight to find greater power.')
@@ -4109,8 +4730,9 @@ Fredrick: Alright, fine.
                                 #man i dont want even more pathing.
                                 character.talk('And you like magic?')
                                 character.talk('Why?')
-                                character.talk("Attacking people from far away is so... weird!")
-                                character.talk("I will show you why you\'re wrong.")
+                                character.talk("Attacking people from far away is so... cowardly!")
+                                
+                                #character.talk("I will show you why you\'re wrong.")
                                 battle.Battle(Party.player1,[battle.fredrick],[battle.swordnyu],'grass stage',None,(89,89,204),[firstorb],'SwordNyu Battle',gamedata)
                                 character.talk('...')
                                 character.talk('I HATE mages...')
@@ -4129,7 +4751,7 @@ Fredrick: Alright, fine.
                                     Party.player2.talk('Heh heh heh.')
                                     Party.player2.talk('There\'s just one rule...')
                                     character.talk('Fight every swordwielder in sight?')
-                                    Party.player2.talk('Ooh! Someone has been studying!.')
+                                    Party.player2.talk('Ooh! Someone has been studying!')
                                     character.talk('ATTACK!')
                                     
                                     battle.Battle(Party.player1,[battle.fredrick],[battle.swordnyu],'grass stage',None,(89,89,204),[firstorb],'SwordNyu Battle',gamedata)
@@ -4181,7 +4803,7 @@ Fredrick: Alright, fine.
                                     character.walk('right',3)
                                     character.orient = 'left'
                                     character.talk('Abra cada--')
-                                    printstuff('The creature throws a book at fredrick.')
+                                    printstuff('The creature throws a book at you.')
                                     character.talk('Read a book!')
                                     self.talk('ow...')
                                     printstuff('The book is titled "Fire flingin\' for freakin\' fricks".')
@@ -4230,7 +4852,7 @@ Fredrick: Alright, fine.
                                     Party.player2.talk('Yes they are.')
                                     character.talk('NO. They\'re NOT.')
                                     Party.player2.talk('Hmm. Maybe you may have a point...')
-                                    Party.player2.talk('\\Ha! I lied! Like a rug!Magic is stupid!')
+                                    Party.player2.talk('Ha! I lied! Like a rug! Magic is stupid!')
                                     
                                     character.talk('...')
                                     character.talk('RRRRRAAAAWWWWWRRRRRRR!!!')
@@ -4244,10 +4866,10 @@ Fredrick: Alright, fine.
                                     character.walk('right',20)        
                                     Party.player2.talk("Well.")
                                     #Party.player2.talk("If only she had the right opinion about swords...")
-                                    Party.player2.talk("Gaze upon the pathetic state of the sword denier.")
+                                    Party.player2.talk("Gaze upon the pathetic\\state of the sword denier.")
                                     Party.player2.talk("What tragedy...!")
                                     Party.player2.talk("My heart would weep for her.")
-                                    Party.player2.talk("If only she had the right opinion!")
+                                    #Party.player2.talk("If only she had the right opinion!")
                                     #Party.player2.talk("She might\'ve won.")
                                     #Party.player2.talk("If only she knew of \\the glory of swordsmanship.")                                                                                                
                             
@@ -4498,7 +5120,17 @@ Fredrick: Alright, fine.
                                 else:
                                     character.talk('You would really ignore the grass?')
                                     character.talk('You have come this far...\\Finish the job.')
-                                    character.talk('Please?')                                                                                                                                                                                                                                                                                                                                                                                
+                                    character.talk('Please?')       
+                    if game.currentplace == 'grassdungeon19.tmx':
+
+                        if moo.name == "MagiNyu":
+                            character.talk("Fack!")
+                            #game.initcharacter("gray")
+                        if moo.name == "Nyu":
+                            character.talk("Yay! You saved my friends!")
+                            character.talk("And only one of them thinks you\'re mean!")         
+                        if moo.name == "SwordNyu":
+                            character.talk("It will be hard for us to\\play together with you\\injured.")                                                                                                                                                                                                                                                                                                                                                               
                     if game.currentplace == 'grassdungeon20.tmx':
                         if 'SPflag1' in moo.properties:
 
@@ -4512,12 +5144,12 @@ Fredrick: Alright, fine.
                             #genmu fails at hiding
                             character.talk('You aren\'t slick, swordsman. I can see you.')
                             Party.player2.talk('No you can\'t!\\I\'m GREAT at hiding.')
-                            character.talk('I guess it was just the wind, then...')
+                            character.talk('Huh. Must have been the wind...')
                             character.talk('Well. Back to business.')
-                            character.talk("You\'re a young man... Swords are probably up your alley.")
-                            character.talk('I\'d sell you something,\\but my dogs are in charge of sales.')
+                            character.talk("I see some calluses on your hands...\\you swinging a sword around all day?")
+                            character.talk('I\'d show you one,\\but my dogs are in charge of sales.')
                             character.talk('They went off to take care of some errands.')
-                            character.talk('One should probably be getting back right about now...')
+                            character.talk('One should probably be\\getting back right about now...')
                             game.initextras()
                             for i in game.actors:
                                 if i.name == 'WizDog':
@@ -4531,59 +5163,133 @@ Fredrick: Alright, fine.
                             dog.walk('down',2)
                             #the dog approaches fredrick
                             dog.talk('...')
-                            printstuff('The dog sniffs fredrick.')
+                            printstuff('The dog sniffs you.')
                             dog.talk('WUUUUUUURF! WURF WURF!')
                             character.talk('Huh?')
                             character.talk('He smells like that bizarre swordthief?')
-                            character.talk('You have to be more specific.\\There are a lot of thieves out there...')
+                            #character.talk('You have to be more specific.\\There are a lot of thieves out there...')
                             dog.talk('Wurf wurf woof! WOOF WOOF.')
-                            character.talk('What\'s that? Sword shavings and angst!')
+                            character.talk('What\'s that?\\The scent of sword shavings and angst!')
                             character.talk('That swordsman...')
                             chosenoption = doublequestion('Do you know Genmu?','Yes, we are questing together.','Not willingly.')
                             if chosenoption == 1:
                                 game.genmuaffection += 1
-                                character.talk('Well, your friend is a couple swords short of a whole collection.')
+                                character.talk('Well, your friend is a couple swords\\short of a whole collection.')
                                 character.talk("In more ways than one...")
                                 character.talk('He stole my swords.')
                                 character.talk('I was just about to gift them to my daughter.')
                                 Party.player2.talk('WHAT!?!','bigtext')
                                 Party.player2.rect.center = (448,864)
-                                Party.player2.walk('right',6)
-                                Party.player2.talk('How did you manage to have kids!?')
-                                Party.player2.talk("And with THAT hair, no less!")
+                                Party.player2.walk('right',4)
+                                Party.player2.talk('How did you manage to\\have kids with that haircut!?')
+                                #Party.player2.talk("And with THAT hair, no less!")
                                 #character.talk('At least people know what mine looks like...')
                                 character.talk('Yes, I have a daughter.\\She is also an excellent businesswoman.')
+                                Party.player2.walk('right',4)
+
                                 Party.player2.talk('NO! You can\'t let her sell those!')
-                                Party.player2.talk("All she\'ll do is rip off some moron who'll\\just have them sit in a case for the rest of time.")
+                                Party.player2.talk("All she\'ll do is rip off some moron who'll\\just have them sit in a case\\for the rest of time.")
                                 dog.talk("Wurf wurf wurf!!!")
                                 character.talk('No, Alexander, attacking people isn\'t very--')
                                 dog.talk('WURF!!!')
-                                game.SPFade(dt)
+                                #game.SPFade(dt)
                             else:
                                 game.percyaffection += 1
                                 character.talk('That definitely sounds like him.')
                                 character.talk('Well, I guess it was just a weird coincidence.')
-                                character.talk('I was not so lucky.')
+                                #character.talk('I was not so lucky.')
                                 character.talk('We traveled together for a while...')
                                 character.talk('It wasn\'t too bad at first.')
                                 character.talk('But he was so NEEDY!')
-                                character.talk('Always asking if people liked him,\\and if he was "truly \\to become a legendary swordsman..."')
+                                character.talk('Always asking if people liked him,\\and if he was "truly \\becoming a legendary swordsman..."')
                                 character.talk('Not to mention, some of my best swords kept "disappearing"...')                                                                
                                 Party.player2.talk('HEY!','bigtext')
                                 Party.player2.rect.center = (448,864)
-                                Party.player2.walk('right',6)
+                                Party.player2.walk('right',4)
                                 #TODO make this suck less
-                                Party.player2.talk('With how cheap you were selling them,\\you might as well have just given them away...')
+                                Party.player2.talk('Those were legendary blades, you fool!')
+                                Party.player2.talk('You foolish fool!')
+                                Party.player2.talk("You could not appreciate their beauty!\\Let alone your moron customers!")
+                                Party.player2.walk('right',4)
+
                                 Party.player2.talk('Was it my fault your greedy daughter\\suddenly demanded more money???')
                                 Party.player2.talk('What did she even need all that money for???')
                                 dog.talk("Wurf wurf wurf!!!")
                                 Party.player2.talk('Really? "Investment opportunities"?')
-                                Party.player2.talk('You can\'t fight people with those! Ridiculous!')
+                                Party.player2.talk("You fooly foolish fool!")
+                                Party.player2.talk('You can\'t fight people with those!')
+                                Party.player2.talk("Fool!")
                                 dog.talk('Wurf Wurf wurf wurf Wurf!')
-                                game.SPFade(dt)
+
+                            genmu = Party.player2
+                                #game.SPFade(dt)
                             #fight while genmu and the salesman talk in the background?
                             # double dog dare you attack?
-                            battle.Battle(Party.player1,[battle.fredrick],[battle.blackcloak],'grass stage',None, (0,0,0),['Stick','First Aid Kit'], 'WizDog Encounter',gamedata)
+
+                            game.initseconds()
+
+
+                            for char in game.actors:
+                                if char.name == "???":
+                                    ofredrick = char
+
+                            #char.walk("down", 6)
+
+                            char.talk("...!")
+                            screenupdate()
+                            character.rect.x += 96
+                            genmu.rect.x -= 96
+                            game.BlackOut()
+                            printstuff("Ofredrick returns in Desire form and slices everyone...!")
+                            character.talk("...!")
+                            genmu.talk("---!")
+                            genmu.talk("Agh...")
+                            genmu.talk("A-again...!")
+                            #char.talk("MOVE.")
+                            #char.talk("YOU.")
+                            char.walk("down", 5)
+                            
+
+
+                                
+
+
+                            res = battle.Battle(Party.player1,[battle.fredrick],[battle.ofredrick],'grass stage',None, (0,0,0),['Stick','First Aid Kit'], 'Grassdungeon Boss',gamedata)
+
+                            character.rect.x += 96000
+                            genmu.rect.x -= 960000
+                            #killtime(3)
+                            Party.player2 = None
+                            screenupdate()
+                            time.sleep(1)
+                            if res:
+                                printstuff("Your opponent disappears...")
+                                game.gamedata.events["persuadedOfredrick"] = True
+                                pass
+
+                            else:
+
+                                printstuff('Your opponent falls over, defeated...')
+
+                                printstuff("Your opponents feelings resonate with yours...")
+
+                                printstuff("You fall over...")
+
+                                gray = game.initcharacter("gray")
+
+                                #gray.talk("What a mess...")
+                                gray.talk("How did he find you so soon...!")
+                                gray.talk("And he couldn\'t control it either...")
+                                gray.talk("What a mess.")
+                                gray.talk("Why do you think I hate these journeys so much?")
+                                #gray.talk("You weren't supposed to meet him yet.")
+                                #gray.talk("The fun never ends...")
+                                game.BlackOut()
+                            #self.walk("down", 3)
+
+                            game.initArea("snowplacetouristcenter.tmx")
+
+                            '''
                             Party.player2.talk('HA! Your dog sucks!')
                             ###
                             character.talk('Cripes, you\'re annoying...')
@@ -4616,6 +5322,8 @@ Fredrick: Alright, fine.
                             Party.player2.talk('ONWARD!!!')
                             Party.player2.walkmode = True
                             Party.player2.followmode = True
+                            '''
+                            Party.player2 = None
                             game.gamedata.events['genmuswordsearch'] = True
                             game.gamedata.events['aftergrassdungeon'] = True
 
@@ -4759,7 +5467,7 @@ Fredrick: Alright, fine.
                         if 'SPflag1' in moo.properties:
                             character.talk('Man, that door bugs me.')
                             character.talk('Everyone wants to look at it for SOME reason.')
-                            character.talk('It\'s literally useless. It doesn\'t open!.')
+                            character.talk('It\'s literally useless. It doesn\'t open!')
                             character.talk('Door opens?\\No one cares, whatever, next.')
                             character.talk('But if it doesn\'t open?\\Ooh, I\'m interested!\\Whatever could be inside???')
                             character.talk('Why is my most successful\\attraction a freakin\' door?')
@@ -5167,8 +5875,10 @@ Fredrick: Alright, fine.
                                     if not character.talkedbefore:
                                         printstuff("Should be Lucy here!")
                                         character.talk("Oh, hello...!")
-                                        character.talk("(Ugh, another customer...)")
-                                        self.talk('Can I get two rooms, please?')
+                                        #character.talk("(Ugh, another customer...)")
+                                        #???
+                                        Party.player2.talk("Can i get two rooms, please.")
+                                        #self.talk('Can I get two rooms, please?')
     ##                                    chosenoption = triplequestion('Don\'t know. That mask of yours didn\'t help.','Why work here if you hate it so much?','Can I *please* get a room?')
     ##                                    if chosenoption == 1:
     ##                                        character.talk('It wouldn\'t be any better if I took it off...')
@@ -5178,7 +5888,7 @@ Fredrick: Alright, fine.
     ##                                    if chosenoption == 3:
                                         character.talk('O-of course!')
                                         character.talk('That\'ll be $150!')
-                                        printstuff("Fredrick shows the woman his card.")
+                                        printstuff("You show the woman your card.")
                                         #self.talk('I have a card.')
                                         character.talk('Well, not anymore..')
                                         #self.talk('But wait...')
@@ -5212,16 +5922,17 @@ Fredrick: Alright, fine.
                                         '''
                                         game.gamedata.events['hasroom'] = True
                                         character.talkedbefore = True
-                                        printstuff("Fredrick receives a room key.")
+                                        printstuff("You receive a room key.")
                                         character.talk("Take the elevator to get to your room.")
                                     else:
                                         if 'percyHotelMad' in game.gamedata.events:
                                             printstuff("With a certain tiredness in his voice, he says:")
                                         character.talk("The elevator is directly to your right.")
-                                        character.talk("It\'s right there...")
+                                        character.talk("It\'s 'right' there...")
                                         character.talk("Hee hee hee.")
 
                                 else:
+                                    character.talk("Things will be better tomorrow...")
                                     character.talk('(I wish I had enough money to quit.)')
                                     
                                     
@@ -5272,6 +5983,8 @@ Fredrick: Alright, fine.
                             chosenoption = triplequestion('I\'m looking for a door.','Are you a goat too?','Yeah, coffee sounds nice.')
                             if chosenoption == 1:
                                 character.talk('Why?')
+                            if chosenoption == 2:
+                                character.talk("Are you a weird fluffless creature?")
                             if chosenoption == 3:
                                 chosenoption = doublequestion('How do you like it?','The normal way.','Iced...')
                                 if chosenoption == 1:
@@ -5341,7 +6054,7 @@ Fredrick: Alright, fine.
                                 printstuff("The being nods in acceptance.")
                                 character.talk('It IS the path of your choosing...')
                                 printstuff("If you will not spare me, than I won\'t spare you.")
-                                printstuff("The being instantly kills Fredrick...")
+                                printstuff("The being instantly kills you...")
                                 printstuff("GAME OVER")
                             else:
                                 printstuff("The being smiles almost imperceptibly.")
@@ -5428,7 +6141,7 @@ Fredrick: Alright, fine.
                             character.talk("Would Genmu have ever discovered\\that no sword would ever give him the strength \\he wanted had you not shown him otherwise?")
                             character.talk("Would Percy have ever chosen to seek his true calling if you had not guided him?")
                             character.talk("Would Lucy have ever learned her true desires without your guidance?")
-                            character.talk("Would Lucille have ever learned how her actions affect others without your insight?")
+                            character.talk("Would  have ever learned how her actions affect others without your insight?")
                             character.talk("Would Ram have accepted himself if you didn\'t accept him first?")
                             character.talk('People need someone who will guide them.')
                             character.talk('Someday, one who is strong would\\ rise against those arbiters')
@@ -5535,7 +6248,7 @@ Fredrick: Alright, fine.
                             #not a sheeperson, next
                             self.talk('Percy! I wasn\'t expecting to see you here! What\'s up? ')
                             character.talk('Well, not much. \I have to ask you a question, though. ')
-                            self.talk('Not you, too. Oh well. \Who put you guys up to this, anyway? \\I\'ve gotta know. ')
+                            self.talk('Not you, too. Oh well. \Who put you guys up to this, anyway?')
                             character.talk('Some dude in a cloak. Totally sketch.')
                             self.talk('Did the robe guy have long black hair? ')
                             character.talk('I dunno. His cloak covered everything.')
@@ -5582,7 +6295,7 @@ Fredrick: Alright, fine.
             
 
 
-    def update(self, dt, game):
+    def update(self, dt, game: Game):
         #cleareventqueue()
         for i in pygame.event.get():
             if i.type == pygame.KEYUP and i.key == pygame.K_z:
@@ -5683,6 +6396,13 @@ Fredrick: Alright, fine.
 
                 global chosenoption
                 #global variable to hold result of options.
+
+
+                #ok i used to do this to help immersio
+                #since it would be weird if you didnt talk to your party members
+                #without turning to face them
+
+                """
                 if Party.player2 != None:
                     z = Party.player2
                     if  z.rect.x <= self.rect.x: #and z.rect.y <= self.rect.y:
@@ -5693,6 +6413,7 @@ Fredrick: Alright, fine.
                         self.orient = 'up'
                     elif z.rect.y <= self.rect.y:
                         self.orient = 'down'
+                """
                 if game.chatready == True:
                     game.chatready = False
                     game.chatholder.chatready = False
@@ -6123,7 +6844,7 @@ Fredrick: Alright, fine.
                     if abs((self.idlestart - time.time())//1) == 95: #and abs((self.idlestart - time.time())) < 300:
                         game.displaytalk('Heh, I got you for a second.')
                     if abs((self.idlestart - time.time())//1) == 300: #and abs((self.idlestart - time.time())) <= 1000:
-                        game.displaytalk('Idling is bad, you know. ')
+                        game.displaytalk('Can you do something already? I\'m getting bored.')
                 
                     
                     
@@ -6166,12 +6887,15 @@ Fredrick: Alright, fine.
                 if not game.noclip:
                     self.rect = copy.copy(lastRect)
                     self.collisionrect = copy.copy(lastColRect)
-            elif  len(game.tilemap.layers['Object Layer 1'].collide(self.rect, 'event')) > 0 and not game.debug:                               
+            elif  len(game.tilemap.layers['Object Layer 1'].collide(self.rect, 'event')) > 0 and not game.debug:    
+                self.setSprite()
+                           
                 for cell in game.tilemap.layers['Object Layer 1'].collide(self.rect, 'event') :
                     if 'eventrequirement' in cell.properties:
                          if cell.properties['eventrequirement'] not in gamedata.events:
                              self.rect = copy.copy(lastRect)
                              self.collisionrect = copy.copy(lastColRect)
+
                          else:
                              continue                                                         
                     #print(cell.properties['event'],'Event value')
@@ -6191,13 +6915,13 @@ Fredrick: Alright, fine.
                     if game.currentplace == 'grassstage2a.tmx':
                         Party.player2.talk("SWORD!")
                         #Party.player2.talk("LOO")
-                        Party.player2.talk("OH MY GOD!")
+                        Party.player2.talk("MY GOD!")
                         Party.player2.talk("LOOK! OVER THERE!")
                         #)
-                        Party.player2.talk("Curses! It was only a reflection.")
+                        Party.player2.talk("Drat! Merely a reflection.")
                                            
                     if game.currentplace == 'grassdungeon1.tmx':
-                        Party.player2.talk('GAAH!')
+                        #Party.player2.talk('GAAH!')
                         Party.player2.talk('I HATE this place!')
                         Party.player2.talk("Something bad always happens here!")
                         Party.player2.talk('This is where I first met that salesman...')
@@ -6205,20 +6929,20 @@ Fredrick: Alright, fine.
                         Party.player2.talk('He acts so STRANGE with money!')
                         Party.player2.talk('He\'d squeal so... strangely\\after getting paid!')
                         #Party.player2.talk('Then, he would go "WEEEEEUEW!"\\Like a child riding a pig!')
-                        Party.player2.talk('How could someone debase themselves like that!?')
+                        #Party.player2.talk('How could someone debase themselves like that!?')
                         Party.player2.talk("For something that wasn\'t even a sword...")
                         game.gamedata.events['genmugrassintro'] = True
                         
                     if game.currentplace == 'grassdungeon2.tmx':
                         if 'genmuSawGrass' not in game.gamedata.events:
-                            Party.player2.talk("AAAGGH!")
+                            #Party.player2.talk("AAAGGH!")
                             Party.player2.talk("No.")
                             Party.player2.talk("No!","bigtext")
                             Party.player2.talk("It\'s all coming back...!")
-                            Party.player2.talk("I CAN\'T DO THIS.")
+                            #Party.player2.talk("I CAN\'T DO THIS.")
                             printstuff("Genmu starts sweating.")
                             Party.player2.talk("...")
-                            Party.player2.talk("Hah, just kidding!.")
+                            Party.player2.talk("Hah, just kidding!")
                             Party.player2.talk("A legendary hero? Afraid of grass?")
                             Party.player2.talk("Never!")
                             #printstuff("Genmu reaffirms himself.")
@@ -6257,13 +6981,18 @@ Fredrick: Alright, fine.
                     if game.currentplace == 'grassdungeon4b.tmx':
                         if 'event2' in cell.properties and 'after1stdream' not in game.gamedata.events:                    
                             Party.player2.talk("Fredrick?")
-                            Party.player2.talk("You don\'t look so good.")
+                            Party.player2.talk("You are not looking quite so good.")
                             printstuff("You are still feeling off.")
                             Party.player2.talk("This adventure is starting to\\ weigh on this legendary swordsman.")
-                            Party.player2.talk("And a zombie is a very poor sidekick.")
+                            #Party.player2.talk("And .")
                             Party.player2.talk("We should get back to your village.")
+                            printstuff("You return to the town with Genmu.")
+                        
+
                             game.gamedata.events['grassdungeonround1done'] = True
-                            game.gamedata.events['grasstownhotel'] = True                               
+                            game.gamedata.events['grasstownhotel'] = True       
+                            game.initArea("grasstown.tmx")   
+                                   
                             #if game.var == 1:
                             ##    Party.player2.talk("Ohh, I REALLY need to find some swords..")
                              #   Party.player2.talk("Fredrick! Stop tempting me!")
@@ -6287,22 +7016,30 @@ Fredrick: Alright, fine.
                                     if i.name == '???':
                                         char = i                                
                                 char.talk('You...')
-                                printstuff('A familiar voice calls from just out of sight.')
+                                printstuff('A voice calls from just out of sight.')
                                 printstuff('You know what you\'re doing isn\'t right.')
                                 char.talk('Shut up.')
                                 #char.talk('...')
                                 Party.player2.talk("Is someone there? I can\'t see anyone.")
                                 Party.player2.talk('Is something happening, Fredrick???')
-                                printstuff("You feel off.")
-                                char.talk("Seeing you makes me sick...")
+                                printstuff("The empty feeling worsens.")
+                                char.talk("You...")
+                                char.talk("Meeting you like this...")
+                                #char.talk("Is horrible.")
+                                char.talk("I\'ve had only one day worse than this.")
+                                #char.talk("But it is sure close...")
+                                #char.talk(".")
+                                #char.talk("You really took everything from me.")
+                                #char.talk("You couldn\'t even leave me my peace of mind.")
                                 char.talk('And your friend can\'t even see me?')
-                                char.talk('Tch...')
+                                #char.talk('Tch...')
                                 #char.talk('You really took EVERYTHING from me.')
                                 #printstuff("A somewhat wry grin appears on his face.")
                                 #char.talk("Figures as much...")
                                 #char.talk("You could\'ve at least left me my appearance..")
-                                printstuff("The person points a sword at Fredrick.")
-                                char.talk("Maybe It\'s better that way.")                                
+                                printstuff("The person points a sword at you.")
+                                char.talk("Maybe it\'s better that way.")  
+                                #char.talk('He\'s about to have ')                              
                                 ##chosenoption = doublequestion("He makes me feel off.",'Who are you?','You know Gray, too?')
                                 ##if chosenoption == 1:
                                 ##    char.talk('OH, of COURSE.')
@@ -6326,12 +7063,12 @@ Fredrick: Alright, fine.
                                 #("The man pauses for a second, then suddently...")
                                 #char.talk("Urgh.")
                                 if res == 1:
-                                    char.talk("You...")
+                                    #char.talk("You...")
                                     char.talk("I hate this!")
                                     char.talk("I hate everything about this!")
                                     #char.talk("And most of all?")
                                     #char.talk("I hate YOU!")
-                                    printstuff("The man slices at Fredrick, and disappears")
+                                    printstuff("The person slices at you, and disappears.")
                                 else:
                                     char.talk("AGH!")
                                     char.talk('W-what happened???')
@@ -6345,7 +7082,7 @@ Fredrick: Alright, fine.
                                 printstuff("As suddenly as he appeared, he vanishes.")
                                 #printstuff('A strange emptiness washes over Fredrick...')
                                 Party.bonds.append(pc.OfredrickBond)
-                                printstuff("Something has awakened inside Fredrick...")
+                                printstuff("Something has awakened inside you...")
 
                                 #Why did i check if the bonds in the bond list
                                 # if i added it one line ago
@@ -6357,10 +7094,14 @@ Fredrick: Alright, fine.
                                         #printstuff('A voice begins speaking into Fredrick\'s mind.')
                                         printstuff('You, the one whose path leads to the end...',0,1,1)
                                         #printstuff('Let an alternate path guide your through your own.',0,1,1)
-                                printstuff('Fredrick\'s SPmeter activates.')
+                                printstuff('Your SPmeter activates.')
+                                printstuff("You learned a new SPmove...")
+                                printstuff("Cleave was equipped and added to your SPmoves.")
+                                Party.player1.spattack = pc.cleave
+                                printstuff("When you fill your meter during battle,\\use your SPmove with x...")
                                 Party.player2.talk("Ugh...")
                                 Party.player2.talk("I couldn\'t breathe.")
-                                Party.player2.talk("It felt like my blood was freezing!")
+                                Party.player2.talk("It felt as if my blood was frozen.")
                                 Party.player2.talk("...")
                                 Party.player2.talk("If a hero's blood COULD freeze...")
                                 #Party.player2.talk("")
@@ -6374,8 +7115,8 @@ Fredrick: Alright, fine.
                         Party.player2.talk('Th-that\'s...')                        
                         Party.player2.talk('HIM!')                
                         Party.player2.talk('Well, maybe he\'s just some peddler...')
-                        Party.player2.talk('No, my senses never lie!\\He has the same smug look and everything....')
-                        Party.player2.talk('Ohhhhh, you HAVE to get my sword from him.')
+                        Party.player2.talk('No, my senses never lie!\\He still has that same smug look...')
+                        Party.player2.talk('Argh, you HAVE to get my sword from him.')
                         Party.player2.talk('I\'d go, but he\'d probably scream and run if he saw me.')
                         Party.player2.followmode = False
                         Party.player2.walkmode = False
@@ -6385,9 +7126,32 @@ Fredrick: Alright, fine.
                         printstuff("You must interact with\\the salesman by yourself...")
                     if game.currentplace == 'snowplacetouristcenter.tmx':
                         if 'talkedtopercy' not in game.gamedata.events: 
+                            #bruh i have to remove all this 
                             for i in game.actors:
-                                if i.name == 'Percy':
+                                if i.name == 'Lucy':
+                                    lucy = i
+                            lucy.talk("O-oh... You\'re awake!")
+                            if 'persuadedOfredrick' in game.gamedata.events:
+                                lucy.talk("Are you okay...?")
+                                #gray teleports you here...?
+                            else:
+                                lucy.talk("I was walking back home when I saw you\\knocked unconscious in the forest.")
+                                lucy.talk("Whatever happened to you?")
+
+                            doublequestion("","Bitch idk wtf is even happening", "I blame the heroes...")
+                            lucy.talk("Well. You could stay here... and rest a little.")
+                            doublequestion("", "If you really want me to", "Where\'d my friend go?")
+                            lucy.talk("I-i\'ll bring you something to drink!\\Surely you\'re cold...")
+                            doublequestion("", "Are you single?", "")
+                            #doublequestion("", "Ar")
+                            #lucy.talk("P")
+
+                            '''
+
+                            
                                     percy = i
+
+                            
                             if 'PercyMercy' in game.gamedata.events:
                                 percy.talk("Oh, you...?")
                             elif 'PercyMercy' not in game.gamedata.events:
@@ -6411,7 +7175,8 @@ Fredrick: Alright, fine.
                                 percy.walkmode = True
                                 percy.followmode = True
                                 Party.player2 = percy
-                                game.gamedata.events['talkedtopercy'] = True                    
+                                game.gamedata.events['talkedtopercy'] = True 
+                                '''                   
                         del cell.properties['event']                            
                         #percy.talk('Step-fredrick I\'m stuck in the dryer again')
                     if game.currentplace == 'dungeonentrance.tmx':
@@ -6422,6 +7187,8 @@ Fredrick: Alright, fine.
                             #printstuff('They are not unfamiliar to me...',0,1)
                             printstuff('That man in the gray cloak...',0,1)
                             printstuff('Do you know where the path\\he has set you on will take you?',0,1)
+                            printstuff('Though he wants what is best for everyone...',0,1)
+                            printstuff('It is unclear if that is best for you.', 0,1)
                             printstuff('Your fate is not yet decided.',0,1)
                             printstuff('If you desire to truly understand\\the circumstances of your journey.',0,1)
                             printstuff('As well as find the way to\\navigate the path awaiting you...',0,1)
@@ -6456,7 +7223,7 @@ Fredrick: Alright, fine.
                         printstuff("The orb you have began to glow...")
                         #printstuff("Fredrick presented it to the being.")
                         #character.talk('Huh. The warrior arrives.')
-                        character.talk("rrrrrrRRRRRRRRRRRROOOOOOOOAAAA--")
+                        character.talk("...")
                         character.talk("!")
 
                         printstuff("The being charges forth!")
@@ -6465,7 +7232,7 @@ Fredrick: Alright, fine.
                         '''
                         for _ in ["Damn it! Another warrior!?",
                                   "Have they really come back?!!",
-                                  "What a waste...! I gave everything to get rid of those guys.", 
+                                  "What a waste...! I gave everything...", 
                                   "Ugh...",
                                   "But what we can do about it?",
                                   "Hm. I\'ve seen you before.",
@@ -6476,33 +7243,12 @@ Fredrick: Alright, fine.
                                   "Though, that is not my only motivation.",
                                   "There is nothing\\the dead crave more than \\to be among the living...",
                                   "If I win, I will be taking your place among the living...",
-                                  "Maybe."] :
+                                  "Perhaps. iF you are unlucky, that is."] :
                             character.talk(_)
                         '''
 
-                        '''
-                        character.talk('You know, there was once one like you.')
-                        character.talk('It\'s not important for me to tell you, but...')
-                        character.talk("You may find the path to the original one through this.")
-                        character.talk("This entire conflict is designed both by him and for you...")
-                        character.talk("Though, of that I can say no more.")
-                       
-                        character.talk('You, who grasps the path of survival...')
-                        character.talk("I will see for myself if you hold\\the necessary strength within you.")
-                        character.talk("...")
-                        #character.talk("Alriiiiight!")
-                        
-                        character.talk("Man, I hate talking like that...")
-                        character.talk("Now, that I've got the serious stuff out of the way...")
-                        character.talk('Let\'s have some fuuuuuun!')
-                        character.talk("You've worked hard to get here!")
-                        character.talk('How about you and me spar a little bit?')
-                        character.talk('You will have to fight me, AND\\I will also REALLY try to defeat you, but...')
-                        character.talk('If you win, I\'ll give you something very special...')
-                        character.talk("It\'s a special move only people like me can teach.")
-                        character.talk('Good deal, huh?')
-                        character.talk('So, you ready?')
-                        '''
+    
+                
 ##                        character.talk('You...!')
 ##                        character.talk('Are you the one who will save us?')
 ##                        character.talk('I can\'t believe it\'s finally happening!')
@@ -6516,10 +7262,10 @@ Fredrick: Alright, fine.
                         character.talk("And I am still trapped in the land of the dead...")
                         character.talk("Oh well. Nothing has changed...")
                         character.talk("You ready?")
-                        printstuff("The orb in Fredrick's inventory is beginning to shake.")
+                        printstuff("The orb in your inventory is beginning to shake.")
                         printstuff('Suddenly, it shatters!')
                         character.talk("Alright, you ready?")
-                        printstuff("The being's sword knowledge flows into Fredrick.")
+                        printstuff("The being's sword knowledge flows into your.")
                         printstuff("Fredrick learned a new SPmove.")
                         printstuff("Cleave was added to your SPmoves.")
                         Party.keyitems.remove(firstorb)
@@ -6548,8 +7294,8 @@ Fredrick: Alright, fine.
                         if chosenoption == 2:
                             #character.talk("Of course, of course.")
                             character.talk("How admirable.")
-                            character.talk('You may be a true hero.')
-                            character.talk("But make sure you know what being a true hero means.")
+                            character.talk('You may be a true hero indeed.')
+                            #character.talk("But make sure you know what being a true hero means.")
                             #character.talk('Stay strong.')
                         printstuff("An exit door appears from nowhere...")                                               
                         del cell.properties['event']     
@@ -6622,7 +7368,7 @@ Fredrick: Alright, fine.
                             screenupdate()
                             game.killtime(1)
                             character.nameless = True
-                            character.talk('Oh, you showed up.')
+                            #character.talk('Oh, you showed up.')
                             done = False
                             theleaderofthebunch = 0
                             clock = pygame.time.Clock()
@@ -6635,8 +7381,289 @@ Fredrick: Alright, fine.
                                 clock.tick(30)
                                 if theleaderofthebunch == 20: #DK
                                     done = True                 
-                            #y no work           
-                            game.player.getinfo(game,dt,[character])
+                            #TODO rewrite this it sucks.    
+                           #game.player.getinfo(game,dt,[character])
+                               #Why did you leave that sword?
+                            #Do you know what i went through to get it?
+                            #character.talk('Well, it\'s more like\\I summoned you here, but.')
+                            #self.walk('rigth')
+
+                            #Yes we are rewriting this again.
+
+                            if "secondtime" in game.gamedata.events:
+                                character.talk("Back again...?")
+                                character.talk("I didn\'t like how that went, either.")
+                                printstuff("Gray squints at you.")
+                                #character.talk("Fredrick...")
+                                character.talk("It's rude to pretend you don't know me.")
+                                character.talk('...')
+                                character.talk("After going through all that,\\you\'re still acting the fool?")
+                                character.talk("I thought you'd be more excited\\to get back to your ladyfriend...")
+                            else:
+                                character.talk("Wow, you actually made it.")
+                                character.talk("Let me introduce myself.")
+                                #character.talk("Glad you could make it.")
+                                #character.talk("Thanks for stopping by.")
+                                #character.talk("...")
+
+                            character.talk("I am known as the man in the gray cloak.")
+                            character.talk("My friends call me Gray.")
+                            
+
+                            #doublequestion("What is your real name?", '')
+                            character.talk("In the past, I took the same journey you did...")
+                            character.talk("It sucked and I hated it.")
+                            character.talk("Now, because the world\\has a cruel sense of humor...")
+                            character.talk("I must guide you through that same journey.")
+                            chosenoption = doublequestion("","Aren\'t you one of the Three Heroes?", "What is even going on right now.")
+                            if chosenoption == 1:
+                                character.talk("Yes.")
+                                character.talk("We weren\'t so good at our jobs, it seems...")
+                                character.talk('For the being we vanquished has returned.')
+                                character.talk('Of course, \\you are the one who must defeat him.')
+                                #self.talk('Why me?')
+                                character.talk('Unfortunately, you\'re "special".')
+                                character.talk('Hopefully.')
+                            else:
+                                character.talk('This place is known as the "Gray Area".')
+                                character.talk('It is a place hidden within your world.')
+                                character.talk('People like me keep\\your world going from here.')                               
+                                #character.talk('It is functionally the heart of your world.')                                
+                                #self.talk('Cool.')
+                                #character.talk("Yeah, you could say that, I guess.")
+                                #character.talk('That is one way to look at it...')
+                                #character.talk('I am one of a select few\\who have control over this place.')
+                                character.talk('I have called you here to \\start you off on your journey.')     
+                                character.talk("Let\'s see if you have what it takes...!")
+                                character.talk("You should.")
+                                character.talk("Probably.")         
+                                character.talk("I really hope you do...")                                                  
+                                
+                                
+                                #character.talk('You really think I\'d just\\grab some random kid off the street for this?')
+                                #character.talk('I mean,\\we will find out if you aren\'t very quickly.')                
+                            #character.talk('I hate to interrupt your VERY BUSY life.')
+                            #character.talk("That consists solely of video games and\\ haunting the shopping plaza with your friends.")
+                            #character.talk("But. ")
+
+                            #character.talk('But don\'t worry; you\'ll get back to\\your dorky school friends soon enough.')                            
+                            #self.talk('Wait!')
+                            #character.talk('What?')
+                            '''
+                            chosenoption = triplequestion('Who are you?','Where am I?','What\'s going on?')
+                            if chosenoption == 1:
+                                gamedata.logicpoints += 1
+                                character.talk('Who am I?')
+                                character.talk('Someday, if things either go really really right\\or really really wrong, you\'ll ' \
+                                'find out.')
+                                character.talk('...')
+                                character.talk('They usually call me "Gray".')
+                                character.nameless = False
+                                character.name = 'Gray'
+                                character.talk('I am "in charge" of your world.')
+                                character.talk('You are about to begin a journey;\\My job is to make sure you finish it.\\Because you might not.')
+                                character.talk('So, now we begin.')
+                                #self.talk('Wait, I don\'t even know what\'s going on--')
+                                #character.talk('You will after this.')
+                                #self.talk('I\'m as ready as I\'ll ever be.')
+                                #character.talk('That\'s not true.\\You\'ll be more ready after this.')
+                                game.SPFade(game.dt)
+                                battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)                                                                                                               
+                                    
+                            elif chosenoption == 2:
+                                gamedata.emotionpoints += 1
+                                character.talk('This place is known as the "Gray Area".')
+                                character.talk('It is a place hidden within your world.')
+                                character.talk('People like me keep your world going from here.')                               
+                                #character.talk('It is functionally the heart of your world.')                                
+                                #self.talk('Cool.')
+                                #character.talk("Yeah, you could say that, I guess.")
+                                #character.talk('That is one way to look at it...')
+                                #character.talk('I am one of a select few\\who have control over this place.')
+                                character.talk('Thus, I have called you here to \\start you off on your journey.')                                                                
+                                game.SPFade(game.dt)
+                                battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
+                            elif chosenoption == 3:
+                                gamedata.willpoints += 1
+                                character.talk('A being which I have\\defeated before has returned.')
+                                character.talk('Of course, \\you are the one who must defeat him.')
+                                #self.talk('Why me?')
+
+                                character.talk('Unfortunately, you\'re "special".')
+                                character.talk('Hopefully.')
+                                
+                                #character.talk('You really think I\'d just\\grab some random kid off the street for this?')
+                                #character.talk('I mean,\\we will find out if you aren\'t very quickly.')                                        
+                                #character.talk('Look, we don\'t have all day. Let\'s begin.')                                
+                                game.SPFade(game.dt)
+                                battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
+
+                            '''
+                            game.SPFade(game.dt)
+                            battle.Battle(Party.player1,[battle.fredrick],[battle.ghostface],'gray area',None,(0,0,0),['Stick','First Aid Kit'],'First Battle (Starring Gray Cloak)',gamedata)
+                            #Rewrite for difficulty from here for cockiness?
+                            
+                            ##                            for i in gamedata.data:
+                            ##                                if 'GCSkill' in i.keys():
+                            ##                                    x = i['GCSkill']
+                            ##                            assert x != None
+                            ##                            ##print(x,'Difficulty result')
+                            x = 1
+                            #TODO why is this crashing.
+                            x = gamedata.GCSkill            
+                            #findpreference()
+                            ##print(x,'battle difficulty result')
+                            #preference = gamedata.preference
+                            #bro i'm not writing everything 9 times.
+                            if  x == 2:
+                                
+                                character.talk('Have you done this before?')
+                                
+
+                                
+                            elif x == 1:
+                                character.talk('Well, I guess that\'s good enough for now.')
+                                    #self.talk('So, does that mean I did well, or...?')
+                                    #character.talk('You did as well as I thought you would do.')
+                                    #self.talk('Which is?')
+                                    #character.talk('Eh, whatever.')
+                                    
+                                
+                            elif x == 0:
+                                character.talk('Heh. Uh...')
+                                character.talk('You\'ll get better eventually.')
+                                #self.talk('(Yikes.)')
+                                character.talk('Maybe...')
+                                #self.talk('(Was I really THAT bad?')
+                                #character.talk("(Man, he was really bad.)")
+                            elif x == 'ded':
+                                character.talk('Please tell me you did that poorly on purpose.')
+                            character.talk('Anyway, that\'s it.')
+                            character.talk('You are now hopefully passable at fighting.')
+                            
+                            #if game.gamedata.preference == 'logic':
+                            #    self.talk('(Certainly took long enough...)')
+                            
+                                
+
+                            
+                        #                            character.talk('Like this.')
+                            character.talk('One last thing, though...')
+                            character.talk('In order for you to\\defeat that old enemy of mine,\\you must become stronger.')
+                            character.talk('To help gain that strength, you must master\\one of the scariest things people can offer...')
+                            character.talk('Relationships.')
+                            #self.talk('Friendship? How does that help me kill things?')
+                            #character.talk('Ugh, just listen...')
+                            #character.talk('I must unfortunately offer you an example.')
+                            #printstuff('You have established a bond\\with the Man in the Gray Cloak.')
+                            Party.bonds.append(pc.GrayCloakBond)
+                            for i in Party.bonds:
+                                if i.name == 'Gray' and i.level == 1:
+                                    #i.level += 1
+                                    printstuff('A voice begins speaking into your mind.')
+                                    printstuff('You, the one whose path leads to the end...',0,1,1)
+                                    #printstuff('Let other\'s paths guide you to your own.',0,1,1)
+                                    break
+                                    
+                            printstuff('Gray has shared some of his power with you.')
+                            printstuff('You learned the magic spell, Beam.\\Beam was equipped and added to your Xmoves.')
+                            #printstuff('Your current Xmove has also become beam.')
+
+                            #this shit aint working?
+                            Party.xmoves.append(pc.laser)
+                            game.player.xmove = pc.laser
+                            Party.player1.xattack = pc.laser
+
+                            if Party.player1.cattack != pc.heal:
+                                #TODO check if battle player and overwolrd player moves are transferring correctly
+                                #overworld to battle is fine, battle to overworld isnt...?
+                                #this aint working
+                                character.talk("Though you've come this far without needing it...")
+                                character.talk("You will need healing magic as well.")
+                                character.talk("Not all your opponents\\will be pulling their punches.")
+                                printstuff("You learned the spell heal,\\and it was equipped and added to your Cmoves.")
+
+                            Party.cmoves.append(pc.heal)
+                            #game.player.cmove = pc.heal
+                            Party.player1.cattack = pc.heal
+                            printstuff('Your relationship with a person\\is shown through a bond,\\viewable in the world menu.')
+                            character.talk('For better or for worse,\\ you and I are now connected.')
+                            character.talk('...')
+                            self.talk('...')
+                            character.talk('Once you make a bond,\\you can strengthen it.')
+                            character.talk('This happens when that\\bond holder trusts you more.')
+                            character.talk('Strengthening bonds\\can give you unrivaled benefits.')
+                            #character.talk('Try to make as many friends as you can.')
+                            #character.talk('Well, actually, you should make the\\maximum number of friends possible.')
+                            character.talk('Now, back to the task at hand...')
+                            
+                            #character.talk('In order for you to reach that enemy of mine,\\you must find my two partners.')
+                            #character.talk('They wear cloaks similar to mine,\\and are as unusual as I am.')
+                            #character.talk('It also seems that they have become\\something of a legend in your world.')
+                            #character.talk('Their locations are unfortunately\\unknown to me-- finding them falls on you.')
+                            character.talk('When you return to your world,\\you will meet a swordsman.')
+                            character.talk('Not only is he more powerful\\than his personality will imply, but...')
+                            character.talk('He seems to have some awareness\\of one of my friend\'s location.')
+                            character.talk('It is important that you get to know him.')
+                            character.talk('Normally, I\'d let you ask questions,\\but, you know...')# our precious time is dwindling.')
+                            #questions here on second playthrough?
+                ##                            if game.gamedata.preference == 'emotion':
+                ##                                self.talk('No, not really...')
+                ##                                character.talk('Are you sure about that?')
+                ##                            if game.gamedata.preference == 'logic':
+                ##                                self.talk('Seems like it.')
+                ##                            if game.gamedata.preference == 'will':
+                ##                                self.talk('That\'s what you\'ve been telling\\me the whole time.')
+                ##                                character.talk('Touche.')
+                            
+                            character.animation('armraise.png',35,5,500,dt)
+                            game.fadeOut()
+                            
+                            character.setSprite()
+                            self.rect.y += 10000 #Yep
+
+                            game.killtime(2)
+                            
+                            lastspot = (player.rect.x,player.rect.y)#copy.copy(game.currentfocus)
+                            done = False
+                            theleaderofthebunch = 0
+                            clock = pygame.time.Clock()
+
+                            while not done:
+                                theleaderofthebunch += 1
+                                center = [character.rect.x,character.rect.y]#[(lastspot[0] + character.rect.x)/2,(lastspot[1] + character.rect.y)/2]
+                                centerdiff = [(center[0] - lastspot[0])/30,(center[1] - lastspot[1])/30]
+                                #why crash it helps
+                                game.currentfocus = [lastspot[0] + (centerdiff[0]*theleaderofthebunch),lastspot[1] + (centerdiff[1]*theleaderofthebunch)]
+                                screenupdate()
+                                clock.tick(30)
+                                if theleaderofthebunch == 30: #DK
+                                    done = True
+                            character.talk("Geez... I'm kinda nervous.")
+                            #character.talk('Hard to believe its finally here.')
+                            character.talk('It really is beginning again.')
+                            #character.talk('I hope he\'s strong enough.')
+                            #character.talk('He wasn\'t before, but...')
+                            #character.talk('No, I shouldn\'t talk like that.')
+
+                            game.BlackOut()
+                            game.initArea('grassstage.tmx')
+                            game.currentfocus = "player"
+                            screenupdate()
+                            game.killtime(1)
+                            #self.rect.y += 10000 
+
+                            screenupdate()
+
+                            #printstuff('Make sure you have healing magic equipped.')
+                            #printstuff("Open the menu, enter 'Skills',\\and then 'C Moves' to do so.")
+
+
+                            printstuff("Pressing A will sometimes yield\\ valuable information.")
+                            #why does screen glitch out if this next killtime is not active?
+                            printstuff("You must now press the A button.")
+                            
+                            return
                             game.currentfocus = "Player"
                         elif cell.properties['event'] == 2:
                             self.walk('right',2)
@@ -6743,8 +7770,8 @@ Fredrick: Alright, fine.
                                         character.talk('*sniff*, *sniff*')
                                         character.talk('...hey, it\'s sharper than I remember...')
                                         character.talk('Have you been treating her right?')
-                                        self.talk('("her?" Does he mean the sword?)')
-                                        self.talk('Uh, I left her alone for a little bit...')
+                                       # self.talk('("her?" Does he mean the sword?)')
+                                        #self.talk('Uh, I left her alone for a little bit...')
                                         character.talk('You\'re kidding me!\\No wonder she\'s so angry!')
                                         character.talk('I\'ve gotta teach you how to treat a sword properly!')
                                         character.talk('Alright, it\'s decided!')
@@ -6759,6 +7786,9 @@ Fredrick: Alright, fine.
                                         character.walkmode = True
                                         character.followmode = True
                                         Party.player2 = character
+                                        #remove genmu from overworld character so he cant collide
+                                        #global characters
+                                        characters.remove(character)
                                         printstuff('Your path has interwined with that of another.')
                                         printstuff('You have made a new bond.')                                                                        
                                         Party.bonds.append(pc.GenmuBond)
@@ -6767,10 +7797,10 @@ Fredrick: Alright, fine.
                                         for i in Party.bonds:
                                             if i.name == 'Genmu' and i.level == 1:
                                             #i.level += 1
-                                                printstuff('A voice begins speaking into Fredrick\'s mind.')
+                                                printstuff('A voice begins speaking into your mind.')
                                                 printstuff('You, the one who carves his own path...',0,1,1)
                                                 #printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)                                            
-                                            printstuff("Fredrick's strength increases by 1.")
+                                            printstuff("Your strength increases by 1.")
                                             Party.player1.attack += 1
                                         printstuff('"A" will let you talk to your friends.')
                                         game.gamedata.events['mettheswordsman'] = True
@@ -6787,8 +7817,10 @@ Fredrick: Alright, fine.
                                     #self.talk('Uh, okay, I guess.')
                                     character.talk('Ha HA! Amazing!')
                                     character.talk('NOW! Our adventure BEGINS!')
-                                    printstuff('The swordsman has decided \\to tag along with Fredrick\\ until his sword is found.')
+                                    printstuff('The swordsman has decided \\to tag along with you\\ until his sword is found.')
                                     Party.player2 = character
+                                    #global characters
+                                    characters.remove(character)
                                     printstuff('Your path has interwined with that of another.')
                                     printstuff('You have made a new bond.')
                                     Party.bonds.append(pc.GenmuBond)
@@ -6799,11 +7831,11 @@ Fredrick: Alright, fine.
                                     for i in Party.bonds:
                                         if i.name == 'Genmu' and i.level == 1:
                                             #i.level += 1
-                                            printstuff('A voice begins speaking into Fredrick\'s mind.')
+                                            printstuff('A voice begins speaking into your mind.')
                                             printstuff('You, the one who carves his own path...',0,1,1)
                                             #printstuff('Let other\'s paths give you the strength to change yours.',0,1,1)
                             
-                                    printstuff("Fredrick's strength increases by 1.")
+                                    printstuff("Your strength increases by 1.")
                                     Party.player1.attack += 1
                                     printstuff('"A" will let you talk to your friends.')    
 
@@ -6820,7 +7852,7 @@ Fredrick: Alright, fine.
                             #character.talk('The glory of traveling\\with an ace swordsman...')
                             #self.talk('...')
                             character.talk('How often do chances like that come along?')
-                            character.talk("Not often! Not often AT ALL!")                                   
+                           # character.talk("Not often! Not often AT ALL!")                                   
 ##                                if game.gamedata.preference == 'logic':
 ##                                    self.talk('Maybe I will.')
 ##                                    character.talk('Then, maybe I\'l let you keep one of my sword\\ after we\'re done...')
@@ -6837,6 +7869,8 @@ Fredrick: Alright, fine.
                             Party.bonds.append(pc.GenmuBond)
                             character.walkmode = True
                             character.followmode = True
+                            #global characters
+                            characters.remove(character)
                             Party.player2 = character
                             for i in Party.bonds:
                                         if i.name == 'Genmu' and i.level == 1:
@@ -6844,7 +7878,7 @@ Fredrick: Alright, fine.
                                             # printstuff('A voice begins speaking into Fredrick\'s mind.')
                                             printstuff('You, the one who carves his own path...',0,1,1)
                                             #fprintstuff('Let other\'s paths give you the strength to change yours.',0,1,1)                                            
-                                            printstuff("Fredrick's strength increases by 1.")
+                                            printstuff("Your strength increases by 1.")
                                             Party.player1.attack += 1
                             printstuff('"A" will let you talk to your friends.')
                             Party.player2.chatready = True
@@ -6992,7 +8026,7 @@ Fredrick: Alright, fine.
                                 clock.tick(30)
                                 if theleaderofthebunch == 30: #DK
                                     done = True
-                            printstuff('Fredrick hears a familiar voice behind him...')
+                            printstuff('You hear a familiar voice behind you...')
                             game.fadeOut()
                             game.initextras()
                             game.killtime(1)
@@ -7018,22 +8052,22 @@ Fredrick: Alright, fine.
     ##                            gray.talk('I know. It\'s all he talks about...')
     ##                            gray.talk("Why is he so obsessed with them?")
                             gray.talk('During this little sword quest you\'re on...')
-                            gray.talk("You could learn how to fight from him.")
+                            gray.talk("You should get him to hone your fighting skills.")
                             gray.talk("Every point he didn\'t put in social skills,\\he put in swords...")
-                            gray.talk("...")
-                            gray.talk("Hey, wait a minute.")
-                            gray.talk("I don\'t think you have any money?")
+                            #gray.talk("...")
+                           # gray.talk("Hey, wait a minute.")
+                            gray.talk("Also, I don\'t think you have any money?")
                             gray.talk("All these salesmen walking around here...")
                             gray.talk("Even if you didn\'t have a penny to your name,\\they\'d still find a way to get money from you.")
                             gray.talk("Here.")
 
                             printstuff("Gray gave you $20.")
                             Party.money += 20
-                            gray.talk("Don\'t make it easy for the salesmen.")
+                            gray.talk("Never pay asking price with these salesmen.")
                             gray.talk("Make them put a little work in...")
                             gray.talk("You\'ll get your money\'s worth that way.")
 
-                            gray.talk("Farewell!")
+                            #gray.talk("Until we meet again...!")
                             #gray.talk("")
 
                             #gray.talk("")
@@ -7066,9 +8100,9 @@ Fredrick: Alright, fine.
                             Party.player2.talk('No...')
                             Party.player2.emote('genmushocked.png')
                             Party.player2.talk("NO!",'bigtext')
-                            Party.player2.talk('I\'ve been had!','bigtext')
+                            #Party.player2.talk('I\'ve been had!','bigtext')
                             Party.player2.imagereboot()
-                            Party.player2.talk('It\'s a fake!')
+                            Party.player2.talk('It\'s a fake!', 'bigtext')
                             Party.player2.talk('A SHAM!','bigtext')                            
                             Party.player2.talk('It\'s so unwieldy!')
                             Party.player2.talk('No wield AT ALL!')
@@ -7079,24 +8113,26 @@ Fredrick: Alright, fine.
                                 if i.name == 'gsword':
                                     i.rect.center = copy.copy(Party.player2.rect.center)
                                     i.rect.centerx += 20000                            
-                            Party.player2.talk('Ugh, all this grass, and then THIS!')
+                            #Party.player2.talk('Ugh, all this grass, and then THIS!')
                             Party.player2.talk("Why is our glorious journey\\ so... inglorious?!")
-                            Party.player2.talk('It all reeks of that salesman\'s weird planning.')
+                            #Party.player2.talk('It all reeks of that salesman\'s weird planning.')
                             #Party.player2.talk('All this because of a few swords...')
-                            Party.player2.talk('I am sorry that I got you involved in this.')
-                            chosenoption = doublequestion('','I\'d feel better if I had a sword...','I have nothing to do besides fight things.')
-                            if chosenoption == 1:
-                                pass
-                            if chosenoption == 2:
-                                pass
+                            #Party.player2.talk('I am sorry that I got you involved in this.')
+                            #chosenoption = doublequestion('','I\'d feel better if I had a sword...','I have nothing to do besides fight things.')
+                            #if chosenoption == 1:
+                            #    pass
+                            #if chosenoption == 2:
+                            #    pass
                           
                             #Party.player2.talk('So I can beat him up\\and get my swords!')
                             #Party.player2.talk('Real men solve their problems in person.')
                             #Party.player2.talk('Not by sending their magical\\dog lackeys to beat up my friends.')
                             #game.player.talk('So how are we going to find him?')
+                            Party.player2.talk("I blame the salesman!")
                             Party.player2.talk('Let\'s just wander around until he shows up.')
+                            Party.player2.talk("A strategy which has never failed me...!")
                             #game.player.talk('I don\'t think that\'s gonna work.')                            
-                            Party.player2.talk('That is all I know how to do!')
+                            #Party.player2.talk('That is all I know how to do!')
                             Party.player2.talk('But...!')
                             Party.player2.talk('That sword...')
                             game.fadeOut()
@@ -7134,7 +8170,7 @@ Fredrick: Alright, fine.
                                                                                             
             elif  len(game.tilemap.layers['Object Layer 1'].collide(self.collisionrect, 'sprite')) > 0:
                 x  = game.tilemap.layers['Object Layer 1'].collide(self.collisionrect, 'sprite')
-                global characters
+                #global characters
                 for z in x:
                     for i in characters:
                         if i.cell == z:
@@ -7150,6 +8186,11 @@ Fredrick: Alright, fine.
                 for cell in game.tilemap.layers['Object Layer 1'].collide(self.rect, 'blockSP'):
                     print(self.gamedata)
                     print(cell.properties['requirement'])
+
+                    if 'notrequirement' in cell.properties:
+                        if cell.properties['notrequirement'] not in game.gamedata.events:
+                            del cell.properties['blockSP']
+                            return
                     if cell.properties['requirement'] in game.gamedata.events:#if self.gamedata.events[cell.properties['requirement']]:
                         #printstuff(' You may proceed. ')
                         del cell.properties['blockSP']
@@ -7166,13 +8207,25 @@ Fredrick: Alright, fine.
                                         i.talk('Really? You\'re just going to ignore me?')
                                         
                         if game.currentplace == 'grassstage2a.tmx':
-                            if Party.player2:
-                                Party.player2.talk('Hey!')
-                                Party.player2.talk("If you\'re gonna go that direction...")
-                                Party.player2.talk("You should turn left first.")
-                                Party.player2.talk("It will go much better for us!")
+                            #add for after1stdream here
+                            if cell.properties["requirement"] == 'after1stdream':
+                                if Party.player2:
+                                    Party.player2.talk('You crave adventure that badly?!')
+                                    Party.player2.talk("Alas, we cannot!")
+                                  
+                                    #Party.player2.talk("But not quite yet!")
+                                    
+                                else:
+                                    printstuff('How did you get here this early?')
                             else:
-                                printstuff('How did you get here this early?')
+
+                                if Party.player2:
+                                    Party.player2.talk('Hey!')
+                                    Party.player2.talk("If you\'re gonna go that direction...")
+                                    Party.player2.talk("You should turn north first.")
+                                    Party.player2.talk("It will make for a much grander adventure!")
+                                else:
+                                    printstuff('How did you get here this early?')
                         if game.currentplace == 'grassdungeon4b.tmx':
                             if 'after1stdream' not in game.gamedata.events:
                                 if game.var == 1:
@@ -7328,8 +8381,10 @@ Fredrick: Alright, fine.
                 self.coordsupdate()
             if self.name == 'Fredrick':
                 game.tilemap.set_focus(self.rect.x, self.rect.y)
-            game.tilemap.draw(game.screen)
-            fps.tick(30)
+            #game.tilemap.draw(game.screen)
+            screenupdate()
+            #this is ticking too fast
+            fps.tick(25)
             pygame.display.update()
 
             #print(self.rect)
@@ -7394,10 +8449,12 @@ class character(Player):
         elif self.orient == 'right':
             self.image.scroll(0, -240)
     def talk(self,words, *args):
+        screenupdate()
         print(self.name,':',words)
         bigtext = False
         sentenceinterrupt = False
         for i in args:
+            print('Text Modifier is:', i)
             if i == 'bigtext':
                 bigtext = True
         text.rect.center = (275,400)        
@@ -7406,25 +8463,17 @@ class character(Player):
         thinking = 0
         m_open = 0
         font = pygame.font.Font('FreeSans.ttf',17)
-        if not self.nameless:
-            title = font.render(self.name, True, (0,0,0),(255,255,255))
-            titlerect = title.get_rect()
-            titlerect.bottomleft = copy.copy(text.rect.topleft)
-            screen.blit(title,titlerect)
-            screen.blit(text.image, text.rect)
         maxlist = len(words)
         words = list(words)
         words.append('\n')
         currentlist = 0        
         newline = 0
         dist_from_end = 0
-        #print(words)
         fast = None
         soFast = None
+        newLined = False
         letters = []
         for y in range(0,maxlist):
-                #for i in letters:
-                #    print(i)
                 if pygame.key.get_pressed()[pygame.K_c]:
                     soFast = True
                     fast = True
@@ -7448,22 +8497,29 @@ class character(Player):
                # print('Font Linesize is :', font.get_linesize())
                 tso = font.render(z, True, (0,0,0), (255,255,255))
                 tro = tso.get_rect()
-                k = len(words) -1                
+                k = len(words) -1      
+                          
                 if words[y-1] == words[k]  or words[y-1] == '\\':
+                    newLined = True
                     if bigtext:
                         tro.midleft = copy.copy(text.rect.midleft)
                         #Lazy fix for letter location
-                        tro.x += 80
+                        tro.x += 20
                         tro.centery = copy.copy(text.rect.center[1])
                         lastletter = copy.copy(tro)
                     else:
                         #Magic numbers: tro.x has plus 80 (30 for edges, 50 for speaker pic
-                        tro.midleft = (copy.copy(text.rect.topleft[0]) + ((y- dist_from_end)*12) + 80 , copy.copy(text.rect.topleft[1]) + (20*newline) + 15)
+                        #we removed the speaker pic 50 since speaker pic is now above text box
+                        #tro.midleft = (text.rect.topleft[0] + ((y- dist_from_end)*12), text.rect.topleft[1] + (20*newline) + 15)               
+
+                        tro.midleft = (copy.copy(text.rect.topleft[0]) + ((y- dist_from_end)*12) + 10 , copy.copy(text.rect.topleft[1]) + (20*newline) + 15)
                         lastletter = copy.copy(tro)
                 else:
                     tro.left = lastletter.right 
                     tro.top = lastletter.top
-                    lastletter = copy.copy(tro)                
+                    lastletter = copy.copy(tro)     
+                    if y == 40 and newLined == False:
+                        print("!!! NEED LINEBREAK!")           
                 if z == '\\' or z == '\n':
                     dist_from_end = y + 1
                     newline += 1
@@ -7481,8 +8537,9 @@ class character(Player):
                     self.setSprite()
                     m_open = 0                               
                 global game
-                game.actors.draw(game.screen)
-                game.players.draw(game.screen)
+                #screenupdate()
+                #game.actors.draw(game.screen)
+                #game.players.draw(game.screen)
                 if len(game.partymembers) >= 1:
                     game.partymembers.draw(game.screen)
                 tro.centery += (10*newline)
@@ -7498,18 +8555,25 @@ class character(Player):
                 speaker = self
                 oldvalues = [copy.copy(speaker.orient),speaker.image.copy()]
                 speaker.orient = 'down'
+                
                 speaker.setSprite()
                 if m_open:
                     speaker.image.scroll(-120,0)
                 speakerrect = self.image.get_rect()
-                speakerrect.bottomleft = copy.copy(text.rect.bottomleft)
+                speakerrect.bottomleft = copy.copy(text.rect.topleft)
                 speakerrect.x += 15
-                a = copy.copy(text.rect.bottomleft[0] + 20)
-                b = copy.copy(text.rect.y + 10)
-                moo = pygame.Rect((0,0),(self.rect.width,self.rect.height))
-                game.screen.blit(self.image,(a,b),moo)
+                a = copy.copy(text.rect.topleft[0] + 80)
+                b = copy.copy(text.rect.y - 160)
+                moo = pygame.Rect((0,0),(self.rect.width*2,self.rect.height*2))
+                game.screen.blit(pygame.transform.scale2x(self.image),(a,b),moo)
                 speaker.orient = oldvalues[0]
                 speaker.image = oldvalues[1]
+                if not self.nameless:
+                    title = font.render(self.name, True, (0,0,0),(255,255,255))
+                    titlerect = title.get_rect()
+                    titlerect.bottomleft = copy.copy(text.rect.topleft)
+                    screen.blit(title,titlerect)
+                    screen.blit(text.image, text.rect)
                 pygame.display.update()
                 currentlist += 1
                 if z == '-' and words[y-1] == '-':
@@ -7518,7 +8582,7 @@ class character(Player):
                     sentenceinterrupt = True
                     time.sleep(0.5)
                     break
-                if z == '.' or z == '?' or z == '!':
+                if (z == '.' and y + 1 < len(words) and words[y+1] != '.') or z == '?' or z == '!':
                     if soFast: pass #time.sleep(0.1)
                     elif fast:
                         #time.sleep(0.25)
@@ -7615,9 +8679,10 @@ class character(Player):
                 self.image.scroll(-120,0)
             if z == ' ' or z == '.' or z == '!' or z == '?' and thinking == 0:
                 self.setSprite()
-            global game
-            game.actors.draw(game.screen)
-            game.players.draw(game.screen)
+            #screenupdate()
+           # global game
+            #game.actors.draw(game.screen)
+            #game.players.draw(game.screen)
             pygame.display.update()
             currentlist += 1            
             if z == '.' or z == '?' or z == '!':
@@ -7730,7 +8795,7 @@ class character(Player):
         # I feel proud of this next line of code, for some reason
         self.xdistfromplayer, self.ydistfromplayer = (self.rect.x-game.player.rect.x),(self.rect.y-game.player.rect.y)
         distfromplayer = (abs(self.rect.x-game.player.rect.x)//36,abs(self.rect.y-game.player.rect.y)//36)
-        # The efficiency is over, back to the usual dreck
+        # The efficiency is over, back to the usual garbage
         #print(distfromplayer)
         if distfromplayer[0] <= 5 and distfromplayer[1] <= 5:
             self.playerclose = True
@@ -7853,12 +8918,13 @@ class character(Player):
                 game.coverobjects.remove(self)
         
         if self.chatready:
+            #man this is assigning every frame... has to be a better way.
             game.chatholder = self
-            exclamation  = pygame.image.load('sprites/exclamation.png')
-            excrect = exclamation.get_rect()
+            #exclamation  = pygame.image.load('sprites/exclamation.png')
+            #excrect = exclamation.get_rect()
             excrect.midbottom = copy.copy(self.rect.midtop)
             game.chatready = True                       
-            game.specialblits.append([exclamation,excrect,'onetime'])            
+            game.specialblits.append([exclamation,excrect, 'onetime'])            
         self.cell.px, self.cell.py = self.rect.x, self.rect.y
 ##            if game.counter == 60:
 ##                self.waitcounter = 0
@@ -7980,6 +9046,7 @@ class worlditem(Player):
         pass    
         #print('grapes')
 
+
 def choicebooster():
     chosenoption = doublequestion("Choose whether to increase your max hp or mp.",'HP.','MP.')
     x = random.randint(0,2)
@@ -7990,8 +9057,8 @@ def choicebooster():
         if x == 1:
             printstuff("You feel more determined.")
         if x == 2:
-            printstuff("A wave of relaxation washes over Fredrick...")
-        printstuff("His health increases by 10.")
+            printstuff("A wave of relaxation washes over you...")
+        printstuff("Your health increases by 10.")
         x = random.randint(1,4)
         if x == 3:
             #printstuff('You hear a goat bleating faintly...')
@@ -8008,795 +9075,9 @@ def choicebooster():
         x = random.randint(1,4)
         if x == 3:
             #printstuff('You hear a goat bleating faintly...')
-            printstuff("Fredrick's MP further increases by 3.") #I round up for the fans
+            printstuff("Fredrick's MP further increases by 5.") #I round up for the fans
             game.player.player.Mmp += 5
                                             
-class Game(object):
-    def __init__(self, screen):
-        self.screen = screen
-        self.currentplace = None
-        self.areaname = None
-        self.currentmus = None
-        self.backgroundcolor = (0,0,0)
-        self.screenshift = False
-        self.noclip = False
-        self.playercontrol = False
-        self.displaytalking = False
-        self.displaysentence = 'I\'ve got nothing to say to you.'
-        self.atalkedbefore = False
-        self.grassdisplay = False
-        self.currentsentence = ''
-        self.currentletter = 0
-        #lettercounter is 1 so that the title talks immediately.
-        self.lettercounter = 1
-        self.waitcounter = 0
-        self.nextsentence = []
-        self.GAtalkcounter = 0
-        self.counter = 0
-        self.currentfocus = 'Player'
-        self.data = []
-        self.gamedata = None
-        self.currentscene = None
-        self.chatready = None
-        self.specialblits = []
-        self.obstacles = []
-        self.filter = None
-        self.var = 0
-        self.genmuaffection = 0
-        self.percyaffection = 0
-        self.debug = None
-        self.chatholder = None
-        self.nosave = False
-        self.actors: tmx.SpriteLayer = None
-        
-    def killtime(self,seconds):
-##    '''
-##    Waste time without freezing everything, like
-##    time.wait()
-##    Updates and draws the game while waiting
-##    for a set amount of seconds
-##    '''
-        clock = pygame.time.Clock()
-        start = time.time()
-        endtime = start + seconds
-        done = False
-        while not done:
-            self.tilemap.draw(game.screen)
-            pygame.display.update()
-            clock.tick(30)
-            if time.time() >= endtime:
-                done = True
-    def fadeOut(self):
-        #Animate the screen fading to white for entering a new area
-        # or just because.
-        clock = pygame.time.Clock()
-        whiteRect = pygame.Surface(self.screen.get_size())
-        whiteRect.set_alpha(100)
-        whiteRect.fill((255,255,255))
-        # Continuously draw a transparent white rectangle over the screen
-        # to create a fadeout effect
-        for i in range(0,7):
-            clock.tick(15)
-            self.screen.blit(whiteRect, (0,0))  
-            pygame.display.flip()
-        clock.tick(15)
-        screen.fill((255,255,255,50))
-        pygame.display.flip()
-        
-    def displaytalk(self,words):
-        if game.displaytalking == True:
-            print('added to queue')
-            #print(game.nextsentence,'before')
-            game.nextsentence += [words]
-            #print(game.nextsentence,'after')
-        else:
-            game.displaytalking = True
-            game.displaysentence = words
-    def displaytalkreset(self):
-        game.displaytalking = False
-        game.displaysentence = "I\'ve got nothing to say."
-        game.lettercounter = 1
-        game.currentsentence = ""
-        game.currentletter = 0
-        game.waitcounter = 0
-    def BlackOut(self):
-        #Animate the screen fading to black for entering a new area
-        clock = pygame.time.Clock()
-        blackRect = pygame.Surface(self.screen.get_size())
-        blackRect.set_alpha(100)
-        blackRect.fill((0,0,0))
-        # Continuously draw a transparent black rectangle over the screen
-        # to create a fadeout effect
-        for i in range(0,5):
-            clock.tick(15)
-            self.screen.blit(blackRect, (0,0))  
-            pygame.display.flip()
-        clock.tick(15)
-        screen.fill((0,0,0,50))
-        pygame.display.flip()
-    def SPFade(self,dt):
-        clock = pygame.time.Clock()
-        blackRect = pygame.Surface(self.screen.get_size())
-        blackRect.set_alpha(100)
-        blackRect.fill((0,0,0))
-        # Continuously draw a transparent black rectangle over the screen
-        # to create a fadeout effect
-        for i in range(0,5):
-            clock.tick(15)
-            self.screen.blit(blackRect, (0,0))
-            game.players.draw(game.screen)
-            #if len(game.partymembers.sprites()) >= 0:
-            #    game.partymembers.draw(game.screen)
-            game.actors.draw(game.screen)
-            pygame.display.flip()
-        clock.tick(15)
-        screen.fill((0,0,0,50))
-        pygame.display.flip()
-    def findfocus(self):
-        if game.currentfocus == 'Player':
-            game.tilemap.set_focus(game.player.rect.x,game.player.rect.y)
-        elif type(game.currentfocus) == type([]):
-            game.tilemap.set_focus(game.currentfocus[0],game.currentfocus[1])
-        else:
-            game.tilemap.set_focus(game.player.rect.x,game.player.rect.y)
-        
-    def initArea(self, mapFile, introsp=False, startarea=False):
-        """Load maps and initialize sprite layers for each new area"""
-        game.grassdisplay = False
-        game.atalkedbefore = False
-        game.filter = None
-        game.var = 0
-        global Party
-        global characters
-        global AllSprites
-        Allsprites = []
-        
-        for i in allitems:
-            i.kill()
-        for i in characters:
-            i.kill()
-        print('Characters : ',characters)
-        self.tilemap = tmx.load(mapFile, screen.get_size())
-        self.currentplace = str(mapFile)
-        print(self.currentplace)
-        Menu.image = pygame.image.load('menu.png')
-        for i in ('firstplace.tmx','place_of_decisions','place_of_judgement','itemplace.tmx'):
-            if self.currentplace == i:
-                Menu.image = pygame.image.load('menu.png')
-        for i in ('grassstage.tmx','grassstage2.tmx','riverstart.tmx'):
-            if self.currentplace == i:
-                Menu.image = pygame.image.load('grassstagemenu.png')
-        for i in ('snowplace.tmx','snowplace2.tmx'):
-            if self.currentplace == i:
-                Menu.image = pygame.image.load('snowplacemenu.png')
-
-        #Its all spritelayers... every one.
-        self.players = tmx.SpriteLayer()
-        self.objects = tmx.SpriteLayer()
-        self.actors = tmx.SpriteLayer()
-        self.items = tmx.SpriteLayer()
-        self.spobjects = tmx.SpriteLayer()
-        self.coverobjects = tmx.SpriteLayer()
-        self.partymembers = tmx.SpriteLayer()
-        game.tilemap.layers.append(self.coverobjects)
-        # Initializing other animated sprites
-        try:
-            for cell in self.tilemap.layers['Object Layer 1'].find('src'):
-                SpriteLoop((cell.px,cell.py), cell, self.objects)
-        # In case there is no sprite layer for the current map
-        except KeyError:
-            pass
-        else:
-            self.tilemap.layers.append(self.objects)
-        try:
-            #for cell1 in self.tilemap.layers['Object Layer 1'].find('sprite'):
-             #   
-             for cell1 in self.tilemap.layers['Object Layer 1'].objects:
-                 if cell1.type == 'character':
-                     if 'eventrequirement' in cell1.properties:
-                         if cell1.properties['eventrequirement'] not in gamedata.events:
-                             pass
-                         else:
-                             continue
-                     character((cell1.px, cell1.py), cell1,cell1.properties['orient'], self.actors)                                      
-        except KeyError:
-            print('No characters found.')
-            raise
-            #raise 
-            pass
-        try:
-            for cell2 in self.tilemap.layers['Object Layer 1'].objects:
-                if cell2.type == 'item':
-                    #print('item found')
-                    x = worlditem((cell2.px,cell2.py),cell2,self.items)
-                    if 'noitem' not in cell2.properties:
-                        x.item = eval(cell2.properties['itemid'])
-                    self.items.add(x)
-            self.tilemap.layers.append(self.items)
-        except KeyError:
-            print('No items?')            
-            pass
-        try:
-            for z in self.tilemap.layers['Object Layer 1'].objects:
-                #print(z.type)
-                if z.type == 'spobject':
-                    #print('special object found')
-                    x = spobject((z.px,z.py),z,self.spobjects)
-                    self.spobjects.add(x)
-            self.tilemap.layers.append(self.spobjects)
-        except KeyError:
-            print('No items?')
-            raise
-            pass
-        try:
-            #Levelinfo is an object in each map on object layer 1 that indicates (guess what) level info
-            
-            levelinfo = self.tilemap.layers['Object Layer 1'].find('levelinfo')[0]
-            print(levelinfo)
-            print(levelinfo.properties)
-            game.areaname = levelinfo.properties['areaname']                        
-            if 'music' in levelinfo.properties:
-                #if levelinfo.properties['music'] != game.currentmus:
-                pygame.mixer.music.load(levelinfo.properties['music'])
-                pygame.mixer.music.play()
-                #else:
-                #    pygame.mixer.music.stop()
-                #game.currentmus = levelinfo.properties['music']
-            else:
-                pygame.mixer.music.stop()
-            if 'filter' in levelinfo.properties:
-                game.filter = levelinfo.properties['filter']
-            
-        except:
-            print('No level info found!')
-            raise
-        else:
-            #global characters
-            global AllSprites
-            self.tilemap.layers.append(self.actors)
-            for characterz in self.actors:
-                characters.add(characterz)
-                AllSprites.append(characterz)            
-            for i in self.items:
-                #print(i)
-                allitems.add(i)                    
-        # Initializing player sprite
-        if (startarea or startarea == 0):            
-            #links together certain entry and exit points with this variable
-            #Or just makes special one time entry points
-            #print(self.tilemap.layers['Object Layer 1'].objects, 'objects')
-            for i in self.tilemap.layers['Object Layer 1'].objects:
-                #print('Property check',i.properties['startarea'])                
-                try:
-                    if 'startarea' in i.properties:
-                        print(startarea,'looking for')
-                        print(i.properties['startarea'], 'has')
-                        if i.properties['startarea'] == startarea:
-                            startCell = i
-                except KeyError:
-                    print('Keyerror for startarea linking')
-                    pass                        
-        try:   
-            assert startCell
-        except UnboundLocalError:
-            raise('Player needs a place to start! Don\'t you think that\'s kinda important?') from UnboundLocalError        
-            #startCell = self.tilemap.layers['Object Layer 1'].find('playerstart')[0]
-        #It is out of place, but whatever
-        if len(Party) == 1:
-            Party.player2 = Noone
-            Party.player3 = Noone
-        if len(Party) >= 2:
-            startCell.properties['image'] = 'graycloak.gif'
-            #try:
-##            if gamedata.player2:
-##                Party.player2 = gamedata.player2
-##                try:
-##                    assert Party.player2.name != None
-##                except:
-##                    Party.player2.name == 'Genmu'
-##            #except:
-            #    print('Gameinfo has no player 2, or another error occured.')
-            print(Party.player2.name, 'char name')            
-            if Party.player2.name == 'Genmu' or Party.player2.name == 'Alexander Hamilton':
-                startCell.properties['image'] = 'sprites/genmu.gif'#.image = pygame.image.load('sprites/genmu.gif')
-                startCell.name  = 'Genmu'
-                inheritchar = DefGenmu
-            if Party.player2.name == 'Percy':
-                startCell.properties['image'] = 'sprites/percy.gif'
-                startCell.name = 'Percy'
-                inheritchar = DefPercy
-            player2 = character((startCell.px, startCell.py), startCell,startCell.properties['orient'], self.partymembers)
-            player2.character = inheritchar
-            player2.followmode = True
-
-            Party.player2 = player2
-            self.tilemap.layers.append(self.partymembers)
-            
-        for i in game.tilemap.layers['Object Layer 1'].objects:
-            i.assignobject(game)
-        print(startCell.properties)
-        self.player = Player(Party.player1,(startCell.left, startCell.top),
-                             startCell.properties['orient'],startCell, self.players)
-        if introsp:
-            self.player.rect.center = (320,360) 
-        global player
-        print(player, 'Player?')
-        assert self.player != None
-        player = self.player
-        #print(self.items.sprites(), 'items')
-        self.tilemap.layers.append(self.players)
-        self.tilemap.set_focus(self.player.rect.x, self.player.rect.y)
-
-
-        #loading here
-        screenupdate()
-        #to let things render
-        screen.fill((0,0,0))
-        time.sleep(0.1)
-        
-        if game.currentplace == 'grasstownweaponshop.tmx' and 'FirstHomeTownTrip' in game.gamedata.events:
-            game.player.talk('So, here it is.')
-            del game.gamedata.events['FirstHomeTownTrip'] 
-            game.gamedata.events['AfterSwordShop'] = True
-        if game.currentplace == 'grasstownweaponshop.tmx' and 'genmubondready' in game.gamedata.events:
-            game.initextras()
-        if game.currentplace == 'grasstownhotelhallway.tmx' and 'after1stdream' in game.gamedata.events:
-            game.killtime(1)
-            printstuff('Fredrick is feeling a sense of deja vu.')
-            #back to the forest
-            del game.gamedata.events['hasroom']
-        
-
-        if game.currentplace == 'grassstage2a.tmx':
-            if 'metorbsalesman' in game.gamedata.events:
-                for i in game.spobjects:
-                    if i.name == 'desk':
-                        i.image = pygame.image.load('grassstageshopclosed.png')
-            #if 'grassstageflyer' in game.gamedata.events:
-            #    for i in game.gamedata.events:
-            #        if i.name == 'flyer':
-            #            i.rect.x += 8008132
-            
-
-        if game.currentplace == 'grasstown.tmx':
-            if 'genmuswordsearch' in game.gamedata.events:
-                #game.player.talk('Don\'t you live somewhere?')
-                Party.player2.talk('Is there a hotel or something around here?')
-                Party.player2.talk("My sword den is too far away...")
-                
-                #Party.player2.talk('Perhaps we will stumble upon it another day.')
-                del game.gamedata.events['genmuswordsearch']
-                game.gamedata.events['grasstownhotel'] = True
-                game.gamedata.events['firstswordshop'] = True
-                return
-            elif 'percypizza' in game.gamedata.events:
-                #game.player.talk('(I\'m hungry...)')
-                pass
-            elif 'tohotel' in game.gamedata.events:
-                Party.player2.talk('What do we do now?')
-                game.player.talk('Wait until tomorrow...')
-                Party.player2.talk('But that\'s so LONG!')
-                Party.player2.talk('How will I become a great swordsman\\if I sit around and do nothing?')
-                game.player.talk('You can stay at a hotel till then.')
-                del game.gamedata.events['tohotel']
-                game.gamedata.events['athotel'] = True
-                
-                pass
-        if game.currentplace == 'grassdungeon2.tmx':
-            if 'grassskit1' not in game.gamedata.events:
-                
-                Party.player2.chatready = True
-                game.chatready = True
-                game.gamedata.events['grassskit1'] = True
-        if game.currentplace == 'grassdungeon3.tmx':
-            if 'genmufoundsword' in game.gamedata.events:
-                for i in allitems:
-                    if i.name == 'gsword':
-                        moo = i
-                moo.rect.x += 9999
-            
-        if game.currentplace == 'grassdungeon4.tmx':
-            game.cutgrassnum = 0
-            
-        if game.currentplace == 'grassdungeon5.tmx':
-            #this aint working
-            if 'maginyudone' in game.gamedata.events and 'swordnyudone' not in game.gamedata.events:
-                print('maginyu placed')
-                
-                for i in game.actors:
-                    if i.name == 'MagiNyu':
-                        i.rect.bottomleft = (736,640)
-                    if i.name == 'Nyu':
-                        i.rect.bottomleft = (672,640)
-            elif 'swordnyudone' in game.gamedata.events and 'maginyudone' not in game.gamedata.events:
-                print('swordnyu placed')
-                for i in game.actors:
-                    if i.name == 'Nyu':
-                        i.rect.bottomleft = (736,640)
-                    if i.name == 'SwordNyu':
-                        i.rect.bottomleft = (672,640)
-            elif 'swordnyudone' in game.gamedata.events and 'maginyudone' in game.gamedata.events:
-                print('maginyu and swordnyu placed')
-                for i in game.actors:
-                    if i.name == 'Nyu':
-                        i.rect.bottomleft = (688,640)
-                    if i.name == 'SwordNyu':
-                        i.rect.bottomleft = (736,640)
-                    if i.name == 'MagiNyu':
-                        i.rect.bottomleft = (640,640)
-                    #should characters be responsive and turn to face player?
-        if game.currentplace == 'grassdungeon15.tmx':
-            for i in allitems:
-                if i.name == 'cutgrass':
-                    i.tangible = False
-                    i.specialproperties['cut'] = True
-                    i.image = pygame.image.load('grasscut.png')
-            game.gamedata.events['allcut15'] = True
-        if game.currentplace == 'grassdungeonsecret.tmx':
-            if 'blackcloakready' in game.gamedata.events: 
-                game.initseconds()
-            else:
-                game.initextras()
-        if 'grassdungeon' in game.currentplace:
-            a = copy.copy(game.currentplace)
-            a = a.strip('grassdungeon')
-            a = a.strip('.tmx')
-            a = 'allcut' + a
-            print(a,'a')
-            if a in game.gamedata.events:
-                for i in allitems:
-                    if i.name == 'cutgrass':
-                        i.tangible = False
-                        i.specialproperties['cut'] = True
-                        i.image = pygame.image.load('grasscut.png')
-        if game.currentplace == 'grassdungeon8.tmx':
-            if 'grassskit2' not in game.gamedata.events:
-                Party.player2.chatready = True
-                game.chatready = True
-                game.gamedata.events['grassskit2'] = True
-        if game.currentplace == 'grassdungeon18.tmx':
-            for i in allitems:
-                if i.tile.properties['image'] == 'cutgrasssmall.png':
-                    i.tangible = False
-            game.cutgrassnum = 0
-        if game.currentplace == 'grassdungeon19.tmx':
-            if 'originalencounter' not in game.gamedata.events:
-                Party.player2.chatready = True
-                game.chatready = True
-                game.gamedata.events['originalencounter'] = True
-        if game.currentplace == 'grasstown.tmx':
-            if 'percystart' in game.gamedata.events:
-                game.initextras()
-        if game.currentplace == 'grasstownhotel.tmx':
-            if 'percypizza' in game.gamedata.events:
-                pass
-            #bro wtf is this shit
-                #printstuff("Fredrick is feeling hungry.")
-                #printstuff("Fredrick remembers that the pizza place\\ nearby has good lunch specials...")
-                #game.player.talk('You know, I\'m kinda hungry...')
-                #game.player.talk('Maybe I\'ll get pizza.')
-        if game.currentplace == 'grasstownhotelhallway.tmx' and 'after1stdream' in game.gamedata.events:
-            game.initextras()
-            Party.player2 = DefGenmu
-            printstuff('Genmu has rejoined the party.')
-            printstuff('Fredrick and Genmu head back to the forest.')
-            game.initArea('grassdungeon4b.tmx')
-            del game.gamedata.events['after1stdream']
-        if game.currentplace == 'peteza.tmx':
-            if 'percypizza' in game.gamedata.events:
-                for i in game.actors:
-                    if i.name == 'Percy':
-                        char = i
-                char.talk('Hey, Fredrick!')
-                char.talk('I already ordered a pizza.')
-                #that genmu guy...
-                # we should all hang out together!
-                #go pick up some chicks maybe??? Huh???
-                #"He likes swords?", what?
-        if game.currentplace == 'snowplace.tmx':
-            if 'talkedtopercy' in game.gamedata.events and 'talkedtopercy2' not in game.gamedata.events:
-                Party.player2.talk("Just go up from here and then to the right.")
-                Party.player2.talk("That will take you to the foot of the mountain...")
-                Party.player2.chatready = True
-                game.gamedata.events['talkedtopercy2'] = True
-        for i in allitems:
-            #what does tis do???
-            
-            if 'moneyid' in i.tile.properties:
-                x = 'money'
-                y = str(i.tile.properties['moneyid'])
-                x += y
-                if x in game.gamedata.events:
-                    i.tile.properties['opened'] = 1
-                    if i.tile.name == 'safe':
-                        i.image = pygame.image.load('moneychestopen.png')
-            if 'chestid' in i.tile.properties:
-                x = 'chest'
-                y = str(i.tile.properties['chestid'])
-                x += y
-                if x in game.gamedata.events:
-                    i.tile.properties['opened'] = 1
-                    if i.tile.name == 'chest':
-                        i.image = pygame.image.load('chestopen.png')
-        #lets things be called immediately after stage initialization
-        #and not have them occur on a black screen.
-        screenupdate()
-
-
-    def initextras(self, everyone=None):
-        '''
-        Used to spawn characters at a certain time.
-        Characters made this way must:
-        1. must have type != character
-        2. have sprite1 in their cell's custom properties.
-
-        Also only works for one character at the time of writing.
-        '''
-        SpawnCell = self.tilemap.layers['Object Layer 1'].find('sprite1')[0]
-        print(SpawnCell)
-        
-        global specialchar
-        specialchar = character((SpawnCell.px, SpawnCell.py), SpawnCell,
-            SpawnCell['orient'], self.actors)
-        print(specialchar.name, specialchar)
-        characters.add(specialchar)
-        AllSprites.append(specialchar)
-    def initseconds(self):
-        '''
-        Inits other special characters
-        (lol plural it only works on one...)
-        '''
-        SpawnCell = self.tilemap.layers['Object Layer 1'].find('sprite2')[0]
-        print(SpawnCell)
-        global specialchar
-        specialchar = character((SpawnCell.px, SpawnCell.py), SpawnCell,
-            SpawnCell['orient'], self.actors)
-        print(specialchar.name, specialchar)
-        characters.add(specialchar)
-        AllSprites.append(specialchar)
-
-    def intro(self):
-        Font = pygame.font.Font('FreeSans.ttf',25)
-        smallfont = pygame.font.Font('FreeSans.ttf',22)
-        self.BlackOut()
-        screen.fill((0,0,0))
-        time.sleep(2)
-        #printstuff('Hmm.', 1,1,0,1)
-        screen.fill((0,0,0))
-        #if game.notfirsttime:
-        #    printstuff('Were you unsatisfied with your outcome?\\It was the one most fitting for you.')
-        
-        #printstuff('It has been a while\\since someone like you has come here.',1,1)
-        screen.fill((0,0,0))
-        printstuff('Before we begin,\\I would like to know your name.',1,1,0,1)
-        name = []
-        done = False
-        shift = False
-        keyboard = smallfont.render('Use the keyboard!',True, (200,200,200),(0,0,0))
-        keyboardrect = keyboard.get_rect()
-        keyboardrect.center = (320,460)
-        while not done:
-            game.screen.blit(keyboard,keyboardrect)
-            print(name)
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT):
-                    shift = True
-                if event.type == pygame.KEYUP:
-                    print(event.key)
-                    if event.key == pygame.K_BACKSPACE:
-                            currentname.fill((0,0,0))
-                            game.screen.blit(currentname, namerect)
-                            if len(name) > 0:
-                                name.pop((len(name)-1))
-                            else:
-                                pass
-                    if event.key == pygame.K_RETURN:
-                        Name = ''
-                        for i in name:
-                            Name += i
-                        done = True
-                    if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
-                        shift = False
-                    for i in ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'):
-                        if len(name) <= 10:
-                            if event.key == ord(i) and shift == True:
-                                k = i.capitalize()
-                                name.append(k)
-                            elif event.key == ord(i) and shift == False:
-                                name.append(i)
-                        
-            moo = ''
-            for i in name:
-                moo += i           
-            currentname = Font.render(moo,True, (255,255,255),(0,0,0))
-            namerect = currentname.get_rect()
-            namerect.center = (320,370)
-            game.screen.blit(currentname,namerect)
-            pygame.display.update()
-            moo = ''
-        screen.fill((0,0,0))
-        Name = Name.lower()
-        playername  = copy.copy(Name)
-        Name = Name.capitalize()       
-        if Name.lower() == 'nothanks':
-            printstuff('Pfff, whatever.', 1, 1,0,1)
-            return
-        printstuff(Name+"...", 1, 1,0,1)
-        screen.fill((0,0,0))
-        if Name.lower() == 'genmu':
-            printstuff('What are ya talking about?', 0,0,1, 1)
-        if Name.lower() == "fredrick":
-            printstuff('Doubt it.',0,0,0,1)
-       
-        screen.fill((0,0,0))
-##        for i in ('So, i'):
-##            'This story is unlike most others.', 'Choices you make will directly affect the story,\in ways both expected and unexpected.',
-##                  'Also, as in real life, once a choice \\has been made, it cannot be undone.\\You can only move forward.',
-##                  'Be cautious, but also trust your heart.', 'That being said...'):
-##            printstuff(i,1,1)
-        screen.fill((0,0,0))
-        
-      
-        self.fadeOut()
-        self.initArea('namingstage.tmx', True)
-        screenupdate()
-        printstuff('See this boy?',1,1)
-        for i in (-160,-200,-160,0):
-            self.player.image.scroll(i,0)
-            self.player.setSprite()
-            time.sleep(0.1)
-            screenupdate()
-        #He blinks.
-        printstuff('Give him a name.',1,1)
-        self.player.emote('sprites/angryfredrick.png')
-        name = []
-        done = False
-        shift = False
-        keyboard = smallfont.render('Again, keyboard.',True, (200,200,200),(0,0,0))
-        keyboardrect = keyboard.get_rect()
-        keyboardrect.center = (120,400)
-        while not done:
-            game.screen.blit(keyboard,keyboardrect)
-            print(name)
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and (event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT):
-                    shift = True
-                if event.type == pygame.KEYUP:
-                    print(event.key)
-                    if event.key == pygame.K_BACKSPACE:
-                            currentname.fill((0,0,0))
-                            game.screen.blit(currentname, namerect)
-                            if len(name)  > 0:
-                                name.pop((len(name)-1))
-                            else:
-                                pass
-                    if event.key == pygame.K_RETURN:
-                        Name = ''
-                        for i in name:
-                            Name += i
-                        done = True
-                    if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
-                        shift = False
-                    for i in ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'):
-                        if len(name) <= 10:
-                            if event.key == ord(i) and shift == True:
-                                k = i.capitalize()
-                                name.append(k)
-                            elif event.key == ord(i) and shift == False:
-                                name.append(i)
-            moo = ''
-            for i in name:
-                moo += i           
-            currentname = Font.render(moo,True, (255,255,255),(0,0,0))
-            namerect = currentname.get_rect()
-            namerect.center = (315,300)
-            game.screen.blit(currentname,namerect)
-            pygame.display.update()
-            moo = ''
-        self.player.setSprite()
-        screen.fill((0,0,0))
-        screenupdate()
-        #printstuff((Name+'...'), 1, 1)
-        screen.fill((0,0,0))
-        screenupdate()
-        funnyGuy = False
-        #I'm sure you all are familiar with these words already...
-        for _ in ['piss','shit','ass','dick','penis','fuck','asshole','bastard','tits','cunt','pussy','alexander hamilton' 
-                            ,'damn','sans']:
-            if _ in Name.lower():
-                funnyGuy = True
-        if funnyGuy:
-            #printstuff(('You\'re kidding, right?'),1,1,0,1)
-            #screen.fill((0,0,0))
-           # screenupdate()
-            printstuff(('This will be a long journey\\for us, it seems...'),1,1,0,1)
-            screen.fill((0,0,0))
-            screenupdate()
-        elif Name.lower() == playername:
-            printstuff('I suppose that would be best.',1,1,0,1)
-            screen.fill((0,0,0))
-            printstuff("However... he has already been given a name.",1,1,0,1)
-            #printstuff('He is not a representation of yourself.',1,1,0,1)
-            screen.fill((0,0,0))
-            #printstuff('It would be wise to remember that...',1,1,0,1)
-            #printstuff('You and him are not the same.')
-            #printstuff('He is a tool with which you impart your desires..')
-            #printstuff('What he is not is a representation of yourself.')
-        elif Name.lower() == 'fredrick':
-            printstuff('...',1,1,0,1)
-            printstuff('So, you learned from your mistakes\\and made the right decision.',1,1,0,1)
-            #printstuff('Quite fitting.',1,1)
-            #first time
-            #Seriously? You already know whats going to happen?
-            #R=            
-        else:
-            printstuff((Name+'...'),1,1,0,1)
-            screen.fill((0,0,0))
-            screenupdate()
-            printstuff(('What kind of a name is that?'),1,1,0,1)
-            screen.fill((0,0,0))
-            screenupdate()
-            printstuff(('Unfortunately, his name is already Fredrick.'), 1,1,0,1)
-            screen.fill((0,0,0))
-            screenupdate()
-            self.BlackOut()
-            #printstuff(('Unfortunately, a name is not\\what you have control over...'),1,1)
-            #printstuff((''),1,1)
-            #screenupdate()
-        self.BlackOut()
-        printstuff(('Now, you will decide what kind\\of person the boy will become.'),1,1,0,1)
-        screen.fill((0,0,0))
-        pygame.display.update()
-       # screenupdate()
-        #self.fadeOut()
-        printstuff(('For this, there are some\\choices for you to make.'),1,1,0,1)
-        screen.fill((0,0,0))
-        printstuff(('Make sure your answers\\reflect that which you truly desire.'),1,1,0,1)
-        screen.fill((0,0,0))
-        #screenupdate()
-        #printstuff(('It is the only way to achieve\\that which you want most...'),1,1,0,1)
-        self.fadeOut()
-        #Where are the questions?
-##        Name = 'Fredrick'
-##        moo = ''
-##        for i in name:
-##            moo += i
-##       
-##        currentname = Font.render(moo,True, (255,255,255),(0,0,0))
-##        namerect = currentname.get_rect()
-##        namerect.center = (320,300)
-##        game.screen.blit(currentname,namerect)
-##        pygame.display.update()
-##        moo = ''
-        #time.sleep(1)
-        screen.fill((255,255,255))
-        
-    def main(self):
-        title = pygame.image.load('title.png')
-        titleimage = title.get_rect()
-        self.fadeOut()
-        BLACK = (0,0,0)
-        z = time.time()
-        for I in range(0,60):                                     #8.3 motherfuckers
-            pygame.draw.line(screen, BLACK, (197,479),(197,479 - (I*8.3)))
-            pygame.draw.line(screen, BLACK, (0,110),(0 + (I*11),110))
-            pygame.draw.line(screen, BLACK, (442,0),(442,0 + (I*8.3)))
-            pygame.draw.line(screen, BLACK, (639,190),(639 - (I*11), 190))
-            pygame.display.update()
-            fps.tick(30)
-        #print((time.time()-z), 'josh')
-        #You mean joj?
-        self.fadeOut()
-        screen.fill((255,255,255))
-        time.sleep(0.25)
-        done = False
-        Font = pygame.font.Font('FreeSans.ttf', 25)
-        smallfont = pygame.font.Font('FreeSans.ttf',22)
-        titlepointer = choicepointer((0,0,32,32),'titlepointer.png',0)
-        moo = 0
-        # check for save file before allowing loading.
-        #gamedata.loaddata()
-        mainmenuselect(self)
 
 def mainmenuselect(self):
         title = pygame.image.load('title.png')
@@ -8824,11 +9105,11 @@ def mainmenuselect(self):
             contrect.center = (320,320)
             screen.blit(cont,contrect)
             screen.blit(begin, beginrect)
-            move = smallfont.render('Move with Arrow Keys. Attack with Z/X/C.',True, ((150,100,100)),(255,255,255))
+            move = smallfont.render('Move with Arrow Keys. Interact with Z.',True, ((150,100,100)),(255,255,255))
             moverect = cont.get_rect()
             moverect.center = (160,360)
             screen.blit(move,moverect)
-            move2 = smallfont.render('S to Block. Enter for Menu.',True, ((150,100,100)),(255,255,255))
+            move2 = smallfont.render('Enter for Menu.',True, ((150,100,100)),(255,255,255))
             move2rect = cont.get_rect()
             move2rect.center = (160,400)
             screen.blit(move2,move2rect)
@@ -8990,7 +9271,7 @@ def mainmenuselect(self):
 ##                    print(characters)
 ##                    moo = len(AllSprites)
 ##                    character = AllSprites[moo-1]
-                    #Hey, this is really on the nose, so it\'s scrapped.
+                    #Hey, this lacks subtlety, so it\'s scrapped.
                     #ALso, deez nutz ha gotteem
 ##                    character.talk('Sometimes, in life, you have to fight.')
 ##                    character.talk('There may be a reason to fight, \\or perhaps your reason is that there is none.')
@@ -9129,19 +9410,11 @@ def mainmenuselect(self):
             for i in game.coverobjects:
                 if i.characterbehind == True and i.playerbehind == False:
                     game.players.draw(game.screen)
-            if game.filter:
-                if game.filter == 'dim':
-                    blackRect = pygame.Surface(self.screen.get_size())
-                    blackRect.set_alpha(100)
-                    blackRect.fill((0,0,0))
-                    self.screen.blit(blackRect, (0,0))  
-                    pygame.display.flip()
-
             
             if game.currentplace == 'place_of_judgement.tmx' and intro == False:
                 showtitlecard('Gray_Area_Title.png')
                 printstuff('A voice calls out, urging those who\\hear it to move with the arrow keys.')
-                printstuff('This confuses the boy,\\who does not know what the "arrow keys" are.')
+                printstuff('This confuses the young man,\\who does not know what the "arrow keys" are.')
                 #game.speciablits.append('Move with arrow keys!','bottom')
                 intro = True
             if game.displaytalking:
@@ -9175,6 +9448,26 @@ def mainmenuselect(self):
                 if len(i) >= 3:
                     if i[2] == 'onetime':
                         game.specialblits.remove(i)
+
+            for i in game.screenblits:
+                sx, sy = i[1].topleft
+                area = pygame.Rect((0, 0),
+                                                               (i[1].width,
+                                                                    i[1].height))
+                screen.blit(i[0], (sx-ox, sy-oy), area)
+                if len(i) >= 3:
+                    if i[2] == 'onetime':
+                        game.specialblits.remove(i)
+                
+
+
+                       
+            if game.filter == 'dim':
+                blackRect = pygame.Surface(self.screen.get_size())
+                blackRect.set_alpha(100)
+                blackRect.fill((0,0,0))
+                self.screen.blit(blackRect, (0,0))  
+                pygame.display.flip()
             pygame.display.flip()
 
 if __name__ == '__main__':
@@ -9183,7 +9476,7 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((640,480))#
     pygame.display.set_caption("ThatOneGame")
     global game
-    game = Game(screen)
+    game: Game = Game(screen)
     game.gamedata = gamedata
     pc.gameevents = game.gamedata.events
     #try:

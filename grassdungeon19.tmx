@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="509">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="510">
  <tileset firstgid="1" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="playerstart.png" width="32" height="32"/>
   <tile id="0">
@@ -240,7 +240,7 @@
   <object id="507" name="MagiNyu" type="character" x="608" y="352" width="32" height="64">
    <properties>
     <property name="SPflag1" value=""/>
-    <property name="description" value="Turn on your location"/>
+    <property name="description" value="Turn on your location i just wanna talk"/>
     <property name="image" value="sprites/maginyu.gif"/>
     <property name="name" value="Nyu"/>
     <property name="orient" value="left"/>
@@ -253,6 +253,17 @@
     <property name="image" value="sprites/swordnyu.gif"/>
     <property name="name" value="Nyu"/>
     <property name="orient" value="left"/>
+   </properties>
+  </object>
+  <object id="509" name="Gray" type="character1" x="608" y="544" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Want a sword?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+    <property name="sprite1" value=""/>
    </properties>
   </object>
  </objectgroup>

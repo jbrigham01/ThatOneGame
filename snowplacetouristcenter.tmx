@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="51">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="53">
  <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
   <image source="grassstage.png" width="1440" height="1440"/>
  </tileset>
@@ -29,11 +29,11 @@
   <image source="snowplacecoffeeshop.png" width="960" height="480"/>
  </tileset>
  <tileset firstgid="8127" source="grassdungeon21.tsx"/>
- <tileset firstgid="9351" source="grassdungeon5snow.tsx"/>
- <tileset firstgid="11051" source="snowmountainresortentrance.tsx"/>
+ <tileset firstgid="9903" source="grassdungeon5snow.tsx"/>
+ <tileset firstgid="11603" source="snowmountainresortentrance.tsx"/>
  <layer id="32" name="Tile Layer 2" width="30" height="15">
   <data encoding="base64" compression="zlib">
-   eJxt1EWQ1wUYx+G/gbQCcpFQQhCVUIcZQWLpDkHp7loQXEq62QWU7m5YRbq7QaV36Vq6FpZGl3qY8fg7PPOdz+09vYUyhUKFKUJRwihGcUpQklKUpgxlKUd5KlCRSlSmClX5nmpU5wd+pAY1qUVt6lCXetSnAQ1pRGOa0JRmNKcFLWlFa9rQlnaE054O/ERHOvEzEXSmC13pRnd+oQc96UVv+tCXfvRnAAMZxGCGMJRIohjGcEbwK78xklGMZgxjGcd4JjCRSeTPGwpNsVOZxnRmMJNZzGYOc5nHfBawkEUsJprf+YMl/MlSlrGcFaxkFatZw1rWsZ4NbGQTm9nCVraxnR3sZBe72cNe9rGfv/ibfzjAQQ5xmCMc5RgxxHKcE5zkFKc5w1nOcZ4LXCSOS1zmCle5xnVucJNb3OYO8dzlHgnc5wEPA/oRj3lCIs95wUteEcocCr3F27zDuyThPZKSjOSkICWpSM37fEAa0gZ0Oj4kPR+RgYxkIjMf8wlZyEo2svMpOcjJZ+Tic77gS3KTh7zkC+iv+Jpv+JYCFOQ7ClGYIhQljGIUpwQlKUVpylCWcpSnAhWpROWArsKUbP6BrUFNalGbOtSlHvVpQEMa0ZgmNKUZzWlBS1rRmja0pV1Ah9OeDkTQmS50pRvd/7+rh+1JL3rTh770oz8DGMggBjOEoUQSFdDDGM4IRjOGsYxjPBOYyCQmv7mBqUxjOjOYySxmM4e5zGM+C1gY0ItYTDRLWcZyVrCSVaxmDWtZx3o2sJFNbGYLW9nGdnawk13sDug97GUfBzjIIQ5zhKMcI4ZYjnOCk5ziNGc4yznOc4GLxHGJy1zhKte4zg1ucovb3CGeu9wjgfs84CGPeMwTnvKMf/mPRJ7zGvTpJt8=
+   eJxt1EVwFlYYhtEfLVYDNmgLFFpcNhR3CBCghrtrgBa34JYEC+7u7sHdC8Hd3R3a4oeZLv/FmXee3Xc3t1DaQKAwRShKMYpTgpKUojRlKEs5QihPBSoSSiUqU4Vf+JXf+J0/qEo1qlODmtSiNnWoSz3q04CGNKIxTWhKM5rTgpa0ojVtCKMt7WjPn/xFBzrSic50oSvd6E4PetKLcHrTh770oz8DGMggBjOEoUQQSRTDGM4IRjKKaEYzhrGMYzwTPr85TyAwyU5mClOZxnRmMJNZzGYOc5nHfBawkEUsZglLWcZyVrCSVaxmDWtZx3pi2MBGNrGZLWxlG9vZwU52sZs97GUf+znAQQ7xN4c5QixHOcZxTnCSU5zmDGc5x3kucJFLXOYKV7nGdW5wk1vc5g53ucd9HvCQRzzmCU95xnNeBOmXvOI1b3nHez7wkUC6QCAOcYlHfBKQkC9IRGKSkJRkfMlXfM03fBukk5OClKQiNWlISzrS8x3fk4GMZOIHMpOFH/mJrGQjOznISS5yB+k85CUf+fmZAhSkEIUpQlGKUZwSlKQUpSlDWcoRQnkqUJFQKgXpykzK6D+wValGdWpQk1rUpg51qUd9GtCQRjSmCU1pRnNa0JJWtA7SbQijLR3oSCc604Wu/9/V3fagJ70Ipzd96Es/+jOAgQxiMEMYGqQjiCSKUUQzmjGMZRzjmcDEzzcwmSlMZRrTmcFMZjGbOcxlHvOD9AIWsojlrGAlq1jNGtayjvXEsIGNbGIzW9jKNrazg53sYjd7gvRe9rGfwxwhlqMc4zgnOMkpTnOGs5zjPBe4yCUuc4WrXOM6N7jJLW5zh7vc4z4PeMgjHvOEpzzjOS94ySte8w//8h9veMs7PgHelicJ
   </data>
  </layer>
  <layer id="33" name="Tile Layer 1" width="30" height="15">
@@ -67,7 +67,7 @@
     <property name="returnarea" value="3"/>
    </properties>
   </object>
-  <object id="48" name="Percy" type="character" x="448" y="224" width="32" height="64">
+  <object id="48" name="Percy" type="character" x="288" y="-96" width="32" height="64">
    <properties>
     <property name="" value=""/>
     <property name="SPflag1" value=""/>
@@ -80,6 +80,17 @@
   <object id="49" x="352" y="320" width="224" height="32">
    <properties>
     <property name="event" value=""/>
+   </properties>
+  </object>
+  <object id="52" name="Lucy" type="character" x="448" y="192" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Do... do you like sheep ladies...?"/>
+    <property name="image" value="sprites/Loreiplayer.png"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
    </properties>
   </object>
  </objectgroup>

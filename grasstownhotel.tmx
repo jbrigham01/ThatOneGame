@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="56">
  <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
   <image source="grassstage.png" width="1440" height="1440"/>
  </tileset>
@@ -67,7 +67,7 @@
     <property name="" value=""/>
     <property name="SPflag2" value=""/>
     <property name="description" value="10 tips to make your angry goat into a happy one"/>
-    <property name="image" value="sprites/graymask.gif"/>
+    <property name="image" value="sprites/Loreiplayer.png"/>
     <property name="name" value="Shopkeeper"/>
     <property name="orient" value="down"/>
     <property name="sprite" value=""/>
@@ -136,7 +136,7 @@
     <property name="" value=""/>
     <property name="description" value="There's some strange fellow practicing his swordsmanship in the forest...\ Maybe you could fight him?"/>
     <property name="image" value="graycloak.gif"/>
-    <property name="name" value="Unpolite Fellow"/>
+    <property name="name" value="Polite Fellow"/>
     <property name="orient" value="down"/>
     <property name="sprite" value=""/>
    </properties>

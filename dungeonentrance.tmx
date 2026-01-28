@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="75" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="75" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="58">
  <tileset firstgid="1" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9" columns="3">
   <image source="bettertiles.png" width="96" height="96"/>
  </tileset>
@@ -91,6 +91,16 @@
     <property name="image" value="chest.png"/>
     <property name="itemid" value="blade"/>
     <property name="opened" value="0"/>
+   </properties>
+  </object>
+  <object id="56" x="480" y="-64" width="32" height="1360">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="57" x="1056" y="-64" width="32" height="1360">
+   <properties>
+    <property name="block" value=""/>
    </properties>
   </object>
  </objectgroup>

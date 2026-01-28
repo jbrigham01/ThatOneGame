@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="19">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="25">
  <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
   <image source="grassstage.png" width="1440" height="1440"/>
  </tileset>
@@ -18,6 +18,7 @@
  <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
   <image source="grassstage3.png" width="1600" height="1088"/>
  </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
  <layer id="1" name="Tile Layer 2" width="50" height="34">
   <data encoding="base64" compression="zlib">
    eJztz8kJgEAQRNGBTtwlHkfjccnFvg+CNxl8D/69qhQAAAAA4G+GaBuzKZvj63XvLdFWszXbOvqxR9uRndnV0Q+AJzdCtRCT
@@ -25,7 +26,7 @@
  </layer>
  <layer id="2" name="Tile Layer 1" width="50" height="34">
   <data encoding="base64" compression="zlib">
-   eJzt1T1KBDEUwPHZJKuIhVqJ9WBjq4iFttY24gHEyr2CoIsHECs9wDaCK9Yi3mG7EfEA4gFsZN0wCT4fb18Ssl/CG/iRqTLvP0VS6qIohRBCCCGEEOKfeW1Mf4YYXw3avBpuWU1/btywrmhbjL0ZarENlarhhgro6VrHrU+qNomWb8WDDSF9Xeu41XfAljlgCcjt2AjA/zzUUZjfDvuOWzaBXSC35SggtiGm41D/dQDkttinu1IUl5o2qY7clseAdkJLqOPC7eedA7kt7wEPCS1+9h7RYRu6bj/vHshtWTS8N/fNlI4+6vANFSO3ZcfwFkBLm2DnP9PDxTSMouXE8LZRC+WOEduQ23JteMeohZIyZ2pL7P3yYnhXqIUy6g7fAs/k00FHi2n5NLxn1EIZR0eV2LHW5H2gFsosdOw3eauohTKOhhJ13AwabpmOHwM/EjA=
+   eJzt1T1KBDEUwPHZJKuIhVqp9WBjq4iFttaCiAeQrfQKgi4eQKz0ANsIrliLeIftRsQDiAewkXXDTPDt4+1LQvZjijfwI5km8/5TzOQ6y3IhhBBCCCGEqLmjteH798bsZwrx06DNq9GW1eznxg0birbN2K9Ri20oVAk3FEBPlzrV+qJK02j5VTzY4NPXpU61ug7YMgcsAakdmx74nfs6MvPfYfe4ZQvYA1JbTjxCG0I6jvWwQyC1xV7dlSy71rRpdaS2PHu0I1p8HVfVec4lkNry6fEU0eJm7xEdtqFbnec8Aqkti4b3UT0zpqOPOlxDwUht2TW8BdDSJtj5L/RoIQ3jaGkZ3g5qoTwwQhtSW24N7xS1UGLmjG0J/b+8Gd4NaqGMu8O1wG/y2aDjnGn5NrxX1EKZREcR2bHe5H2hFkodOg6avFXUQplEQ4467gYN90zHH717EnU=
   </data>
  </layer>
  <layer id="3" name="Tile Layer 3" width="50" height="34">
@@ -79,7 +80,7 @@
     <property name="block" value=""/>
    </properties>
   </object>
-  <object id="13" x="640" y="608" width="448" height="16">
+  <object id="13" x="608" y="622" width="512" height="16">
    <properties>
     <property name="block" value=""/>
    </properties>
@@ -114,6 +115,26 @@
     <property name="event" value=""/>
     <property name="eventrequirement" value="metthewildanimal"/>
     <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="21" x="595" y="625" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="22" x="1102" y="629" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="23" x="1108" y="864" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="24" x="592" y="864" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
    </properties>
   </object>
  </objectgroup>

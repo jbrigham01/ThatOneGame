@@ -16,11 +16,10 @@ class bond:
         self.level = 1
         self.desc = description
         self.image  = image
-    
         # You and I are basically mortal enemies...
         # And yet you still want to pal around and talk.
         # ...
-        # I\'ve been stuck for a while.
+        # I\'ve been stuck here for a while.
     def call(self):
         #if gameevents:
         #    printdummy('yes')
@@ -45,6 +44,8 @@ class bond:
             #when I talk about you with my brother...
             #He actually smiles for once.
             #it really creeps me out.
+            #he\'s not allowed to enjoy you!
+            #only me
             printdummy('Your phone rings, but only for a moment.')
             printdummy('I thought you were dating my brother...?')
         #percival and lucille?
@@ -347,24 +348,25 @@ heal = spell('Heal','Restores minor wounds or injuries.','Basic healing magic.',
 slicer = spmove('Slice','stepslice','Slice with your sword.','Can do up to three','hits in a row.','Range: 1',50)
 commandslice = spmove('Command Slice','commandslice','Use special inputs to',' use different moves.','Masters can make','great use of it...',50)
 quickslice = spmove('Quick Slice','quickslice','Thrust forward with your sword.','Can do two hits in a row.','Range: 2','',30)
-Noattack = spmove('None','None','There is no move equipped here.','well, technically there is, but...','','',0)
+Noattack = spmove('None','None','There is no move equipped here.','well, technically the lack of a move','is equipped here.','',0)
 rekkoha = spmove('Lightfall','lightfall', "SPMOVE","Attack all columns in front of you", "with pillars of light.",
                     "Don't get hit while it starts up...",500,'')
 counter = spmove('Counter', 'counter','On successful block, counterattack.','Damage is based off move countered.','','',50)
 meteor = spmove('Meteors','meteor','Summon meteors to kill everything.','Charges faster than other moves.','Stronger if you\'re lucky...','',150)
-death = spmove('Purify','purify','Instantly defeats your foe.','Makes SPmeter much more difficult to charge.','','','ALL')
+death = spmove('Purify','purify','Instantly defeats your foe.','Makes SPmeter almost impossible to charge.','','','ALL')
 chargeslice = spmove('Chargeslice','chargeslice','Charge up and slice','in front of yourself.','Makes meter charge differently.','Fiercely powerful at full charge.',10)
 cleave = spmove('Cleave','cleave','Unleash a powerful slice','on a large area ahead of you.','Can finish off enemies whose health','is at 1/4 or less of maximum.',200)
 SP_aura = spmove('Aura','auraburst','Your attack increases relative','to SP meter fullness.','Damage reduces your meter, however.','',0)
 SP_trueaura = spmove('Emanation','auraburst','Your attack and speed increases relative','to SP meter fullness.','Damage still reduces your meter, however.','You can use full meter for an attack, too.',0)
 Salvation = spmove('Salvation','salvation','Doubles all stats and','revives user one time on death.',
                     'Ultimate Healing Move.','Switches to backup spmove after one use.',100)
-Nova = spmove("Purify",'Purify', 'Attacks once...','','','',1000,"Holy") #create?
+Purify = spmove("Purify",'Purify', 'Attacks once...','','','',1000,"Holy") #create?
 Rage = spmove("Rage",'rage','Attacks 13 times...','','','',77,'Curse') #destroy
 Fredrick = Player('Fredrick', 1, 'battlesprites/Fredricktruebattle.png','Fstatusboxsprite.png',
                   100, 35,1,1,1,1,1,1, [], (0,113,113))
 OriginalFredrick = Player('OFredrick', 1,'battlesprites/ofredrickbattlesprite.png','battlesprites/HimBattleSprite.gif',
                   1000, 350,1,1,1,1,1,1, [], (0,60,60),True)
+dFredrick = Player
 Fredrick.spells.append(holy)
 Fredrick.zattack = slicer
 Fredrick.xattack = laser
@@ -372,8 +374,8 @@ Fredrick.cattack = heal
 Fredrick.spattack = Salvation
 Fredrick.mode = 'sword'
 #atk def mag mdef spd lck
-GrayCloak = Player('Gray Cloak', 1, 'battlesprites/HimBattleSprite.gif','None',1500,100,3,3,3,3,3,3,None,(127,127,127))
-DarkNyu = Player('Dark Nyu',1,'battlesprites/dnyubattlesprite.gif','None',500,25,2,2,2,2,2,2,None,(100,100,100))
+GrayCloak = Player('Gray Cloak', 1, 'battlesprites/HimBattleSprite.gif','None',1000,100,3,3,3,3,3,3,None,(127,127,127))
+DarkNyu = Player('Dark Nyu',1,'battlesprites/dnyubattlesprite.gif','None',400,25,2,2,2,2,2,2,None,(100,100,100))
 BlackCloak = Player('Black Cloak',1,'battlesprites/BlackCloakBattleSprite.gif','None',2500,50,4,4,1,1,3,3,None,(50,50,50))
 Dark = Player('Dark', 1, 'battlesprites/DarkBattleSprite.gif','None',1500,100,5,5,0,0,5,0,None,(0,0,0))
 Light = Player('Light', 1, 'LightBattleSprite.gif','None',1500,100,0,0,5,5,5,0,None,(127,127,127))
@@ -382,7 +384,7 @@ Genmu = Player('Genmu',1,'GenmuBattleSprite.png','genmustatusboxsprite.png',4000
 #A little cocky, but well meaning.
 #How dare you dishonor this legendary hero?!
 #AH, he's right. Maybe I'll get it next time...
-# You think you'll be talkin' like that after facin' me?
+# "You think you'll be talkin' like that after facin' me?""
 #"I want it! Gimme that sword!"
 Genmu.get_title(Genmu_Default)
 Percy = Player('Percy',1,'GenmuBattleSprite.png','genmustatusboxsprite.png',3000,200,4,4,7,7,2,7,None,(200,200,200))
@@ -394,16 +396,29 @@ Percy.get_title(Percy_Default)
 '''Lucy = Player("Lucy", )'''
 #Percy's sister.
 #What is her personality?
-#A sweetiepie, but also a little snide.
+#A sweetiepie, but also a little bit of a dork.
+#Idealized not toriel
 # a little cooler than percy, but a little more discerning.
 
 '''Salesman's Daughter'''
 #Very polite and sweet, but actually cutthroat.
 #Knows how to play the game.
 
-'''The last guy'''
-#Very charismatic, cares for the player.
+'''Ram'''
+#Very charismatic, cares for you.
 #But, of course, no one is truly perfect. He is hiding a very dark secret.
+#You may smooch him. Perhaps. If you're into that.
+
+#Oh me... I'm just a traveling writer.
+#You want to read my stories?
+#Maybe. If you ask nicely...
+
+'''True Ram'''
+#Charming yet heartless...
+#Destructive yet a free spirit. 
+#An adaptation created by Ram's desire to get what he truly wants
+#though he cares for no one but himself
+#he cant bring himself to harm you
 
 ''''''
 MagicDog = Player('MagicDog',1,'magicdog.png','genmustatusboxsprite.png',1000,500,1,1,2,2,3,2,None,(100,100,100))
@@ -412,7 +427,7 @@ MagiNyu = Player('MagiNyu',1,'MagiNyubattlesprite.gif','genmustatusboxsprite.png
 SwordNyu = Player('SwordNyu',1,'SwordNyubattlesprite.gif','genmustatusboxsprite.png',1500,15,2,2,1,1,3,5,None,(100,100,100))
 FallenWarrior = Player('FallenWarrior',1,'FallenWarriorbattlesprite.gif','genmustatusboxsprite.png',5000,100,2,2,2,2,2,2,None,(150,150,150))
 GenmuBond = bond('Genmu',['Idiot Swordsman','You have become closer ultimately due to swords.'],'genmustatusboxsprite.png')
-OfredrickBond = bond('OFredrick',['Other','What does he want?'],'Gstatusboxsprite.png')
+OfredrickBond = bond('OFredrick',['Other','How are you connected?'],'Gstatusboxsprite.png')
 OfredrickBond.level = 0
 GrayCloakBond = bond('Gray',['Sarcastic Ex-hero','You understand his motivations.'],'graystatusboxsprite.png')
 #(self,name,description,image,character)

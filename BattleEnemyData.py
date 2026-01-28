@@ -66,6 +66,9 @@ def GenmuStrategy(self,target,game,alltiles):
                                        
         pass
 def TemplateStrategy(self,target,game,alltiles):
+    """
+    use this as a base to work off of!
+    """
     player = target
     self.battlecounter += 1
     print(self.strat)
@@ -102,7 +105,37 @@ def TemplateStrategy(self,target,game,alltiles):
                 self.moveneeded = 'right'
                 pass
             
-            
+def AFredrickStrategy(self,target,game,alltiles):
+    
+    player = target
+    self.battlecounter += 1
+    self.movecounter += 1
+    print(self.strat)
+    self.guard = False
+    if self.strat == 'intro':
+        self.strat = 'atta  qk'
+    if self.strat == 'attack':
+        self.cooldown = 10
+        self.strat = 'beam'
+    if self.cooldown:
+        self.cooldown -= 1
+    if not self.cooldown:
+        if self.Chealth <= 300:
+            self.fast = True
+        basicmovement(self,game)
+                #battle plan:
+        #Approach the player quickly and do either a 3 hit or 2 hit combo
+        #and teleport???
+
+        if self.strat == "attack":
+            if game.distancefromplayer >= 1:
+                self.moveneeded = 'left'
+            else:
+                if random.randint(0,1):
+                    moo = random.randint(0,2)
+                areas = [[6,1],[5,4],[7,3]]
+                self.currentpos = copy.copy(areas[moo])
+
 def OFredrickStrategy(self,target,game,alltiles):
     player = target   
     self.battlecounter += 1
@@ -131,7 +164,7 @@ def OFredrickStrategy(self,target,game,alltiles):
 ##                if self.strat == 'beam':
 ##                    pass
         if self.strat == 'beam':
-            if game.distancefromplayer < 4:
+            if game.distancefromplayer < 4 and self.currentpos[1] != 8:
                 self.moveneeded = 'right'
             else:
                 if player.currentpos[1] > self.currentpos[1]:
@@ -1097,7 +1130,7 @@ def GrayCloakStrategy(self, target, game, alltiles):
                         
                                                   
                 
-            if self.Chealth <= 500 and self.sptrigger == False:
+            if self.Chealth <= 200 and self.sptrigger == False:
                  # Trigger the special attack randomly
                 x = random.randint(0,50)
                 if x == 50:
@@ -1497,6 +1530,7 @@ def DarkNyuStrategy(self,target,game,alltiles):
         self.moveneeded = None
     self.battlecounter += 1
     if self.cooldown:
+        print(self.cooldown)
         self.guard = False
         self.cooldown -= 1
         return
@@ -1504,20 +1538,6 @@ def DarkNyuStrategy(self,target,game,alltiles):
     if self.Chealth >= (0.50*self.Mhealth):
         if self.strat == 'reset' or self.strat == 'attack':
             self.strat = 'dash'
-##        if self.strat == 'dash':
-##            self.guard = False
-##            if game.distancefromplayer >= 2:
-##                self.fast = True
-##                if game.playerinfront:
-##                    self.moveneeded = 'left'
-##                if game.playerisabove:
-##                    self.moveneeded = 'up'
-##                if game.playerisbelow:
-##                    self.moveneeded = 'down'
-##                if game.playerbehind:
-##                    self.moveneeded = 'right'
-##            
-##            else:
         if self.strat == 'circlecut':
             if game.distancefromplayer >= 1:
                 if game.playerinfront:
@@ -1579,6 +1599,38 @@ def DarkNyuStrategy(self,target,game,alltiles):
                 else:
                     self.strat = 'dash'
                     self.moo = 0
+    if self.Chealth < (0.5 * self.Mhealth):
+        if self.strat not in ['teleportSlice','teleportPreSlice', 'teleport']:
+            print("old strat was:" , self.strat)
+            self.strat = 'teleport'
+
+        if self.strat == 'teleportSlice':
+            #do i need all the copies? 
+            target = copy.copy(player.currentpos)
+            for i in alltiles:
+                if i.coords == target:
+                    i.damage(5,10,'player',['stagger','player'],['staggeronblock',self])
+            x = random.randint(0,1)
+            if x:
+                self.strat = "slice"
+            else:
+                self.strat = "teleport"
+            #stagger on block? damage if player blocks attack.
+        if self.strat == 'teleportPreSlice':
+            self.currentpos = copy.copy(player.currentpos)
+            self.currentpos[0] -= 1
+            if (self.currentpos[0] <= -1):
+                self.currentpos[0] = 1
+            self.cooldown = 20
+            self.strat = 'teleportSlice'
+        
+        if self.strat == "teleport":
+            self.currentpos[0] = 999
+            self.cooldown = 60
+            self.strat = 'teleportPreSlice'
+        
+        
+
 #         player = target
 #         self.movecounter += 1
 #         self.moo2 += 1

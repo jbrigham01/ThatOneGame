@@ -598,6 +598,7 @@ class ObjectLayer(object):
                 '''
                 r = []
                 for propname in properties:
+                        print(propname)
                         for object in self.objects:
                                 if object and propname in object or propname in self.properties:
                                         r.append(object)
