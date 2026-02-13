@@ -721,12 +721,16 @@ class Game(object):
         if Name.lower() == 'nothanks':
             printstuff('Pfff, whatever.', 1, 1,0,1)
             return
-        printstuff(Name+"...", 1, 1,0,1)
+        printstuff(Name+".", 1, 1,0,1)
         screen.fill((0,0,0))
         if Name.lower() == 'genmu':
-            printstuff('What are ya talking about?', 0,0,1, 1)
+            printstuff('I am flattered. But not THAT flattered.', 0,0,1, 1)
         if Name.lower() == "fredrick":
             printstuff('Doubt it.',0,0,0,1)
+        if Name.lower() == 'lucy':
+            printstuff('I don\'t know about that one.',0,0,0,1)
+        if Name.lower() == "gray":
+            printstuff('It is not my name,\\but I still won\'t let you have it.',0,0,0,1)
        
         screen.fill((0,0,0))
 ##        for i in ('So, i'):
@@ -2594,12 +2598,14 @@ def printstuff(moo, wait=0, creatormode=False, creatortalking=False,inmenu = Fal
     #text.rect.center = (250,400)
     print(text.rect,'rect info') # 50 350
     revengeoftobias = False
+    if creatormode:
+        time.sleep(0.5)
+        revengeoftobias = True
     if fast:
         revengeoftobias = True
     if pygame.key.get_pressed()[pygame.K_c]:
         revengeoftobias = True
     while not revengeoftobias:
-
         #any([*map(lambda x: x.type == pygame.KEYUP and x.key == pygame.K_z)])
         for event in pygame.event.get():
             if (event.type == pygame.KEYUP and(event.key == pygame.K_x or event.key == pygame.K_z)) or (event.type == pygame.KEYDOWN and (event.key == pygame.K_c)):
@@ -4272,7 +4278,7 @@ Fredrick: Alright, fine.
                                         #character.talk('(He\'s just standing there, staring at me.)')
                                         character.talk('(Wait, maybe he\'s the one...)')
                                         character.talk('So, ya gonna let me do my thing, or...?')
-                                        chosenoption = triplequestion('Nah...','Go for it.','What?')
+                                        chosenoption = triplequestion('Nah...','Go for it.','Who are you?')
                                         character.talkedbefore = True
                                         if chosenoption == 1:
                                             #character.talk('Well, you might need to eventually.')
@@ -5744,9 +5750,13 @@ Fredrick: Alright, fine.
                         
                         if 'SPflag2' in moo.properties:
                             if 'percytalk' in game.gamedata.events:
-                                character.talk('What?')
-                                character.talk('Are you gonna stay another night?')
-                                character.talk('They don\'t even put a mint on your pillow here, though')
+                                #character.talk('What?')
+                                character.talk("Are you enjoying your stay?")
+                                character.talk("Do you want another pillow mint?")
+                                character.talk("They keep them in a jar over here with me...")
+                                #character.talk('Are you gonna stay another night?')
+                                #character.talk('They don\'t even put a mint on your pillow here, though')
+                                """
                                 chosenoption = doublequestion('','You\'re such a perfect goat PLEASE smooch me','Wow this place sucks.')
                                 if chosenoption == 1:
                                     #character.talk('Baaa. Baaa.')
@@ -5840,6 +5850,7 @@ Fredrick: Alright, fine.
                                 char.talk('If you do well, our paths will cross again.')
                                 printstuff('Grey gets back in the elevator and leaves.')
                                 char.walk('up',10)
+                                """
                                 
                                 #printstuff("You can either return to your \\hotel room and sleep until tomorrow's \\journey, or go mess around.")
 ##                                    character.walkmode = True
@@ -6296,6 +6307,11 @@ Fredrick: Alright, fine.
 
 
     def update(self, dt, game: Game):
+        """
+        bloated ahh function
+        has normal player walking and sprite management
+        and then all A button dialogues as well
+        """
         #cleareventqueue()
         for i in pygame.event.get():
             if i.type == pygame.KEYUP and i.key == pygame.K_z:
@@ -6624,7 +6640,9 @@ Fredrick: Alright, fine.
                         
                     elif 'metdog' in game.gamedata.events:
                         Party.player2.talk('Ugh, that salesman! What a pain!')
-                        Party.player2.talk("To have to run into him here of all places...")
+                        Party.player2.talk("Running into to him here...")
+                        Party.player2.talk("Sounds like a bad joke.")
+                        #Party.player2.talk("Like a bad ")
                         #Party.player2.talk("Who wo")
                         #Party.player2.talk('I almost hate him as much as I love swords!')
                         #Party.player2.talk('It\'s really close. Unbelievably close.')
@@ -6981,7 +6999,7 @@ Fredrick: Alright, fine.
                     if game.currentplace == 'grassdungeon4b.tmx':
                         if 'event2' in cell.properties and 'after1stdream' not in game.gamedata.events:                    
                             Party.player2.talk("Fredrick?")
-                            Party.player2.talk("You are not looking quite so good.")
+                            Party.player2.talk("Perhaps you are not looking so good.")
                             printstuff("You are still feeling off.")
                             Party.player2.talk("This adventure is starting to\\ weigh on this legendary swordsman.")
                             #Party.player2.talk("And .")
@@ -7023,7 +7041,7 @@ Fredrick: Alright, fine.
                                 Party.player2.talk("Is someone there? I can\'t see anyone.")
                                 Party.player2.talk('Is something happening, Fredrick???')
                                 printstuff("The empty feeling worsens.")
-                                char.talk("You...")
+                                #char.talk("You...")
                                 char.talk("Meeting you like this...")
                                 #char.talk("Is horrible.")
                                 char.talk("I\'ve had only one day worse than this.")
@@ -7391,6 +7409,27 @@ Fredrick: Alright, fine.
                             #Yes we are rewriting this again.
 
                             if "secondtime" in game.gamedata.events:
+                                character.talk("Ughhhhhhhh.")
+                                #character.talk("Dude.")
+                                character.talk("Why are we back...?")
+                                character.talk("You know.")
+                                character.talk("They say that there\'s no second chances in life.")
+                                character.talk("That you better do things right the first time.")
+                                #character.talk("I believe in that sentiment.")
+                                #character.talk("I wouldn\'t want to say I did something i didn\'t believe in.")
+                                #character.talk("But sometimes there\'s things that we just couldn\'t have seen coming.")
+                                character.talk("But if only we knew what was coming...")
+                                character.talk("Then we would\'ve done things differently.")
+                                character.askandquestion("Right?","Yes...?", "Drop the act.")
+                                if chosenoption == 1:
+                                    character.talk("Right.")
+                                    character.talk("You know, I once was in your shoes.")
+                                    character.talk("Hopefully you can figure everything out...")
+                                else:
+                                    character.talk("You\'re funny.")
+                                    character.talk("This IS my first time meeting you, after all.")
+
+                                """
                                 character.talk("Back again...?")
                                 character.talk("I didn\'t like how that went, either.")
                                 printstuff("Gray squints at you.")
@@ -7399,6 +7438,7 @@ Fredrick: Alright, fine.
                                 character.talk('...')
                                 character.talk("After going through all that,\\you\'re still acting the fool?")
                                 character.talk("I thought you'd be more excited\\to get back to your ladyfriend...")
+                                """
                             else:
                                 character.talk("Wow, you actually made it.")
                                 character.talk("Let me introduce myself.")
@@ -7639,7 +7679,8 @@ Fredrick: Alright, fine.
                                 clock.tick(30)
                                 if theleaderofthebunch == 30: #DK
                                     done = True
-                            character.talk("Geez... I'm kinda nervous.")
+                            printstuff("The man sighs.")
+                            #character.talk("The man sighs.")
                             #character.talk('Hard to believe its finally here.')
                             character.talk('It really is beginning again.')
                             #character.talk('I hope he\'s strong enough.')
@@ -8064,8 +8105,8 @@ Fredrick: Alright, fine.
                             printstuff("Gray gave you $20.")
                             Party.money += 20
                             gray.talk("Never pay asking price with these salesmen.")
-                            gray.talk("Make them put a little work in...")
-                            gray.talk("You\'ll get your money\'s worth that way.")
+                            #gray.talk("Make them put a little work in...")
+                            #gray.talk("You\'ll get your money\'s worth that way.")
 
                             #gray.talk("Until we meet again...!")
                             #gray.talk("")
@@ -8094,7 +8135,7 @@ Fredrick: Alright, fine.
                             Party.player2.talk('I could cry!')
                             Party.player2.talk('That is, if heroes could cry.')
                             #Party.player2.talk("If one victory filled, golden tear slips out\\, there ")
-                            Party.player2.talk("Perhaps one golden,\\victory struck tear could slip free...")
+                            Party.player2.talk("If one golden,\\victory filled tear slipped out,\\it would not be my fault...")
                             Party.player2.orient = 'left'
                             Party.player2.talk('Yes, it...')
                             Party.player2.talk('No...')
@@ -8493,6 +8534,9 @@ class character(Player):
                 if bigtext:
                      font = pygame.font.Font('FreeSans.ttf',
                                         50)
+                     
+                nameFont = pygame.font.Font('FreeSansBold.ttf',22)
+
     
                # print('Font Linesize is :', font.get_linesize())
                 tso = font.render(z, True, (0,0,0), (255,255,255))
@@ -8569,11 +8613,11 @@ class character(Player):
                 speaker.orient = oldvalues[0]
                 speaker.image = oldvalues[1]
                 if not self.nameless:
-                    title = font.render(self.name, True, (0,0,0),(255,255,255))
+                    title = nameFont.render(self.name, True, (0,0,0),(255,255,255))
                     titlerect = title.get_rect()
                     titlerect.bottomleft = copy.copy(text.rect.topleft)
                     screen.blit(title,titlerect)
-                    screen.blit(text.image, text.rect)
+                    #screen.blit(text.image, text.rect)
                 pygame.display.update()
                 currentlist += 1
                 if z == '-' and words[y-1] == '-':

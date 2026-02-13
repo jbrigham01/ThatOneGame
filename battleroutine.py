@@ -1181,7 +1181,7 @@ def eventcheck():
 
                 #speak('More often than not,\\blocking won\'t protect you.',ghostface)
                 speak('This is usually your enemy\'s last resort',ghostface)
-                speak("Never get too comfortable.", ghostface)
+                speak("Some people are just endless trouble...", ghostface)
                 #speak("I mean, look at me.", ghostface)
                 #speak("I saved the world and there\'s still more fighting for me to do.", ghostface)
                 #speak('Why\'d you bring that up?',fredrick)
@@ -1448,7 +1448,7 @@ def eventcheck():
             if chosenoption == 2:
                 speak('Shut up.',ofredrick)
                 draw("The person's emotions\\are influencing you.")
-                draw("Your attack and magic increase!")
+                draw("Your health and attack increase!")
                 fredrick.Chealth *= 1.5
                 fredrick.Chealth = int(fredrick.Chealth)
                 fredrick.attack += 1
@@ -1510,9 +1510,9 @@ def eventcheck():
                     else:
                         goodPath = False
                         #you messed it up! Dweeb!
-                        draw("The person's expression darkens.")
                         #speak("You...", ofredrick)
                         speak("You\'re mocking me...?", ofredrick)
+                        draw("The person's expression darkens.")
                         speak("This is so screwed up!", ofredrick)
                         #speak("I don\'t know whether to laugh or scream?", ofredrick)
                         draw("The person\'s defense drops!")
@@ -1534,7 +1534,7 @@ def eventcheck():
             speak("NO! I... won\'t--",ofredrick)
             speak('...',ofredrick)
             ofredrick.emote('desirous')
-            #draw("The man falls silent.")
+            draw("The person falls silent.")
             speak("...!",ofredrick)
             ofredrick.Chealth = 300
             ofredrick.image = pygame.image.load('battlesprites/dfredrickbattlesprite.png')
@@ -1581,6 +1581,16 @@ def eventcheck():
                 #speak("How dare you!")
                 speak("YOU WILL BE TESTED.",warrior)
                 #speak("")
+                talkmenu("Wow great.", ["What gives you the right to judge me?", "I will defeat you."], fredrick)
+                if chosenoption == 1:
+                    speak("WHAT GIVES YOU THE RIGHT TO ASK?", warrior)
+                    speak("IF YOU ONLY KNEW WHAT YOU ARE.", warrior)
+                    draw("The man gazes coolly at you.")
+                    draw("Your defense rises.")
+                else:
+                    speak("YOU WILL NOT.", warrior)
+                    speak("YOU CANNOT.", warrior)
+                    #speak("")
                 """
                 speak('Where are my clothes???',warrior)
                 speak('This ALWAYS happens...',warrior)
@@ -1615,7 +1625,7 @@ def eventcheck():
             #if chosenoption == 1:
                 speak("...", warrior)
                 draw('The warrior relents for a moment...')
-                talkmenu("",[ "?", "What can I do?"], fredrick)
+                talkmenu("",[ "...", "What can I do?"], fredrick)
                 if chosenoption == 1:
                     speak("IT IS ALL YOUR FAULT.", warrior)
                     speak("IT HAS ALWAYS BEEN YOUR FAULT", warrior)
@@ -3883,8 +3893,9 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
         if not introed:
             intro()
             introed = True
-        eventcheck()
+       
         pygame.display.update()
+        eventcheck()
         fps.tick(30)
 
 
