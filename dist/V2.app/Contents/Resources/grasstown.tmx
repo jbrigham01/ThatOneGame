@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="75" height="75" tilewidth="32" tileheight="32" infinite="0" nextlayerid="28" nextobjectid="136">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2040" name="poisontile" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="poisontile.png" width="100" height="100"/>
+ </tileset>
+ <tileset firstgid="2049" source="grassstage4redux.tsx"/>
+ <tileset firstgid="2749" name="grasstown" tilewidth="32" tileheight="32" tilecount="5625" columns="75">
+  <image source="grasstown.png" width="2400" height="2400"/>
+ </tileset>
+ <layer id="24" name="Tile Layer 1" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAACAxwBX5AAB
+  </data>
+ </layer>
+ <layer id="25" name="Tile Layer 2" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAACAxwBX5AAB
+  </data>
+ </layer>
+ <layer id="26" name="Tile Layer 3" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="18" name="Object Layer 1">
+  <object id="21" x="480" y="160" width="32" height="32">
+   <properties>
+    <property name="description" value="A surprisingly deep pond. \The water is rather warm ."/>
+   </properties>
+  </object>
+  <object id="29" x="416" y="288" width="32" height="32">
+   <properties>
+    <property name="description" value="Seems like a good place to \watch the sun set..."/>
+   </properties>
+  </object>
+  <object id="53" x="1528" y="736" width="32" height="64">
+   <properties>
+    <property name="NewArea" value="grassstage2.tmx"/>
+    <property name="area" value="grassstage2.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="54" x="384" y="1376" width="64" height="64">
+   <properties>
+    <property name="NewArea" value="grasstownweaponshop.tmx"/>
+    <property name="area" value="grasstownweaponshop.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="56" x="624" y="296" width="32" height="26">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="63" type="info" x="608" y="288" width="64" height="64">
+   <properties>
+    <property name="description" value="If you can read this, you aren't blind. \Good job! \(Something is just ahead.)"/>
+   </properties>
+  </object>
+  <object id="65" x="96" y="608" width="1184" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="67" x="516" y="688" width="94" height="80">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="69" x="32" y="736" width="480" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="70" x="1344" y="736" width="208" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="72" x="1272" y="616" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="74" x="1344" y="616" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="76" x="992" y="960" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="78" name="level Info" x="168" y="208" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Fredrick's Hometown"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="80" x="88" y="320" width="8" height="288">
+   <properties>
+    <property name="NewArea" value="grassstage4.tmx"/>
+    <property name="area" value="grassstage4.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="81" x="7" y="1216" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="83" x="128" y="576" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="84" x="721" y="1568" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="3"/>
+   </properties>
+  </object>
+  <object id="87" type="spobject" x="1056" y="320" width="64" height="64">
+   <properties>
+    <property name="image" value="sptester.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="90" x="1792" y="480" width="92" height="19">
+   <text wrap="1" color="#ffffff">Despacito</text>
+  </object>
+  <object id="93" x="960" y="160" width="215" height="38">
+   <text wrap="1" color="#ffffff">I swear on Lorei's breasts
+ I am not a furry...</text>
+  </object>
+  <object id="96" x="608" y="736" width="665" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="98" x="736" y="1024" width="64" height="32">
+   <properties>
+    <property name="description" value="A lone flower.\The only survivor..."/>
+   </properties>
+  </object>
+  <object id="99" x="96" y="288" width="512" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="100" x="832" y="288" width="704" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="101" x="1344" y="608" width="208" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="102" x="1744" y="779" width="32" height="32">
+   <properties>
+    <property name="description" value="Residential Area\Hopefully you already knew because you live here.\Otherwise..."/>
+   </properties>
+  </object>
+  <object id="104" x="704" y="1376" width="64" height="64">
+   <properties>
+    <property name="NewArea" value="grasstownarmorshop.tmx"/>
+    <property name="area" value="grasstownarmorshop.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="105" x="128" y="1696" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="106" x="-32" y="1184" width="33" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage3.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="108" x="398" y="1568" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="returnarea" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="110" x="1856" y="1408" width="96" height="64">
+   <properties>
+    <property name="NewArea" value="grasstownhotel.tmx"/>
+    <property name="area" value="grasstownhotel.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="111" x="1888" y="1568" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="returnarea" value=""/>
+    <property name="startarea" value="4"/>
+   </properties>
+  </object>
+  <object id="112" name="Alexander Hamilton" type="character" x="992" y="1248" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="sprites/player.png"/>
+    <property name="name" value="Copy"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+    <property name="test" value=""/>
+   </properties>
+  </object>
+  <object id="114" x="480" y="1984" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="grasstownweaponshop.tmx"/>
+    <property name="area" value="peteza.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="115" x="512" y="2208" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="5"/>
+   </properties>
+  </object>
+  <object id="116" x="256" y="1784" width="570" height="1">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="117" x="1651" y="2010" width="68" height="70">
+   <properties>
+    <property name="NewArea" value="grasstowngiftshop.tmx"/>
+    <property name="area" value="grasstowngiftshop.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="118" x="1664" y="2144" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="6"/>
+   </properties>
+  </object>
+  <object id="120" name="not percy" type="character" x="704" y="1120" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="friend" value=""/>
+    <property name="image" value="sprites/notpercy.png"/>
+    <property name="name" value="Percy"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="121" x="640" y="1120" width="32" height="32">
+   <properties>
+    <property name="event" value=""/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="126" name="flyer" type="item" x="480" y="1664" width="60" height="35">
+   <properties>
+    <property name="description" value="..."/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+    <property name="story" value=""/>
+   </properties>
+  </object>
+  <object id="128" name="Gray Mask" type="character" x="896" y="1504" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="deathquestion" value=""/>
+    <property name="description" value="I was walking by, and I saw a person who I thought was you.\I got a closer look; and I just didn't know what I was looking at..."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Gray Mask"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="129" name="Shopkeeper" type="character" x="2080" y="1664" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="It's a dumb question. but..."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="lifequestion" value=""/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="130" name="flyer" type="item" x="1856" y="1664" width="60" height="35">
+   <properties>
+    <property name="description" value="There's a picture of a\dorky little goat person wearing glasses.\Slightly long hair, a slightly sad look..."/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+   </properties>
+  </object>
+  <object id="131" name="Percy" type="character1" x="1440" y="1472" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Who asked you?"/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+  <object id="132" name="Shopkeeper" type="character" x="1568" y="1568" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="The last piece of grass before the warrior nyu..."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="133" x="352" y="1490" width="128" height="96">
+   <properties>
+    <property name="block" value=""/>
+    <property name="description" value="Store Closed:\Ran out of swords.\Currently growing more."/>
+   </properties>
+  </object>
+  <object id="134" x="672" y="1490" width="128" height="96">
+   <properties>
+    <property name="block" value=""/>
+    <property name="description" value="Store Closed: Currently out\collecting every non sword object ever.\Be right back!"/>
+   </properties>
+  </object>
+  <object id="135" x="448" y="2064" width="160" height="128">
+   <properties>
+    <property name="block" value=""/>
+    <property name="description" value="Store Closed: Pizza has been outlawed. \Out lobbying to legalize."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="27" name="Tile Layer 4" width="75" height="75">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAACAxwBX5AAB
+  </data>
+ </layer>
+</map>

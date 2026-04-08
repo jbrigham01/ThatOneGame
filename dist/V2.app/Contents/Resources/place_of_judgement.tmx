@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="70" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="68">
+ <tileset firstgid="1" name="place_of_decisions" tilewidth="32" tileheight="32" tilecount="1848" columns="21">
+  <image source="place_of_decisions.png" width="672" height="2816"/>
+ </tileset>
+ <tileset firstgid="1849" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="bettertiles.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="1858" name="firstplace" tilewidth="32" tileheight="32" tilecount="3250" columns="130">
+  <image source="firstplace.png" width="4160" height="800"/>
+ </tileset>
+ <tileset firstgid="5108" name="place_of_judgement" tilewidth="32" tileheight="32" tilecount="1200" columns="60">
+  <image source="place_of_judgement.png" width="1920" height="640"/>
+  <tile id="54">
+   <properties>
+    <property name="" value=""/>
+   </properties>
+  </tile>
+  <tile id="114">
+   <properties>
+    <property name="cover" value=""/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="429">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="529">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="534">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="535">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="536">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="537">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="538">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="588">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="589">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="590">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="591">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="592">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="593">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="594">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="595">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="596">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="597">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="598">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="648">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="649">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="650">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="651">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="652">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="653">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="654">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="655">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="656">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="657">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="658">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="708">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="709">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="710">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="711">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="712">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="713">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="714">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="715">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="716">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="717">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="718">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="773">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="774">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="775">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="776">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="777">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+  <tile id="778">
+   <properties>
+    <property name="hidden" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6308" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6309" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value="exactly what it says on the name area."/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6310" name="firstplace" tilewidth="32" tileheight="32" tilecount="3250" columns="130">
+  <image source="firstplace.png" width="4160" height="800"/>
+  <tile id="1535">
+   <properties>
+    <property name="image" value="ghostface2.png"/>
+    <property name="orient" value="left"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="9560" name="place_of_judgementtrue" tilewidth="32" tileheight="32" tilecount="7000" columns="100">
+  <image source="place_of_judgementtrue.png" width="3200" height="2240"/>
+ </tileset>
+ <layer id="5" name="Tile Layer 1" width="100" height="70" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztmT1vE0EQhq+4851FLrT8AMoImhQIKZGCBD8mgA34r6QCIVHQkgSJWBAKPkoooEhIR+2EGGIgH6JiRnujHa/3LmfLSZzL+0ivcndrr9fz7sx6N0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwGTw/MpwzwG4CHTi4bWt/u6QfpB2SY26X7uJVZf0k/Qr6X9eJH6P7/O6SlWAa9FiUk5uPHzx2av7pb1pkh6QHuZ45xO/p5PzmexFMznrSI6PsnNUx4Kv2aO7pHuk+6RGYuLyLhqU9qZH+l03c6FI7ntkTuR5UhXKzlFdrxY9tWeP1CNtRMVifzjeH+jv46BfT0jPAtPGr+HXvo/M/W5S7ElV0HPyTjAoadO1i2Pj1p5HpBZpk2L3jbSl8kNiKl6shUHQJq0E/VolfSetU9vb0PrWie065KudVfNDx/9mbKU90bWr4dSeP6S/pP269YL10ZF48Yn0mfRiKgiWSbPTRqt0/ZL0Jez3pBPbdcitnVX3Yy620s917XLXAu2Huw6IN9qLA+XFEV1fiswzlnhy5HiynXlS9fWjyI+5eLBuDaNxsB729+n6Mcq49PhOcuyjwJ/tesDo+/kRv7cPzouVqazfNAiWHC2kJjd0nnwNR/v8Ucc4SX4I7rPlkpqp5esaxfp6avrk2sTxn3e8WMr80J78C80Y5Lf2SderSfPDly9l/VioGc3U7LVI1m3th09pZCSvvxyZMex49j3MuPeDk+SHzxNmWD9YGr5fo9i2Mz94DefY35q2PtzOrg+z/HhN929IVyM71oF9Y7bvGXdMzgrfvsP1Z1y1eTYynrxKTX5oL7Qn2os0sv3txIP7ntNcV04Dnx++PeFx53ndY9pdOE8OQv+YxAuXot+88l3GEcvz7EczsSpq18xG/fdH2d7jMMcfRvdZ9f1gGeX50UusfLkhbdoT7k9qV3vartuSFzdUjfLlWpX9KKpDZWtSKzu78uWGtIknXbUePa35pdcLX65V2Y+8c3OJnVuTXH9Y+9lZidsHeyBt2pON6Ph81P3r/noV9yPv3LynPOh5nmnl9dFS51raky115ihnxnlzQs+B1gU4v8o7N5fYSVzdZ1p5few7Z43iCeeHnMv7/o+7l/jngJuXup6eR/4DrV7CFg==
+  </data>
+ </layer>
+ <layer id="6" name="Tile Layer 2" width="100" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt2NFNwkAAx+EOQYOJjkWCc9RVHEDRZ7qQogu4g3ehDceFEB5o75TvS/6hvDX55dpA0wAAAAAAAAAAAAAAAAAAAAAAAADAdfwsj79/LJrmZdhr2CbsLex9Ueb+bk3e4649NNFjXnmLaNXum+gxv9gjX7TSo4hTPcbpMb9zPeI75DNsF/YV9q3H5M71SHcfnl8Pbem7/f8u7bEOLR71mNylPeKe9ZicHnXRoy561EWPOo2/y/WoT9qmGxavn07818U84lnohgbjpx5lpR3iej2K6JIz0Sfz/ihju9yvz86H51U52+xs9H/kefULQOOitQ==
+  </data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="1" name="character" x="2280" y="1472" width="32" height="80">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="What it be, what it do\\ what the heck is wrong with you"/>
+    <property name="image" value="awakenedcreator.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="2" name="Gray Cloak" type="character1" x="1792" y="1869" width="32" height="80">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="What description? "/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="left"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+  <object id="3" name="No clue what this is" type="trigger" x="528" y="1680" width="32" height="32">
+   <properties>
+    <property name="event" value=""/>
+    <property name="my nama" value="jeff"/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="4" name="block" type="block" x="192" y="1792" width="80" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="5" name="block" type="block" x="192" y="2016" width="256" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="6" name="Block" type="block" x="384" y="1792" width="80" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="7" type="info" x="287" y="160" width="96" height="98">
+   <properties>
+    <property name="description" value="Ugh, symbolism. Gross."/>
+   </properties>
+  </object>
+  <object id="9" name="Player Start" type="trigger" x="320" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="11" name="block" type="block" x="215" y="242" width="248" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="12" name="block" type="block" x="215" y="194" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="13" name="block" type="block" x="447" y="186" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="18" name="Block" type="block" x="280" y="384" width="8" height="1408">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="19" name="Block" type="block" x="384" y="384" width="8" height="1408">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="22" name="Gay Baby Jail" x="2144" y="1488" width="8" height="96">
+   <properties>
+    <property name="Shoutouts to" value="Simpleflips"/>
+    <property name="To be honest" value="You have to have an extremely high IQ "/>
+    <property name="event" value="2"/>
+   </properties>
+  </object>
+  <object id="23" name="level Info" type="info" x="167" y="162" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Where it starts..."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="25" name="Event Trigger" type="trigger" x="1504" y="1856" width="8" height="168">
+   <properties>
+    <property name="event" value="1"/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="26" name="character1" type="cloakedcreator" x="2376" y="1472" width="32" height="80">
+   <properties>
+    <property name="description" value="Kinkshaming is an important part of the plot"/>
+    <property name="image" value="awakenedcreator.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="right"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+  <object id="28" name="Save Guy" type="character" x="2218" y="1492" width="30" height="63">
+   <properties>
+    <property name="image" value="SaveGuy.png"/>
+    <property name="orient" value="left"/>
+    <property name="save" value=""/>
+   </properties>
+  </object>
+  <object id="30" name="sword" type="item" x="301" y="1912" width="60" height="64">
+   <properties>
+    <property name="description" value="A sword is lying there.\Strange engravings wrap around the blade."/>
+    <property name="event1" value=""/>
+    <property name="image" value="firstsword.png"/>
+    <property name="item" value=""/>
+    <property name="itemid" value="firstsword"/>
+   </properties>
+  </object>
+  <object id="36" x="704" y="480" width="100" height="2">
+   <properties>
+    <property name="event" value="titletalk1"/>
+   </properties>
+  </object>
+  <object id="37" x="704" y="1600" width="6" height="98">
+   <properties>
+    <property name="event" value="titletalk2"/>
+   </properties>
+  </object>
+  <object id="45" name="Nyu?" type="character" x="1024" y="1888" width="32" height="64">
+   <properties>
+    <property name="SPflag2" value=""/>
+    <property name="desc" value="Oh? An enemy? I can test my skills."/>
+    <property name="image" value="sprites/darknyu.gif"/>
+    <property name="name" value="Nyu"/>
+    <property name="orient" value="left"/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+  <object id="49" name="Blocker" x="800" y="1856" width="64" height="160">
+   <properties>
+    <property name="blockSP" value="How are you going to know \what your moves and items are \without looking at them?"/>
+    <property name="requirement" value="openedmenu"/>
+   </properties>
+  </object>
+  <object id="50" name="Blocker" x="480" y="1856" width="64" height="160">
+   <properties>
+    <property name="blockSP" value="At least look at the sword..."/>
+    <property name="requirement" value="lookedatsword"/>
+   </properties>
+  </object>
+  <object id="51" x="896" y="1760" width="224" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="52" x="896" y="2016" width="224" height="64">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="53" x="841" y="1815" width="32" height="32"/>
+  <object id="54" x="1144" y="1814" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="55" x="844" y="2014" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="56" x="1131" y="2004" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="57" x="1152" y="1808" width="288" height="80">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="58" x="1152" y="1984" width="352" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="59" name="Blocker" x="1312" y="1600" width="64" height="160">
+   <properties>
+    <property name="blockSP" value="Are you truly ready for battle?"/>
+    <property name="eventrequirement" value=""/>
+   </properties>
+  </object>
+  <object id="60" x="896" y="1728" width="32" height="480">
+   <properties>
+    <property name="event" value=""/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="61" x="1440" y="1856" width="64" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="62" name="block" type="block" x="416" y="320" width="97" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="63" name="block" type="block" x="384" y="352" width="97" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="64" name="block" type="block" x="192" y="352" width="97" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="65" name="block" type="block" x="192" y="352" width="97" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="66" name="block" type="block" x="160" y="320" width="97" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="67" x="1440" y="1952" width="64" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="7" name="Tile Layer 3" width="100" height="70">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+</map>

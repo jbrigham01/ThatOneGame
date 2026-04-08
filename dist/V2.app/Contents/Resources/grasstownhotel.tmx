@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="56">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grasstownweaponshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownweaponshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="7227" name="grasstownhotel" tilewidth="32" tileheight="32" tilecount="450" columns="30">
+  <image source="grasstownhotel.png" width="960" height="480"/>
+ </tileset>
+ <layer id="32" name="Tile Layer 2" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwNwwOYFgYAANC/Vi2vWsu1rTXWsm3btq3LuGzbtm3btnnxsvne971siQKB7OYwp7nMbR7zms/8FrCghSxsEYtazOKWsKSlLG0Zy1rO8lawopWsbBWrWs3q1rCmtaxtHetaz/o2sKGNbGwTm9rM5rawpa1sbRvb2s72BtnBjnays13saje728OeBtvL3vaxr/3s7wAHOsjBDnGowxzuCEc6ytGOcazjHO8EJzrJyU5xqtOc7gxnOsvZznGu85zvAhe6yMUucanLXO4KV7rK1a5xretc7wY3usnNbnGr29zuDne6y93uca/73O8BD3rIwx7xqMc87glPesrTnvGs5zzvBS96ycte8arXvO4Nb3rL297xrve8b4gPfOgjH/vEp4b6zOe+8KWvfO0b3/rO937wo5/87Be/+s1A4kAgjGH9wXCGN4I/GtFIRjaKUY1mdH8yhjGN5c/G9hfjGNd4xjeBCU1kYpP4q7/5u0n9w2T+6V/+7T/+638mN4X/m9JUpjaNaU1nejOY0UxmNotZzWZ2c5jTXOY2j3nNZ34LWNBCFraIRS1mcUtY0lKWtoxlLWd5K1jRSla2ilWtZnVrWNNa1raOda1nfRvY0EY2tolNbWZzW9jSVra2jW1tZ3uD7GBHO9nZLna1m93tYU+D7WVv+9jXfvZ3gAMd5GCHONRhDneEIx3laMc41nGOd4ITneRkpzjVaU53hjOd5WznONd5zneBC13kYpe41GUud4UrXeVq17jWda53gxvd5Ga3uNVtbneHO93lbve4133u94AHPeRhj3jUYx73hCc95WnPeNZznveCF73kZa941Wte94Y3veVt73jXe943xAc+9JGPfeJTQ33mc1/40le+9o1vfed7P/jRT372O8WCJ5w=
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAf3GRiYLjEDMFLofRuJgi2BWIBIFZmhmBqApC9/5kheCmUhtmLbDcbE23sZWBB2Atio9ttPAD2hjJD8EixtxEo1kRDey9hsRdk5zogXk9De/+j2Quz8yYUUxPUMmPH6HZS295VzNgxup3UthfdbHx41N6RZS8AWr10FA==
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx10VV0F2QYB+A/CiogYCBXoISKCahgjQ5FOkezARvdo7s2uru7Q5TeiA02UsGgYzQMULrBeC52scNhF8/5fud38533fYOyBwKFKUJRilGcEpSkFKUpw5DnKE8FKlKJylShKtWoTg1qEkwtalOHutSjPg1oSAihNKIxTQgjnKY0ozktaEkrWtOGtrSjPR3oSASd6EwXutKN7vSgJ73oTR/60o/+DGAgg4gkisHJcw9lGMMZwUhGMZoxjGUc45nARCYxmSlMZRrTmcFMZjGbOcxlHvNZwEIWsZglLGUZy1nBSlbxI6v5iZ9Zw1rWsZ4NbGQT0cSwmS1sZRuxxLGdHcSTwE52sZs97GVf8p5/ZT8H+I3f+YM/OcghDnOEoxzjOCc4ySkSOc0ZznKO81zgIpe4TBJXkv+9xl/8zXVucJNb3OYOd7nHfR7wkEc85glP+Yd/+Y9AjkAgDS/wImlJx0u8zCukJwMZeZVMZCYLr/E6b/AmWXmLbAxjeIp3BNnJwdu8Q05ykZs8vMt7vE9ePuBDPuJjPuFT8pGfAnzG53xBQQrxJV/xNd/wLUEUpghFKUZxSlCSUpSmDN/xPWX5gXKUpwIVqURlqlCValSnBjUJpha1qUNd6lGfBjQkhFAa0ZgmhBFOU5rRnBa0pBWtaUNb2tGeDnQkgk50pgtd6UZ3etCTXvSmD33pR38GMJBBRBLFYIYw9JkbjmQUoxnDWMYxnglMZBKTmcJUpjGdGcxkFrOZw1zmMZ8FLGQRi1nCUpaxnBWsZFUqfcq8gY1sIpoYNrOFrWwjlji2s4N4EtjJLnazh73s45dU+pT5EIc5wlGOcZwTnOQUiZzmDGc5x3kucJFLXCaJK1xNpU+Z73CXe9znAQ95xGOe8JT/ARQ1KZg=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="40" name="level Info" x="736" y="64" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Grasstown Hotel"/>
+    <property name="levelinfo" value="1"/>
+    <property name="music" value="dabbad.mp3"/>
+   </properties>
+  </object>
+  <object id="41" x="544" y="384" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="42" x="480" y="428" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="grasstown.tmx"/>
+    <property name="area" value="grasstown.tmx"/>
+    <property name="returnarea" value="4"/>
+   </properties>
+  </object>
+  <object id="43" name="Fluffy Concierge" type="character" x="160" y="192" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="10 tips to make your angry goat into a happy one"/>
+    <property name="image" value="sprites/Loreiplayer.png"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="44" name="Save Guy" type="character" x="704" y="224" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="SaveGuy.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="left"/>
+    <property name="save" value=""/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="45" x="512" y="160" width="96" height="96">
+   <properties>
+    <property name="description" value="Part time positions available."/>
+   </properties>
+  </object>
+  <object id="46" x="416" y="191" width="448" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="47" x="437" y="154" width="32" height="70">
+   <properties>
+    <property name="description" value="Select your floor...\If only you could."/>
+    <property name="gelevator" value=""/>
+    <property name="nodesc" value=""/>
+   </properties>
+  </object>
+  <object id="49" x="334" y="237" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="50" x="480" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="52" name="Weird Customer" type="character" x="160" y="288" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="Erectile Dysfunction"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Unpolite Fellow"/>
+    <property name="orient" value="up"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="53" x="352" y="224" width="32" height="192">
+   <properties>
+    <property name="event" value=""/>
+   </properties>
+  </object>
+  <object id="54" name="Duder" type="character" x="672" y="352" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="There's some strange fellow practicing his swordsmanship in the forest...\ Maybe you could fight him?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Polite Fellow"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="55" name="Grey" type="character" x="416" y="-96" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Buffs aren't important, demifiend.\Believe me! I'm a skeleton."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="None"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+    <property name="talk" value="There was someone like you... He told me something interesting."/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

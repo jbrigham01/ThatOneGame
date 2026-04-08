@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="2">
+ <tileset firstgid="1" name="bettertiles" tilewidth="32" tileheight="32" tilecount="9">
+  <image source="bettertiles.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="10" name="firstbattle" tilewidth="32" tileheight="32" tilecount="300">
+  <image source="firstbattle.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="310" name="blocktile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="311" name="playerstart" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxt0WVoV1EYB+C/MbtWxuacsd7s2d3d3d3d3f1JbP1ifLFBscVERcXABluw47Odz3DghF14+J17zvtyuO/NEwgE8pKP/BSgIIUIJoRQwginMEUoSjEiiKQ4UZQgmpKUojRliCGWOOJJIJEkkkmhLOUoTwUqUonKpFKFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSCc604WudKM7PehJL3rTh770oz8DGMggBjOEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzozmMksZjOHucxjPgtYyCIWs4SlLGM5K9LmmeV/ac/KvxFYxWrWsJZ1rGcDG9mUSf9me1vYyrZMzrfb28FOdrGbPewN/Lt/H/vT/rP3A/IghzjMEY5yjOPpPSfkSU5xmjOcTT87J89zgSAuconL6a5wlWtcT++5IW9yi9vc4S73MnzPfesHPOQRj3nCU55lqHtu/YKXvOI1b3jLO97zIZM5Zeajuk985gtf+cZ3fvCTX/xOG6L6LGQlG9kJIgc5yUVu8pCXfOSnAAUpRDAhhBJGOIUpQlGKEUEkxYmiBNGUpBSlKUMMscQRTwKJJJFMCmUpR3kqUJFKVCaVKvwBpwJyWA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwNwwWUCAYAANCTszt1d5zO40LccbqZGqaZzhm2adOxsZk2TM8mN93dHcP0xnTHdGw6/nv/BwYEBASZ1GQmN4UpDTbEUFOZ2jDTmNZ0pjeDGc1kZrOY1WxmN9wc5jTCSKOMNpe5zWNeY4w1n/mNs4AFLWRhi1jUYha3hCUtZWnLWNZyfmR5K1jRSlb2Y6tY1Wp+YnVrWNNa1raOda1nfT+1gQ1tZGOb2NRmNreFLW1laz+zjZ/b1na29wu/9Cs72NFOdraLXe1md7+2hz3tZW/72Nd+9neAA/3Gbx3kYL/ze4f4g0Md5nBHONJRjnaMPzrWcY73Jyc40UlOdopTnebPTvcXf3WGM53lbOc419/83XnOd4ELXeRil7jUZS53hStd5WrXuNZ1rneDG93kZre41W1ud4c73eVu97jXfe73Dw940EP+6WGPeNRjHveEJ/3Lvz3laf/xjGc953kveNFLXvaKV73mdW9401ve9l/veNd73veBD33kY5/41P/832c+94UvfeVr3/jWdwbEw/gmMKGJTOwHJvFDAw0yqclMbgpTGmyIoaYytWGmMa3pTG8GM5rJzGYxq9nMbrg5zGmEkUYZbS5zm8e8xhhrPvMbZwELWsj3Lm+FIQ==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" name="character" type="cloakedcreator" x="384" y="256" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="Sometimes, in life, you'll have to fight."/>
+    <property name="image" value="cloakedcreator2.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="left"/>
+    <property name="special1" value=""/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

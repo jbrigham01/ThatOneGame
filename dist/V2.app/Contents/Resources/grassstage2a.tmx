@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="37">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grassstage2a" tilewidth="32" tileheight="32" tilecount="2000" columns="50">
+  <image source="grassstage2a.png" width="1600" height="1280"/>
+ </tileset>
+ <layer id="5" name="Tile Layer 2" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztz0VOQ2EYheE/XJwNtAuA4uvAoevAZQHIHJegBea4E1x2gFaCyzJ453dQBiQ3Hzlv8szPcU4p9d+bDjk3g1nMYR4LiGERS1gOBb0yfUdsPMYJTnGGc1zgEle4NvDjiY3PeMEr3vCOD3ziC98GfmSEnfOQiSxkIwe5yEM+CsJBr0xfIRuLEEExSlCKMpSjApUGflSxsRo1qEUd6tGARjQhauBHMxtb0Io2tKMDnehCN3oM/Bhk4xCGMYJRjGEcE5jElIEfG2zcxBa2sYNd7GEfBzg08OOGjbe4wz0e8Ig4EkgiZeCHUkoppdRf1+v59aEfA17Q637fiue3ijWsG/oR9/wSSCJl6IdSSimllPV+AFD2T0U=
+  </data>
+ </layer>
+ <layer id="6" name="Tile Layer 1" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1b1KBDEQwPFcklPEQq3EerGxVcRCW2sb8QHESl9B0MMHECt9gGsET6xFfIfrVsQHEB/ARs5bNsFxmJsk5D5hBn7sVtn5b7FbGKUKIYQQQgghhJgxb43J7xDju0Gb14Mt68nvjRvWNW2LsTdFLVVDqWu4oQS6ptZ212ddG0fLj+bBhpCeqbXd1XfAljlgCcjt2AjA7zzUoexfR3WPWzaBXSC35SggtiGm49D8dwDktlTTWVHqytDG1ZHb8hTQSmgJdVy687wLILflI+AxocXv3iU6qoaOO897AHJbFi3v3T0zpaOHOnxDycht2bG8BdDSIlT7n5vBYhqG0XJieduohXLPiG3IbbmxvGPUQknZM7Ul9v/yannXqIUy7A7fAr/Jp/2OM6bly/JeUAtlFB1lYsdak/eJWijT0LHf5K2iFsooGgrUcdtvuGM6ZGRkZGZlfgFJOhIw
+  </data>
+ </layer>
+ <layer id="7" name="Tile Layer 3" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="1" x="1600" y="672" width="56" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage3.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="3" x="-32" y="704" width="33" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage2.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="5" x="32" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="184" y="568" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The Pond???"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="10" x="1536" y="768" width="32" height="32">
+   <properties>
+    <property name="image" value="graycloak"/>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="11" x="0" y="672" width="800" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="0" y="832" width="512" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="14" x="512" y="1088" width="672" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="15" x="928" y="672" width="672" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="1184" y="832" width="416" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="17" name="None" type="character" x="1408" y="224" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="For some reason, I became aware...\The cruel cycle innate to his existence must end."/>
+    <property name="image" value="abyss.png"/>
+    <property name="name" value="qqqq"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="18" name="Shopkeep?" type="character" x="832" y="832" width="32" height="96">
+   <properties>
+    <property name="SPflag2" value=""/>
+    <property name="eventrequirement" value="metorbsalesman"/>
+    <property name="image" value="specialcloak.gif"/>
+    <property name="name" value="qqqq"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="19" name="desk" type="spobject" x="749" y="770" width="211" height="192">
+   <properties>
+    <property name="image" value="grassstageshop.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="20" x="749" y="919" width="210" height="40">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="22" x="736" y="-32" width="224" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon1.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="23" x="832" y="96" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="3"/>
+   </properties>
+  </object>
+  <object id="24" x="736" y="256" width="64" height="64">
+   <properties>
+    <property name="description" value="Be alert; dangerous animals have been spotted.\They have also been striped.\Beware of patterns."/>
+   </properties>
+  </object>
+  <object id="25" x="928" y="352" width="32" height="320">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="27" x="768" y="352" width="32" height="320">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="28" name="flyer" type="item" x="352" y="736" width="60" height="35">
+   <properties>
+    <property name="description" value=""/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+    <property name="nodesc" value=""/>
+   </properties>
+  </object>
+  <object id="29" x="192" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="30" x="1184" y="704" width="32" height="128">
+   <properties>
+    <property name="blockSP" value=""/>
+    <property name="requirement" value="ofredrickencounter"/>
+   </properties>
+  </object>
+  <object id="31" type="item" x="1024" y="256" width="32" height="35">
+   <properties>
+    <property name="description" value="Your party member bestows benefits upon you.\Genmu strengthens your physical attacks."/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+   </properties>
+  </object>
+  <object id="32" x="448" y="864" width="64" height="224">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="33" x="1184" y="864" width="64" height="224">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="34" x="1120" y="480" width="512" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="35" x="0" y="480" width="544" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="36" x="352" y="160" width="352" height="128">
+   <properties>
+    <property name="blockSP" value=""/>
+    <property name="requirement" value="after1stdream"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

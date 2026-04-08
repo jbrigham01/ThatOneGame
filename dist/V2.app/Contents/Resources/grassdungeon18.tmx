@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="502">
+ <tileset firstgid="1" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" source="grassstage4redux.tsx"/>
+ <tileset firstgid="702" name="grassdungeon1" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon1.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="2402" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="4102" name="grassdungeon5" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon5.png" width="1600" height="1088"/>
+ </tileset>
+ <layer id="6" name="Tile Layer 2" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1kduU2EYhtFrwM4oGdIRI3rva2AF1HTqUgyEdOou6ChASO/ULdBRSKP3E4lBhIwUCTvX+nVf6Uw8ud8jyyWKkiULZ+XpKKqgkiqqqaE2HfdlhVm9rgYaaaKZFloD7e3Q1UkX3fTQS1+gvVO63vOBj3ziM18C7V2ViaLVrGEt61jPhkzclxVm+3Tt5wAHOcRhygPtzeo6xWnOUMdZ6gPtbdN1h7vco537dATaO6rrHWOMM8EkU4H2riyJoiulUXSVa1znBje5xe3SuC/M/55pes4LXvKK17zhbYC9C8uiaBGLWcJSlrGcFWVxX5f/5fqObi+Sz+/eWZrtcrXW/fneKobNRW82k/v1OFao3uwMbZncv8txrBC9MxunjWZy/y7HsXz3/t0YV2e/5wwwyBDDjPCAhzziMU94+h83Fct7+dUzv/GdH/zk1/Qd/g+lmMd8FpAumfv78r2NGjaxmS1sZRvb2cFOdrGbPQH0VmiopIpqaqjlCEc5xnFOcDKA3gYNjTTRTAutnOM8F7jIJS4H0NupoYtueuilj34GGGSIYUYC6E2WLFmyZMnyubHUv40zwSRTqXju+w0ZIaRf
+  </data>
+ </layer>
+ <layer id="7" name="Tile Layer 1" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6Dbv7Qt7twgAQkAAAAAAC1zHQAA4K0FKiwAAg==
+  </data>
+ </layer>
+ <layer id="8" name="Tile Layer 3" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="7" name="level Info" x="992" y="128" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Mainpath puzzle 2"/>
+    <property name="filter" value="dim"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="12" x="32" y="-128" width="1504" height="320">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="32" y="928" width="1536" height="256">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="24" type="spobject" x="32" y="800" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="262" x="1920" y="480" width="32" height="256">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon19.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="263" type="spobject" x="32" y="96" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="390" name="cutgrass" type="item" x="352" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="403" name="cutgrass" type="item" x="928" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="404" name="cutgrass" type="item" x="416" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="405" name="cutgrass" type="item" x="480" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="406" name="cutgrass" type="item" x="544" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="407" name="cutgrass" type="item" x="608" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="408" name="cutgrass" type="item" x="672" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="409" name="cutgrass" type="item" x="736" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="410" name="cutgrass" type="item" x="800" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="411" name="cutgrass" type="item" x="864" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="412" name="cutgrass" type="item" x="928" y="384" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="413" name="cutgrass" type="item" x="928" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="414" name="cutgrass" type="item" x="928" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="415" name="cutgrass" type="item" x="928" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="416" name="cutgrass" type="item" x="928" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="417" name="cutgrass" type="item" x="928" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="418" name="cutgrass" type="item" x="352" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="419" name="cutgrass" type="item" x="352" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="420" name="cutgrass" type="item" x="352" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="421" name="cutgrass" type="item" x="352" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="422" name="cutgrass" type="item" x="352" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="423" name="cutgrass" type="item" x="352" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="424" name="cutgrass" type="item" x="416" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="425" name="cutgrass" type="item" x="416" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="426" name="cutgrass" type="item" x="416" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="427" name="cutgrass" type="item" x="416" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="428" name="cutgrass" type="item" x="416" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="429" name="cutgrass" type="item" x="416" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="430" name="cutgrass" type="item" x="480" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="431" name="cutgrass" type="item" x="480" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="432" name="cutgrass" type="item" x="480" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="433" name="cutgrass" type="item" x="480" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="434" name="cutgrass" type="item" x="480" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="435" name="cutgrass" type="item" x="480" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="436" name="cutgrass" type="item" x="544" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="437" name="cutgrass" type="item" x="544" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="438" name="cutgrass" type="item" x="544" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrassSP.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="reqgrass" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="439" name="cutgrass" type="item" x="544" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="440" name="cutgrass" type="item" x="544" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="441" name="cutgrass" type="item" x="544" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="442" name="cutgrass" type="item" x="608" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="443" name="cutgrass" type="item" x="608" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="444" name="cutgrass" type="item" x="608" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="445" name="cutgrass" type="item" x="608" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="448" name="cutgrass" type="item" x="672" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="449" name="cutgrass" type="item" x="672" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="450" name="cutgrass" type="item" x="672" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="451" name="cutgrass" type="item" x="672" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="454" name="cutgrass" type="item" x="736" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="455" name="cutgrass" type="item" x="736" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="457" name="cutgrass" type="item" x="736" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="458" name="cutgrass" type="item" x="736" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="459" name="cutgrass" type="item" x="736" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="460" name="cutgrass" type="item" x="800" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="461" name="cutgrass" type="item" x="800" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="462" name="cutgrass" type="item" x="800" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="463" name="cutgrass" type="item" x="800" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="464" name="cutgrass" type="item" x="800" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="465" name="cutgrass" type="item" x="800" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="466" name="cutgrass" type="item" x="864" y="768" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="467" name="cutgrass" type="item" x="864" y="448" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="468" name="cutgrass" type="item" x="864" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="469" name="cutgrass" type="item" x="864" y="576" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="470" name="cutgrass" type="item" x="864" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="471" name="cutgrass" type="item" x="864" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="472" name="cutgrass" type="item" x="736" y="512" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrassSP.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="reqgrass" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="473" name="cutgrass" type="item" x="608" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrassSP.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="reqgrass" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="474" name="cutgrass" type="item" x="672" y="704" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrassSP.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="reqgrass" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="475" x="32" y="576" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value="0"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="476" name="cutgrass" type="item" x="608" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="477" name="cutgrass" type="item" x="672" y="640" width="64" height="64">
+   <properties>
+    <property name="image" value="cutgrasssmall.png"/>
+    <property name="itemid" value="stick"/>
+    <property name="nodesc" value=""/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="478" name="flyer1" type="item" x="160" y="576" width="60" height="35">
+   <properties>
+    <property name="description" value="This is the last one.\Just cut a smiley face for me."/>
+    <property name="flyer" value=""/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+   </properties>
+  </object>
+  <object id="479" name="Grassy Spirit" type="character" x="1536" y="160" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="I am he who watches over the forest.\I appreciate you amusing me."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Grassy Spirit"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="480" type="spobject" x="224" y="832" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="481" type="spobject" x="416" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="482" type="spobject" x="608" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="483" type="spobject" x="800" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="484" type="spobject" x="992" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="485" type="spobject" x="1184" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="486" type="spobject" x="224" y="64" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="487" type="spobject" x="416" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="488" type="spobject" x="608" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="489" type="spobject" x="800" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="490" type="spobject" x="992" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="491" type="spobject" x="1184" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="492" type="spobject" x="1376" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="493" type="spobject" x="1568" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="494" type="spobject" x="1376" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="495" type="spobject" x="1568" y="864" width="196" height="298">
+   <properties>
+    <property name="image" value="foresttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="496" x="-32" y="480" width="32" height="256">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon17.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="498" x="1856" y="576" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value="1"/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="499" type="spobject" x="1568" y="32" width="196" height="298">
+   <properties>
+    <property name="image" value="snowyforesttreesp.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="500" x="1504" y="352" width="32" height="512">
+   <properties>
+    <property name="event" value=""/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

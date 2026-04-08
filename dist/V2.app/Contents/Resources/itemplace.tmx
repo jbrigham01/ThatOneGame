@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="2">
+ <tileset firstgid="1" name="firstplace" tilewidth="32" tileheight="32" tilecount="3250">
+  <image source="firstplace.png" width="4160" height="800"/>
+ </tileset>
+ <tileset firstgid="3251" name="playerstart" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3252" name="blocktile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3253" name="itemplace" tilewidth="32" tileheight="32" tilecount="300">
+  <image source="itemplace.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="3553" name="desctile" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="tiles/desctile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="event" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIwls4SENE2MeCGwmQS2lamDqiDWPmv4dBQMLAGW/FoA=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BogYe8A+2CUTBQAADc+gDv
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxT4mRgUAZiFSiGsZWQ2ApArIgmhkscFxtZH7pdyJgc89DNQXcnLjlsfkLnE/I3urw8C+kY2Qxy9OMzj1Kz0eMY3b/qrAwM2kRiYszTZmNgWMtKGM/nZWCYxkbYPH12BoZSXlRcggWXA3EFL2HziAkzUJhoEOlfYsxbCfUzMf4lxjxQmBgD8Sx2wuZhy+MKRNgDU6+ABWPLU9gwNvMAKIk75A==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" x="448" y="224" width="32" height="32">
+   <properties>
+    <property name="description" value="A hamburger?"/>
+    <property name="question" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

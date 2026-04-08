@@ -3124,6 +3124,7 @@ class Player(pygame.sprite.Sprite):
                     cursor.play()
                 if z == '(':
                     thinking = 1
+                
                 if z != ' ' and thinking == 0 and M_Open == 0:
                     self.image.scroll(-120,0)
                     M_Open = 1
@@ -5022,6 +5023,7 @@ Fredrick: Alright, fine.
                         if 'SPflag1' in moo.properties:
                             character.talk('What? You guys again?')
                             character.talk('Are you two stalking me?')
+                            """
                             chosenoption = doublequestion('','Give me your items...','What? No. No we\'re not.')
                             if chosenoption == 1:
                                 character.talk('Woah, okay buddy.')
@@ -5045,6 +5047,7 @@ Fredrick: Alright, fine.
                                 
                                 character.talk('They have some kind of den\\hidden somewhere in this forest.')
                                 character.talk('They\'re... strange.')
+                            """
                             character.talk('Anyway, I\'m selling these special items.')
                             character.talk('It looks like they\\make you more powerful?')
                             character.talk('I really don\'t know about them...')
@@ -5284,10 +5287,12 @@ Fredrick: Alright, fine.
                                 gray = game.initcharacter("gray")
 
                                 #gray.talk("What a mess...")
-                                gray.talk("How did he find you so soon...!")
-                                gray.talk("And he couldn\'t control it either...")
-                                gray.talk("What a mess.")
-                                gray.talk("Why do you think I hate these journeys so much?")
+                                gray.talk("How did he track you down...?")
+                                gray.talk("I tried everything to keep you from him.")
+                                gray.talk("")
+                                #gray.talk("And he couldn\'t control it either...")
+                                #gray.talk("What a mess.")
+                                #gray.talk("Why do you think I hate these journeys so much?")
                                 #gray.talk("You weren't supposed to meet him yet.")
                                 #gray.talk("The fun never ends...")
                                 game.BlackOut()
@@ -5722,9 +5727,9 @@ Fredrick: Alright, fine.
                             #character.talk('She\'s just another one of those\\ big city businesswomen.')
                             #character.talk('I mean, Easton is the only city nearby,\\so I should say "Easton businesswomen"...')
                             #character.talk('But a price-gouger by any other\\name is still just as annoying.')
-                            #Northton
+                            #Norrol 
                             #Easton
-                            #Westley
+                            #Wesley
                             #Southlake
                             
                             #character.talk('If you become powerful, show me.')
@@ -5943,7 +5948,7 @@ Fredrick: Alright, fine.
                                         character.talk("Hee hee hee.")
 
                                 else:
-                                    character.talk("Things will be better tomorrow...")
+                                    character.talk("Day's almost over...")
                                     character.talk('(I wish I had enough money to quit.)')
                                     
                                     

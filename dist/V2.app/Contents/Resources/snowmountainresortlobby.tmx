@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="32" nextobjectid="44">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="grasstownweaponshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstownweaponshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="7227" source="1stdefaultplace.tsx"/>
+ <layer id="29" name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAcFEgzMBRKU8GgUTAKRsEowAMA1DoBGA==
+  </data>
+ </layer>
+ <layer id="30" name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAEN5kYGC4xQ/BSKL2bCYJtgVgAiJWZIZgYADLvPzMEL4XSMPOQzWRjIs08BhaEeSA2upnGVDQvlBmCB6t5jUCxJjLMu4TFPJBZ64B4PRnm/UczD2bWTSgmBtQyY8foZhFr3ipm7BjdLGLNQ9eDD4+aR13zAGm4dBQ=
+  </data>
+ </layer>
+ <layer id="31" name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwNwwW0DQYAANCn23QzPTU93d384PfXvakxm2aYtumOiU13jc2mNt1tOrZhGNN17zm3YrZAoJKVrWJVq1ndGta0lrWtY13rWd8GNrSRjW1iU5sZZLAhhtrcFoYZboSRRhltjLG2tJWtbWNb29neDna0k53tYlc/9TO72d0e9rSXn9vbPn5hX7/0K/vZ3wEOdJCDHeJQh/m1wx3hSL9xlKMd41jHOd4JTvRbv3OSk53iVKc53RnOdJazneNc5znfBS70exe52CUu9Qd/dJnLXeFKV7naNa51nevd4EY3udktbnWbP7ndHf7sL+70V39zl7vd4173+bt/uN8DHvSQhz3iUY953BOe9JSnPeNZz3neC170kn962Ste9ZrXveFNb3nbO/7l3/7jXe9533994EMf+Z+PfeL/PvWZz33hS1/52je+9Z2B7IFAHOMaz/gmMKGJTGwSk5rM5KYwpR+YytSmMa3pTG8GM5rJzGYxq9nMbg4/NKe5zG0e85rP/H5kAQtayMIW8WOLWszilrCkpSztJ5axrOUsbwUrWsnKVrGq1axuDWtay9rWsa71rG8DG9rIxjaxqc0MMtgQQ21uC8MMN8JIo4w2xlhb2srWtrGt7WxvB98DB+qujg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="19" x="288" y="320" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="256" y="384" width="128" height="64">
+   <properties>
+    <property name="NewArea" value="grasstown.tmx"/>
+    <property name="area" value="snowmountainresortentrance.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="22" name="level Info" x="160" y="32" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Yeah Buddy"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="24" name="sword2" x="128" y="224" width="64" height="64">
+   <properties>
+    <property name="description" value="Is that even a sword?\Looks like a gun."/>
+   </properties>
+  </object>
+  <object id="26" name="Yeah, Buddy" type="character" x="384" y="256" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="sprites/yeahbuddy.gif"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="35" x="448" y="384" width="128" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

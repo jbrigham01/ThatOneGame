@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="25">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <layer id="1" name="Tile Layer 2" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztz8kJgEAQRNGBTtwlHkfjccnFvg+CNxl8D/69qhQAAAAA4G+GaBuzKZvj63XvLdFWszXbOvqxR9uRndnV0Q+AJzdCtRCT
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 1" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1T1KBDEUwPHZJKuIhVqp9WBjq4iFttaCiAeQrfQKgi4eQKz0ANsIrliLeIftRsQDiAewkXXDTPDt4+1LQvZjijfwI5km8/5TzOQ6y3IhhBBCCCGEqLmjteH798bsZwrx06DNq9GW1eznxg0birbN2K9Ri20oVAk3FEBPlzrV+qJK02j5VTzY4NPXpU61ug7YMgcsAakdmx74nfs6MvPfYfe4ZQvYA1JbTjxCG0I6jvWwQyC1xV7dlSy71rRpdaS2PHu0I1p8HVfVec4lkNry6fEU0eJm7xEdtqFbnec8Aqkti4b3UT0zpqOPOlxDwUht2TW8BdDSJtj5L/RoIQ3jaGkZ3g5qoTwwQhtSW24N7xS1UGLmjG0J/b+8Gd4NaqGMu8O1wG/y2aDjnGn5NrxX1EKZREcR2bHe5H2hFkodOg6avFXUQplEQ4467gYN90zHH717EnU=
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="1" x="1600" y="672" width="56" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage2.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="3" x="-32" y="704" width="33" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage.tmx"/>
+    <property name="returnarea" value="3"/>
+   </properties>
+  </object>
+  <object id="5" x="32" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="184" y="568" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The place with a dog..."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="10" x="1536" y="768" width="32" height="32">
+   <properties>
+    <property name="image" value="graycloak"/>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="11" x="0" y="672" width="608" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="0" y="832" width="608" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="13" x="608" y="622" width="512" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="14" x="608" y="896" width="512" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="15" x="1120" y="672" width="480" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="1120" y="832" width="480" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="17" name="Dog" type="character" x="864" y="704" width="64" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="grrr."/>
+    <property name="eventrequirement" value="metthewildanimal"/>
+    <property name="image" value="alexander.png"/>
+    <property name="name" value="Wizdog"/>
+    <property name="orient" value="left"/>
+   </properties>
+  </object>
+  <object id="18" x="704" y="640" width="32" height="272">
+   <properties>
+    <property name="event" value=""/>
+    <property name="eventrequirement" value="metthewildanimal"/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="21" x="595" y="625" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="22" x="1102" y="629" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="23" x="1108" y="864" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="24" x="592" y="864" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

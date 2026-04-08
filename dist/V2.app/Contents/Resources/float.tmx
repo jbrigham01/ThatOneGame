@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="floatingtree" tilewidth="32" tileheight="32" tilecount="880">
+  <image source="../floatingtree.gif" width="1301" height="716"/>
+ </tileset>
+ <tileset firstgid="881" name="playerstart" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwV1kMQGAgQBMDYtm3btm3btm1bd7FtXmzbtm3nOlXTNf/97AQMECBAIAIThKAEIzghCEkoQhOGsIQjPBGISCQiE4WoRCM6MYhJLGITh7jEIz4JSEgiEpOEpCQjOSlISSpSk4a0pCM9GchIJjKThaxkIzs5yEkucpOHvOQjPwUoSCEKU4SiFKM4JShJKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSCc604WudKM7PehJL3rTh770oz8DGMggBjOEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzozmMks/uFfZjOHucxjPgtYyCIWs4SlLGM5K1jJKlazhrWsYz0b2MgmNrOFrWxjOzv4j53sYjd72Ms+9nOAgxziMEc4yjGOc4KTnOI0ZzjLOc5zgYtc4jJXuMo1rnODm9ziNne4yz3u84CHPOIxT3jKM57zgpe84jVveMs73vOBj3ziM1/4yje+84Of/OI3fwgQUAhEYIIQlGAEJwQhCUVowhCWcIQnAhGJRGSiEJVoRCcGMYlFbOIQl3jEJwEJSURikpCUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAUpRGGKUJRiFKcEJSlFacpQlnKUpwIVqURlqlCValSnBjWpRW3qUJd61KcBDWlEY5rQlGY0pwUtaUVr2tCWdrSnAx3pRGe60JVudKcHPelFb/rQl370ZwADGcRghjCUYQxnBCMZxWjGMJZxjGcCE5nEZKYwlWlMZwYzmcU//Mts5jCXecxnAQtZxGKWsJRlLGcFK1nFatawlnWsZwMb2cRmtrCVbWxnB/+xk13sZg972cd+DnCQQxzmCEc5xnFOcJJTnOYMZznHeS5wkUtc5gpXucZ1bnCTW9zmDne5x30e8JBHPOYJT3nGc17wkle85g1vecd7PvCRT3zmC1/5xnd+8JNf/OYPfx9/QAIRmCAEJRjBCUFIQhGaMIQlHOGJQEQiEZkoRCUa0YlBTGIRmzjEJR7xSUBCEpGYJCQlGclJQUpSkZo0pCUd6clARjKRmSxkJRvZyUFOcpGbPOQlH/kpQEEKUZgiFKUYxSlBSUpRmjKUpRzlqUBFKlGZKlSlGtWpQU1qUZs61KUe9WlAQxrRmCY0pRnNaUFLWtGaNrSlHe3pQEc60ZkudKUb3elBT3rRmz70pR/9GcBABjGYIQxlGMMZwUhGMZoxjGUc45nARCYxmSlMZRrTmcFMZvEP/zKbOcxlHvNZwEIWsZglLGUZy1nBSlaxmjWsZR3r2cBGNrGZLWxlG9vZ8fdOBu5OvYvd7GEv+9jPAQ5yiMMc4SjHOM4JTnKK05zhLOc4zwUuconLXOEq17jODW5yi9vc4S73uM8DHvKIxzzhKc94zgte8orXvOEt73jPBz7yic984Svf+M4PfvKL3/zh7+gPSCACE4SgBCM4IQhJKEIThrCEIzwRiEgkIhOFqEQjOjGISSxiE4e4xCM+CfgfWnWDug==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" type="cloakedcreator" x="736" y="304" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value="It's a pretty nice place, isn't it?\I use it for birthday parties and the occasional fate deciding."/>
+    <property name="fullname" value="cloakedcreator"/>
+    <property name="image" value="cloakedcreator2.png"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="down"/>
+    <property name="specialtalk" value="1"/>
+    <property name="sprite" value="sprite"/>
+    <property name="temporary" value="True"/>
+   </properties>
+  </object>
+  <object id="2" x="560" y="408" width="1" height="200">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="5" x="664" y="408" width="1" height="200">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="10" x="672" y="408" width="1" height="1">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+   <polyline points="0,0 24,0 56,0 72,0 88,0 248,-24"/>
+  </object>
+  <object id="12" x="312" y="408" width="1" height="1">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+   <polyline points="248,0 224,0 192,0 176,0 160,0 0,-24"/>
+  </object>
+ </objectgroup>
+ <layer name="Tile Layer 2" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAA+BgyAAAE=
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzN1YO2GAYARMEX27Zt27Zt27Zt27Zt27ZtJ1U6/YvuufMNGyggICAwQQhKMIITgpCEIjRhCEs4whOBiEQiMlGISjSiE4OYxCI2cYhLPOKTgIQkIjFJSEoykpOClKQiNWlISzrSk4GMZCIzWchKNrKTg5zkIjd5yEs+8lOAghSiMEUoSjGKU4KSlKI0ZShLOcpTgYpUojJVqEo1qlODmtSiNnWoSz3q04CGNKIxTWhKM5rTgpa0ojVtaEs72tOBjnSiM13oSje604Oe9KI3fehLP/ozgIEMYjBDGMowhjOCkYxiNGMYyzjGM4GJTGIyU5jKNKYzg5nMYjZzmMs85rOAhSxiMUtYyjKWs4KVrGI1a1jLOtazgY1sYjNb2Mo2trODnexiN3vYyz72c4CDHOIwRzjKMY5zgpOc4jRnOMs5znOBi1ziMle4yjWuc4Ob3OI2d7jLPe7zgIc84jFPeMoznvOCl7ziNW94yzve84GPfOIzX/jKN77zg5/84g/+5C/+5h9+ExBIBCYIQQlGcEIQklCEJgxhCUd4IhCRSEQmClGJRnRiEJNYxCYOcYlHfBKQkEQkJglJSUZyUpCSVKQmDWlJR3oykJFMZCYLWclGdnKQk1zkJg95yUd+ClCQQhSmCEUpRnFKUJJSlKYMZSlHeSpQkUpUpgpVqUZ1alCTWtSmDnWpR30a0JBGNKYJTWlGc1rQkla0pg1taUd7OtCRTnSmC13pRnd60JNe9KYPfelHfwYwkEEMZghDGcZwRjCSUYxmDGMZx3gmMJFJTGYKU5nGdGYwk1nMZg5zmcd8FrCQRSxmCUtZxnJWsJJVrGYNa1nHejawkU1sZgtb2cZ2drCTXexmD3vZx34OcJBDHOYIRznGcU5wklOc5gxnOcd5LnCRS1zmCle5xnVucJNb3OYOd7nHfR7wkEc85glPecZzXvCSV7zmDW95x3s+8JFPfOYLX/nGd37wk1/8wZ/8xd/8w2/+O/5ABCYIQQlGcEIQklCEJgxhCUd4IhCRSEQmClGJRnRiEJNYxCYOcYlHfBKQkEQkJglJSUZyUpCSVKQmDWlJR3oykJFMZCYLWclGdnKQk1zkJg95yUd+ClCQQhSmCEUpRnFKUJJSlKYMZSlHeSpQkUpUpgpVqUZ1alCTWtSmDnWpR30a0JBGNKYJTWlGc1rQkla0pg1taUd7OtCRTnSmC13pRnd60JNe9KYPfelHfwYwkEEMZghDGcZwRjCSUYxmDGMZx3gmMJFJTGYKU5nGdGYwk1nMZg5zmcd8FrCQRSxmCUtZxnJWsJJVrGYNa1nHejawkU1sZgtb2cZ2drCTXexmD3vZx34OcJBDHOYIRznGcU5wklOc5gxnOcd5LnCRS1zmCle5xnVucJNb3OYOd7nHfR7wkEc85glPecZzXvCSV7zmDW95x3s+8JFPfOYLX/nGd37wM3DA/37/AlO/ep4=
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="roomref" tilewidth="32" tileheight="32" margin="27" tilecount="266">
+  <image source="../roomref.png" width="640" height="480"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztzMkNglAAQEHqoS7F9e6CwN1d74obNdCDsQV7cVr4CQcTeMlcXxR1taGYHn0SBgwZMWbCNOBXM2POgiUpKzJyioDfmzUbtuzYc+DIiXPA78uFKyU37jx48qIK+HX9X5+GX03+2tIPVpYXjw==
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="41" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="31">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" name="picnicarea" tilewidth="32" tileheight="32" tilecount="1230" columns="30">
+  <image source="picnicarea.png" width="960" height="1312"/>
+ </tileset>
+ <layer id="8" name="Tile Layer 2" width="30" height="41">
+  <data encoding="base64" compression="zlib">
+   eJztzbEJACAMBdEPaXSC7KLLZSEXchrr9BJB7sHVJwEAAAAAIDWXutd/h799z8vfsFyVZbkq23LATw5Ksgmz
+  </data>
+ </layer>
+ <layer id="9" name="Tile Layer 1" width="30" height="41">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJwjAUgOE2CYon3aE4geJJd/DiBM4hqBO4RC+CdgBxid4iDuKtNrwWnyGvtqQBD+/BT0IO+eBFEQ8Pj+8kkuM4juO4f+wRh/n3FbsbCrqJ8Denwt28oZWnrQVkmxqVSyitzpuAfGwtfldIKK3O2sX2ADVG+bqR+rjmbtsz1BJF2X24G/ndGkXZoV3K7sM9lG9H1B5F2V3c3OEa81qWoS4oyu7iFpZbm7ohys6sHdUZbyfp2phN9tPaEe7cUFuTskcKbFdd/u1qLxTYrvp2a9u4WwW2qxCurtyTAttVSPeuwHYVwkwq9w3BgHPn
+  </data>
+ </layer>
+ <layer id="10" name="Tile Layer 3" width="30" height="41">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="18" name="level Info" x="800" y="352" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Picnic Area."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="19" x="460" y="1270" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="352" y="1312" width="224" height="64">
+   <properties>
+    <property name="NewArea" value="grassstage.tmx"/>
+    <property name="area" value="grassstage.tmx"/>
+    <property name="returnarea" value="4"/>
+   </properties>
+  </object>
+  <object id="21" x="352" y="480" width="224" height="64">
+   <properties>
+    <property name="NewArea" value="heaven.tmx"/>
+    <property name="area" value="heaven.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="22" x="448" y="736" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="23" x="448" y="896" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="25" name="Shopkeep" type="character" x="256" y="800" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Are you even the best version of yourself?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Tour Guide?"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="26" name="Shopkeep" type="character" x="672" y="800" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Are friends SO important?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Tour Guide?"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="29" x="416" y="512" width="96" height="128">
+   <properties>
+    <property name="description" value="null"/>
+    <property name="door" value=""/>
+    <property name="nodesc" value=""/>
+   </properties>
+  </object>
+  <object id="30" name="Gray" type="character" x="576" y="896" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="The secret dungeon???"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Tour Guide?"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

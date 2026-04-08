@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="48" height="37" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="508">
+ <tileset firstgid="1" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="grassdungeon1" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon1.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="1702" name="foresttreesolo" tilewidth="32" tileheight="32" tilecount="63" columns="7">
+  <image source="foresttreesolo.png" width="250" height="300"/>
+ </tileset>
+ <tileset firstgid="1765" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="3465" name="grassdungeon20" tilewidth="32" tileheight="32" tilecount="2208" columns="48">
+  <image source="grassdungeon20.png" width="1536" height="1472"/>
+ </tileset>
+ <tileset firstgid="5673" name="grassdungeon5" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon5.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="7373" source="grassdungeon5snow.tsx"/>
+ <tileset firstgid="9073" source="grassdungeon21.tsx"/>
+ <layer id="15" name="Tile Layer 2" width="48" height="37">
+  <data encoding="base64" compression="zlib">
+   eJzt1MdOAkEAh/GRXVSKFOuBp7BgA3t/FRV792B7DRUsgPVgewwLNsD6KPoZSbiZgCS7k8w/+Z3ny85khVBTU1MzZlGLEDHELUaX5Lck3SmkJe23aULY4dCMLslvAbqDaJO0P0T3GMYl7Q/THcGOpP0Juu/xIGm/pguhw6obXZLf/HQ3oknS/maHEC1oRQBBh9FFuW2Y3hGMIoQxyfo36d3CNsKISNZ/p/3+gzRJ338i0++XuP864wa3WvZOZNhP91eG4A6KYNHleU8/3bX6rzrUo0GX5z3l0r3iE2IVa1jHhi//c52cUwYX3PDAi3JUoBJVqEbNH025fOszes9xgUtc/aO/nTM70IkudKMHvehDPwYwiKECvYVC9k/QNIkpTGMGs5jDPBawiCUsm7B/l6Y97COKGOI4wCGOcIwTnJqw/5GmJzwjiRTSeMEr3vCOD3yasL/YKkQJSmGDHQ44UQYX3PDAazVfvxFT/WpqamrZfQPI2GNm
+  </data>
+ </layer>
+ <layer id="16" name="Tile Layer 1" width="48" height="37">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAACAFwMbwAAB
+  </data>
+ </layer>
+ <layer id="17" name="Tile Layer 3" width="48" height="37">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="7" name="level Info" x="320" y="160" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Snowy End"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="12" x="1184" y="160" width="320" height="1024">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="32" y="256" width="416" height="928">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="479" name="Weird Salesman" type="character" x="896" y="544" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="Want a sword?"/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="499" x="448" y="64" width="736" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon22.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="500" x="800" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value="1"/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="501" x="480" y="800" width="608" height="32">
+   <properties>
+    <property name="event" value=""/>
+   </properties>
+  </object>
+  <object id="503" x="800" y="1024" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value="0"/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="506" x="448" y="1120" width="736" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassdungeon20.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="507" name="chest" type="item" x="736" y="448" width="64" height="64">
+   <properties>
+    <property name="chestid" value="2"/>
+    <property name="description" value=""/>
+    <property name="image" value="chest.png"/>
+    <property name="itemid" value="pc.quickslice"/>
+    <property name="opened" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

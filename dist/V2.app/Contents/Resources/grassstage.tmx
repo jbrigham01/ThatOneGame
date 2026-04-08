@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="117">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="45" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt1jsOgCAQBUA6739ZbS2MHUZQEFdnEiqW8Ej4pQQAwBfM0/vaWba9L4rSzJHWxFi58/L0/FfG9Mhcc6/Uzt0jc8k9EC1zi/pomXuQebMc/ANasZ/z9TLff9tG/5sBAPiHFWK+il4=
+  </data>
+ </layer>
+ <layer id="2" name="Tile Layer 2" width="45" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAgIcBH6QAAQ==
+  </data>
+ </layer>
+ <layer id="3" name="Tile Layer 3" width="45" height="45">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="21" x="384" y="0" width="32" height="32">
+   <properties>
+    <property name="description" value="A surprisingly deep pond. \The water is rather warm ."/>
+   </properties>
+  </object>
+  <object id="29" x="320" y="128" width="32" height="32">
+   <properties>
+    <property name="description" value="Seems like a good place to \watch the sun set..."/>
+   </properties>
+  </object>
+  <object id="53" x="1432" y="576" width="32" height="64">
+   <properties>
+    <property name="NewArea" value="grassstage2b.tmx"/>
+    <property name="area" value="grassstage2b.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="54" x="-8" y="608" width="8" height="32">
+   <properties>
+    <property name="NewArea" value="grassstage2.tmx"/>
+    <property name="area" value="grassstage4.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="56" x="528" y="136" width="32" height="26">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="63" type="info" x="512" y="128" width="64" height="64">
+   <properties>
+    <property name="description" value="Scenic Picnic Area ahead. \Closed due to lack of picnics (and thus, scenicness)"/>
+   </properties>
+  </object>
+  <object id="65" x="0" y="448" width="1184" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="67" x="420" y="528" width="94" height="80">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="69" x="-64" y="576" width="480" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="70" x="1248" y="576" width="208" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="72" x="1176" y="456" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="74" x="1248" y="456" width="8" height="136">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="76" x="224" y="768" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="78" name="level Info" x="72" y="48" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Picnic Area?"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="80" x="-32" y="160" width="32" height="288">
+   <properties>
+    <property name="NewArea" value="grassstage4.tmx"/>
+    <property name="area" value="grassstage4.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="81" x="32" y="608" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="83" x="32" y="390" width="32" height="32">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="84" x="1376" y="608" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="3"/>
+   </properties>
+  </object>
+  <object id="86" name="Save Guy" type="character" x="896" y="736" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="SaveGuy.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="right"/>
+    <property name="save" value=""/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="87" type="spobject" x="224" y="1344" width="64" height="64">
+   <properties>
+    <property name="image" value="sptester.png"/>
+    <property name="spobject" value=""/>
+   </properties>
+  </object>
+  <object id="90" x="104" y="1280" width="92" height="19">
+   <text wrap="1" color="#ffffff">Despacito</text>
+  </object>
+  <object id="93" x="232" y="1264" width="215" height="38">
+   <text wrap="1" color="#ffffff">I swear on Lorei's breasts
+ I am not a furry...</text>
+  </object>
+  <object id="96" x="512" y="576" width="665" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="97" name="Alexander Hamilton" type="character" x="160" y="1344" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="description" value=""/>
+    <property name="image" value="sprites/player.png"/>
+    <property name="name" value="Copy"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+    <property name="test" value=""/>
+   </properties>
+  </object>
+  <object id="98" x="736" y="864" width="64" height="64">
+   <properties>
+    <property name="description" value="A lone flower.\Its solitude only makes it more beautiful."/>
+   </properties>
+  </object>
+  <object id="99" x="0" y="128" width="512" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="100" x="736" y="128" width="704" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="101" x="1248" y="448" width="208" height="16">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="102" x="608" y="64" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="4"/>
+   </properties>
+  </object>
+  <object id="103" x="512" y="-32" width="224" height="32">
+   <properties>
+    <property name="NewArea" value="picnicarea.tmx"/>
+    <property name="area" value="picnicarea.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="105" x="1118" y="608" width="32" height="32">
+   <properties>
+    <property name="blockSP" value=""/>
+    <property name="requirement" value="talkedtosaveguy"/>
+   </properties>
+  </object>
+  <object id="106" x="1024" y="704" width="32" height="32"/>
+  <object id="107" x="-352" y="192" width="96" height="288">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="108" x="1440" y="160" width="96" height="288">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="109" name="flyer" type="item" x="704" y="704" width="60" height="35">
+   <properties>
+    <property name="description" value="Talk to people twice. Or don't."/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+    <property name="nodesc" value=""/>
+   </properties>
+  </object>
+  <object id="110" x="480" y="0" width="32" height="128">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="111" x="736" y="0" width="32" height="128">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="112" name="chest" type="item" x="320" y="672" width="64" height="64">
+   <properties>
+    <property name="chestid" value="1"/>
+    <property name="description" value=""/>
+    <property name="image" value="chest.png"/>
+    <property name="itemid" value="choiceboost"/>
+    <property name="opened" value="0"/>
+   </properties>
+  </object>
+  <object id="116" x="384" y="128" width="480" height="32">
+   <properties>
+    <property name="block" value=""/>
+    <property name="description" value="You have nothing to picnic with.\You would be given the stink eye if you entered here."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="5" name="Tile Layer 4" width="45" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAgIcBH6QAAQ==
+  </data>
+ </layer>
+</map>

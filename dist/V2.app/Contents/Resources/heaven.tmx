@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="20">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4526" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4527" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="6227" source="grassstage4redux.tsx"/>
+ <tileset firstgid="6927" source="heaven.tsx"/>
+ <layer id="5" name="Tile Layer 2" width="50" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztz8VNRGEYheE/XJwGZgrApQ5c6kAHKADZ4xJc9rhPcOkAHQkuZfAmLG/IsCC5+ZLzJs/+HOeUUkoppZRSSimllFJKKaV+mgo5N40ZzGIO81jAIpawHAp6ZeoO2XiEY5zgFGc4xwUucWXgxyMbn/CMF7ziDe/4wCe+DPxICzvnIR0ZyEQWspGDXOSFg16Zunw2FqAQRShGCUpRhnJUGPhRycYqVKMGtahDPRrQiCYDP5rZ2IJWtKEdHYigE13oNvBjgI2DGMIwRjCKMYxjApMGfmywcRNb2MYOdrGHfRwgauDHNRtvcIs73OMBMcSRQNLAD6WUUkqp/67H8+tFH/q9oNf9vRXPbxVrWDf0I+b5xZFA0tAPpZT6rW+8Ck9F
+  </data>
+ </layer>
+ <layer id="6" name="Tile Layer 1" width="50" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt1blKA0Ecx/HN7kYRC+3EWnwCRSy0tbYRH0CsFO8jjaB5ArFSvI80goq1iK33kW5FfACx9T7ib8ksjsPsZIfJhfx/8CGpkvmyYWJZNBqNRqPRaDQajUaj0Wg0Go0WbQ0OIYQQQgghcgMxyxqEIRiGERiFMRiHCZiERKz0Zw0T9fyJf9SRKuMOnd9UOkfHbQk7dToy8CpRaYertcuvo9GWa1ZoL1LLYsysxeOknawUez2ws4rRcqzZ4dnhMk5Wir0GHXxLBaeGY9rxFMs+kyVYhhVYhTVYhw3YhC12X+XqsNzfDv+92NLEaeOYtnSzZ3ICp3AG53ABl3AF13DD7iuTji7nr06OaYs//5k8wwu7f97gHT7gE77gm91XheowbdnPIemoz67TMcM+LzDNMW25z2FPoyU4e1rS4Tfsss8L7HBMW6pdtTv2nTodGaEjaPAUTFtaXbUqriUp4Z9/ygkXpSEfLb2uWovQIrOtELXBtGXOVesRWmR0zqnbEvX/5chVmxVaZPLdEbTwd3IfOvoVLY+u2qHQIlOIDk+zoz6u9iC0yJRDR0dcrU5okSlEQ4PQMY+GBUXHD3qvLRc=
+  </data>
+ </layer>
+ <layer id="7" name="Tile Layer 3" width="50" height="60">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="1" x="1600" y="1504" width="56" height="160">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage3.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="3" x="192" y="1568" width="1376" height="160">
+   <properties>
+    <property name="NewArea" value="picnicarea.tmx"/>
+    <property name="area" value="picnicarea.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="5" x="768" y="1376" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="7" name="level Info" x="184" y="1400" width="24" height="24">
+   <properties>
+    <property name="areaname" value="After the end?"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="10" x="1536" y="1600" width="32" height="32">
+   <properties>
+    <property name="image" value="graycloak"/>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="12" x="0" y="1664" width="1120" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="1120" y="1664" width="480" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="17" name="Gray Cloak" type="character" x="768" y="928" width="32" height="64">
+   <properties>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="It's a weird feeling, huh?\You're the one who's left."/>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="up"/>
+   </properties>
+  </object>
+  <object id="18" name="Grey" type="character" x="832" y="768" width="32" height="64">
+   <properties>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="I have been with you since the beginning..."/>
+    <property name="image" value="sprites/grey.gif"/>
+    <property name="name" value="???"/>
+    <property name="orient" value="Down"/>
+   </properties>
+  </object>
+  <object id="19" x="672" y="1312" width="64" height="96">
+   <properties>
+    <property name="NewArea" value="picnicarea.tmx"/>
+    <property name="area" value="picnicarea.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

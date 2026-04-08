@@ -106,17 +106,19 @@ def TemplateStrategy(self,target,game,alltiles):
                 pass
             
 def AFredrickStrategy(self,target,game,alltiles):
-    
     player = target
     self.battlecounter += 1
     self.movecounter += 1
-    print(self.strat)
+    print(self.strat, ",", self.currentpos)
     self.guard = False
+    if self.strat == 'beam':
+        self.strat = 'intro'
+        #i think orig fredrick has beam as intro... too lazy to fix
     if self.strat == 'intro':
-        self.strat = 'atta  qk'
-    if self.strat == 'attack':
-        self.cooldown = 10
-        self.strat = 'beam'
+        self.strat = 'attack'
+    #if self.strat == 'attack':
+        #self.cooldown = 10
+        #self.strat = 'beam'
     if self.cooldown:
         self.cooldown -= 1
     if not self.cooldown:
@@ -126,15 +128,26 @@ def AFredrickStrategy(self,target,game,alltiles):
                 #battle plan:
         #Approach the player quickly and do either a 3 hit or 2 hit combo
         #and teleport???
-
         if self.strat == "attack":
-            if game.distancefromplayer >= 1:
+            if game.distancefromplayer >= 2:
                 self.moveneeded = 'left'
             else:
                 if random.randint(0,1):
+                    self.moo += 1
+                    if self.moo == 10:
+                        moo = random.randint(0,2)
+                        areas = [[6,1],[5,4],[7,3]]
+                        self.currentpos = [random.randint(1,8), random.randint(1,4)]#copy.copy(areas[moo])
+                        self.moo = 0
+                        self.cooldown = 10
+
+                """
+                super cool effect he teleports down all rows if left like this
+                 if random.randint(0,1):
                     moo = random.randint(0,2)
-                areas = [[6,1],[5,4],[7,3]]
-                self.currentpos = copy.copy(areas[moo])
+                    areas = [[6,1],[5,4],[7,3]]
+                    self.currentpos = copy.copy(areas[moo])
+                """
 
 def OFredrickStrategy(self,target,game,alltiles):
     player = target   

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="53">
+ <tileset firstgid="1" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="right"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2" name="grasstowngiftshop" tilewidth="32" tileheight="32" tilecount="300" columns="20">
+  <image source="grasstowngiftshop.png" width="640" height="480"/>
+ </tileset>
+ <tileset firstgid="302" name="grasstowngiftshop2" tilewidth="32" tileheight="32" tilecount="465" columns="31">
+  <image source="grasstowngiftshop2.png" width="992" height="480"/>
+ </tileset>
+ <layer id="32" name="Tile Layer 2" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0Ausw4LX08nuQ1jwYTrZfQ0Lvk4nu19hwa/pZPcoGP4AAIYTEyU=
+  </data>
+ </layer>
+ <layer id="33" name="Tile Layer 1" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGATkAAAdEAAE=
+  </data>
+ </layer>
+ <layer id="34" name="Tile Layer 3" width="31" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxd0FV0FgQAhuEfBFFC8NIgJUxApbsbZjNgo7u7c3R3jRojRvfo7u5uRvdApUGfi11w/ovn6r34zvmyJwoEcpCTH/mJn8lFbvKQl3zkpwAFKURhilCUYhSnBCUpRWnKUJZylKcCFalEZaoQwi/8ym/8zh/8yV9UJZRqVKcGYYRTk1rUpg51qUd9GtCQRjSmCU1pRnNa0JJWtKYNbWlHezrQkU50pgtd6UZ3etCTXvSmDxH0pR/9GcBABjGYIQxlGMMZwUhGMZoxjGUc45nARCYxmUimMJVpTGcGUcwkmlnMZg5ziWEe81nAQhaxmCUsZRnLWcFKVhHLatawlnWsZwMb2cRmtrCVbWxnBzvZxW72sJd97OcABzkU5DBHOMoxjnOCM5zlHOe5wEUucZkrXOUacVznBje5xW3ucJd73Ofpex7wkEc8Jp4nCe0Zz3nBS17xmje85R3/EUgcCCQiMR+QhKR8SDI+4mOS05JWtCYFKUnFJ6QmDZ/yWYLP+YIvSUs60pOBjGQK8hWZyUJWsvE13wRtf8t3fM8PZCcHOcmXID8FKEghClOEohSjeJASlKQUpSlDWcpRPkgFKlKJylQhhKoJQqlGdWoQRjg1qUXtIHWoSz3q04CGNKIxTWhKM5rTIuiPNrSlHe3pQEc60ZkudKUb3elBT3rRmz5E0Jd+9GcAAxnEYIYwlGEMZwQjGcVoxjCWcYxnAhOZxGQimcJUpjGdGUQxk2hmMZs5zCWGecxnAQtZxGKWsJRlLGcFK1lFLKtZw1rWsZ4NbGQTm9nCVraxnR3sZBe72cNe9rGfAxzkEIc5wlGOcZwTnOQUpznDWc5xngtc5BKXucJVrhHHdW5wk1vc5g53ucd9HvCQRzwmnic85W/+4V+e8ZwXvOQVr3nDW97xP9AM/ss=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="19" x="96" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="20" x="32" y="224" width="32" height="96">
+   <properties>
+    <property name="NewArea" value="grasstowngiftshop.tmx"/>
+    <property name="area" value="grasstowngiftshop.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="22" name="level Info" x="544" y="64" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Their relics."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="37" x="384" y="416" width="224" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="38" x="32" y="416" width="224" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="46" x="288" y="224" width="128" height="64">
+   <properties>
+    <property name="Black" value=""/>
+    <property name="MemoryPlace" value=""/>
+    <property name="description" value="It looks like an orb could fit here..."/>
+   </properties>
+  </object>
+  <object id="47" x="608" y="224" width="128" height="64">
+   <properties>
+    <property name="MemoryPlace" value=""/>
+    <property name="White" value=""/>
+    <property name="description" value="&quot;The understanding mage&quot; is written on it."/>
+   </properties>
+  </object>
+  <object id="48" name="Shopkeep" type="character" x="334" y="180" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="image" value="sprites/blackcloak.png"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="49" name="Shopkeep" type="character" x="655" y="178" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="image" value="sprites/whitecloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="50" x="928" y="224" width="32" height="96">
+   <properties>
+    <property name="NewArea" value="grasstowngiftshop.tmx"/>
+    <property name="area" value="grasstowngiftshop3.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="51" x="864" y="288" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="52" name="Shopkeep" type="character" x="512" y="288" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description" value="You don't know of the two heroes?"/>
+    <property name="image" value="sprites/graycloak.gif"/>
+    <property name="name" value="Tour Guide?"/>
+    <property name="orient" value="left"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

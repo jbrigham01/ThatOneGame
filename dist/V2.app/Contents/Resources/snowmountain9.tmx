@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="46" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="86">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2040" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4540" name="snowplace" tilewidth="32" tileheight="32" tilecount="1440" columns="36">
+  <image source="snowplace.png" width="1152" height="1280"/>
+ </tileset>
+ <tileset firstgid="5980" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="7680" source="grassdungeon21.tsx"/>
+ <tileset firstgid="9456" source="snowplacev2.tsx"/>
+ <tileset firstgid="10896" source="snowmountain1.tsx"/>
+ <tileset firstgid="11616" source="snowmountain2.tsx"/>
+ <tileset firstgid="12768" source="snowmountain3.tsx"/>
+ <tileset firstgid="13920" source="snowmountain4.tsx"/>
+ <tileset firstgid="15744" source="snowmountain5.tsx"/>
+ <tileset firstgid="16752" source="snowmountain6.tsx"/>
+ <layer id="14" name="Tile Layer 1" width="46" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzrcNwgAYROFfgjFIG7h2Y3ekYcCJtAqpJcfRSDWvo3WDjM096WtPZ6ZUMbp5Znc88MTLy/pRuiq+WRU11NHws36UriY/W2ijg25Ofgf8DBEhRpKT31N+zjDHAsuc/FZKKaWUUkopVYx6rlkfAUJEiJFggCFGGGPiZv3204ova2ywxQ57HHDECWdccP2h3/9UyTErO9/bfwP8VSVo
+  </data>
+ </layer>
+ <layer id="15" name="Tile Layer 2" width="46" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAPwZFwAAAQ==
+  </data>
+ </layer>
+ <layer id="16" name="Tile Layer 3" width="46" height="32">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="68" x="448" y="992" width="448" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountain8.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="69" x="640" y="864" width="32" height="32">
+   <properties>
+    <property name="orient" value="up"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="77" name="level Info" x="864" y="416" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Mountain 1"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="79" x="-96" y="352" width="96" height="320">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountain7.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="80" x="64" y="384" width="32" height="32"/>
+  <object id="81" x="64" y="480" width="32" height="32">
+   <properties>
+    <property name="orient" value=""/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="82" x="1472" y="320" width="96" height="320">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountain8.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="83" x="640" y="96" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="84" name="Percy" type="character" x="640" y="672" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag2" value=""/>
+    <property name="description" value="It's just a part time job. I really want to be a mage, after all..."/>
+    <property name="image" value="sprites/graymask.gif"/>
+    <property name="orient" value="down"/>
+    <property name="percival" value=""/>
+   </properties>
+  </object>
+  <object id="85" x="448" y="-96" width="448" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountainresortentrance.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

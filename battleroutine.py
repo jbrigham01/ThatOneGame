@@ -33,6 +33,9 @@ pygame.init()
 # from a istance, as the area is not divided.
 #we should make corners able to be stood on.
 
+
+hit = pygame.mixer.Sound("sounds/hit.wav")
+
 '''GLOBAL DAMAGE DOUBLE FOR PLAYER IS ACTIVE! APPLIED IN DAMAGE() FUNCTION'''
 
 grassbg = pygame.image.load('battlesprites/grassstagebackground.png')
@@ -724,6 +727,7 @@ def updatebattlearea():
                                 #damage enemy here, not projectile?
                                 print(x.occupant.guard,'Occupant guarding?')                                
                                 if x.occupant.guard != True and not x.occupant.invincible:
+                                    hit.play()
                                     if game.debug:
                                         print(x.damageamount,'damage')
                                     if x.occupant.stunsp:
@@ -1360,6 +1364,7 @@ def eventcheck():
         #print("grassdguneo boss")
         ofredrick: enemy = game.enemies[0]
         fredrick: battleplayer = game.players[0]
+        ofredrick.name = "AFredrick" #triggers awakened battle strategy
         
 
         if ofredrick.Chealth == ofredrick.Mhealth and game.check1 == False:
@@ -1409,10 +1414,12 @@ def eventcheck():
             if chosenoption == 2:
                 talkmenu("", ["Why are you doing this?","You won\'t win."], fredrick)
                 #if chosenoption == 1:
-                speak("I-i can\'t...", ofredrick)
                 draw("Your opponent suddenly focuses.")
-                speak("I-i\'m... sorry.", ofredrick)
-                draw("Your opponent leaves.")
+                speak("I-i can\'t...", ofredrick)
+                
+                draw("IT'S THE ONLY WAY!", ofredrick)
+                #speak("I-i\'m... sorry.", ofredrick)
+                #draw("Your opponent leaves.")
                 battleFinished = True
                 #if chosenoption == 2:
                 #    speak("I-i...", ofredrick)
@@ -1862,6 +1869,45 @@ def eventcheck():
                     #speak("...", dark)
                     speak("So you are a true hero.", dark)
                     speak("I admire your resolve.", dark)
+        if game.check4 == False:
+            resetBattleField()
+            draw('What has happened...',1,['Talk','Item'])
+            game.check3 = True
+            if chosenoption == 1:
+                speak('Hah...',dark)
+                speak('You have taken my greatest gift.',dark)
+                speak("And you have survived.", dark)
+                speak('... you are different from that other one.',dark)
+                speak("But how...?", dark)
+                speak("You are the same in every way...!", dark)
+                speak("Unless... could it be that force?", dark)
+                printstuff("The being seems to almost choke for a moment.")
+                speak('I am finally... fading...',dark)
+                speak("We have played this game for a very long time.", dark)
+                speak("Soon, it will be over.",dark)
+                talkmenu('...',['Thank you.','I\'m sorry.'],fredrick)
+                if chosenoption == 1:
+                    speak("Ha!", dark)
+                    printstuff("It almost seemed like the being smiled for a moment.")
+                    speak("It is I who should be thanking you.", dark)
+                    speak("You will finally put this world back the way it should be.", dark)
+                    speak("After all...", dark)
+                    printstuff("The being begins to fade.")
+                    speak("That was...", dark)
+                    speak("Always...", dark)
+                    speak('...', dark)
+                    speak("Our purpose...", dark)
+                else:
+                    speak("Heh.", dark)
+                    speak("I am the one who should apologize.", dark)
+                    speak("You have been given a terrible burden.", dark)
+                    speak("And you have come so far in spite of it.", dark)
+                    speak("Your journey is not yet over...", dark)
+                    speak("Go...", dark)
+                    printstuff("The being begins to fade.")
+                    speak("Do... what we were unable to.", dark)
+                    speak("And see... ",dark)
+                    speak("...Tomorrow.", dark)
 
                     
 ##                speak('We have dedicated our existences to maintaining yours.',dark)
@@ -3412,6 +3458,8 @@ class enemy:
                 BattleEnemyData.SwordNyuStrategy(self,fredrick,game,alltiles)
             if self.name == 'OFredrick':
                 BattleEnemyData.OFredrickStrategy(self,fredrick,game,alltiles)
+            if self.name == 'AFredrick':
+                BattleEnemyData.AFredrickStrategy(self,fredrick,game,alltiles)
             if self.name == 'FallenWarrior':
                 BattleEnemyData.FallenWarriorStrategy(self,fredrick,game,alltiles)
             if self.name == 'Black Cloak':
@@ -3814,6 +3862,7 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
     global battleFinished
     battleFinished = False
     game.specialblits.clear()    
+    ticked = 0
 
 
     while True:
@@ -3879,23 +3928,31 @@ def Battle(playerdata,players, enemies, place, music, background,presentableitem
         
 
         
-        
-        game.enemy.strategy()
-        game.player.update()
+     
         for i in game.enemies:
             getlocation(i)
 
         if enemies[0].currentpos == players[0].currentpos:
             print("player and enemy in same spot... reverting locations")
+            print("from:", enemies[0].currentpos, players[0].currentpos)
             enemies[0].currentpos = enemyLastPos
             players[0].currentpos = playerLastPos
+            print("to:", enemies[0].currentpos, players[0].currentpos)
+        
         displayupdate(players,enemies, game.background, game.backcolor)
+           
+        game.enemy.strategy()
+        game.player.update()
         if not introed:
             intro()
             introed = True
        
         pygame.display.update()
-        eventcheck()
+        if not ticked:
+            #bug happening where eventheck is called before battelfield is reset between battles.
+            #this should solve.
+            eventcheck()
+            ticked = 1
         fps.tick(30)
 
 
@@ -3953,12 +4010,12 @@ if __name__ == '__main__':
     # and neds to be assigned to
     Fredrick.xattack  = laser
     Fredrick.cattack  = heal
-    Battle(Fredrick,[fredrick],[darknyu],'gray area',None,(0,0,0),None,'First Battle',x)
+    #Battle(Fredrick,[fredrick],[darknyu],'gray area',None,(0,0,0),None,'First Battle',x)
 
-    Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Grassdungeon Boss')
+    #Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Grassdungeon Boss')
 
     
-    Battle(Fredrick,[fredrick],[blackcloak],'grass stage',None, (0,0,0),['Stick','First Aid Kit'], 'Black Cloak Battle',x)
+    #Battle(Fredrick,[fredrick],[blackcloak],'grass stage',None, (0,0,0),['Stick','First Aid Kit'], 'Black Cloak Battle',x)
     #Battle(Fredrick,[fredrick],[wizdog],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'WizDog Encounter',x)
     #Battle(Fredrick,[fredrick],[magicdog],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'Magic Dog Encounter',x)
     #replicate brawl 1v1s?

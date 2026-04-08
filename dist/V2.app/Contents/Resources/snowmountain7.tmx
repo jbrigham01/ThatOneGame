@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="57" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="94">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="grass.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="13" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2038" name="blocktile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="blocktile.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2039" name="playerstart" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="playerstart.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="2040" name="grassstage2" tilewidth="32" tileheight="32" tilecount="2500" columns="50">
+  <image source="grassstage2.png" width="1600" height="1600"/>
+ </tileset>
+ <tileset firstgid="4540" name="snowplace" tilewidth="32" tileheight="32" tilecount="1440" columns="36">
+  <image source="snowplace.png" width="1152" height="1280"/>
+ </tileset>
+ <tileset firstgid="5980" name="grassdungeon2" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassdungeon2.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="7680" source="grassdungeon21.tsx"/>
+ <tileset firstgid="9456" source="snowplacev2.tsx"/>
+ <tileset firstgid="10896" source="snowmountain1.tsx"/>
+ <tileset firstgid="11616" source="snowmountain2.tsx"/>
+ <tileset firstgid="12768" source="snowmountain3.tsx"/>
+ <tileset firstgid="13920" source="snowmountain4.tsx"/>
+ <tileset firstgid="15744" source="snowmountain5.tsx"/>
+ <tileset firstgid="16752" source="snowmountain6.tsx"/>
+ <tileset firstgid="18576" source="snowmountain7.tsx"/>
+ <layer id="11" name="Tile Layer 1" width="57" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztz0kOglAUBdGX6H7+mE2honQrskGlWaGVMGXEhEjqJDW/N0KSJEmSJEmSJGn/8iziRGe6UEFXulFJFdXUUJttvXadO7sf9KQXdfSmD32pp4FGmv70o5YdUsQxbb1i9gOTpRM+
+  </data>
+ </layer>
+ <layer id="12" name="Tile Layer 2" width="57" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAAAPgYcgAAB
+  </data>
+ </layer>
+ <layer id="13" name="Tile Layer 3" width="57" height="32">
+  <data encoding="base64" compression="zlib">
+   eJyd1mWUVVUUAOCRUFRAJSSk20C6ZwhlYGYIJVSQbkSlUSm7ExCDRkW6RJEQA2xppFUUAyxQ6cbvrpm3HC9vBhY/vjV7v33uWWfPPe+807FqTEwnOtOFruyrHROzv3by3/NVoE76oj2zP9WzBSlEYYpQNEWb6slGpwjitrSjffX/5jnAQQ4xpur5rzM9Dc4irb4jzzYkgUSSaJQi0tvqFKl7jNbfYTZUPf91pqfvWaTVd+TZfvRnAAMZlCLS25pzfIdBj5dWO/91pmfsWaTVd+TZcYxnAhOZlCLS39pzfIfB/q5f7fzXmZ5oawz+1x1S1pZW3+k9P/o83mGwvx+MS3udIxJiYkYyihcZzUu8zCu8yhjGMo7xTGAik5jMa7zOG0zhTaYyjenMYCazmM0c5jKP+bzFAt7mHRbyLotYnHD2HoP9PVOPs5jNHOYyj/ksMcdS3mMZ7/MBH/IRy1nBx3zCp3zG53zBl3zFSlaxmjWsZR3r2cDXbGQTm9nCVraxnW/4lu/Ywff8wM7g/62/V9LpMXj/G/Wyic1sYSvb2M6P5viJn/mFXezmV37jd/7gT/awl7/4m3/Yx34OcJBDHOYIRznGcU5wklOcJiYxJuYCMpCRTGTmQi4iCxdzSWLy93JdOj0G+/yUXk4TI7+ADGQkU3AemSMr2cjOZVzOFeQgJ7nIzZXkIS/5yM9VFKAghShMEYpSjOKUoCSlKE0ZruYaruU6ynI95ShPBSpSiVfPct4EPZYRJ8VHV9kcVahKNapTg5rUIpY4alOHutTjBm6kPvE0oCEJJJJEIxrThKbcxM00ozktaMkt3MpttKI1t9OGtqw/y3kTnFnNxY/ER9fOHO3pQEc60ZkudKUb3elBT+6gF3dyF3fTmz70pR/9GcBABnEP93IfgxnCUIYxnPt5gAd5iId5hEd5LDH9fRqcNxvUh4mXxUf3uDme4Eme4mme4Vme43leYAQjGcWLjOYlXuaVYD8xhrGMYzwTmMgkJvMar/MGU3iTqUxjOjOYySxmM4e5icnfx7TufsF5E/xWBXvyYEjwWSPmmWM+b7GAt3mHhbzLIhazhKW8xzLe5wM+5COWs4KP+YRP+YzP+YIv+YqVrGI1a4L1B+8p2I9s4Gs2sonNbElM/r1M6+4XfFcDkX25LFVvjWnCVnNsYzvf8C3fsYPv+YGd/MhP/Mwv7GI3v/Ibv/MHf7KHvfzF3/zDPvZzgIMc4jBHOMoxjnOCk5ziNDFJye8prbtf8F0NLIty1nzdMNkF5shARjKRmQu5iCxczCVcSlaykZ3LuJwryEFOcpGbK8lDXvKRn6soQEEKUZgiFKUYxSlBSUpRmjJcnZT8ntK6F0V+Vw5GOWuyJiS7xhzXch1luZ5ylKcCFalEZapQlWpUpwY1qUUscdSmDnWpxw3cSH3iaUBDEkgkiUY0pglNuYmbaUbzoO86Z1pf/f/32kOhcyZ4f/EJyVqYoyW3cCu30YrW3E4b2tKO9sG+oSOd6EwXutKN7vSgJ3fQizu5i7vpTR/60o/+DGBglHwwQxgaqkXi8PjDqc6aoL+sKf01YJj6cO7nAR7kIR7mER7lMR7nCZ7kKZ7mGZ7lOZ7nBUYwklG8yGhe4mVeCfYdYxjLOMYzIUr+Om8wJVSLxGeMr/Pf9y91fw2D+7P6VKYxnRnMZBazmcNc5jGft1jA27zDQt5lEYtZwlLeYxnv8wEf8hHLWcHHfMKnfBYlX8kqVodqkTg8PtJb6v6a1U22Rn0t61jPhmA8G9nEZrawlW1s5xu+5Tt28D0/sJMf+Ymf+YVd7OZXfuN3/uBP9rCXv6LkBzjIoVAtEofHR3oLeor0l5Dy97D6EY5yjOOc4CSnOE1MI+cvGchIJjJzIReRhYu5hEvJSjaycxmXcwU5yEkucnMlecgbJS9IIQqHapE4PD4+VY9hRdSLUozilKAkpShNGa7mGq7lOspyPeUoTwUqUonKVKEq1ahODWpSi1jiqE0d6lIvSt6AhiSEapE4PD68PxNTx+pJNKIxTWjKTdxMM5rTgpbcwq3cRitaczttaEs72tOBjnSiM13oSje604Oe3EGvKHkf+tIvVIvE4fFBL4OivMNAf/UBDGQQ93Av9zGYIQxlGMO5nwd4kId4mEd4lMd4nCd4kqd4mmd4lud4nhcYwUhG8WKU/FXGMDZUi8Th8dF6ixinPp4JTGQSk3mN13mDKbzJVKYxnRnMZBazmcNc5jGft1jA27zDQt5lEYtZwlLeY1mUfDkr+DhUi8Th8en1+In6p3zG53zBl3zFSlaxmjWsZR3r2cDXbGQTm9nCVraxnW/4lu/Ywff8wE5+5Cd+5pco+e/8wZ+hWiQOj0+vxz3qe/mLv/mHfeznAAc5xGGOcJRjHOcEJznFaWIaO3/JQEYykZkLuYgsXMwlXEpWspE9Sp6TXOQO1SJxeHx6PV6pnoe85CM/V1GAghSiMEUoSjGKU4KSlKJ04+T7blrKqZenAhWpRGWqUJVqUfJY4qgdqkXi8Pj0ejxX6fUQEdwZj6TcGYM7ciRPa/xd9dxj6V3vzPzLWN+X2DPHRuLw+E2x/1/vtpR8cs1z73GXZ3bza+yZPYTzoxzjOAdi/393DO4ewW9XsMbjaic4GXtmniHOfo/7r8dILRKHx2eP+/96c8hzkiv0eV55PvKHPi8kL0wRilKM4pSgJKUoTRmu5hquDdZHWa6nHOWpQEUqUZkqVKUa1alBTWoRSxy1qUNd6nEDN1KfeBrQMNWak8SNaEwTmnITNwdjaE4LWob6bCVvze20oS3taE8HOtKJznShK93oTg96cge9uJO7uJve9KEv/ejPAAYyiHu4l/sYzBCGMozh3M8D/AszfnU3
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <properties>
+   <property name="descript" value=""/>
+  </properties>
+  <object id="68" x="1888" y="480" width="96" height="352">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="snowmountain6.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="77" name="level Info" x="1280" y="224" width="24" height="24">
+   <properties>
+    <property name="areaname" value="Mountain 1"/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="80" name="Gray" type="character" x="1120" y="544" width="32" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="description">You and your &quot;copy&quot;...
+ There's only room for 1? (Maybe 2.)</property>
+    <property name="image" value="graycloak.gif"/>
+    <property name="name" value="Shopkeeper"/>
+    <property name="orient" value="down"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="81" x="1728" y="672" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="82" x="416" y="480" width="64" height="256">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="83" x="480" y="736" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="84" x="512" y="768" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="85" x="544" y="800" width="128" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="86" x="480" y="448" width="32" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="87" x="512" y="416" width="64" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="88" x="704" y="768" width="1120" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="89" x="928" y="480" width="896" height="32">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="90" x="736" y="544" width="160" height="32">
+   <properties>
+    <property name="eventrequirement" value="percydone"/>
+   </properties>
+  </object>
+  <object id="91" x="768" y="448" width="96" height="64">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="cave1.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="92" x="800" y="608" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="93" name="flyer" type="item" x="526" y="608" width="64" height="61">
+   <properties>
+    <property name="description" value="Secret Report 1"/>
+    <property name="image" value="flyer.png"/>
+    <property name="itemid" value="firstsword"/>
+    <property name="report" value=""/>
+    <property name="tangible" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

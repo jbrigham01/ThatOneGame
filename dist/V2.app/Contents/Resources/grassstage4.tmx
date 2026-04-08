@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="83">
+ <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
+  <image source="grassstage.png" width="1440" height="1440"/>
+ </tileset>
+ <tileset firstgid="2026" name="grassstage3" tilewidth="32" tileheight="32" tilecount="1700" columns="50">
+  <image source="grassstage3.png" width="1600" height="1088"/>
+ </tileset>
+ <tileset firstgid="3726" name="grassstage4" tilewidth="32" tileheight="32" tilecount="700" columns="35">
+  <image source="grassstage4.png" width="1120" height="640"/>
+ </tileset>
+ <tileset firstgid="4426" source="grassstage4redux.tsx"/>
+ <layer id="5" name="Tile Layer 1" width="35" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0ccNAjEQRuGhAhtogFQBqRNSJ6QbqRNSJ6ROSA0Q3ogbYiUOi2aR/EvfzZKfbJGwsOTv5kTueEC8SMp/PjdyL2NMMMXMxduS4+48CiiiFNGiDXMssMQK65hbvp02bLDFDnscjFq04YgTzrjgatSiDY7/80gjg2zEf/562lBGBVXUUDdq0YYGmmihjY5RizZ00UMfAwyNWt4brN5El5Q3CQv7lz0BodckWQ==
+  </data>
+ </layer>
+ <layer id="6" name="Tile Layer 2" width="35" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAPwaCvAAAQ==
+  </data>
+ </layer>
+ <layer id="7" name="Tile Layer 3" width="35" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwN02ODGAQAANBr9t3Ntm3btl1bzazZrNm2bdu2bdtW78P7CW9klICAUYxmDGMZx3gmMJFJTGYKU5nGdGYwk1nMZg5zmcd8FrCQRSxmCUtZxnJWsJJVrGYNa1nHejawkU1sZgtb2cZ2drCTXexmD3vZx34OcJBDHOYIRznGcU5wklOc5gxnOcd5LnCRS1zmCle5xnVucJNb3OYOd7nHfR7wkEc85glPecZzXvCSV7zmDW95x3s+8JFPfOYLX/nGd37wk18EBAYE/EYIQhKK0IQhLOEITwQiEonIRCGQIIKJSjSiE4OYxCI2cYhLPOKTgIQkIjFJSEoykpOClKQiNWlISzrSk4GMZCIzWchKNrKTg5zkIjd5yEs+8lOAghSiMEUoSjGKU4KSlKI0ZShLOcpTgYpUojJVqEo1qlODmtSiNnWoSz3q04CGNKIxv/MHTWjKn/xFM5rTgpa0ojVtaEs72tOBjvzNP3SiM13oSje604Oe9KI3fehLP/ozgIEMYjD/8h9DGMowhjOCkYxiNGMYyzjGM4GJTGIyU5jKNKYzg5nMYjZzmMs85rOAhSxiMUtYyjKWs4KVrGI1a1jLOtazgY1sYjNb2Mo2trODnexiN3vYyz72c4CDHOIwRzjKMY5zgpOc4jRnOMs5znOBi1ziMle4yjWuc4Ob3OI2d7jLPe7zgIc84jFPeMoznvOCl7ziNW94yzve84GPfOIzX/jKN77zg5/8IiDIf0IQklCEJgxhCUd4IhCRSEQmCoEEEUxUohGdGMQkFrGJQ1ziEZ8EJCQRiUlCUpKRnBSkJBWpSUNa0pGeDGQkE5nJQlaykZ0c5CQXuclDXvKRnwIUpBCFKUJRilGcEpSkFKUpQ1nKUZ4KVKQSlalCVapRnRrUpBa1qUNd6lGfBjSkEY35nT9oQlP+5C+a0ZwWtKQVrWlDW9rRng505G/+oROd6UJXutGdHvSkF73pQ1/60Z8BDGQQg/mX/xjCUIYxnBGMZBSjGcNYxjGeCUxkEpOZwlSmMZ0ZzGQWs5nDXOYxnwUsZBGLWcJSlrGcFaxkFatZw1rWsZ4NbGQTm9nCVraxnR3sZBe72cNe9rGfAxzkEIc5wlGOcZwTnOQUpznDWc5xngtc5BKXucJVrnGdG9zkFre5w13ucZ8HPOQRj3nCU57xnBe85BWvecNb3vGeD3zkE5/5wle+8Z0f/OQXAcH+E4KQhCI0YQhLOMITgYhEIjJRCCSIYKISjejEICaxiE0c4hKP+CQgIYlITBKSkozkpCAlqUhNGtKSjvRkICOZyEwWspKN7OQgJ7nITR7yko/8FKAghShMEYpSjOKUoCSlKE0Z/geU94wo
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="3" x="1055" y="344" width="32" height="40">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="1"/>
+   </properties>
+  </object>
+  <object id="4" x="352" y="386" width="128" height="118">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="5" name="level Info" x="400" y="192" width="24" height="24">
+   <properties>
+    <property name="areaname" value="The place with the tree."/>
+    <property name="levelinfo" value="1"/>
+   </properties>
+  </object>
+  <object id="7" x="1056" y="128" width="32" height="32">
+   <properties>
+    <property name="orient" value="left"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="2"/>
+   </properties>
+  </object>
+  <object id="8" x="1120" y="296" width="8" height="120">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage.tmx"/>
+    <property name="returnarea" value="1"/>
+   </properties>
+  </object>
+  <object id="10" x="1120" y="96" width="8" height="96">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grassstage.tmx"/>
+    <property name="returnarea" value="2"/>
+   </properties>
+  </object>
+  <object id="13" x="576" y="352" width="32" height="64">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="distance" value="5"/>
+    <property name="walkinfo" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="672" y="288" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="distance" value="16"/>
+    <property name="walkinfo" value=""/>
+   </properties>
+  </object>
+  <object id="17" x="512" y="384" width="32" height="32">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="0"/>
+   </properties>
+  </object>
+  <object id="18" x="353" y="190" width="127" height="80">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="19" name="Old Cloak" type="character1" x="96" y="320" width="64" height="64">
+   <properties>
+    <property name="" value=""/>
+    <property name="SPflag1" value=""/>
+    <property name="image" value="cloakedcreator.png"/>
+    <property name="name" value="Him"/>
+    <property name="orient" value="right"/>
+    <property name="sprite" value=""/>
+    <property name="sprite1" value=""/>
+   </properties>
+  </object>
+  <object id="20" x="672" y="416" width="444" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="21" x="1" y="482" width="347" height="14">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="22" x="352" y="192" width="768" height="80">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="23" x="2" y="240" width="286" height="14">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="24" x="128" y="192" width="96" height="128">
+   <properties>
+    <property name="description" value="Something feels special about this tree..."/>
+   </properties>
+  </object>
+  <object id="25" x="224" y="224" width="32" height="256">
+   <properties>
+    <property name="event" value="1"/>
+    <property name="onetime" value=""/>
+   </properties>
+  </object>
+  <object id="40" x="736" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="41" x="736" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="42" x="800" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="43" x="800" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="46" x="864" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="47" x="864" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="48" x="928" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="49" x="928" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="52" x="992" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="53" x="992" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="54" x="1056" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="55" x="1056" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="56" x="1056" y="192" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="58" x="608" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="59" x="608" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="60" x="672" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="61" x="672" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="64" x="480" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="65" x="480" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="66" x="544" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="67" x="544" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="70" x="352" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="71" x="352" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="72" x="416" y="256" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="73" x="416" y="224" width="64" height="32">
+   <properties>
+    <property name="frames" value="8"/>
+    <property name="height" value="32"/>
+    <property name="mspf" value="250"/>
+    <property name="src" value="sprites/flowingwater.png"/>
+    <property name="width" value="64"/>
+   </properties>
+  </object>
+  <object id="75" x="768" y="64" width="64" height="32">
+   <properties>
+    <property name="description" value="A gated community with\exactly one resident..."/>
+    <property name="graycloakhome" value=""/>
+   </properties>
+  </object>
+  <object id="76" x="672" y="128" width="32" height="40">
+   <properties>
+    <property name="orient" value="down"/>
+    <property name="playerstart" value=""/>
+    <property name="startarea" value="3"/>
+   </properties>
+  </object>
+  <object id="77" x="608" y="-32" width="160" height="32">
+   <properties>
+    <property name="NewArea" value=""/>
+    <property name="area" value="grayhouse.tmx"/>
+    <property name="returnarea" value="0"/>
+   </properties>
+  </object>
+  <object id="78" x="32" y="32" width="1088" height="14">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="79" x="1" y="208" width="352" height="14">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="80" x="352" y="96" width="32" height="96">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="81" x="480" y="480" width="192" height="8">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+  <object id="82" x="672" y="416" width="32" height="64">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
