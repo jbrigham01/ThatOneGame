@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://elst0xn32iil"]
+
+[ext_resource type="Script" uid="uid://0xq33eqohuog" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://oea2uyph2jxn" path="res://overworld.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://b12h5djipv0ih" path="res://mainMenu.tscn" id="3_feb5d"]
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_e2o6t")
+
+[node name="Overworld" parent="." instance=ExtResource("2_feb5d")]
+
+[node name="MainMenu" parent="." instance=ExtResource("3_feb5d")]
+offset_left = -148.0
+offset_top = -40.0
+offset_right = 175.0
+offset_bottom = 53.0
+
+[node name="Battle" type="Node2D" parent="."]

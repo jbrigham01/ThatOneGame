@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="14">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="14">
  <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
   <image source="grassstage.png" width="1440" height="1440"/>
  </tileset>
@@ -13,6 +13,7 @@
  <tileset firstgid="5126" name="grassstage3a" tilewidth="32" tileheight="32" tilecount="600" columns="30">
   <image source="grassstage3a.png" width="960" height="640"/>
  </tileset>
+ <tileset firstgid="5726" source="grassStage_newTiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
@@ -28,7 +29,7 @@
    eJwN02ODEAYAANBbLbvuLtu2bdv2sm1u2bZtu2XXsrds27X34f2EFzowICAMYQlHeCIQkUhEJgpRiUZ0YhBIEMHEJBaxiUNc4hGfBCQkEYlJQlKSkZwUpCQVqUlDWtKRngxkJBOZyUJWspGdHOQkF7nJQ17ykZ8CFKQQhSlCUYpRnBKUpBSlKUNZylGeClSkEpWpQlWqUZ0a1KQWtalDXepRnwY0pBGNaUJTmtGcP2hBS1rRmja0pR3t6UBHOtGZLnSlG93pQU960Zs+9KUf/RnAQAYxmCEM5U/+YhjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmznMZR7zWcBCFrGYJSxlGctZwUpWsZo1rGUd69nARjaxmS1sZRvb2cFOdrGbPezlb/axnwMc5BCHOcJRjnGcE5zkFKc5wz+c5RznucBFLnGZK1zlGte5wU3+5T9ucZs73OUe93nAQx7xmCc85RnPecFLXvGaN7zlHe/5wEc+8ZkvfOUb3/nBT34REBQQ8BshCMnvhCI0YQhLOMITgYhEIjJRiEo0ohODQIIIJiaxiE0c4hKP+CQgIYlITBKSkozkpCAlqUhNGtKSjvRkICOZyEwWspKN7OQgJ7nITR7yko/8FKAghShMEYpSjOKUoCSlKE0ZylKO8lSgIpWoTBWqUo3q1KAmtahNHepSj/o0oCGNaEwTmtKM5vxBC1rSita0oS3taE8HOtKJznShK93oTg960ove9KEv/ejPAAYyiMEMYSh/8hfDGM4IRjKK0YxhLOMYzwQmMonJTGEq05jODGYyi9nMYS7zmM8CFrKIxSxhKctYzgpWsorVrGEt61jPBjayic1sYSvb2M4OdrKL3exhL3+zj/0c4CCHOMwRjnKM45zgJKc4zRn+4SznOM8FLnKJy1zhKte4zg1u8i//cYvb3OEu97jPAx7yiMc84SnPeM4LXvKK17zhLe94zwc+8onPfOEr3/jOD37yi4Bg/wlBSH4nFKEJQ1jCEZ4IRCQSkYlCVKIRnRgEEkQwMYlFbOIQl3jEJwEJSURikpCUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAUpRGGKUJRiFKcEJSlFacpQlnKUpwIVqURlqlCValSnBjWpRW3qUJd61Od/DQpAsA==
   </data>
  </layer>
- <objectgroup id="4" name="Object Layer 1">
+ <objectgroup id="4" name="Object Layer 1" visible="0">
   <object id="3" x="896" y="352" width="32" height="40">
    <properties>
     <property name="orient" value="left"/>

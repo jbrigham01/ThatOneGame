@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://oea2uyph2jxn"]
+
+[ext_resource type="Script" uid="uid://bss4mgihbqfdc" path="res://character_body_2d.gd" id="1_pjt0s"]
+[ext_resource type="Texture2D" uid="uid://bxbe6vc87plf4" path="res://player.png" id="2_pjt0s"]
+[ext_resource type="Script" uid="uid://beq7d2f4hlba1" path="res://sprite_2d.gd" id="3_wa5vi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wa5vi"]
+radius = 54.451813
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pjt0s"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_pjt0s")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_pjt0s")
+region_enabled = true
+region_rect = Rect2(0, 0, 40, 80)
+script = ExtResource("3_wa5vi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_wa5vi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_pjt0s")

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="51">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="35" nextobjectid="51">
  <tileset firstgid="1" name="grassstage" tilewidth="32" tileheight="32" tilecount="2025" columns="45">
   <image source="grassstage.png" width="1440" height="1440"/>
  </tileset>
@@ -31,6 +31,7 @@
  <tileset firstgid="8127" name="player" tilewidth="32" tileheight="32" tilecount="96" columns="8">
   <image source="sprites/player.png" width="280" height="400"/>
  </tileset>
+ <tileset firstgid="8223" source="pizzaTiles.png.tsx"/>
  <layer id="32" name="Tile Layer 2" width="30" height="15">
   <data encoding="base64" compression="zlib">
    eJyN1FdwFWUYgOGDcKs0lSIHwVtEehGpKkqHAApKFYWEEsAuAWzUECz0qqAhoSlVigWQhKqUEEhQASEBglKkRnp5GDgz5yIncPHMfjP7zbz7787sM2UCgbrUoz4NaEgjnuU5nqcxL/AiTWhKM5rTgpa0ojVtiKJthPu3vcKrdKIzXehKN7rzGj14nTfoSS+iiaE3fehLP2Lpz4AIzdi73ucDBhHHYIYwlA/5iI/5hE8ZxnBGMJJRjCaeMSQwNp9zJtw1iclMYSrTmM4MZvIVXzOL2XzDtyQyhySSmcs85rMgj25a6Tvd0LMt5wdWsJJVrOZHfuJnfmENa1nHr6wnhVQ2sJFNbGZLPucNvZddpLObPWSQyV7+4E/+Yh/7OcDfHOQQWWRzmCMcJSefbuibnOYMZznHeS6Qy/9c5BKXucJVrnGdG9wkEAwECvAABSkUvHf3QTsPUZgiFKUYxXmYR3iUEpSkFKV5jDIEKcvjlKM8T+TTDb3nCnaepCJPUYnKVKEq1ahODWpSi9o8TR3WlvXNqWeuTwMa3ke3qZ1mt/doQUta0Zo2RNGWdrTnJV6mAx3Zr3mATubOdKFrhG5sWDfaTgy96UNf+hFLfwYwkDd5i7d5h3d5L6w7yBzHYIZE6CaEdUfYGckoRhPPGBIYy2d8zhd8yTjGM4GJYd0p5qlMY3ow7/9YeDfRzhySSGYu85jPAhbyHd+ziMUsYSnLwrorzCtZxepg3v+x8O56OymksoGNbGIzW9jKb/zONrazg52ksYt0drOHDDLZG6Eduh50/xBZZHOYIxwlh2P8w78c5wQnOcV/nOYMZznHeS6Qe4/uLd6LGmw=

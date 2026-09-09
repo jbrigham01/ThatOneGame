@@ -930,7 +930,6 @@ def eventcheck():
             speak('(He\'s gonna need some help.)',ghostface)
             speak('Here.',ghostface)
             game.player.cattack = heal
-            
             speak('I gave you some healing magic.',ghostface)
             speak('Heal yourself with C.',ghostface)
             speak('What\'s "C"?',ghostface)
@@ -1029,7 +1028,8 @@ def eventcheck():
                 speak('I hope it\'ll help you out...',ghostface)               
                 #findpreference()
                 speak('"Z,S,C, Arrow keys!"', ghostface)
-                speak('(Arrow keys? Sounds moving...)',fredrick)         
+                #speak('(Arrow keys? Sounds moving...)',fredrick)      
+                speak("That saying always moved me...", ghostface)   
                 speak("Now, I\'m sure you already\\know how to fight enemies.", ghostface)      
                 speak("But what will you do\\if they aren\'t\\3 foot tall forest creatures?",ghostface) 
                 speak("You may have to think a little bit.", ghostface)
@@ -1588,14 +1588,14 @@ def eventcheck():
                 #speak("How dare you!")
                 speak("YOU WILL BE TESTED.",warrior)
                 #speak("")
-                talkmenu("Wow great.", ["What gives you the right to judge me?", "I will defeat you."], fredrick)
+                talkmenu("Wow great.", ["What gives you the right to judge me?", "You can't stop me."], fredrick)
                 if chosenoption == 1:
                     speak("WHAT GIVES YOU THE RIGHT TO ASK?", warrior)
-                    speak("IF YOU ONLY KNEW WHAT YOU ARE.", warrior)
                     draw("The man gazes coolly at you.")
+                    speak("IF YOU ONLY KNEW WHAT YOU ARE.", warrior)
                     draw("Your defense rises.")
                 else:
-                    speak("YOU WILL NOT.", warrior)
+                    speak("YOU WILL NOT SUCCEED.", warrior)
                     speak("YOU CANNOT.", warrior)
                     #speak("")
                 """
@@ -4010,6 +4010,8 @@ if __name__ == '__main__':
     # and neds to be assigned to
     Fredrick.xattack  = laser
     Fredrick.cattack  = heal
+    #Battle(Fredrick,[fredrick],[ghostface],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'First Battle (Starring Gray Cloak)',x)
+
     #Battle(Fredrick,[fredrick],[darknyu],'gray area',None,(0,0,0),None,'First Battle',x)
 
     #Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Grassdungeon Boss')
@@ -4021,11 +4023,10 @@ if __name__ == '__main__':
     #replicate brawl 1v1s?
     #Battle(Fredrick,[fredrick],[genmu],'grass stage',None, (100,100,200), 'First Genmu Encounter')
     #Battle(Fredrick,[fredrick],[ghostface],'grass stage',None, (129,129,254),['Stick','First Aid Kit'], 'GrassStage Gestalt',x)
-    #Battle(Fredrick,[fredrick],[ghostface],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'First Battle (Starring Gray Cloak)',x)
    
     #Battle(Fredrick,[fredrick],[maginyu],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'MagiNyu Battle',x)
-    #Battle(Fredrick,[fredrick],[swordnyu],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'SwordNyu Battle',x)
-    Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Original Fredrick Encounter')
+    Battle(Fredrick,[fredrick],[swordnyu],'grass stage',None, (100,100,200),['Stick','First Aid Kit'], 'SwordNyu Battle',x)
+    #Battle(Fredrick,[fredrick],[ofredrick],'grass stage',None, (100,100,200),[], 'Original Fredrick Encounter')
 
     Battle(Fredrick,[fredrick],[fallenwarrior],'gray area',None, (0,0,0),['Stick','First Aid Kit'], 'FallenWarrior Battle',x)
 

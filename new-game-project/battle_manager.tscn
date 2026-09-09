@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://yxhwbnwokwr4"]
+
+[ext_resource type="Script" uid="uid://cps0fhpa83y16" path="res://battle_manager.gd" id="1_c1csy"]
+[ext_resource type="PackedScene" uid="uid://jmfmou808oy5" path="res://battle_field.tscn" id="1_r0ul7"]
+[ext_resource type="Script" uid="uid://dnoi5vtf3jhfb" path="res://battle_player.gd" id="3_41eye"]
+[ext_resource type="Script" uid="uid://ba3sc8np4gxy" path="res://battle_enemy.gd" id="4_rhx7j"]
+[ext_resource type="Texture2D" uid="uid://dsfj4txjvqm2t" path="res://battle/Fredricktruebattle.png" id="4_x37lc"]
+
+[node name="BattleManager" type="Node2D"]
+script = ExtResource("1_c1csy")
+
+[node name="battleField" parent="." instance=ExtResource("1_r0ul7")]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+
+[node name="Enemy" type="Sprite2D" parent="."]
+script = ExtResource("4_rhx7j")
+
+[node name="Player" type="Sprite2D" parent="."]
+z_index = 3
+texture = ExtResource("4_x37lc")
+region_enabled = true
+region_rect = Rect2(0, 0, 55, 85)
+script = ExtResource("3_41eye")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Node" parent="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/UI"]
+offset_left = 147.0
+offset_top = 414.0
+offset_right = 247.0
+offset_bottom = 474.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UI/ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Bruh
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer"]
+offset = Vector2(200, 0)
+transform = Transform2D(1, 0, 0, 1, 200, 0)
+
+[node name="UI" type="Node" parent="CanvasLayer/CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CanvasLayer/UI"]
+offset_left = 147.0
+offset_top = 414.0
+offset_right = 247.0
+offset_bottom = 474.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CanvasLayer/UI/ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/CanvasLayer/UI/ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Bruh
+"

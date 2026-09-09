@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b12h5djipv0ih"]
+
+[ext_resource type="Script" uid="uid://dn12u7ocbrg15" path="res://main_menu.gd" id="1_wut1r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wut1r"]
+
+[node name="CenterContainer" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wut1r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Thatonegame"
+label_settings = SubResource("LabelSettings_wut1r")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start!"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "checker i love drag and drop coding"

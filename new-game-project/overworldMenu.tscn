@@ -1,0 +1,121 @@
+[gd_scene load_steps=13 format=3 uid="uid://bf03bu5kxuls"]
+
+[ext_resource type="Script" uid="uid://d0d0vmkjbqmpq" path="res://label.gd" id="1_mjw1x"]
+[ext_resource type="Script" uid="uid://dwt0bt853s2vc" path="res://h_box_container.gd" id="1_rl8na"]
+[ext_resource type="Texture2D" uid="uid://lu74tn830ve1" path="res://menus/itemicon.png" id="2_1pah6"]
+[ext_resource type="Texture2D" uid="uid://b0vte4851jd6b" path="res://menus/equipment.png" id="3_8wvm5"]
+[ext_resource type="Texture2D" uid="uid://b1yronwvpn8io" path="res://menus/status.png" id="4_vstfl"]
+[ext_resource type="Texture2D" uid="uid://bp8gccxyu1m4e" path="res://menus/settings.png" id="5_j7dex"]
+[ext_resource type="FontFile" uid="uid://y64uqvg45k6" path="res://freesansbold.ttf" id="6_vstfl"]
+[ext_resource type="Texture2D" uid="uid://b6gmtcf353jtn" path="res://menus/quickStat.png" id="7_8wvm5"]
+[ext_resource type="Script" uid="uid://dxneod2eiyadh" path="res://rich_text_label.gd" id="9_j7dex"]
+[ext_resource type="Script" uid="uid://bnst8u2077n4s" path="res://rich_text_label_2.gd" id="10_sk6lx"]
+[ext_resource type="Script" uid="uid://b55tyf7efx4n7" path="res://rich_text_label_3.gd" id="11_ye7jb"]
+[ext_resource type="Script" uid="uid://c07jkdqx3a6bk" path="res://rich_text_label_4.gd" id="12_q5x12"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+rotation = 0.00078832096
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_rl8na")
+
+[node name="item" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_1pah6")
+
+[node name="skills" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_8wvm5")
+
+[node name="stats" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_vstfl")
+
+[node name="world" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "
+"
+icon = ExtResource("5_j7dex")
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+color = Color(0.26839805, 0.26839802, 0.26839802, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ColorRect"]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 72.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/ColorRect/CenterContainer"]
+z_index = 6
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_vstfl")
+text = "Skills"
+script = ExtResource("1_mjw1x")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("7_8wvm5")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/TextureRect"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 100.0
+offset_bottom = 20.0
+rotation = 0.003924921
+theme_override_colors/default_color = Color(0.045312412, 0.04531242, 0.04531242, 1)
+bbcode_enabled = true
+script = ExtResource("9_j7dex")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/TextureRect"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = 100.0
+offset_bottom = 45.0
+rotation = 0.003924921
+theme_override_colors/default_color = Color(0.045312412, 0.04531242, 0.04531242, 1)
+bbcode_enabled = true
+script = ExtResource("10_sk6lx")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/TextureRect"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 50.235
+offset_right = 100.0
+offset_bottom = 70.235
+rotation = 0.003924921
+theme_override_colors/default_color = Color(0.045312412, 0.04531242, 0.04531242, 1)
+bbcode_enabled = true
+script = ExtResource("11_ye7jb")
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/TextureRect"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 20.0
+offset_right = 185.0
+offset_bottom = 40.0
+rotation = 0.003924921
+theme_override_colors/default_color = Color(0.045312412, 0.04531242, 0.04531242, 1)
+bbcode_enabled = true
+script = ExtResource("12_q5x12")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
