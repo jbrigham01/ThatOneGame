@@ -1,7 +1,7 @@
 extends Sprite2D
 class_name battlePlayer
 
-var currentPos = Vector2i(1,2)
+var currentPos:Vector2i = Vector2i(1,2)
 var cHealth = Player.cHealth
 var mHealth = Player.mHealth
 var cMp = Player.cMp
@@ -46,7 +46,9 @@ func move(direction: String):
 			
 	pass
 
-
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func strategy():
+	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	print("Current state: ", state)
@@ -61,7 +63,10 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("k_Right"):
 			move("right")
 		if Input.is_action_just_pressed("k_Z"):
-			useAttack(zMove)
+			var pts: Array[Vector2i] = [self.currentPos + Vector2i(1,0)]
+			%attackManager.addAttack(pts, 10, 10, 10, "player")
+			#useAttack(zMove)
+			
 		if Input.is_action_just_pressed("k_X"):
 			useAttack(xMove)
 		if Input.is_action_just_pressed("k_C"):

@@ -6,13 +6,26 @@ var battlefield: battleField
 var enemy: battleEnemy
 var playerMove = null
 var enemyMove = null
+
+
+
+
 var dir = {
 	"up": Vector2i(0, -1),
 	"down": Vector2i(0, 1),
 	"left": Vector2i(-1, 0),
 	"right": Vector2i(1, 0)
 }
-# Called when the node enters the scene tree for the first time.
+
+func updateEnemyStrategyInfo(enemy: battleEnemy):
+	enemy.playerinFront = player.position[0] < enemy.position[0]
+	enemy.playerBehind = player.position[0] > enemy.position[0]
+	enemy.playerAbove  = player.position[1] < enemy.position[1]
+	enemy.playerBelow  = player.position[1] > enemy.position[1]
+	enemy.distanceFromPlayer = abs(player.position[0] - enemy.position[1])
+	
+
+
 func _ready() -> void:
 	player = get_node("Player")
 	enemy = get_node("Enemy")
@@ -20,29 +33,40 @@ func _ready() -> void:
 	var battleFinished = false
 	initBattle(player, enemy)
 	#while not battleFinished:
-		#updateBattleField()
-		#moveplayer
-		#moveenemy
+	#	updateBattleField()
+	#	updateEnemyStrategyInfo(enemy)
+	#	player.strategy()
+	#	enemy.strategy()
+		
 		#updateInfo
 	#	pass
 		
 	
-	
-	pass # Replace with function body.
+	# Replace with function body.
 
 func checkValidAndAssign(player, newPos):
 	if newPos[0] > battlefield.width || newPos[0] < 0 or newPos[1] > battlefield.height or newPos[1] < 0:
 		return
 	#are we zero indexing?
-	if battlefield.tiles[newPos[0]-1][newPos[1]-1].isBroken:
+	var tile = battlefield.tiles[newPos[0]-1][newPos[1]-1]
+	if tile.isBroken or tile.isOccupied:
 		return
 	player.currentPos = newPos
 	moveCharacter(player)
 	
+	
+
 func checkForEvent():
 	pass
-
+	
+	
+func handleDamageTiles():
+	for x in battlefield.tiles:
+		for tile in x:
+			if tile.damage:
+				tile.damageTick()
 func updateBattleField():
+	handleDamageTiles()
 	var pNewPos = null
 	var eNewPos = null
 	if playerMove:

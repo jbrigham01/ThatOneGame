@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://yxhwbnwokwr4"]
+[gd_scene load_steps=7 format=3 uid="uid://yxhwbnwokwr4"]
 
 [ext_resource type="Script" uid="uid://cps0fhpa83y16" path="res://battle_manager.gd" id="1_c1csy"]
 [ext_resource type="PackedScene" uid="uid://jmfmou808oy5" path="res://battle_field.tscn" id="1_r0ul7"]
+[ext_resource type="Script" uid="uid://deja5bjmg2vwl" path="res://attack_manager.gd" id="2_x37lc"]
 [ext_resource type="Script" uid="uid://dnoi5vtf3jhfb" path="res://battle_player.gd" id="3_41eye"]
 [ext_resource type="Script" uid="uid://ba3sc8np4gxy" path="res://battle_enemy.gd" id="4_rhx7j"]
 [ext_resource type="Texture2D" uid="uid://dsfj4txjvqm2t" path="res://battle/Fredricktruebattle.png" id="4_x37lc"]
@@ -9,14 +10,20 @@
 [node name="BattleManager" type="Node2D"]
 script = ExtResource("1_c1csy")
 
+[node name="attackManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_x37lc")
+
 [node name="battleField" parent="." instance=ExtResource("1_r0ul7")]
 unique_name_in_owner = true
 position = Vector2(0, -100)
 
 [node name="Enemy" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_rhx7j")
 
 [node name="Player" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 z_index = 3
 texture = ExtResource("4_x37lc")
 region_enabled = true

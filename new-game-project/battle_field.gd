@@ -12,7 +12,9 @@ func _ready() -> void:
 	print(tiles)
 	pass # Replace with function body.
 
-
+func get_tile(index:Vector2i):
+	#zero index i think?
+	return tiles[index[0]-1][index[1]-1]
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
